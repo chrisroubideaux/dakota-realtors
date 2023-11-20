@@ -42,7 +42,7 @@ export default function HomeInfo({ params }) {
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch homes from your server
+    // GET request to fetch homes data from server
     axios
       .get(`http://localhost:3001/homes/${params.id}`)
       .then((response) => {
@@ -133,39 +133,14 @@ export default function HomeInfo({ params }) {
             </div>
           </div>
           <Layout />
-          {/* <div className="container mt-5 pt-5">
-          <div className="container mt-5 pt-5">
-            <div className="row py-4">
-              <div className="col-md-6">
-                <h2 className=" text-center fw-bold">Calculator</h2>
-                <div className="mt-4">
-                  <Calculator />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <h3 className="text-center fw-bold mt-2">Chart</h3>
-                <div className="mt-3">
-                  <Chart
-                    homeValue={homeValue}
-                    downPaymentPercentage={downPaymentPercentage}
-                    interestRate={interestRate}
-                    loanAmount={loanAmount}
-                  />
-                </div>
-                <div className="d-flex justify-content-end"></div>
-              </div>
-            </div>
-          </div>
-        </div> */}
         </div>
       </div>
-
       <Footer />
     </>
   );
 }
 
-// Fetch data on the server side using getServerSideProps
+// Function for fetching data on the server side using getServerSideProps
 export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch the home by id from your server
