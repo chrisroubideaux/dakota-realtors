@@ -41,7 +41,7 @@ export default function Page({ params }) {
   const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch apartments from your server
+    // Make a GET request to fetch apartments from server
     axios
       .get(`http://localhost:3001/apartments/${params.id}`)
       .then((response) => {
@@ -140,10 +140,10 @@ export default function Page({ params }) {
   );
 }
 
-// Fetch data on the server side using getServerSideProps
+// Fetch data server side using getServerSideProps
 export async function getServerSideProps({ params }) {
   try {
-    // Make a GET request to fetch apartment data from your server based on the ID in the URL
+    // GET request to fetch apartment data from server based on the ID in the URL
     const response = await axios.get(
       `http://localhost:3001/apartments/${params.id}`
     );
