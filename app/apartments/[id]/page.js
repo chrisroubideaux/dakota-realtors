@@ -12,12 +12,10 @@ import Amenities from '@/components/apartments/Amenities';
 import Bed from '@/components/apartments/Bed';
 import Cover from '@/components/apartments/Cover';
 import Maps from '@/components/apartments/Maps';
-//import Agent from '@/components/apartments/Agent';
 import Realtors from '@/components/apartments/Realtors';
 import Bookings from '@/components/apartments/tours/Bookings';
 import Room from '@/components/apartments/Room';
 import Floor from '@/components/apartments/Floor';
-//import Iconbar from '@/components/apartments/Iconbar';
 import Footer from '@/components/misc/Footer';
 
 // data
@@ -41,7 +39,7 @@ export default function Page({ params }) {
   const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch apartments from server
+    // GET request to fetch apartments by id from server 
     axios
       .get(`http://localhost:3001/apartments/${params.id}`)
       .then((response) => {
