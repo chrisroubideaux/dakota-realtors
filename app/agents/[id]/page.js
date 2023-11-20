@@ -22,7 +22,7 @@ const AgentBio = ({ params }) => {
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // GET request to fetch agent data by id from your server
+    // GET request to fetch agent data by id from server
     axios
       .get(`http://localhost:3001/agents/${params.id}`)
       .then((response) => {
