@@ -1,0 +1,97 @@
+/* hero */
+
+.cover {
+  background-image: linear-gradient(#2d3245b3, #04091eb3),
+    url('../public/covers/cover.jpg');
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* property cover */
+.properties {
+  background-image: linear-gradient(#2d3245b3, #04091eb3),
+  url('../public/properties/home1.jpg');
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+}
+
+/* apartments cover */
+.apartments {
+  background-image: linear-gradient(#2d3245b3, #04091eb3),
+    url('../public/covers/aptcover.jpg');
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+}
+/* homes cover */
+.homes {
+  background-image: linear-gradient(#2d3245b3, #04091eb3),
+    url('../public/covers/home.jpg');
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+}
+
+/* commercial cover */
+.commercial {
+  background-image: linear-gradient(#2d3245b3, #04091eb3),
+    url('../public/covers/commercial.jpg');
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+}
+
+/* agents cover */
+.agents {
+  background-image: linear-gradient(#313030b3, #202121b3),
+    url('../public/covers/agent.jpg');
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+}
+/* about cover */
+.about {
+  background-image: linear-gradient(#313030b3, #202121b3),
+    url('../public/covers/about.jpg');
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* swiper */
+.swiper {
+  height: 32rem;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* slider */
+.slider {
+  height: 32rem;
+ 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}

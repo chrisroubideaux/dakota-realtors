@@ -1,95 +1,53 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+// cover page //
+import Link from 'next/link';
 
+import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
+
+// metadata
+export const metadata = {
+  title: 'dakota realtors',
+  description: 'nextjs real estate app',
+};
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className="cover">
+        <div className="containter text-center py-5">
+          <h1 className=" display-3 py-4 mr-3">Dakota Realtors</h1>
+          <p className="display-6 fs-3 text-light fw-semi-bold">
+            Your Dream Home is just a few clicks away.
+          </p>
+          {/* <Search /> */}
+          <Link className="btn btn-md mt-5" href="/properties/">
+            View Properties
+          </Link>
+          <div className="container pt-5 ">
+            <ul className="nav justify-content-center list-unstyled d-flex pt-5 ">
+              <li className="ms-3">
+                <Link className="text-muted" href="/">
+                  <FaFacebook className="social-icons m-2" />
+                </Link>
+              </li>
+              <li className="ms-3">
+                <Link className="text-muted" href="/">
+                  <FaInstagram className="social-icons m-2" />
+                </Link>
+              </li>
+              <li className="ms-3">
+                <Link className="text-muted" href="/">
+                  <FaYoutube className="social-icons m-2" />
+                </Link>
+              </li>
+              <li className="ms-3">
+                <Link className="text-muted" href="/">
+                  <FaTiktok className="social-icons m-2" />
+                </Link>
+              </li>
+            </ul>
+            <p className="text-light pt-1">© Copyright 2023 Dakota Realtors</p>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </>
+  );
 }

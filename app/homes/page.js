@@ -1,0 +1,95 @@
+// home page
+'use client';
+import { useState, useEffect } from 'react';
+import Nav from '@/components/nav/Nav';
+import Heros from '@/components/homes/Heros';
+import Tab from '@/components/nav/Tab';
+import Banners from '@/components/homes/Banners';
+import FeaturedHomes from '@/components/homes/FeaturedHomes';
+import Details from '@/components/misc/Details';
+import Reviews from '@/components/homes/Reviews';
+import Footer from '@/components/misc/Footer';
+// utils
+//import homes from '@/data/featured/homes';
+import reviews from '@/data/slider/reviews';
+
+import axios from 'axios';
+
+// metadata
+export const metadata = {
+  title: 'dakota realtors | home listings',
+  description: 'dakota realtors | home page',
+};
+
+const Homes = () => {
+  const [homes, setHomes] = useState([]);
+
+  useEffect(() => {
+    // Make a GET request to fetch homes from your server
+    axios
+      .get('http://localhost:3001/homes')
+      .then((response) => {
+        // Update the state with the fetched apartments
+        setHomes(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartments:', error);
+      });
+  }, []);
+  return (
+    <>
+      {/* page layout */}
+      <div className="layout">
+        {/* nav */}
+        <Nav />
+        <Heros />
+        <Banners />
+        {/* homes */}
+        <div className="container px-4 py-5" id="properties">
+          <Tab />
+          <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-4">
+            {homes.map((homes) => (
+              <div key={homes.id} className="pt-4 ">
+                <FeaturedHomes homes={homes} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <Details />
+        {reviews.map((reviews) => (
+          <Reviews key={reviews.id} reviews={reviews} />
+        ))}
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default Homes;
+
+// Fetch data on the server side using getServerSideProps
+export async function getServerSideProps() {
+  try {
+    // Make a GET request to fetch homes from your server
+    const response = await axios.get('http://localhost:3001/homes');
+    const homes = response.data;
+
+    // Return the 'homes' data as props
+    return {
+      props: {
+        homes,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching homes:', error);
+
+    // You can handle errors here, e.g., redirect to an error page
+    return {
+      redirect: {
+        destination: '/error', // Replace with your error page URL
+        permanent: false,
+      },
+    };
+  }
+}
