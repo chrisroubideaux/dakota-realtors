@@ -24,7 +24,7 @@ const Commercials = () => {
   const [commercials, setCommercials] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch apartments from your server
+    // Make a GET request to fetch commercial properties from server
     axios
       .get('http://localhost:3001/commercials')
       .then((response) => {
@@ -70,7 +70,7 @@ export default Commercials;
 // Fetch data on the server side using getServerSideProps
 export async function getServerSideProps() {
   try {
-    // Make a GET request to fetch commercial listings from your server
+    // GET request to fetch commercial listings from server
     const response = await axios.get('http://localhost:3001/commercials');
     const commercialListings = response.data;
 
