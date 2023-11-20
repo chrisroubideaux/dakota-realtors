@@ -21,7 +21,7 @@ function Agents() {
   const [agents, setAgents] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch agents from your server
+    // GET request to fetch agents data from server
     axios
       .get('http://localhost:3001/agents')
       .then((response) => {
@@ -64,7 +64,7 @@ export default Agents;
 // Fetch data on the server side using getServerSideProps
 export async function getServerSideProps() {
   try {
-    // Make a GET request to fetch agents data from your server
+    // Make a GET request to fetch agents data from server
     const response = await axios.get('http://localhost:3001/agents');
     const agentsData = response.data;
 
