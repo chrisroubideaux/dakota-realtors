@@ -25,11 +25,11 @@ const Homes = () => {
   const [homes, setHomes] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch homes from your server
+    // GET request to fetch homes data from server
     axios
       .get('http://localhost:3001/homes')
       .then((response) => {
-        // Update the state with the fetched apartments
+        // Update the state with the fetched homes
         setHomes(response.data);
       })
       .catch((error) => {
@@ -68,10 +68,10 @@ const Homes = () => {
 
 export default Homes;
 
-// Fetch data on the server side using getServerSideProps
+// Function fetching data on the server side using getServerSideProps
 export async function getServerSideProps() {
   try {
-    // Make a GET request to fetch homes from your server
+    // GET request to fetch homes data from server
     const response = await axios.get('http://localhost:3001/homes');
     const homes = response.data;
 
@@ -84,10 +84,10 @@ export async function getServerSideProps() {
   } catch (error) {
     console.error('Error fetching homes:', error);
 
-    // You can handle errors here, e.g., redirect to an error page
+    // handle errors 
     return {
       redirect: {
-        destination: '/error', // Replace with your error page URL
+        destination: '/error', 
         permanent: false,
       },
     };
