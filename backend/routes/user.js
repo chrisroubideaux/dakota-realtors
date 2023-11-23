@@ -41,19 +41,7 @@ userRoutes.get('/:id', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-{
-  /*
-userRoutes.get('/', async (req, res) => {
-  // Get all users from the database
-  try {
-    const user = await User.find();
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-*/
-}
+
 // GET user profile page (protected route)
 userRoutes.get('/:id', verifyToken, async (req, res) => {
   try {
