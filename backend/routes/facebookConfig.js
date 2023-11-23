@@ -5,50 +5,7 @@ const User = require('../models/user'); // Update with your User model import
 
 // Load environment variables from .env file
 require('dotenv').config();
-{
-  /*
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL:
-        process.env.FACEBOOK_CALLBACK_URL ||
-        'http://localhost:3001/auth/facebook/callback', // callback URL
-      profileFields: ['id', 'displayName', 'photos', 'emails'], // Requested user data fields
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        // Check if the Facebook user is already registered in your database
-        const existingUser = await User.findOne({ 'facebook.id': profile.id });
-
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-
-        // Create a new user with Facebook account details
-        const newUser = new User({
-          facebook: {
-            id: profile.id,
-            displayName: profile.displayName,
-            email: profile.emails[0].value,
-            profileFields: ['id', 'displayName', 'photos', 'email'],
-          },
-          // Add other user properties as needed
-        });
-
-        // Save the new user to the database
-        await newUser.save();
-
-        return done(null, newUser);
-      } catch (err) {
-        return done(err);
-      }
-    }
-  )
-);
-  */
-}
+// passport facebook config
 passport.use(
   new FacebookStrategy(
     // ... other options ...
