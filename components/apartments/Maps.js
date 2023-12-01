@@ -18,7 +18,7 @@ export default function SimpleMap() {
       style={{ height: '50vh', width: '100%' }}
     >
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyCZE7XIoNvku4lSjHC0EFpmp3SxaKXjL-k' }}
+        bootstrapURLKeys={{ key: '' }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
@@ -28,4 +28,3 @@ export default function SimpleMap() {
   );
 }
 
-('AIzaSyCZE7XIoNvku4lSjHC0EFpmp3SxaKXjL-k');
