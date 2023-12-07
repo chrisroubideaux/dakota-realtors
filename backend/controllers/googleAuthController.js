@@ -17,18 +17,7 @@ function handleGoogleCallback(req, res, next) {
   });
 }
 
-{
-  /*
-function handleGoogleCallback(req, res, next) {
-  passport.authenticate('google', {
-    failureRedirect: '/login',
-  })(req, res, () => {
-    // Successful authentication, redirect to a page or send a response as needed
-    res.redirect('/apartments'); // Replace with the appropriate redirect URL
-  });
-}
-*/
-}
+
 module.exports = {
   authenticateWithGoogle,
   handleGoogleCallback,

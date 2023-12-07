@@ -23,26 +23,3 @@ const appointmentSchema = new mongoose.Schema({
 const Appointment = mongoose.model('Appointments', appointmentSchema);
 
 module.exports = Appointment;
-{
-  /*
-const appointmentSchema = new mongoose.Schema({
-  id: String,
-  mlsId: String,
-  name: String,
-  photo: String,
-  title: String,
-  phone: String,
-  email: String,
-  location: String,
-  times: String,
-  slot: String,
-  slot2: String,
-  slot3: String,
-  slot4: String,
-  slot5: String,
-  slot6: String,
-  slot7: String,
-  days: String,
-});
-*/
-}

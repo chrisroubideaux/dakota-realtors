@@ -81,19 +81,3 @@ googleRoutes.get(
   }
 );
 
-{
-  /*
-// google auth route
-googleRoutes.get(
-  '/google',
-  passport.authenticate('google', { scope: ['email', 'openid', 'profile'] })
-);
-
-// google login route
-googleRoutes.get(
-  '/google/login',
-  passport.authenticate('google', { scope: ['email', 'openid', 'profile'] })
-);
-
-*/
-}
