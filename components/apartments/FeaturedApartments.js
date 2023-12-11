@@ -53,4 +53,4 @@ export default function FeaturedApartments({ apartments }) {
   );
 }
 
-//href={`/apartments/${apartments.id}`}>
+
