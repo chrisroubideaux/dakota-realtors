@@ -27,7 +27,7 @@ export default function Room({ apartments }) {
           {/*modal*/}
           <button
             type="button"
-            className="d-none d-md-inline-block btn btn-sm btn-light me-5 mt-5"
+            className="d-none d-md-inline-block btn btn-sm btn-light me-5 mt-5 m-5"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >

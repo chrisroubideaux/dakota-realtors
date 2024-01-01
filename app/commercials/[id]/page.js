@@ -10,7 +10,7 @@ import Office from '@/components/commercials/Office';
 import Cover from '@/components/commercials/Cover';
 import Floor from '@/components/commercials/Floor';
 import Room from '@/components/commercials/Room';
-import Maps from '@/components/apartments/Maps';
+import Maps from '@/components/misc/Maps';
 import Layout from '@/components/commercials/calculator/Layout';
 import Details from '@/components/commercials/Details';
 import Gallery from '@/components/commercials/Gallery';

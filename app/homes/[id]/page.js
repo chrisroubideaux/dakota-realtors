@@ -11,7 +11,7 @@ import Room from '@/components/homes/Room';
 import HomeDetails from '@/components/homes/HomeDetails';
 import Floor from '@/components/homes/Floor';
 import Realtors from '@/components/homes/Realtors';
-import Maps from '@/components/apartments/Maps';
+import Maps from '@/components/misc/Maps';
 import Amenities from '@/components/homes/Amenities';
 import Bookings from '@/components/homes/tours/Bookings';
 import Layout from '@/components/homes/calculator/Layout';
