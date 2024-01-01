@@ -214,7 +214,7 @@ const Register = () => {
           <Link className="btn btn lg w-75" href="/login">
             Login
           </Link>
-          <p className="pt-1 text-muted">&copy; Dakota Realtors, 2023</p>
+          <p className="pt-1 text-muted">&copy; Dakota Realtors, 2024</p>
         </form>
       </div>
     </div>

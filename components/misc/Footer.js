@@ -35,7 +35,7 @@ export default function Footer() {
               </li>
             </ul>
             <small className="d-block mb-3 text-muted">
-              &copy; 2023 Dakota Reality
+              &copy; 2024 Dakota Reality
             </small>
           </div>
           <div className="col-6 col-md">
@@ -109,7 +109,7 @@ export default function Footer() {
           </div>
           <div className="container text-lg-center mx-lg-auto my-3">
             <p className="text-black-50 small text-center">
-              Built by: Digi Wraith. &copy; 2023 Digi Wraith.com
+              Built by: Digi Wraith. &copy; 2024 Digi Wraith.com
             </p>
           </div>
         </div>

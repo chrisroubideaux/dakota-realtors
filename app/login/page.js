@@ -1,5 +1,4 @@
 // login page
-
 'use client';
 // imports
 import axios from 'axios';
@@ -135,7 +134,7 @@ const Login = () => {
           <Link className="btn btn lg w-75" href="/register">
             Register
           </Link>
-          <p className="mt-1 mb-3 text-muted">&copy; Dakota Realtors, 2023</p>
+          <p className="mt-1 mb-3 text-muted">&copy; Dakota Realtors, 2024</p>
         </form>
       </div>
     </div>

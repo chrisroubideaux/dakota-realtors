@@ -44,7 +44,7 @@ export default function Home() {
                 </Link>
               </li>
             </ul>
-            <p className="text-light pt-1">© Copyright 2023 Dakota Realtors</p>
+            <p className="text-light pt-1">© Copyright 2024 Dakota Realtors</p>
           </div>
         </div>
       </div>
