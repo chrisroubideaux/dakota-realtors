@@ -7,11 +7,9 @@ import Tab from '@/components/nav/Tab';
 import Banners from '@/components/homes/Banners';
 import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import Details from '@/components/misc/Details';
-//import Reviews from '@/components/homes/Reviews';
+import Reviews from '@/components/homes/Reviews';
 import Footer from '@/components/misc/Footer';
 // utils
-//import homes from '@/data/featured/homes';
-//import reviews from '@/data/slider/reviews';
 
 import axios from 'axios';
 
@@ -23,7 +21,7 @@ const Homes = () => {
   useEffect(() => {
     // GET request to fetch homes data from server
     axios
-      .get('http://localhost:3001/homes')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
       .then((response) => {
         // Update the state with the fetched homes
         setHomes(response.data);
@@ -52,11 +50,9 @@ const Homes = () => {
           </div>
         </div>
         <Details />
-        {/*}
-        {reviews.map((reviews) => (
-          <Reviews key={reviews.id} reviews={reviews} />
-        ))}
-        */}
+
+        <Reviews />
+
         {/* Footer */}
         <Footer />
       </div>

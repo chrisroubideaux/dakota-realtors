@@ -9,22 +9,8 @@ import FeaturedApartments from '@/components/apartments/FeaturedApartments';
 import Details from '@/components/misc/Details';
 import Reviews from '@/components/apartments/Reviews';
 import Footer from '@/components/misc/Footer';
+// axios
 import axios from 'axios';
-
-// data
-//import apartments from '@/data/featured/apartments';
-//import reviews from '@/data/slider/reviews';
-
-// metadata
-{
-  /*
-export const metadata = {
-  title: 'dakota realtors | apartments page',
-  description: 'nextjs real estate app',
-};
-
-*/
-}
 
 const Apartments = () => {
   const [apartments, setApartments] = useState([]);
@@ -32,7 +18,7 @@ const Apartments = () => {
   useEffect(() => {
     // Make a GET request to fetch apartments from your server
     axios
-      .get('http://localhost:3001/apartments')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
       .then((response) => {
         // Update the state with the fetched apartments
         setApartments(response.data);
@@ -63,11 +49,9 @@ const Apartments = () => {
         </div>
         {/* Details */}
         <Details />
-        {/* rewviews 
-        {reviews.map((reviews) => (
-          <Reviews key={reviews.id} reviews={reviews} />
-        ))}
-        */}
+
+        <Reviews />
+
         {/* Footer */}
         <Footer />
       </div>

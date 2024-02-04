@@ -30,7 +30,7 @@ const Commercials = () => {
   useEffect(() => {
     // Make a GET request to fetch commercial properties from server
     axios
-      .get('http://localhost:3001/commercials')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
       .then((response) => {
         // Update the state with the fetched commercial listings
         setCommercials(response.data);

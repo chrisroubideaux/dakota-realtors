@@ -7,20 +7,7 @@ import Banners from '@/components/agents/Banners';
 import Realtors from '@/components/agents/Realtors';
 import Footer from '@/components/misc/Footer';
 // data
-//import agents from '@/data/featured/agents';
-
 import axios from 'axios';
-
-// metadata
-{
-  /*
-export const metadata = {
-  title: 'dakota realtors | agents page',
-  description: 'nextjs real estate app',
-};
-
-*/
-}
 
 function Agents() {
   const [agents, setAgents] = useState([]);
@@ -28,7 +15,7 @@ function Agents() {
   useEffect(() => {
     // GET request to fetch agents data from server
     axios
-      .get('http://localhost:3001/agents')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/agents')
       .then((response) => {
         // Update the state with the fetched agents
         setAgents(response.data);
