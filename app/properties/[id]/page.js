@@ -1,3 +1,5 @@
+{
+  /*
 'use client';
 // property details page
 import Nav from '@/components/nav/Nav';
@@ -23,7 +25,7 @@ export default function PropertyInfo({ params }) {
 
   return (
     <>
-      {/* page layout */}
+    
       <div className="layout h-100">
         <Nav />
         <div className="container-fluid my-5">
@@ -101,20 +103,6 @@ export default function PropertyInfo({ params }) {
     </>
   );
 }
-{
-  /*
-export async function getStaticPaths() {
-  const paths = properties.map((property) => ({
-    params: { id: property.id.toString() },
-  }));
 
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const property = properties.find((property) => property.id === params.id);
-
-  return { props: { property } };
-}
 */
 }
