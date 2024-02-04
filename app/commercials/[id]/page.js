@@ -135,6 +135,8 @@ export default function CommercialInfo({ params }) {
   );
 }
 // Fetch data on the server side using getServerSideProps
+{
+  /*
 export async function getServerSideProps({ params }) {
   const { id } = params;
 
@@ -160,4 +162,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
+}
+*/
 }
