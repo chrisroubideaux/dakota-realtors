@@ -1,7 +1,7 @@
 // userController from controllers folder
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+
 require('dotenv').config();
 //
 
@@ -58,6 +58,7 @@ const getUserById = async (req, res) => {
 };
 
 // Function to update user profile
+// Function to update user profile
 const updateUser = async (req, res) => {
   try {
     const userId = req.userId; // Assuming userId is available from middleware
@@ -77,13 +78,12 @@ const updateUser = async (req, res) => {
     if (email) {
       user.email = email;
     }
-
     // Update password if newPassword is provided
     if (newPassword) {
-      // Hash the new password
-      const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
-      user.password = hashedPassword;
+      // Update password logic here based on your application requirements
+      // For example, you can hash the new password and save it to the user object
+      // const hashedPassword = hashPasswordFunction(newPassword);
+      // user.password = hashedPassword;
     }
 
     // Save the updated user data
@@ -102,6 +102,7 @@ const deleteUser = async (req, res) => {
     const userId = req.userId; // Assuming userId is available from middleware
 
     // Delete user data from the database
+    // Implement your database-specific logic to delete the user
     await User.findByIdAndRemove(userId);
 
     res.status(200).json({ message: 'User profile deleted successfully' });

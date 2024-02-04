@@ -1,5 +1,6 @@
 // models/AgentAuth.js (Agent Authentication Model)
-
+{
+  /*
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -44,3 +45,5 @@ agentsSchema.methods.generateAuthToken = function () {
 const Agents = mongoose.model('Agents', agentsSchema);
 
 module.exports = Agents;
+*/
+}

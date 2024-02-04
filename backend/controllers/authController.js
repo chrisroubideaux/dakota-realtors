@@ -1,4 +1,6 @@
 // auth controller
+{
+  /*
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -115,37 +117,6 @@ module.exports = {
   // Other controller functions
 };
 
-{
-  /*
-const login = async (req, res) => {
-  const { email, password } = req.body;
 
-  try {
-    // Find the user by email
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    {
-      // Compare the provided password with the stored hashed password
-      const passwordMatch = await bcrypt.compare(password, user.password);
-
-      if (!passwordMatch) {
-        return res.status(401).json({ message: 'Invalid email or password' });
-      }
-    }
-
-    // User authentication successful, generate a JWT token
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-
-    // Return a success response with the token
-    res.status(200).json({ message: 'Login successful', user, token });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
 */
 }

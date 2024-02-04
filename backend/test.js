@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 // auth routes

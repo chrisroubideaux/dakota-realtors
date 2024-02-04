@@ -1,7 +1,7 @@
-// models/AgentAuth.js (Agent Authentication Model)
+// models
 
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -10,7 +10,8 @@ const agentsSchema = new mongoose.Schema({
   password: { type: String, required: true },
   fullName: { type: String, required: true },
 });
-
+{
+  /*
 // Hash the password before saving the agent authentication data
 agentsSchema.pre('save', async function (next) {
   try {
@@ -39,42 +40,8 @@ agentsSchema.methods.generateAuthToken = function () {
   });
   return token;
 };
-
+*/
+}
 const Agents = mongoose.model('Agents', agentsSchema);
 
 module.exports = Agents;
-
-// models/AgentInfo.js (Agent General Information Model)
-{
-  /*
-const mongoose = require('mongoose');
-
-const agentSchema = new mongoose.Schema({
-  realtor: String,
-  name: String,
-  image: String,
-  photo: String,
-  title: String,
-  phone: String,
-  email: String,
-  bio: String,
-  experience: String,
-  times: String,
-  appointments: String,
-  slot: String,
-  slot2: String,
-  slot3: String,
-  slot4: String,
-  slot5: String,
-  slot6: String,
-  slot7: String,
-  days: String,
-  // Other agent fields here
-});
-
-const Agent = mongoose.model('Agent', agentSchema);
-
-module.exports = Agent;
-
-*/
-}

@@ -3,7 +3,6 @@ const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 // auth routes
@@ -15,7 +14,7 @@ const commercialRoutes = require('./commercials/commercials');
 const homeRoutes = require('./homes/homes');
 const userRoutes = require('./routes/user');
 const agentRoutes = require('./agents/agents');
-const adminRoutes = require('./admin/admin');
+//const adminRoutes = require('./admin/admin');
 // google auth
 
 const passport = require('passport');
@@ -28,7 +27,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 require('dotenv').config();
 
 const app = express();
-const port = 3001;
+//const port = 3001;
+const port = process.env.PORT || 3001; // Use the provided PORT or default to 3001
 
 const mongoURI = process.env.MONGO_URI;
 
@@ -73,39 +73,17 @@ function verifyToken(req, res, next) {
   });
 }
 
-{
-  /*}
-function verifyToken(req, res, next) {
-  const token = req.headers['authorization'];
-
-  if (!token) {
-    return res.status(401).json({ error: 'Authentication token is missing' });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      if (err.name === 'TokenExpiredError') {
-        return res.status(401).json({ error: 'Token has expired' });
-      }
-      console.error('Token verification error:', err);
-      return res.status(401).json({ error: 'Invalid token' });
-    }
-    req.userId = decoded.id;
-    next();
-  });
-}
-*/
-}
 // Configure session middleware (optional if you're using JWT)
 const sessionMiddleware = session({
-  secret: process.env.SESSION_SECRET || 'secret-key',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 });
-
+{
+  /*
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'secret-key',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -113,6 +91,8 @@ app.use(
     },
   })
 );
+*/
+}
 app.use(sessionMiddleware);
 
 // google passport oAuth
@@ -168,50 +148,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 // facebook strategy
-{
-  /*
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL:
-        process.env.FACEBOOK_CALLBACK_URL ||
-        'http://localhost:3001/auth/facebook/callback', // callback URL
-      profileFields: ['id', 'displayName', 'photos', 'emails'], // Requested user data fields
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        // Check if the Facebook user is already registered in your database
-        const existingUser = await User.findOne({ 'facebook.id': profile.id });
 
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-
-        // Create a new user with Facebook account details
-        const newUser = new User({
-          facebook: {
-            id: profile.id,
-            displayName: profile.displayName,
-            email: profile.emails[0].value,
-            profileFields: ['id', 'displayName', 'photos', 'email'],
-          },
-          // Add other user properties as needed
-        });
-
-        // Save the new user to the database
-        await newUser.save();
-
-        return done(null, newUser);
-      } catch (err) {
-        return done(err);
-      }
-    }
-  )
-);
-  */
-}
 passport.use(
   new FacebookStrategy(
     {
@@ -273,6 +210,7 @@ app.get('/properties', (req, res) => {
 app.get('/', (req, res) => {
   res.send('cover page');
 });
+
 // apartments route
 app.use('/apartments', apartmentRoutes);
 
@@ -286,10 +224,10 @@ app.use('/commercials', commercialRoutes);
 app.use('/appointments', appointmentRoutes);
 
 //route for fetching a single appointment by ID
-app.use('/appointments/:id', appointmentRoutes);
+//app.use('/appointments/:id', appointmentRoutes);
 
 // admin routes
-app.use('/admin', adminRoutes);
+//app.use('/admin', adminRoutes);
 
 // agents routes
 app.use('/agents', agentRoutes);
@@ -299,7 +237,7 @@ app.use('/auth', authRoutes);
 
 app.post('/auth', authRoutes);
 
-app.use('/user', userRoutes);
+app.use('/user', userRoutes); // Then use userRoutes
 
 // contact page
 app.get('/contact', (req, res) => {
@@ -387,3 +325,12 @@ app.get(
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+{
+  /*
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+*/
+}

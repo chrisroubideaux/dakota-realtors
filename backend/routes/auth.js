@@ -4,7 +4,7 @@ const User = require('../models/user');
 const authRoutes = express.Router();
 const { register, login } = require('../controllers/authController');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const validator = require('validator'); // Import the validator module
 const passport = require('passport'); // Import Passport.js
 
@@ -23,7 +23,8 @@ function isPasswordValid(password) {
 }
 
 //register user
-
+{
+  /*
 authRoutes.post('/register', async (req, res) => {
   const { email, password, confirmPassword, fullName } = req.body;
 
@@ -83,8 +84,12 @@ authRoutes.post('/register', async (req, res) => {
   }
 });
 
-// login
+*/
+}
 
+// login
+{
+  /*
 authRoutes.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -113,6 +118,8 @@ authRoutes.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+*/
+}
 
 // Google OAuth login route
 authRoutes.get(

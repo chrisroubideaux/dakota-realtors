@@ -1,4 +1,6 @@
 // admin authentication
+{
+  /*
 const express = require('express');
 const Admin = require('./adminModel');
 const adminRoutes = express.Router();
@@ -101,3 +103,6 @@ adminRoutes.post('/login', async (req, res) => {
 });
 
 module.exports = adminRoutes;
+
+*/
+}
