@@ -13,7 +13,7 @@ import axios from 'axios';
 
 // data
 //import apartments from '@/data/featured/apartments';
-import reviews from '@/data/slider/reviews';
+//import reviews from '@/data/slider/reviews';
 
 // metadata
 {
@@ -63,10 +63,11 @@ const Apartments = () => {
         </div>
         {/* Details */}
         <Details />
-        {/* rewviews */}
+        {/* rewviews 
         {reviews.map((reviews) => (
           <Reviews key={reviews.id} reviews={reviews} />
         ))}
+        */}
         {/* Footer */}
         <Footer />
       </div>

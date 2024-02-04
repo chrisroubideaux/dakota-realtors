@@ -7,11 +7,11 @@ import Tab from '@/components/nav/Tab';
 import Banners from '@/components/homes/Banners';
 import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import Details from '@/components/misc/Details';
-import Reviews from '@/components/homes/Reviews';
+//import Reviews from '@/components/homes/Reviews';
 import Footer from '@/components/misc/Footer';
 // utils
 //import homes from '@/data/featured/homes';
-import reviews from '@/data/slider/reviews';
+//import reviews from '@/data/slider/reviews';
 
 import axios from 'axios';
 
@@ -52,9 +52,11 @@ const Homes = () => {
           </div>
         </div>
         <Details />
+        {/*}
         {reviews.map((reviews) => (
           <Reviews key={reviews.id} reviews={reviews} />
         ))}
+        */}
         {/* Footer */}
         <Footer />
       </div>

@@ -13,7 +13,7 @@ import Reviews from '@/components/commercials/Reviews';
 import Footer from '@/components/misc/Footer';
 // utils
 //import commercials from '@/data/featured/commercial';
-import reviews from '@/data/slider/reviews';
+//import reviews from '@/data/slider/reviews';
 
 // metadata
 {

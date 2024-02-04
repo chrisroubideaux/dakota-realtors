@@ -11,7 +11,7 @@ import Tab from '@/components/nav/Tab';
 import FeaturedApartments from '@/components/apartments/FeaturedApartments';
 import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import CommercialProperties from '@/components/commercials/CommercialProperties';
-import Reviews from '@/components/properties/Reviews';
+//import Reviews from '@/components/properties/Reviews';
 import Details from '@/components/misc/Details';
 import Footer from '@/components/misc/Footer';
 
@@ -20,7 +20,7 @@ import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 // data
 //import apartments from '@/data/featured/apartments';
 //import homes from '@/data/featured/homes';
-import reviews from '@/data/slider/reviews';
+//import reviews from '@/data/slider/reviews';
 //import commercials from '@/data/featured/commercial';
 
 // metadata
@@ -154,9 +154,7 @@ const Properties = () => {
         </div>
 
         <Details />
-        {reviews.map((reviews) => (
-          <Reviews key={reviews.id} reviews={reviews} />
-        ))}
+
         {/* Footer */}
         <Footer />
       </div>
