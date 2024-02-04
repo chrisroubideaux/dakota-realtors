@@ -16,10 +16,14 @@ import Footer from '@/components/misc/Footer';
 import reviews from '@/data/slider/reviews';
 
 // metadata
+{
+  /*
 export const metadata = {
   title: 'dakota realtors | commercial listings',
   description: 'nextjs real estate app',
 };
+*/
+}
 const Commercials = () => {
   const [commercials, setCommercials] = useState([]);
 
@@ -68,6 +72,8 @@ const Commercials = () => {
 export default Commercials;
 
 // Fetch data on the server side using getServerSideProps
+{
+  /*
 export async function getServerSideProps() {
   try {
     // GET request to fetch commercial listings from server
@@ -88,4 +94,6 @@ export async function getServerSideProps() {
       },
     };
   }
+}
+*/
 }
