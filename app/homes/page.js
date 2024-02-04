@@ -16,10 +16,6 @@ import reviews from '@/data/slider/reviews';
 import axios from 'axios';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | home listings',
-  description: 'dakota realtors | home page',
-};
 
 const Homes = () => {
   const [homes, setHomes] = useState([]);
@@ -69,6 +65,8 @@ const Homes = () => {
 export default Homes;
 
 // Function fetching data on the server side using getServerSideProps
+{
+  /*
 export async function getServerSideProps() {
   try {
     // GET request to fetch homes data from server
@@ -92,4 +90,7 @@ export async function getServerSideProps() {
       },
     };
   }
+}
+
+*/
 }

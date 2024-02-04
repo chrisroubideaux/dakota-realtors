@@ -24,10 +24,6 @@ import axios from 'axios';
 //import Calculator from '@/components/homes/calculator/Calculator';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | home details page',
-  description: 'real estate app',
-};
 
 export default function HomeInfo({ params }) {
   //  const home = homes.find((home) => home.id === +params.id);
@@ -141,6 +137,8 @@ export default function HomeInfo({ params }) {
 }
 
 // Function for fetching data on the server side using getServerSideProps
+{
+  /*
 export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch the home by id from your server
@@ -166,4 +164,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
+}
+*/
 }

@@ -17,11 +17,6 @@ import properties from '@/data/featured/properties';
 import agents from '@/data/featured/agents';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | properties page',
-  description: 'next.js realty app',
-};
-
 export default function PropertyInfo({ params }) {
   const property = properties.find((property) => property.id === params.id);
   const agent = agents.find((agent) => agent.id === params.id);
@@ -106,7 +101,8 @@ export default function PropertyInfo({ params }) {
     </>
   );
 }
-
+{
+  /*
 export async function getStaticPaths() {
   const paths = properties.map((property) => ({
     params: { id: property.id.toString() },
@@ -119,4 +115,6 @@ export async function getStaticProps({ params }) {
   const property = properties.find((property) => property.id === params.id);
 
   return { props: { property } };
+}
+*/
 }

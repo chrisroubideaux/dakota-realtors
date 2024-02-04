@@ -7,10 +7,7 @@ import { useState } from 'react';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | login page',
-  description: 'next.js real estate app',
-};
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -142,26 +139,3 @@ const Login = () => {
 };
 
 export default Login;
-{
-  /*
-import Login from '@/components/form/Login';
-
-// metadata
-export const metadata = {
-  title: 'dakota realtors | login page',
-  description: 'next.js real estate app',
-};
-
-export const login = () => {
-  return (
-    <>
-      <div className="">
-        <Login />
-      </div>
-    </>
-  );
-};
-
-export default login;
-*/
-}

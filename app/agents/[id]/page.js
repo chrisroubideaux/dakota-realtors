@@ -12,10 +12,15 @@ import Footer from '@/components/misc/Footer';
 import axios from 'axios';
 
 // metadata
+{
+  /*
 export const metadata = {
   title: 'dakota realtors | agent details page',
   description: 'nextjs real estate app',
 };
+
+*/
+}
 
 const AgentBio = ({ params }) => {
   const [agent, setAgent] = useState([]);

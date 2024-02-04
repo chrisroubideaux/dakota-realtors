@@ -6,10 +6,7 @@ import Nav from '@/components/nav/Nav';
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | contact page',
-  description: 'nextjs real estate app',
-};
+
 function Contact() {
   return (
     <>

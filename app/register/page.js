@@ -13,10 +13,6 @@ import {
 } from 'react-icons/fa';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | register page',
-  description: 'next.js real estate app',
-};
 
 const Register = () => {
   const router = useRouter(); // Initialize the router

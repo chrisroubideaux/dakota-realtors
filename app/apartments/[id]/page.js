@@ -25,11 +25,14 @@ import Footer from '@/components/misc/Footer';
 //import agents from '@/data/featured/agents';
 
 // metadata
+{
+  /*
 export const metadata = {
   title: 'dakota realtors | apartment details page',
   description: 'real estate app',
 };
-
+*/
+}
 export default function Page({ params }) {
   //  const apartment = apartments.find((apartment) => apartment.id === +params.id);
   //  const appointment = appointments.find(
@@ -137,7 +140,8 @@ export default function Page({ params }) {
     </>
   );
 }
-
+{
+  /*
 // Fetch data server side using getServerSideProps
 export async function getServerSideProps({ params }) {
   try {
@@ -161,4 +165,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
+}
+*/
 }

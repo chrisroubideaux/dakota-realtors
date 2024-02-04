@@ -24,10 +24,6 @@ import reviews from '@/data/slider/reviews';
 //import commercials from '@/data/featured/commercial';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | properties page',
-  description: 'nextjs real estate app',
-};
 
 const Properties = () => {
   //
