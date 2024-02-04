@@ -24,10 +24,7 @@ import Footer from '@/components/misc/Footer';
 import Iconbar from '@/components/commercials/Iconbar';
 
 // metadata
-export const metadata = {
-  title: 'dakota realtors | commercial details page',
-  description: 'next js real estate app',
-};
+
 export default function CommercialInfo({ params }) {
   //const commercial = commercials.find((commercial) => commercial.id === +params.id );
 
