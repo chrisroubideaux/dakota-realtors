@@ -7,7 +7,7 @@ import Tab from '@/components/nav/Tab';
 import Banners from '@/components/homes/Banners';
 import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import Details from '@/components/misc/Details';
-import Reviews from '@/components/homes/Reviews';
+//import Reviews from '@/components/homes/Reviews';
 import Footer from '@/components/misc/Footer';
 // utils
 
@@ -51,7 +51,7 @@ const Homes = () => {
         </div>
         <Details />
 
-        <Reviews />
+        {/* <Reviews /> */}
 
         {/* Footer */}
         <Footer />

@@ -13,7 +13,7 @@ import {
 function Realtors({ commercials }) {
   return (
     <>
-      <Link className="card-link" href={`/commercials/${commercials.id}`}>
+      <Link className="card-link" href={`/commercials/${commercials._id}`}>
         <div class="card mb-2" style={{ maxWidth: '540px' }}>
           <div class="row g-0">
             <div class="col-sm-4">

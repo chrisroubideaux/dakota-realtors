@@ -7,7 +7,7 @@ import Banners from '@/components/apartments/Banners';
 import Tab from '@/components/nav/Tab';
 import FeaturedApartments from '@/components/apartments/FeaturedApartments';
 import Details from '@/components/misc/Details';
-import Reviews from '@/components/apartments/Reviews';
+//import Reviews from '@/components/apartments/Reviews';
 import Footer from '@/components/misc/Footer';
 // axios
 import axios from 'axios';
@@ -50,7 +50,7 @@ const Apartments = () => {
         {/* Details */}
         <Details />
 
-        <Reviews />
+        {/* <Reviews /> */}
 
         {/* Footer */}
         <Footer />

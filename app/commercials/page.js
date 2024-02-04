@@ -9,7 +9,7 @@ import Tab from '@/components/nav/Tab';
 import Banners from '@/components/commercials/Banners';
 import CommercialProperties from '@/components/commercials/CommercialProperties';
 import Details from '@/components/misc/Details';
-import Reviews from '@/components/commercials/Reviews';
+//import Reviews from '@/components/commercials/Reviews';
 import Footer from '@/components/misc/Footer';
 // utils
 //import commercials from '@/data/featured/commercial';
@@ -60,7 +60,7 @@ const Commercials = () => {
         </div>
         <Details />
 
-        <Reviews />
+        {/* <Reviews /> */}
 
         {/* Footer */}
         <Footer />
