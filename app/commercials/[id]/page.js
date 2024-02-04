@@ -13,17 +13,10 @@ import Room from '@/components/commercials/Room';
 import Maps from '@/components/misc/Maps';
 import Layout from '@/components/commercials/calculator/Layout';
 import Details from '@/components/commercials/Details';
-import Gallery from '@/components/commercials/Gallery';
 import Realtors from '@/components/commercials/Realtors';
 import Bookings from '@/components/commercials/tours/Bookings';
 import Amenities from '@/components/commercials/Amenties';
 import Footer from '@/components/misc/Footer';
-
-// data
-//import commercials from '@/data/featured/commercial';
-import Iconbar from '@/components/commercials/Iconbar';
-
-// metadata
 
 export default function CommercialInfo({ params }) {
   //const commercial = commercials.find((commercial) => commercial.id === +params.id );
