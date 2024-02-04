@@ -59,9 +59,9 @@ const Commercials = () => {
           </div>
         </div>
         <Details />
-        {reviews.map((reviews) => (
-          <Reviews key={reviews.id} reviews={reviews} />
-        ))}
+
+        <Reviews />
+
         {/* Footer */}
         <Footer />
       </div>
