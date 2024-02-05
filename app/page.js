@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <div className="cover">
         <div className="containter text-center py-5">
-          <h1 className=" display-3 py-4 mr-3">Dakota Realtors</h1>
+          <h1 className="display-3 py-4 mr-3">Dakota Realtors</h1>
           <p className="display-6 fs-3 text-light fw-semi-bold">
             Your Dream Home is just a few clicks away.
           </p>
