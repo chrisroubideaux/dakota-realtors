@@ -1,5 +1,5 @@
 'use client';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import '@/styles/globals.css';
 import '@/styles/cards.css';
