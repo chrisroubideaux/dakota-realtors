@@ -4,9 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 // data
-import apartments from '@/data/featured/apartments';
-import homes from '@/data/featured/homes';
-import commercials from '@/data/featured/commercial';
+//import apartments from '@/data/featured/apartments';
+//import homes from '@/data/featured/homes';
+//import commercials from '@/data/featured/commercial';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
