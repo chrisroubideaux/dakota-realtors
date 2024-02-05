@@ -4,11 +4,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run realtors\" \"npm run backend\"",
+    "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
     "realtors": "next dev",
-    "backend": "cd backend && npm start",
     "start": "npm run dev"
   },
   "engines": {
