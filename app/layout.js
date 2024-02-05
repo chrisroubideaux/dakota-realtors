@@ -2,9 +2,9 @@
 import { useEffect } from 'react';
 import '@/styles/globals.css';
 //import '@/styles/cards.css';
-import '@/styles/form.css';
-import '@/styles/hero.css';
-import '@/styles/modal.css';
+//import '@/styles/form.css';
+//import '@/styles/hero.css';
+//import '@/styles/modal.css';
 //import '@fortawesome/fontawesome-svg-core/styles.css';
 
 export default function RootLayout({ children }) {
