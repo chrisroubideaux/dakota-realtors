@@ -1,4 +1,6 @@
 // cover page //
+import React from 'react';
+
 import Link from 'next/link';
 
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
