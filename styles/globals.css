@@ -1,3 +1,8 @@
+/* globals.css */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* Your custom styles and other CSS rules go here */
+
 body,
 html {
   margin: 0;
