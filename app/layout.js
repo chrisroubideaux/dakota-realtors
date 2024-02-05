@@ -1,20 +1,18 @@
-'use client';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
 import '@/styles/cards.css';
 import '@/styles/form.css';
 import '@/styles/hero.css';
 import '@/styles/modal.css';
+import BootstrapClient from '@/components/utils/BootstrapClient';
 
 export default function RootLayout({ children }) {
-  useEffect(() => {
-    require('bootstrap/dist/js/bootstrap.bundle.min.js');
-  }, []);
-
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <BootstrapClient />
+      </body>
     </html>
   );
 }
