@@ -16,11 +16,9 @@ const Apartments = () => {
   const [apartments, setApartments] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch apartments from your server
     axios
       .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
       .then((response) => {
-        // Update the state with the fetched apartments
         setApartments(response.data);
       })
       .catch((error) => {
@@ -62,12 +60,13 @@ const Apartments = () => {
 export default Apartments;
 
 // Fetch data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps() {
   try {
     // Make a GET request to fetch apartments data from your server
-    const response = await axios.get('http://localhost:3001/apartments');
+    const response = await axios.get(
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments'
+    );
     const apartmentsData = response.data;
 
     // Return data as props to the component
@@ -84,6 +83,4 @@ export async function getServerSideProps() {
       },
     };
   }
-}
-*/
 }

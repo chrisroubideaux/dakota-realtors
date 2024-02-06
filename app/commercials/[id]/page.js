@@ -26,7 +26,9 @@ export default function CommercialInfo({ params }) {
   useEffect(() => {
     // Makes a GET request to fetch commercial property by id
     axios
-      .get(`http://localhost:3001/commercials/${params.id}`)
+      .get(
+        `https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials/${params.id}`
+      )
       .then((response) => {
         // Update the state with the fetched commercial property
         setCommercial(response.data);
@@ -124,14 +126,15 @@ export default function CommercialInfo({ params }) {
   );
 }
 // Fetch data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps({ params }) {
   const { id } = params;
 
   // Fetch the commercial data based on the 'id' parameter
   try {
-    const response = await axios.get(`http://localhost:3001/commercials/${id}`);
+    const response = await axios.get(
+      `https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials/${params.id}`
+    );
     const commercial = response.data;
 
     // Return the 'commercial' data as props
@@ -151,6 +154,4 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-}
-*/
 }

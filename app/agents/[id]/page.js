@@ -1,7 +1,6 @@
 // agent bio page
 'use client';
 import { useState, useEffect } from 'react';
-
 import Nav from '@/components/nav/Nav';
 import Navbar from '@/components/agents/Navbar';
 import Bio from '@/components/agents/Bio';
@@ -23,13 +22,16 @@ export const metadata = {
 }
 
 const AgentBio = ({ params }) => {
+  // const agent = agents.find((agent) => agent.id === +params.id);
   const [agent, setAgent] = useState([]);
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
     // GET request to fetch agent data by id from server
     axios
-      .get(`http://localhost:3001/agents/${params.id}`)
+      .get(
+        `https://midwest-realtors-95d2cdb37007.herokuapp.com/agents/${params.id}`
+      )
       .then((response) => {
         // Update the state with the fetched agents
         setAgent(response.data);
@@ -38,7 +40,7 @@ const AgentBio = ({ params }) => {
         console.error('Error fetching agents:', error);
       });
   }, [params.id]);
-  // const agent = agents.find((agent) => agent.id === +params.id);
+
   return (
     <>
       <Nav />
@@ -72,13 +74,12 @@ const AgentBio = ({ params }) => {
 export default AgentBio;
 
 // Fetch data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch agent data from server using `params.id`
     const response = await axios.get(
-      `http://localhost:3001/agents/${params.id}`
+      `https://midwest-realtors-95d2cdb37007.herokuapp.com/agents${params.id}`
     );
     const agentData = response.data;
 
@@ -96,7 +97,4 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-}
-
-*/
 }

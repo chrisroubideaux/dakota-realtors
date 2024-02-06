@@ -39,7 +39,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/auth/register',
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/register',
         formData
       );
 

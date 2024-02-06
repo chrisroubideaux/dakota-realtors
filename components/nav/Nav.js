@@ -17,7 +17,7 @@ const Nav = ({ onSearch }) => {
   useEffect(() => {
     // Fetch apartments data
     axios
-      .get('http://localhost:3001/apartments')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
       .then((response) => {
         setApartmentsData(response.data);
       })
@@ -27,7 +27,7 @@ const Nav = ({ onSearch }) => {
 
     // Fetch homes data
     axios
-      .get('http://localhost:3001/homes')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
       .then((response) => {
         setHomesData(response.data);
       })
@@ -37,7 +37,7 @@ const Nav = ({ onSearch }) => {
 
     // Fetch commercials data
     axios
-      .get('http://localhost:3001/commercials')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
       .then((response) => {
         setCommercialsData(response.data);
       })
@@ -152,10 +152,7 @@ const Nav = ({ onSearch }) => {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ">
               <li className="nav-item">
-                <Link
-                  className="nav-link nav-item"
-                  href="/properties/index.tsx"
-                >
+                <Link className="nav-link nav-item" href="/">
                   <img
                     src="https://pngimg.com/uploads/house/house_PNG55.png "
                     className="mt-3"

@@ -63,12 +63,13 @@ const Homes = () => {
 export default Homes;
 
 // Function fetching data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps() {
   try {
     // GET request to fetch homes data from server
-    const response = await axios.get('http://localhost:3001/homes');
+    const response = await axios.get(
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/homes'
+    );
     const homes = response.data;
 
     // Return the 'homes' data as props
@@ -80,15 +81,12 @@ export async function getServerSideProps() {
   } catch (error) {
     console.error('Error fetching homes:', error);
 
-    // handle errors 
+    // handle errors
     return {
       redirect: {
-        destination: '/error', 
+        destination: '/error',
         permanent: false,
       },
     };
   }
-}
-
-*/
 }

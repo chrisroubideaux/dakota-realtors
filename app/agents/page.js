@@ -55,12 +55,13 @@ function Agents() {
 export default Agents;
 
 // Fetch data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps() {
   try {
     // Make a GET request to fetch agents data from server
-    const response = await axios.get('http://localhost:3001/agents');
+    const response = await axios.get(
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/agents'
+    );
     const agentsData = response.data;
 
     // Return data as props to the component
@@ -77,6 +78,4 @@ export async function getServerSideProps() {
       },
     };
   }
-}
-*/
 }

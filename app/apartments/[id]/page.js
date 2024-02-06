@@ -44,7 +44,9 @@ export default function Page({ params }) {
   useEffect(() => {
     // GET request to fetch apartments by id from server
     axios
-      .get(`http://localhost:3001/apartments/${params.id}`)
+      .get(
+        `https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments/${params.id}`
+      )
       .then((response) => {
         // Update the state with the fetched apartments
         setApartment(response.data);
@@ -140,14 +142,13 @@ export default function Page({ params }) {
     </>
   );
 }
-{
-  /*
+
 // Fetch data server side using getServerSideProps
 export async function getServerSideProps({ params }) {
   try {
     // GET request to fetch apartment data from server based on the ID in the URL
     const response = await axios.get(
-      `http://localhost:3001/apartments/${params.id}`
+      `https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments/${params.id}`
     );
     const apartmentData = response.data;
 
@@ -165,6 +166,4 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-}
-*/
 }

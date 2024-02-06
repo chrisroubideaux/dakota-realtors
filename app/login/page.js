@@ -30,7 +30,7 @@ const Login = () => {
     try {
       // Send a POST request to the login endpoint using Axios
       const response = await axios.post(
-        'http://localhost:3001/auth/login',
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/login',
         formData
       );
 

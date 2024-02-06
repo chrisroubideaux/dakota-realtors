@@ -72,12 +72,13 @@ const Commercials = () => {
 export default Commercials;
 
 // Fetch data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps() {
   try {
     // GET request to fetch commercial listings from server
-    const response = await axios.get('http://localhost:3001/commercials');
+    const response = await axios.get(
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials'
+    );
     const commercialListings = response.data;
 
     // Return data as props to the component
@@ -94,6 +95,4 @@ export async function getServerSideProps() {
       },
     };
   }
-}
-*/
 }

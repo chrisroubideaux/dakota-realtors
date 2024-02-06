@@ -34,11 +34,9 @@ const Properties = () => {
   // useEffect for fetching apartments
 
   useEffect(() => {
-    // Make a GET request to fetch apartments from your server
     axios
       .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
       .then((response) => {
-        // Update the state with the fetched apartments
         setApartments(response.data);
       })
       .catch((error) => {
@@ -48,11 +46,9 @@ const Properties = () => {
 
   // useEffect for fetching homes
   useEffect(() => {
-    // Make a GET request to fetch homes from your server
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
+      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
       .then((response) => {
-        // Update the state with the fetched apartments
         setHomes(response.data);
       })
       .catch((error) => {
@@ -66,11 +62,9 @@ const Properties = () => {
 
   // useEffect for fetching commercial properties
   useEffect(() => {
-    // Make a GET request to fetch apartments from your server
     axios
       .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
       .then((response) => {
-        // Update the state with the fetched commercial listings
         setCommercials(response.data);
       })
       .catch((error) => {
@@ -165,23 +159,23 @@ const Properties = () => {
 export default Properties;
 // Fetch data using getStaticProps
 
-{
-  /*
 export async function getStaticProps() {
   try {
     // Fetch apartments data
     const apartmentsResponse = await axios.get(
-      'http://localhost:3001/apartments'
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments'
     );
     const apartmentsData = apartmentsResponse.data;
 
     // Fetch homes data
-    const homesResponse = await axios.get('http://localhost:3001/homes');
+    const homesResponse = await axios.get(
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/homes'
+    );
     const homesData = homesResponse.data;
 
     // Fetch commercials data
     const commercialsResponse = await axios.get(
-      'http://localhost:3001/commercials'
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials'
     );
     const commercialsData = commercialsResponse.data;
 
@@ -202,7 +196,4 @@ export async function getStaticProps() {
       },
     };
   }
-}
-
-*/
 }

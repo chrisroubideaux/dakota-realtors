@@ -40,7 +40,9 @@ export default function HomeInfo({ params }) {
   useEffect(() => {
     // GET request to fetch homes data from server
     axios
-      .get(`http://localhost:3001/homes/${params.id}`)
+      .get(
+        `https://midwest-realtors-95d2cdb37007.herokuapp.com/homes/${params.id}`
+      )
       .then((response) => {
         // Update the state with the fetched homes
         setHome(response.data);
@@ -137,13 +139,12 @@ export default function HomeInfo({ params }) {
 }
 
 // Function for fetching data on the server side using getServerSideProps
-{
-  /*
+
 export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch the home by id from your server
     const response = await axios.get(
-      `http://localhost:3001/homes/${params.id}`
+      `https://midwest-realtors-95d2cdb37007.herokuapp.com/homes/${params.id}`
     );
     const home = response.data;
 
@@ -164,6 +165,4 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-}
-*/
 }
