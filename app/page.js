@@ -1,7 +1,7 @@
 // cover page //
 
 import Link from 'next/link';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 
 // metadata
