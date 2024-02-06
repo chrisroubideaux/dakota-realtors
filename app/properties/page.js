@@ -157,8 +157,10 @@ const Properties = () => {
 };
 
 export default Properties;
-// Fetch data using getStaticProps
 
+// Fetch data using getStaticProps
+{
+  /*
 export async function getStaticProps() {
   try {
     // Fetch apartments data
@@ -196,4 +198,6 @@ export async function getStaticProps() {
       },
     };
   }
+}
+*/
 }
