@@ -7,7 +7,6 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "realtors": "next dev",
     "start": "npm run dev"
   },
   "engines": {
@@ -38,7 +37,5 @@
     "react-redux": "^8.1.1",
     "swiper": "^9.3.2"
   },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  }
+  "devDependencies": {}
 }
