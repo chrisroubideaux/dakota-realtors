@@ -1,11 +1,4 @@
-// next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
 
-module.exports = {
-  // Your other Next.js configuration options
-
-  // Exclude CSS modules for Bootstrap
-
-  cssLoaderOptions: {
-    modules: false,
-  },
-};
+module.exports = nextConfig;
