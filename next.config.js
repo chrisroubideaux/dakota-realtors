@@ -3,6 +3,10 @@
 module.exports = {
   // Your other Next.js configuration options
 
-  // Add this for CSS support
-  cssModules: true,
+  // Exclude CSS modules for Bootstrap
+  cssLoaderOptions: {
+    modules: {
+      localIdentName: '[local]__[hash:base64:5]',
+    },
+  },
 };
