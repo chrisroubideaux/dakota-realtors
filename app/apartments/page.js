@@ -60,7 +60,8 @@ const Apartments = () => {
 export default Apartments;
 
 // Fetch data on the server side using getServerSideProps
-
+{
+  /*
 export async function getServerSideProps() {
   try {
     // Make a GET request to fetch apartments data from your server
@@ -83,4 +84,6 @@ export async function getServerSideProps() {
       },
     };
   }
+}
+*/
 }

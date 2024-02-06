@@ -144,6 +144,8 @@ export default function Page({ params }) {
 }
 
 // Fetch data server side using getServerSideProps
+{
+  /*
 export async function getServerSideProps({ params }) {
   try {
     // GET request to fetch apartment data from server based on the ID in the URL
@@ -166,4 +168,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
+}
+*/
 }

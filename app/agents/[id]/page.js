@@ -74,7 +74,8 @@ const AgentBio = ({ params }) => {
 export default AgentBio;
 
 // Fetch data on the server side using getServerSideProps
-
+{
+  /*
 export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch agent data from server using `params.id`
@@ -97,4 +98,7 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
+}
+
+*/
 }

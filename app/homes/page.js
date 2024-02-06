@@ -63,7 +63,8 @@ const Homes = () => {
 export default Homes;
 
 // Function fetching data on the server side using getServerSideProps
-
+{
+  /*
 export async function getServerSideProps() {
   try {
     // GET request to fetch homes data from server
@@ -89,4 +90,7 @@ export async function getServerSideProps() {
       },
     };
   }
+}
+
+*/
 }

@@ -55,7 +55,8 @@ function Agents() {
 export default Agents;
 
 // Fetch data on the server side using getServerSideProps
-
+{
+  /*
 export async function getServerSideProps() {
   try {
     // Make a GET request to fetch agents data from server
@@ -78,4 +79,7 @@ export async function getServerSideProps() {
       },
     };
   }
+}
+
+*/
 }

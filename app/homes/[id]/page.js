@@ -139,7 +139,8 @@ export default function HomeInfo({ params }) {
 }
 
 // Function for fetching data on the server side using getServerSideProps
-
+{
+  /*
 export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch the home by id from your server
@@ -165,4 +166,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
+}
+*/
 }
