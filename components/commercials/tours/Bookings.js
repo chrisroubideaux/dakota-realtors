@@ -5,10 +5,106 @@ import Calendar from 'react-calendar';
 //import Times from '@/components/properties/tours/Times';
 //import properties from '@/data/featured/properties';
 
-export default function Bookings({ commercials }) {
+export default function Bookings({
+  commercials,
+  appointments,
+  onUpdateAppointment,
+  onDeleteAppointment,
+}) {
   const [value, onChange, onClickTile] = useState(new Date());
 
   const [date, setDate] = useState(new Date());
+
+  const [selectedSlot, setSelectedSlot] = useState(''); // State to store the selected time slot
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDayClick = (date) => {
+    // Handle the selected day
+    setSelectedDay(date);
+    setSelectedDate(date);
+  };
+
+  // Function to handle the form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectedSlot) {
+      // Handle validation or show an error message
+      return;
+    }
+    try {
+      // Send a POST request to create or reschedule the appointment
+      const response = await axios.post(
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments',
+        {
+          commercialsId: commercials._id, // Send the apartment ID
+          selectedSlot, // Send the selected time slot
+          appointmentId: selectedAppointment ? selectedAppointment._id : null, // Send the existing appointment ID if rescheduling
+        }
+      );
+
+      // Handle successful appointment creation or rescheduling
+      console.log('Appointment created or rescheduled:', response.data);
+
+      if (selectedAppointment) {
+        // Appointment has been rescheduled
+        showAlertMessage(
+          `Your appointment has been rescheduled ${selectedSlot}.`
+        );
+      } else {
+        // New appointment has been created
+        showAlertMessage(
+          `Your appointment has been successfully created for one hour from ${selectedSlot}.`
+        );
+      }
+
+      // Close the modal or perform any other desired actions
+      setSelectedAppointment(null);
+      setSelectedSlot('');
+    } catch (error) {
+      // Handle errors (e.g., show an error message)
+      console.error('Error creating or rescheduling appointment:', error);
+
+      // Display an error message to the user
+      showAlertMessage(
+        `Selected time slot is not available. Please choose another time slot ${selectedSlot}.`
+      );
+    }
+  };
+
+  // Function to delete an appointment
+  const handleDeleteAppointment = async (appointmentId) => {
+    try {
+      // Send a DELETE request to delete the appointment
+      const response = await axios.delete(
+        `'https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments/${appointmentId}`
+      );
+
+      // Handle successful appointment deletion
+      console.log('Appointment deleted:', response.data);
+
+      // Close the modal or perform any other desired actions
+      alert('Appointment has been canceled successfully.');
+
+      onDeleteAppointment(appointmentId);
+    } catch (error) {
+      // Handle errors (e.g., show an error message)
+      console.error('Error deleting appointment:', error);
+
+      // Display an error message to the user
+      alert('Error deleting appointment. Please try again later.');
+    }
+  };
+
+  // Function to display the alert message
+  const showAlertMessage = (message) => {
+    setAlertMessage(message);
+    setShowAlert(true);
+  };
   return (
     <>
       <div
@@ -16,7 +112,7 @@ export default function Bookings({ commercials }) {
         id="exampleModalToggle"
         aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1"
+        tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
@@ -35,10 +131,9 @@ export default function Bookings({ commercials }) {
               <a data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
                 <Calendar
                   className="calendar text-center "
-                  onChange={onClickTile}
-                  value={value}
-                  selectRange={true}
-                ></Calendar>
+                  onClickDay={handleDayClick}
+                  value={selectedDay}
+                />
               </a>
             </div>
             <div className="modal-footer"></div>
@@ -50,12 +145,12 @@ export default function Bookings({ commercials }) {
         id="exampleModalToggle2"
         aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1"
+        tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h6 className=" fs-5" id="exampleModalToggleLabel2">
+              <h6 className="fs-5" id="exampleModalToggleLabel2">
                 Select a time
               </h6>
               <button
@@ -66,51 +161,98 @@ export default function Bookings({ commercials }) {
               ></button>
             </div>
             <div className="modal-body">
-              {/* time component*/}
-
+              {/* alert component */}
+              {showAlert && (
+                <div
+                  className="card mb-2"
+                  style={{ maxWidth: '540px' }}
+                  role="alert"
+                >
+                  <div className="card-body">
+                    <p className="fs-6">
+                      {alertMessage} || {selectedDate.toDateString()}
+                    </p>
+                    <h3 className="fs-6"> </h3>
+                  </div>
+                  <div className="card-footer d-flex text-nowrap m-auto">
+                    <button className="btn btn-sm" onClick={handleSubmit}>
+                      view your appointment
+                    </button>
+                  </div>
+                </div>
+              )}
+              {/* list group component */}
               <div className="">
                 <div className="list-group-item list-group-item-action d-flex gap-3 py-3 ">
                   <Image
                     src={commercials.photo}
-                    className=" avatar"
+                    className="avatar"
                     width={200}
                     height={100}
                     alt="..."
                   />
-
-                  <div className="d-flex gap-2 w-100 justify-content-between mt-1 ">
+                  <div className="d-flex gap-2 w-100 justify-content-between mt-1">
                     <div className="">
                       <h6 className="fs-5 me-2">{commercials.realtor}</h6>
                       <h6 className="">{commercials.name}</h6>
                       <h6 className="">{commercials.times}</h6>
                     </div>
-
                     <small className="opacity-50 text-nowrap">
-                      {/* select component */}
                       <h6 className="">{commercials.days}</h6>
-                      <select>
-                        <option value="1">{commercials.slot}</option>
-                        <option value="2">{commercials.slot2}</option>
-                        <option value="3">{commercials.slot3}</option>
-                        <option value="4">{commercials.slot4}</option>
-                        <option value="5">{commercials.slot5}</option>
-                        <option value="6">{commercials.slot6}</option>
-                        <option value="7">{commercials.slot7}</option>
+                      <h6 className="">{commercials.slot}</h6>
+                      {/* select time slot component */}
+                      <select
+                        value={selectedSlot}
+                        onChange={(e) => setSelectedSlot(e.target.value)}
+                      >
+                        <option value="">Select a time slot</option>
+                        <option value={commercials.slot}>
+                          {commercials.slot}
+                        </option>
+                        <option value={commercials.slot2}>
+                          {commercials.slot2}
+                        </option>
+                        <option value={commercials.slot3}>
+                          {commercials.slot3}
+                        </option>
+                        <option value={commercials.slot4}>
+                          {commercials.slot4}
+                        </option>
+                        <option value={commercials.slot5}>
+                          {commercials.slot5}
+                        </option>
+                        <option value={commercials.slot6}>
+                          {commercials.slot6}
+                        </option>
+                        <option value={commercials.slot7}>
+                          {commercials.slot7}
+                        </option>
                       </select>
                     </small>
                   </div>
                 </div>
               </div>
             </div>
-            {/* end time component*/}
             <div className="modal-footer">
               <button
                 className="btn btn-md"
                 data-bs-target="#exampleModalToggle"
                 data-bs-toggle="modal"
               >
-                back to calendar
+                Back to calendar
               </button>
+
+              <div className="d-flex justify-content-end">
+                <button
+                  type="submit"
+                  className="btn btn-md"
+                  onClick={handleSubmit}
+                >
+                  Book Appointment
+                </button>
+
+                {/* */}
+              </div>
             </div>
           </div>
         </div>

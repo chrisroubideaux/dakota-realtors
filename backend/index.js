@@ -41,6 +41,7 @@ mongoose
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
+
 // cors middleware
 const corsOptions = {
   origin: 'http://localhost:3000',

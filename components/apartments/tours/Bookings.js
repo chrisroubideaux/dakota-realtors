@@ -35,11 +35,14 @@ export default function Bookings({
     }
     try {
       // Send a POST request to create or reschedule the appointment
-      const response = await axios.post('http://localhost:3001/appointments', {
-        apartmentId: apartments._id, // Send the apartment ID
-        selectedSlot, // Send the selected time slot
-        appointmentId: selectedAppointment ? selectedAppointment._id : null, // Send the existing appointment ID if rescheduling
-      });
+      const response = await axios.post(
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments',
+        {
+          apartmentId: apartments._id, // Send the apartment ID
+          selectedSlot, // Send the selected time slot
+          appointmentId: selectedAppointment ? selectedAppointment._id : null, // Send the existing appointment ID if rescheduling
+        }
+      );
 
       // Handle successful appointment creation or rescheduling
       console.log('Appointment created or rescheduled:', response.data);
@@ -75,7 +78,7 @@ export default function Bookings({
     try {
       // Send a DELETE request to delete the appointment
       const response = await axios.delete(
-        `http://localhost:3001/appointments/${appointmentId}`
+        `https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments/${appointmentId}`
       );
 
       // Handle successful appointment deletion
@@ -171,7 +174,7 @@ export default function Bookings({
                   </div>
                   <div className="card-footer d-flex text-nowrap m-auto">
                     <button className="btn btn-sm" onClick={handleSubmit}>
-                      veiw your appointment
+                      view your appointment
                     </button>
                   </div>
                 </div>
