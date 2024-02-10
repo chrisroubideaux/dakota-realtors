@@ -10,7 +10,7 @@
     "start": "npm run dev"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20.10.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
