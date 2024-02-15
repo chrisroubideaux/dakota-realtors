@@ -1,8 +1,8 @@
 // register page
 'use client';
+import axios from 'axios';
 import { useState } from 'react';
 import Link from 'next/link';
-import axios from 'axios'; // Import Axios
 import { useRouter } from 'next/navigation';
 import {
   FaFacebook,

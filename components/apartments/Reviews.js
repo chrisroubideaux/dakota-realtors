@@ -1,6 +1,7 @@
 // reviews component
-//import  { useRef, useState } from "react";
 'use client';
+//import  { useRef, useState } from "react";
+
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Iconbar from '@/components/misc/Iconbar';

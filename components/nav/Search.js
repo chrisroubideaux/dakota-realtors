@@ -3,10 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
-// data
-//import apartments from '@/data/featured/apartments';
-//import homes from '@/data/featured/homes';
-//import commercials from '@/data/featured/commercial';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -26,7 +22,7 @@ const SearchBar = ({ onSearch }) => {
       .filter((property) =>
         property.propertyType.toLowerCase().includes(query.toLowerCase())
       )
-      .slice(0, 4); // Limit suggestions to the first five results
+      .slice(0, 4);
 
     setSuggestions(filteredSuggestions);
   };
@@ -75,7 +71,6 @@ const SearchBar = ({ onSearch }) => {
   };
 
   const getPropertyPageLink = (propertyType) => {
-    // Customize the file paths according to your specific routes
     if (propertyType === 'Apartments') {
       return '/apartments';
     } else if (propertyType === 'Homes') {
@@ -84,7 +79,6 @@ const SearchBar = ({ onSearch }) => {
       return '/commercials';
     }
 
-    // Return a default path if needed
     return '/properties';
   };
 

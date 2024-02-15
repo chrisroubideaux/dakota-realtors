@@ -1,5 +1,4 @@
 // passport config for
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -45,12 +44,10 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL:
         process.env.GOOGLE_CALLBACK_URL ||
-        'http://localhost:3001/auth/google/callback',
-      //  Google redirects to this path after authentication
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Check if the Google user is already registere in database
         const existingUser = await User.findOne({
           email: profile.emails[0].value,
         });
@@ -59,16 +56,14 @@ passport.use(
           return done(null, existingUser);
         }
 
-        // Create a new user with Google account details
         const newUser = new User({
           googleId: profile.id,
           displayName: profile.displayName,
           email: profile.emails[0].value,
           fullName: profile.displayName,
-          password: '', // Placeholder for Google users
+          password: '',
         });
 
-        // Save the new user to the database
         await newUser.save();
 
         return done(null, newUser);

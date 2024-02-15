@@ -9,14 +9,12 @@ function handleGoogleCallback(req, res, next) {
     failureRedirect: '/login',
   })(req, res, (err) => {
     if (err) {
-      // Handle any authentication errors here
       return next(err);
     }
-    // Successful authentication, redirect to a page or send a response as needed
-    res.redirect('/user'); // Replace with the appropriate redirect URL
+
+    res.redirect('/user');
   });
 }
-
 
 module.exports = {
   authenticateWithGoogle,

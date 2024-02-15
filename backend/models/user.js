@@ -1,25 +1,23 @@
 const mongoose = require('mongoose');
 //const bcrypt = require('bcrypt');
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 // Define the user schema
 const userSchema = new mongoose.Schema(
   {
-    email: { type: String, unique: true, sparse: true }, // Make it optional
-    password: { type: String, required: false }, // Make it optional
-    fullName: { type: String }, // Make it optional
-    facebookId: { type: String }, // Store Facebook user ID
-    facebookDisplayName: { type: String }, // Store Facebook display name
-    facebookEmail: { type: String }, // Store Facebook email
-    // Other user fields here
+    email: { type: String, unique: true, sparse: true },
+    password: { type: String, required: false },
+    fullName: { type: String },
+    facebookId: { type: String },
+    facebookDisplayName: { type: String },
+    facebookEmail: { type: String },
   },
   {
-    timestamps: true, // Automatically add createdAt and updatedAt timestamps
+    timestamps: true,
   }
 );
 
-// Add a pre-save hook to hash the password before saving it to the database
 {
   /*
 userSchema.pre('save', async function (next) {

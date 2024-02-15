@@ -1,8 +1,9 @@
 // profile page
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+// import components
 import Nav from '@/components/nav/Nav';
 import Footer from '@/components/misc/Footer';
 
@@ -11,7 +12,7 @@ export default function Profile({}) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('token');
     axios
       .get(`http://localhost:3001/users`, {
         headers: {

@@ -1,7 +1,7 @@
 // commercial routes
 const express = require('express');
 const commercialRoutes = express.Router();
-const Commercial = require('./commercial'); //
+const Commercial = require('./commercial');
 
 const {
   getAllCommercials,
@@ -15,10 +15,8 @@ const {
 
 commercialRoutes.post('/', async (req, res) => {
   try {
-    // Create a new commercial property based on the request body
     const newCommercial = new Commercial(req.body);
 
-    // Save the new commercail property to the database
     const savedCommercial = await newCommercial.save();
 
     res.status(201).json(savedCommercial);
@@ -44,7 +42,6 @@ commercialRoutes.get('/:id', async (req, res) => {
   try {
     const commercialId = req.params.id;
 
-    // Use Mongoose to find the commercail by its ID
     const commercail = await Commercial.findById(commercialId);
 
     if (!commercail) {
@@ -61,15 +58,15 @@ commercialRoutes.get('/:id', async (req, res) => {
 // Update an existing commercialby ID
 commercialRoutes.put('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Get the commercial property ID from the route parameters
-    const updateFields = req.body; // Get the fields to update from the request body
+    const { id } = req.params;
+    const updateFields = req.body;
 
     // Find the commercial property by ID and update the specified fields
     const updatedCommercial = await Commercial.findByIdAndUpdate(
       id,
       updateFields,
       {
-        new: true, // Return the updated apartment after the update
+        new: true,
       }
     );
 
@@ -88,7 +85,7 @@ commercialRoutes.put('/:id', async (req, res) => {
 
 commercialRoutes.delete('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Get the commercial ID from the route parameters
+    const { id } = req.params;
 
     // Find the commercial by ID and remove it
     const deletedCommercial = await Commercial.findByIdAndRemove(id);

@@ -117,29 +117,3 @@ export default function Room({ apartments }) {
     </div>
   );
 }
-
-{
-  /* export default function Room({ apartments }) {
-        "swiper": "^9.3.2"
-  return (
-    <div>
-      <div className="d-flex justify-content-end">
-        <Image
-          src={apartments.image2}
-          alt="mls"
-          width={400}
-          height={200}
-          className="image img-fluid"
-        />
-
-        <div className="position-absolute bottom-0 end-0 mb-3 me-5 mt-5">
-          <span className="d-none d-md-inline-block btn btn-sm btn-light me-5 mt-5">
-            <i class="bi-arrows-fullscreen me-2"></i>
-            <FaArrowAltCircleDown /> View photos
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}*/
-}

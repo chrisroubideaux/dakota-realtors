@@ -1,8 +1,8 @@
 // apartment details page
 'use client';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
-// components
+import { useState, useEffect } from 'react';
+// component imports
 import Nav from '@/components/nav/Nav';
 import Toolbar from '@/components/apartments/Toolbar';
 import ApartmentDetails from '@/components/apartments/ApartmentDetails';
@@ -18,12 +18,6 @@ import Room from '@/components/apartments/Room';
 import Floor from '@/components/apartments/Floor';
 import Footer from '@/components/misc/Footer';
 
-// data
-//import apartments from '@/data/featured/apartments';
-//import appointments from '@/data/featured/appointments';
-
-//import agents from '@/data/featured/agents';
-
 // metadata
 {
   /*
@@ -34,21 +28,15 @@ export const metadata = {
 */
 }
 export default function Page({ params }) {
-  //  const apartment = apartments.find((apartment) => apartment.id === +params.id);
-  //  const appointment = appointments.find(
-  //  (appointment) => appointment.id === +params.id
-
   const [apartment, setApartment] = useState([]);
   const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // GET request to fetch apartments by id from server
     axios
       .get(
         `https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments/${params.id}`
       )
       .then((response) => {
-        // Update the state with the fetched apartments
         setApartment(response.data);
       })
       .catch((error) => {

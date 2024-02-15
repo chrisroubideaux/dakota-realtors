@@ -6,11 +6,6 @@ import Image from 'next/image';
 import { FaAngleDown, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 
-// data
-//import apartments from '@/data/featured/apartments';
-//import homes from '@/data/featured/homes';
-//import commercials from '@/data/featured/commercial';
-
 const Nav = ({ onSearch }) => {
   // fetch apartments, homes, and commercials data
 
@@ -68,13 +63,12 @@ const Nav = ({ onSearch }) => {
       .filter((property) =>
         property.propertyType.toLowerCase().includes(query.toLowerCase())
       )
-      .slice(0, 4); // Limit suggestions to the first five results
+      .slice(0, 4);
 
     setSuggestions(filteredSuggestions);
   };
-  // handle search
+
   const handleSearch = () => {
-    // Filter apartments by query
     const filteredApartments = apartments.filter(
       (apartment) =>
         apartment.propertyType.includes(query) ||
@@ -83,15 +77,15 @@ const Nav = ({ onSearch }) => {
         apartment.bedrooms.includes(query) ||
         apartment.bathrooms.includes(query)
     );
-    // Filter homes by query
+
     const filteredHomes = homes.filter((home) =>
       home.propertyType.includes(query)
     );
-    // Filter commercials by query
+
     const filteredCommercials = commercials.filter((commercial) =>
       commercial.propertyType.includes(query)
     );
-    // Combine all filtered properties
+
     const allFilteredProperties = [
       ...filteredApartments,
       ...filteredHomes,
@@ -103,7 +97,7 @@ const Nav = ({ onSearch }) => {
       dropdownRef.current.classList.remove('show');
     }
   };
-  // handle suggestion click
+
   const handleSuggestionClick = (suggestion) => {
     setQuery(suggestion.propertyType);
 
@@ -111,14 +105,12 @@ const Nav = ({ onSearch }) => {
       dropdownRef.current.classList.remove('show');
     }
 
-    // Additional code to handle location and price
     const location = suggestion.location;
     const price = suggestion.price;
   };
 
   // get property page link
   const getPropertyPageLink = (propertyType) => {
-    // Customize the file paths according to your specific routes
     if (propertyType === 'Apartments') {
       return '/apartments';
     } else if (propertyType === 'Homes') {
@@ -127,7 +119,6 @@ const Nav = ({ onSearch }) => {
       return '/commercials';
     }
 
-    // Return a default path if needed
     return '/properties';
   };
 

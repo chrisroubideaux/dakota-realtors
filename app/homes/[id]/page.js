@@ -1,7 +1,8 @@
 // homes details page
 'use client';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-
+// component imports
 import Nav from '@/components/nav/Nav';
 import Navbar from '@/components/homes/Navbar';
 import Toolbar from '@/components/homes/Toolbar';
@@ -16,18 +17,13 @@ import Amenities from '@/components/homes/Amenities';
 import Bookings from '@/components/homes/tours/Bookings';
 import Layout from '@/components/homes/calculator/Layout';
 import Footer from '@/components/misc/Footer';
-import axios from 'axios';
 
-// data
-//import homes from '@/data/featured/homes';
 //import Chart from '@/components/homes/calculator/Chart';
 //import Calculator from '@/components/homes/calculator/Calculator';
 
 // metadata
 
 export default function HomeInfo({ params }) {
-  //  const home = homes.find((home) => home.id === +params.id);
-
   //  const [homeValue, setHomeValue] = useState(0);
   //  const [downPaymentPercentage, setDownPaymentPercentage] = useState(20);
   //  const [interestRate, setInterestRate] = useState(4.5);
@@ -38,13 +34,11 @@ export default function HomeInfo({ params }) {
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // GET request to fetch homes data from server
     axios
       .get(
         `https://midwest-realtors-95d2cdb37007.herokuapp.com/homes/${params.id}`
       )
       .then((response) => {
-        // Update the state with the fetched homes
         setHome(response.data);
       })
       .catch((error) => {

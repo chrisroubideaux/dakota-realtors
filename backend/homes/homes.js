@@ -1,7 +1,7 @@
 //homes routes
 const express = require('express');
 const homeRoutes = express.Router();
-const Home = require('./home'); //
+const Home = require('./home');
 
 const {
   getAllHomes,
@@ -15,10 +15,8 @@ const {
 
 homeRoutes.post('/', async (req, res) => {
   try {
-    // Create a new home based on the request body
     const newHome = new Home(req.body);
 
-    // Save the new home to the database
     const savedHome = await newHome.save();
 
     res.status(201).json(savedHome);
@@ -44,7 +42,6 @@ homeRoutes.get('/:id', async (req, res) => {
   try {
     const homeId = req.params.id;
 
-    // Use Mongoose to find the home by its ID
     const home = await Home.findById(homeId);
 
     if (!home) {
@@ -61,12 +58,11 @@ homeRoutes.get('/:id', async (req, res) => {
 // Update an existing home by ID
 homeRoutes.put('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Get the home ID from the route parameters
-    const updateFields = req.body; // Get the fields to update from the request body
+    const { id } = req.params;
+    const updateFields = req.body;
 
-    // Find the home by ID and update the specified fields
     const updatedHome = await Home.findByIdAndUpdate(id, updateFields, {
-      new: true, // Return the updated home after the update
+      new: true,
     });
 
     if (!updatedHome) {
@@ -84,9 +80,8 @@ homeRoutes.put('/:id', async (req, res) => {
 
 homeRoutes.delete('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Get the home ID from the route parameters
+    const { id } = req.params;
 
-    // Find the home by ID and remove it
     const deletedHome = await Home.findByIdAndRemove(id);
 
     if (!deletedHome) {

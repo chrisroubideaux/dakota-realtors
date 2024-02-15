@@ -7,7 +7,7 @@ require('dotenv').config();
 const adminSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  fullName: { type: String, required: true }, // Make fullName required
+  fullName: { type: String, required: true },
 });
 
 // Hash the password before saving the agent authentication data
@@ -34,7 +34,7 @@ adminSchema.methods.comparePassword = async function (candidatePassword) {
 // Generate a JWT token for agent authentication with expiration
 adminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: '1h', // Token expires in 1 hour (adjust as needed)
+    expiresIn: '1h',
   });
   return token;
 };

@@ -21,9 +21,9 @@ const Form = () => {
           <input
             className="form-control m-2 fw-bold"
             required
-            type="text" // Use text input for full name
-            name="fullName" // Match the name attribute to the field in formData
-            placeholder="Enter Full Name" // Update the placeholder
+            type="text"
+            name="fullName"
+            placeholder="Enter Full Name"
           />
           <input
             className="form-control m-2 fw-bold"

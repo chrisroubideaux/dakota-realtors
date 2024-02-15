@@ -1,23 +1,21 @@
 //agents page
 'use client';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
+// component imports
 import Nav from '@/components/nav/Nav';
 import Hero from '@/components/agents/Hero';
 import Banners from '@/components/agents/Banners';
 import Realtors from '@/components/agents/Realtors';
 import Footer from '@/components/misc/Footer';
-// data
-import axios from 'axios';
 
 function Agents() {
   const [agents, setAgents] = useState([]);
 
   useEffect(() => {
-    // GET request to fetch agents data from server
     axios
       .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/agents')
       .then((response) => {
-        // Update the state with the fetched agents
         setAgents(response.data);
       })
       .catch((error) => {

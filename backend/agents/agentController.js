@@ -1,6 +1,6 @@
 // agent controller
 
-const Agent = require('./agent'); // Correct import
+const Agent = require('./agent');
 
 // Create a new agent
 const createAgent = async (req, res) => {

@@ -1,8 +1,8 @@
 // commercial page
 'use client';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
-// components
+import { useState, useEffect } from 'react';
+// component imports
 import Nav from '@/components/nav/Nav';
 import Hero from '@/components/commercials/Hero';
 import Tab from '@/components/nav/Tab';
@@ -11,9 +11,6 @@ import CommercialProperties from '@/components/commercials/CommercialProperties'
 import Details from '@/components/misc/Details';
 //import Reviews from '@/components/commercials/Reviews';
 import Footer from '@/components/misc/Footer';
-// utils
-//import commercials from '@/data/featured/commercial';
-//import reviews from '@/data/slider/reviews';
 
 // metadata
 {
@@ -28,11 +25,9 @@ const Commercials = () => {
   const [commercials, setCommercials] = useState([]);
 
   useEffect(() => {
-    // Make a GET request to fetch commercial properties from server
     axios
       .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
       .then((response) => {
-        // Update the state with the fetched commercial listings
         setCommercials(response.data);
       })
       .catch((error) => {

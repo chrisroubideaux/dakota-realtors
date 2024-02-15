@@ -1,5 +1,6 @@
 // home page
 'use client';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Nav from '@/components/nav/Nav';
 import Heros from '@/components/homes/Heros';
@@ -9,21 +10,14 @@ import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import Details from '@/components/misc/Details';
 //import Reviews from '@/components/homes/Reviews';
 import Footer from '@/components/misc/Footer';
-// utils
-
-import axios from 'axios';
-
-// metadata
 
 const Homes = () => {
   const [homes, setHomes] = useState([]);
 
   useEffect(() => {
-    // GET request to fetch homes data from server
     axios
       .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
       .then((response) => {
-        // Update the state with the fetched homes
         setHomes(response.data);
       })
       .catch((error) => {

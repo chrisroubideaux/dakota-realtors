@@ -1,7 +1,7 @@
 // apartment routes
 const express = require('express');
 const apartmentRoutes = express.Router();
-const Apartment = require('./apartment'); //
+const Apartment = require('./apartment');
 
 const {
   getAllApartments,
@@ -15,10 +15,8 @@ const {
 
 apartmentRoutes.post('/', async (req, res) => {
   try {
-    // Create a new apartment based on the request body
     const newApartment = new Apartment(req.body);
 
-    // Save the new apartment to the database
     const savedApartment = await newApartment.save();
 
     res.status(201).json(savedApartment);
@@ -30,7 +28,6 @@ apartmentRoutes.post('/', async (req, res) => {
 // GET all apartments
 
 apartmentRoutes.get('/', async (req, res) => {
-  // Get all apartments from the database
   try {
     const apartments = await Apartment.find();
     res.status(200).json(apartments);
@@ -45,7 +42,6 @@ apartmentRoutes.get('/:id', async (req, res) => {
   try {
     const apartmentId = req.params.id;
 
-    // Use Mongoose to find the apartment by its ID
     const apartment = await Apartment.findById(apartmentId);
 
     if (!apartment) {
@@ -62,15 +58,15 @@ apartmentRoutes.get('/:id', async (req, res) => {
 // Update an existing apartment by ID
 apartmentRoutes.put('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Get the apartment ID from the route parameters
-    const updateFields = req.body; // Get the fields to update from the request body
+    const { id } = req.params;
+    const updateFields = req.body;
 
     // Find the apartment by ID and update the specified fields
     const updatedApartment = await Apartment.findByIdAndUpdate(
       id,
       updateFields,
       {
-        new: true, // Return the updated apartment after the update
+        new: true,
       }
     );
 
@@ -89,7 +85,7 @@ apartmentRoutes.put('/:id', async (req, res) => {
 
 apartmentRoutes.delete('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Get the apartment ID from the route parameters
+    const { id } = req.params;
 
     // Find the apartment by ID and remove it
     const deletedApartment = await Apartment.findByIdAndRemove(id);

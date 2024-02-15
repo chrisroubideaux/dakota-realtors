@@ -15,26 +15,20 @@ googleRoutes.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   async (req, res) => {
     try {
-      // Extract user data from req.user (provided by passport)
-
       const { email, fullName } = req.user;
-      // Store the registration timestamp
+
       const registrationTimestamp = new Date();
 
-      // Create a new user record with user data and registration timestamp
       const newUser = new User({
         email,
         fullName,
         registrationTimestamp,
       });
 
-      // Save the new user record to the database
       await newUser.save();
 
-      // Generate a JWT token for the new user
       const token = jwt.sign({ email, fullName }, process.env.JWT_SECRET);
 
-      // User registration successful, return a success response with the token and redirect URL
       res.status(201).json({
         message: 'User registered successfully',
         user: req.user,
@@ -60,13 +54,10 @@ googleRoutes.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   async (req, res) => {
     try {
-      // Extract user data from req.user (provided by passport)
       const { email, fullName } = req.user;
 
-      // Generate a JWT token for the logged-in user
       const token = jwt.sign({ email, fullName }, process.env.JWT_SECRET);
 
-      // User login successful, return a success response with the token and redirect URL
       res.status(200).json({
         message: 'User logged in successfully',
         user: req.user, // User data from passport
@@ -74,10 +65,8 @@ googleRoutes.get(
         redirectTo: '/user',
       });
     } catch (err) {
-      // Handle any errors that occur during the login process
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
     }
   }
 );
-

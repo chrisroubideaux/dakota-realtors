@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// components
+// component imports
 import Nav from '@/components/nav/Nav';
 import Navbar from '@/components/commercials/Navbar';
 import Toolbar from '@/components/commercials/Toolbar';
@@ -18,19 +18,15 @@ import Amenities from '@/components/commercials/Amenties';
 import Footer from '@/components/misc/Footer';
 
 export default function CommercialInfo({ params }) {
-  //const commercial = commercials.find((commercial) => commercial.id === +params.id );
-
   const [commercial, setCommercial] = useState([]);
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // Makes a GET request to fetch commercial property by id
     axios
       .get(
         `https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials/${params.id}`
       )
       .then((response) => {
-        // Update the state with the fetched commercial property
         setCommercial(response.data);
       })
       .catch((error) => {

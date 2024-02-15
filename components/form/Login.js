@@ -25,14 +25,12 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      // Send a POST request to the login endpoint using Axios
       const response = await axios.post(
         'http://localhost:3001/auth/login',
         formData
       );
 
       if (response.status === 200) {
-        // Redirect to the profile page after successful login
         window.location.href = '/profile';
       } else {
         const data = response.data;
@@ -111,106 +109,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-{
-  /*
-import Link from 'next/link';
-import { useState } from 'react';
-
-const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [error, setError] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Send a POST request to the registration endpoint using Axios
-      const response = await axios.post(
-        'http://localhost:3001/auth/login',
-        formData
-      );
-
-      if (response.status === 201) {
-        setSuccessMessage('Welcome! back');
-        // Redirect to the profile page after successful registration
-        window.location.href = '/profile';
-      } else {
-        const data = response.data;
-        setError(data.message);
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Internal server error');
-    }
-  };
-
-  return (
-    <div>
-      <div className="text-center py-5">
-        <Link href="/" className="nav-item">
-          <img
-            className="mb-4"
-            src="https://pngimg.com/uploads/house/house_PNG55.png"
-            alt=""
-            width="72"
-            height="57"
-          />
-        </Link>
-        <h2 className="fw-bold">Login to Your Account</h2>
-
-        <form className="form text-center" onSubmit={handleSubmit}>
-          <input
-            className="form-control m-2 fw-bold"
-            required
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <input
-            className="form-control m-2 fw-bold"
-            required
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-
-          <div className="container">
-            <button className="w-100 btn btn-md" type="submit">
-              Login
-            </button>
-          </div>
-
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-
-          <p className="pt-3 fw-bold">{"Don't have an account"}</p>
-          <Link className="btn btn lg w-75" href="/register">
-            Register
-          </Link>
-          <p className="mt-5 mb-3 text-muted">&copy; Dakota Realtors, 2023</p>
-        </form>
-      </div>
-    </div>
-  );
-};
-
-export default LoginForm;
-
-*/
-}

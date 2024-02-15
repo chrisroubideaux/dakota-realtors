@@ -5,15 +5,14 @@ const authRoutes = express.Router();
 const { register, login } = require('../controllers/authController');
 const jwt = require('jsonwebtoken');
 //const bcrypt = require('bcrypt');
-const validator = require('validator'); // Import the validator module
-const passport = require('passport'); // Import Passport.js
+const validator = require('validator');
+const passport = require('passport');
 
 require('dotenv').config();
 
-// Function to check if a string contains at least one digit and one special character
 function isPasswordValid(password) {
   const digitRegex = /\d/;
-  const specialCharRegex = /[!@#$%^&*]/; // Add more special characters as needed
+  const specialCharRegex = /[!@#$%^&*]/;
 
   return (
     password.length >= 10 &&
@@ -132,9 +131,7 @@ authRoutes.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Successful Google OAuth authentication
-    // Redirect to a success page or send a response as needed
-    res.redirect('/profile'); // You can customize the redirect URL
+    res.redirect('/profile');
   }
 );
 

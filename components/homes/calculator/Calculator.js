@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 
 const Calculator = ({}) => {
   const [homeValue, setHomeValue] = useState(0);
-  const [downPaymentPercentage, setDownPaymentPercentage] = useState(20); // Default down payment percentage
-  const [interestRate, setInterestRate] = useState(4.5); // Default interest rate
+  const [downPaymentPercentage, setDownPaymentPercentage] = useState(20);
+  const [interestRate, setInterestRate] = useState(4.5);
   const [loanAmount, setLoanAmount] = useState(20);
-  const [loanTerm, setLoanTerm] = useState(30); // Default loan term in years
+  const [loanTerm, setLoanTerm] = useState(30);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
 
   useEffect(() => {

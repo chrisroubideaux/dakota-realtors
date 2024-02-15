@@ -12,9 +12,8 @@ const User = require('../models/user');
 userRoutes.get('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
-    console.log('User ID:', userId); // Check the value of userId
+    console.log('User ID:', userId);
     const userData = await User.findById(userId);
-    // ... rest of the code
   } catch (error) {
     console.error('Error fetching user profile by ID:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -28,7 +27,6 @@ userRoutes.put('/:id', async (req, res) => {
     const userId = req.params.id;
     const { fullName, email, newPassword } = req.body;
 
-    // Assuming you have an 'updateUser' function to update the user profile
     await updateUser(userId, fullName, email, newPassword);
 
     res.status(200).json({ message: 'User profile updated successfully' });
@@ -44,7 +42,6 @@ userRoutes.delete('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
 
-    // Assuming you have a 'deleteUser' function to delete the user profile
     await deleteUser(userId);
 
     res.status(200).json({ message: 'User profile deleted successfully' });

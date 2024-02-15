@@ -7,10 +7,8 @@ require('dotenv').config();
 
 const getUser = async (req, res) => {
   try {
-    // Assuming you have userId available from middleware
     const userId = req.userId;
 
-    // Fetch user data from the database using userId
     const user = await User.findById(userId);
 
     if (!user) {
@@ -21,7 +19,6 @@ const getUser = async (req, res) => {
     const userUserData = {
       fullName: user.fullName,
       email: user.email,
-      // Add other user fields here as needed
     };
 
     res.status(200).json({ message: 'User profile data', user: userUserData });
@@ -34,20 +31,17 @@ const getUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const userId = req.userId; // Assuming userId is available from middleware
+    const userId = req.userId;
 
-    // Fetch user data from the database using userId
     const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Customize the user profile data you want to send to the client
     const userData = {
       fullName: user.fullName,
       email: user.email,
-      // Add other user fields here as needed
     };
 
     res.status(200).json({ message: 'User profile data', user: userData });
@@ -58,30 +52,26 @@ const getUserById = async (req, res) => {
 };
 
 // Function to update user profile
-// Function to update user profile
+
 const updateUser = async (req, res) => {
   try {
-    const userId = req.userId; // Assuming userId is available from middleware
+    const userId = req.userId;
     const { fullName, email, newPassword } = req.body;
 
-    // Fetch user data from the database
     const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Update user profile fields
     if (fullName) {
       user.fullName = fullName;
     }
     if (email) {
       user.email = email;
     }
-    // Update password if newPassword is provided
+
     if (newPassword) {
-      // Update password logic here based on your application requirements
-      // For example, you can hash the new password and save it to the user object
       // const hashedPassword = hashPasswordFunction(newPassword);
       // user.password = hashedPassword;
     }
@@ -99,10 +89,8 @@ const updateUser = async (req, res) => {
 // Function to delete user profile
 const deleteUser = async (req, res) => {
   try {
-    const userId = req.userId; // Assuming userId is available from middleware
+    const userId = req.userId;
 
-    // Delete user data from the database
-    // Implement your database-specific logic to delete the user
     await User.findByIdAndRemove(userId);
 
     res.status(200).json({ message: 'User profile deleted successfully' });

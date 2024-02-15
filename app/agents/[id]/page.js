@@ -1,14 +1,12 @@
 // agent bio page
 'use client';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
+// component imports
 import Nav from '@/components/nav/Nav';
 import Navbar from '@/components/agents/Navbar';
 import Bio from '@/components/agents/Bio';
 import Footer from '@/components/misc/Footer';
-// data
-//import agents from '@/data/featured/agents';
-
-import axios from 'axios';
 
 // metadata
 {
@@ -22,18 +20,15 @@ export const metadata = {
 }
 
 const AgentBio = ({ params }) => {
-  // const agent = agents.find((agent) => agent.id === +params.id);
   const [agent, setAgent] = useState([]);
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
-    // GET request to fetch agent data by id from server
     axios
       .get(
         `https://midwest-realtors-95d2cdb37007.herokuapp.com/agents/${params.id}`
       )
       .then((response) => {
-        // Update the state with the fetched agents
         setAgent(response.data);
       })
       .catch((error) => {

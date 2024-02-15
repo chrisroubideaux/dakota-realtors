@@ -1,7 +1,7 @@
 'use client';
 // properties page
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 // components
 import Nav from '@/components/nav/Nav';
@@ -16,12 +16,6 @@ import Details from '@/components/misc/Details';
 import Footer from '@/components/misc/Footer';
 
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
-
-// data
-//import apartments from '@/data/featured/apartments';
-//import homes from '@/data/featured/homes';
-//import reviews from '@/data/slider/reviews';
-//import commercials from '@/data/featured/commercial';
 
 // metadata
 

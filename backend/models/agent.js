@@ -21,7 +21,6 @@ const agentSchema = new mongoose.Schema({
   slot6: String,
   slot7: String,
   days: String,
-  // Other agent fields here
 });
 
 const Agent = mongoose.model('Agent', agentSchema);

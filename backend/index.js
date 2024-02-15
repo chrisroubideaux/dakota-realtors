@@ -15,20 +15,19 @@ const homeRoutes = require('./homes/homes');
 const userRoutes = require('./routes/user');
 const agentRoutes = require('./agents/agents');
 //const adminRoutes = require('./admin/admin');
-// google auth
 
+// google auth
 const passport = require('passport');
-// Google Strategy
+
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-// Facebook Strategy
+
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-// Load environment variables from .env file
 require('dotenv').config();
 
 const app = express();
 //const port = 3001;
-const port = process.env.PORT || 3001; // Use the provided PORT or default to 3001
+const port = process.env.PORT || 3001;
 
 const mongoURI = process.env.MONGO_URI;
 
@@ -44,7 +43,7 @@ mongoose
 
 // cors middleware
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://dakota-realtors.vercel.app',
 };
 
 app.use(cors(corsOptions));
@@ -104,11 +103,10 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL:
         process.env.GOOGLE_CALLBACK_URL ||
-        'http://localhost:3001/auth/google/callback',
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Check if the Google user is already registered in your database
         const existingUser = await User.findOne({
           email: profile.emails[0].value,
         });
@@ -136,14 +134,14 @@ passport.use(
 
 // Serialize user data to store in the session
 passport.serializeUser((user, done) => {
-  done(null, user.id); // Store the user's ID in the session
+  done(null, user.id);
 });
 
 // Deserialize user data when retrieving from the session
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
-    done(null, user); // Attach the user object to the request (req.user)
+    done(null, user);
   } catch (err) {
     done(err);
   }
@@ -157,11 +155,11 @@ passport.use(
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       callbackURL:
         process.env.FACEBOOK_CALLBACK_URL ||
-        'http://localhost:3001/auth/facebook/callback',
+        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/callback',
       profileFields: ['id', 'displayName', 'photos', 'emails'],
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log('Facebook Profile Data:', profile); // Add this line to inspect the profile data
+      console.log('Facebook Profile Data:', profile);
 
       try {
         // Check if the Facebook user is already registered in your database
@@ -178,10 +176,8 @@ passport.use(
             displayName: profile.displayName,
             email: profile.emails[0].value,
           },
-          // Add other user properties as needed
         });
 
-        // Save the new user to the database
         await newUser.save();
 
         return done(null, newUser);
@@ -193,13 +189,13 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id); // Store the user's ID in the session
+  done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
-    done(null, user); // Attach the user object to the request (req.user)
+    done(null, user);
   } catch (err) {
     done(err);
   }
@@ -238,7 +234,7 @@ app.use('/auth', authRoutes);
 
 app.post('/auth', authRoutes);
 
-app.use('/user', userRoutes); // Then use userRoutes
+app.use('/user', userRoutes);
 
 // contact page
 app.get('/contact', (req, res) => {
@@ -262,9 +258,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Successful authentication, you can redirect to the home page or any other desired destination
-
-    res.redirect('http://localhost:3000/user');
+    res.redirect('https://dakota-realtors.vercel.app/user');
   }
 );
 // Google OAuth login route
@@ -280,8 +274,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Successful authentication, you can redirect to the home page or any other desired destination
-    res.redirect('http://localhost:3000/user');
+    res.redirect('https://dakota-realtors.vercel.app/user');
   }
 );
 
@@ -301,11 +294,10 @@ app.get(
 app.get(
   '/auth/facebook/callback/register',
   passport.authenticate('facebook', {
-    failureRedirect: '/login', // Redirect to login page on failure
+    failureRedirect: '/login',
   }),
   (req, res) => {
-    // Successful authentication, redirect to a page or send a response as needed
-    res.redirect('http://localhost:3000/user'); // Replace with the appropriate redirect URL
+    res.redirect('https://dakota-realtors.vercel.app/user');
   }
 );
 
@@ -313,11 +305,10 @@ app.get(
 app.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook', {
-    failureRedirect: '/login', // Redirect to login page on failure
+    failureRedirect: '/login',
   }),
   (req, res) => {
-    // Successful authentication, you can redirect to the home page or any other desired destination
-    res.redirect('http://localhost:3000/user');
+    res.redirect('https://dakota-realtors.vercel.app/user');
   }
 );
 

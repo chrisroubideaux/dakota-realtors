@@ -1,6 +1,8 @@
 // apartments page
 'use client';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
+// component imports
 import Nav from '@/components/nav/Nav';
 import Hero from '@/components/apartments/Hero';
 import Banners from '@/components/apartments/Banners';
@@ -9,8 +11,6 @@ import FeaturedApartments from '@/components/apartments/FeaturedApartments';
 import Details from '@/components/misc/Details';
 //import Reviews from '@/components/apartments/Reviews';
 import Footer from '@/components/misc/Footer';
-// axios
-import axios from 'axios';
 
 const Apartments = () => {
   const [apartments, setApartments] = useState([]);
