@@ -15,7 +15,7 @@ import {
 // metadata
 
 const Register = () => {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -44,23 +44,19 @@ const Register = () => {
       );
 
       if (response.status === 201) {
-        // Registration successful, store the token and redirect
-        const { token } = response.data; // Assuming the token is in the response
-        localStorage.setItem('token', token); // Store the token in localStorage
+        const { token } = response.data;
+        localStorage.setItem('token', token);
 
         // Check if redirectTo is present in the response
         if (response.data.redirectTo) {
-          router.push(response.data.redirectTo); // Redirect to the specified URL
+          router.push(response.data.redirectTo);
         }
 
-        // Display a success message
         setSuccessMessage('Registration successful!.');
       } else {
-        // Registration failed, display error message
         setErrorMessage(response.data.message);
       }
     } catch (error) {
-      // Handle network or other errors
       console.error('Error during registration:', error);
       setErrorMessage('Internal server error');
     }
@@ -69,7 +65,8 @@ const Register = () => {
   // Google registration function
   const handleGoogleRegister = () => {
     // Define the Google OAuth registration URL
-    const googleOAuthURL = 'http://localhost:3001/auth/google/register';
+    const googleOAuthURL =
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/register';
 
     // Open the Google OAuth URL in a popup window
     window.open(
@@ -82,7 +79,8 @@ const Register = () => {
   // Facebook registration function
   const handleFacebookRegister = () => {
     // Define the Facebook OAuth registration URL
-    const facebookOAuthURL = 'http://localhost:3001/auth/facebook/register';
+    const facebookOAuthURL =
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/register';
 
     // Open the Facebook OAuth URL in a popup window
     window.open(

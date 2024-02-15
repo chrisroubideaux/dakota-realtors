@@ -14,7 +14,7 @@ export default function Profile({}) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios
-      .get(`http://localhost:3001/users`, {
+      .get(`https://midwest-realtors-95d2cdb37007.herokuapp.com/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

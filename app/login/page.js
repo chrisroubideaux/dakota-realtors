@@ -50,15 +50,15 @@ const Login = () => {
   // Add Google login function
   const handleGoogleLogin = () => {
     // Redirect the user to Google OAuth login
-    window.location.href = 'http://localhost:3001/auth/google/login';
+    window.location.href =
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/login';
   };
 
   // Facebook registration function
   const handleFacebookLogin = () => {
-    // Define the Facebook OAuth registration URL
-    const facebookOAuthURL = 'http://localhost:3001/auth/facebook/register';
+    const facebookOAuthURL =
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/register';
 
-    // Open the Facebook OAuth URL in a popup window
     window.open(
       facebookOAuthURL,
       'Facebook OAuth',

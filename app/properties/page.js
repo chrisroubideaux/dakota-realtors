@@ -17,8 +17,6 @@ import Footer from '@/components/misc/Footer';
 
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 
-// metadata
-
 const Properties = () => {
   //
   const [apartments, setApartments] = useState([]);
