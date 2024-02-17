@@ -66,7 +66,7 @@ const Register = () => {
   const handleGoogleRegister = () => {
     // Define the Google OAuth registration URL
     const googleOAuthURL =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/register';
+      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/callback';
 
     // Open the Google OAuth URL in a popup window
     window.open(
