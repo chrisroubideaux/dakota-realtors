@@ -36,7 +36,6 @@ googleRoutes.get(
         redirectTo: '/user',
       });
     } catch (err) {
-      // Handle any errors that occur during the registration process
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
     }
@@ -60,7 +59,7 @@ googleRoutes.get(
 
       res.status(200).json({
         message: 'User logged in successfully',
-        user: req.user, // User data from passport
+        user: req.user,
         token,
         redirectTo: '/user',
       });

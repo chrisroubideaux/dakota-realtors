@@ -253,14 +253,12 @@ app.get(
   })
 );
 
-// Google OAuth register/callback route
+// Google OAuth register route
 app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    res.redirect('https://dakota-realtors.vercel.app/user');
-  }
+  '/auth/google/register',
+  passport.authenticate('google', { scope: ['openid', 'profile', 'email'] })
 );
+
 // Google OAuth login route
 app.get(
   '/auth/google/login',
@@ -268,8 +266,7 @@ app.get(
     scope: ['openid', 'profile', 'email'],
   })
 );
-
-// Google OAuth login callback route
+// Google OAuth callback route
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
