@@ -25,9 +25,7 @@ const AgentBio = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://midwest-realtors-95d2cdb37007.herokuapp.com/agents/${params.id}`
-      )
+      .get(`http://localhost:3001/agents/${params.id}`)
       .then((response) => {
         setAgent(response.data);
       })

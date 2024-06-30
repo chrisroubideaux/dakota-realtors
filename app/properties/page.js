@@ -24,10 +24,9 @@ const Properties = () => {
   const [commercials, setCommercials] = useState([]);
 
   // useEffect for fetching apartments
-
   useEffect(() => {
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
+      .get('http://localhost:3001/apartments')
       .then((response) => {
         setApartments(response.data);
       })
@@ -39,7 +38,7 @@ const Properties = () => {
   // useEffect for fetching homes
   useEffect(() => {
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
+      .get('http://localhost:3001/homes')
       .then((response) => {
         setHomes(response.data);
       })
@@ -55,7 +54,7 @@ const Properties = () => {
   // useEffect for fetching commercial properties
   useEffect(() => {
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
+      .get('http://localhost:3001/commercials')
       .then((response) => {
         setCommercials(response.data);
       })
@@ -66,12 +65,8 @@ const Properties = () => {
 
   return (
     <>
-      {/* page layout */}
-
       <Nav />
       <div className="layout h-100">
-        {/* hero content */}
-
         <div className="properties mt-4">
           <div className="containter text-center pt-5">
             <h1 className="pt-5">Featured Properties</h1>

@@ -23,9 +23,7 @@ export default function CommercialInfo({ params }) {
 
   useEffect(() => {
     axios
-      .get(
-        `https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials/${params.id}`
-      )
+      .get(`http://localhost:3001/commercials/${params.id}`)
       .then((response) => {
         setCommercial(response.data);
       })

@@ -14,7 +14,7 @@ function Agents() {
 
   useEffect(() => {
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/agents')
+      .get('http://localhost:3001/agents')
       .then((response) => {
         setAgents(response.data);
       })
@@ -24,14 +24,12 @@ function Agents() {
   }, []);
   return (
     <>
-      {/* page layout */}
       <div className="layout">
-        {/* nav */}
         <Nav />
         <Hero />
         <Banners />
         {/* Agents */}
-        <div className="container text-center py-4 my-4 pt-5 mt-5">
+        <div className="container text-center py-4 my-4 pt-5 mt-3">
           <div className="row row-cols-1 row-cols-1">
             {agents.map((agents) => (
               <div

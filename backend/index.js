@@ -43,7 +43,7 @@ mongoose
 
 // cors middleware
 const corsOptions = {
-  origin: 'https://dakota-realtors.vercel.app',
+  origin: 'http://localhost:3000',
 };
 
 app.use(cors(corsOptions));

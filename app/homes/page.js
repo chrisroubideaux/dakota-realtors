@@ -16,7 +16,7 @@ const Homes = () => {
 
   useEffect(() => {
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
+      .get('http://localhost:3001/homes')
       .then((response) => {
         setHomes(response.data);
       })

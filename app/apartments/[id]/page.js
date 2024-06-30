@@ -18,24 +18,13 @@ import Room from '@/components/apartments/Room';
 import Floor from '@/components/apartments/Floor';
 import Footer from '@/components/misc/Footer';
 
-// metadata
-{
-  /*
-export const metadata = {
-  title: 'dakota realtors | apartment details page',
-  description: 'real estate app',
-};
-*/
-}
 export default function Page({ params }) {
   const [apartment, setApartment] = useState([]);
   const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
     axios
-      .get(
-        `https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments/${params.id}`
-      )
+      .get(`http://localhost:3001/apartments/${params.id}`)
       .then((response) => {
         setApartment(response.data);
       })

@@ -23,9 +23,9 @@ function About() {
       <div className="layout">
         <Nav />
         <div className="about mt-3">
-          <div className="containter text-center py-5">
-            <h1 className="display-3 py-3">Our Mission</h1>
-            <p className="display-6 text-white">
+          <div className="containter text-center py-5 mt-5">
+            <h1 className="display-3 py-3 mt-5">Our Mission</h1>
+            <p className="display-6 text-white ">
               Helping people find their dream home.
             </p>
           </div>

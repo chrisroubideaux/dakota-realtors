@@ -26,7 +26,7 @@ const Commercials = () => {
 
   useEffect(() => {
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
+      .get('http://localhost:3001/commercials')
       .then((response) => {
         setCommercials(response.data);
       })
