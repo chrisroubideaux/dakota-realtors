@@ -12,8 +12,6 @@ import {
   FaGoogle,
 } from 'react-icons/fa';
 
-// metadata
-
 const Register = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -22,10 +20,10 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
-  // success and error messages
+
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  // Handle form data change
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -33,7 +31,7 @@ const Register = () => {
       [name]: value,
     });
   };
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,7 +45,6 @@ const Register = () => {
         const { token } = response.data;
         localStorage.setItem('token', token);
 
-        // Check if redirectTo is present in the response
         if (response.data.redirectTo) {
           router.push(response.data.redirectTo);
         }
@@ -62,13 +59,10 @@ const Register = () => {
     }
   };
 
-  // Google registration function
+  // Oauth
   const handleGoogleRegister = () => {
-    // Define the Google OAuth registration URL
-    const googleOAuthURL =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/callback';
+    const googleOAuthURL = 'http://localhost:3001/auth/google/callback';
 
-    // Open the Google OAuth URL in a popup window
     window.open(
       googleOAuthURL,
       'Google OAuth',
@@ -76,13 +70,10 @@ const Register = () => {
       'width=300,height=300'
     );
   };
-  // Facebook registration function
-  const handleFacebookRegister = () => {
-    // Define the Facebook OAuth registration URL
-    const facebookOAuthURL =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/register';
 
-    // Open the Facebook OAuth URL in a popup window
+  const handleFacebookRegister = () => {
+    const facebookOAuthURL = 'http://localhost:3001/auth/facebook/register';
+
     window.open(
       facebookOAuthURL,
       'Facebook OAuth',

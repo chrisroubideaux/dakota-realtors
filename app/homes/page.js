@@ -26,13 +26,11 @@ const Homes = () => {
   }, []);
   return (
     <>
-      {/* page layout */}
       <div className="layout">
-        {/* nav */}
         <Nav />
         <Heros />
         <Banners />
-        {/* homes */}
+
         <div className="container px-4 py-5" id="properties">
           <Tab />
           <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-4">
@@ -47,7 +45,6 @@ const Homes = () => {
 
         {/* <Reviews /> */}
 
-        {/* Footer */}
         <Footer />
       </div>
     </>
@@ -63,7 +60,7 @@ export async function getServerSideProps() {
   try {
     // GET request to fetch homes data from server
     const response = await axios.get(
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/homes'
+      'http://localhost:3001/homes'
     );
     const homes = response.data;
 

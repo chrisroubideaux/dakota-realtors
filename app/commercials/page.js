@@ -36,13 +36,11 @@ const Commercials = () => {
   }, []);
   return (
     <>
-      {/* page layout */}
       <div className="layout">
-        {/* nav */}
         <Nav />
         <Hero />
         <Banners />
-        {/* commercial */}
+
         <div className="container px-4 py-5" id="properties">
           <Tab />
           <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-4">
@@ -57,7 +55,6 @@ const Commercials = () => {
 
         {/* <Reviews /> */}
 
-        {/* Footer */}
         <Footer />
       </div>
     </>
@@ -73,7 +70,7 @@ export async function getServerSideProps() {
   try {
     // GET request to fetch commercial listings from server
     const response = await axios.get(
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials'
+      '  http://localhost:3001/commercials'
     );
     const commercialListings = response.data;
 

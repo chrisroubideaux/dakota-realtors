@@ -73,7 +73,7 @@ export async function getServerSideProps({ params }) {
   try {
     // Make a GET request to fetch agent data from server using `params.id`
     const response = await axios.get(
-      `https://midwest-realtors-95d2cdb37007.herokuapp.com/agents${params.id}`
+      `http://localhost:3001/agents${params.id}`
     );
     const agentData = response.data;
 

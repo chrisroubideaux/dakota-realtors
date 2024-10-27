@@ -27,14 +27,11 @@ const Apartments = () => {
   }, []);
   return (
     <>
-      {/* page layout */}
-
       <div className="layout">
-        {/* nav */}
         <Nav />
         <Hero />
         <Banners />
-        {/* Apartments */}
+
         <div className="container px-4 py-5" id="properties">
           <Tab />
           <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-4">
@@ -45,12 +42,8 @@ const Apartments = () => {
             ))}
           </div>
         </div>
-        {/* Details */}
         <Details />
-
         {/* <Reviews /> */}
-
-        {/* Footer */}
         <Footer />
       </div>
     </>

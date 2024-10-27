@@ -28,7 +28,6 @@ function Agents() {
         <Nav />
         <Hero />
         <Banners />
-        {/* Agents */}
         <div className="container text-center py-4 my-4 pt-5 mt-3">
           <div className="row row-cols-1 row-cols-1">
             {agents.map((agents) => (
@@ -41,7 +40,6 @@ function Agents() {
             ))}
           </div>
         </div>
-        {/* footer */}
         <Footer />
       </div>
     </>
@@ -50,14 +48,13 @@ function Agents() {
 
 export default Agents;
 
-// Fetch data on the server side using getServerSideProps
 {
   /*
 export async function getServerSideProps() {
   try {
     // Make a GET request to fetch agents data from server
     const response = await axios.get(
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/agents'
+      'http://localhost:3001/agents'
     );
     const agentsData = response.data;
 

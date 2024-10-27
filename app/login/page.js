@@ -28,14 +28,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Send a POST request to the login endpoint using Axios
       const response = await axios.post(
         'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/login',
         formData
       );
 
       if (response.status === 200) {
-        // Redirect to the profile page after successful login
         window.location.href = '/user';
       } else {
         const data = response.data;

@@ -34,7 +34,6 @@ export default function CommercialInfo({ params }) {
 
   return (
     <>
-      {/* page layout */}
       <div className="layout h-100">
         <Nav />
         <div className="container my-5">
@@ -128,7 +127,7 @@ export async function getServerSideProps({ params }) {
   // Fetch the commercial data based on the 'id' parameter
   try {
     const response = await axios.get(
-      `https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials/${params.id}`
+      `http://localhost:3001/commercials/${params.id}`
     );
     const commercial = response.data;
 

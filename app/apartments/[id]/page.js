@@ -35,7 +35,6 @@ export default function Page({ params }) {
 
   return (
     <>
-      {/* page layout */}
       <div className="layout h-100">
         <Nav />
         <div className="container my-5">
@@ -101,7 +100,6 @@ export default function Page({ params }) {
                 <div className="mt-4">
                   <Realtors apartments={apartment} />
                 </div>
-
                 <Bookings apartments={apartment} />
               </div>
               <div className="col-md-6">
