@@ -22,7 +22,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "google-map-react": "^2.2.1",
-    "next": "13.4.4",
+    "next": "^15.0.1",
     "openai": "^4.0.0",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
@@ -32,7 +32,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
     "react-redux": "^8.1.1",
-    "swiper": "^9.3.2"
-  },
-  "devDependencies": {}
+    "swiper": "^9.3.2",
+    "typewriter-effect": "^2.21.0"
+  }
 }

@@ -14,7 +14,7 @@ export default function Profile({}) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios
-      .get(`https://midwest-realtors-95d2cdb37007.herokuapp.com/users`, {
+      .get(`http://localhost:3001/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,6 @@ export default function Profile({}) {
       <div className="layout">
         <Nav />
         <div className="container-fluid pt-5">
-          {/* main content */}
           <div className="container text-center">
             <h4>You have successfully registered your account</h4>
             <Link className="btn btn-md w-100" href="/">

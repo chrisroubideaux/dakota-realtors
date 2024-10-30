@@ -1,7 +1,9 @@
 'use client';
+// properties page
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+// components
 import Nav from '@/components/nav/Nav';
 import Search from '@/components/nav/Search';
 import Featured from '@/components/misc/Features';
@@ -11,6 +13,7 @@ import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import CommercialProperties from '@/components/commercials/CommercialProperties';
 import Details from '@/components/misc/Details';
 import Footer from '@/components/misc/Footer';
+
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 
 const Properties = () => {
@@ -18,44 +21,59 @@ const Properties = () => {
   const [homes, setHomes] = useState([]);
   const [commercials, setCommercials] = useState([]);
 
-  const fetchData = (endpoint, setState) => {
+  // useEffect for fetching apartments
+  useEffect(() => {
     axios
-      .get(`http://localhost:3001/${endpoint}`)
+      .get('http://localhost:3001/apartments')
       .then((response) => {
-        setState(response.data);
+        setApartments(response.data);
       })
       .catch((error) => {
-        console.error(`Error fetching ${endpoint}:`, error);
+        console.error('Error fetching apartments:', error);
       });
-  };
+  }, []);
 
+  // useEffect for fetching homes
   useEffect(() => {
-    const endpoints = [
-      { endpoint: 'apartments', setState: setApartments },
-      { endpoint: 'homes', setState: setHomes },
-      { endpoint: 'commercials', setState: setCommercials },
-    ];
-
-    endpoints.forEach(({ endpoint, setState }) =>
-      fetchData(endpoint, setState)
-    );
+    axios
+      .get('http://localhost:3001/homes')
+      .then((response) => {
+        setHomes(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching homes:', error);
+      });
   }, []);
 
   const handleSearch = (filteredData) => {
     setApartments(filteredData);
   };
 
+  // useEffect for fetching commercial properties
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/commercials')
+      .then((response) => {
+        setCommercials(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching commercials:', error);
+      });
+  }, []);
+
   return (
     <>
       <Nav />
       <div className="layout h-100">
         <div className="properties mt-4">
-          <div className="containter text-center pt-5">
+          <div className="container text-center pt-5">
             <h1 className="pt-5">Featured Properties</h1>
-            <p className="fs-3 text-light">Helping you find your dream home.</p>
+            <p className="fs-3 text-light ">
+              Helping you find your dream home.
+            </p>
             <Search apartments={apartments} onSearch={handleSearch} />
             <div className="container">
-              <ul className="nav justify-content-center list-unstyled d-flex pt-5 ">
+              <ul className="nav justify-content-center list-unstyled d-flex pt-5">
                 <li className="ms-3">
                   <Link className="text-muted" href="/">
                     <FaFacebook className="social-icons m-2" />
@@ -83,31 +101,39 @@ const Properties = () => {
         <Featured />
         <div className="container">
           <Tab />
-          <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {apartments.slice(0, 4).map((apartment) => (
-              <div key={apartment.id}>
+          {/* Apartments Section */}
+          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+            {apartments.slice(0, 4).map((apartment, index) => (
+              <div key={apartment.id || `apartment-${index}`} className="">
                 <FeaturedApartments apartments={apartment} />
               </div>
             ))}
           </div>
+
+          {/* Homes Section */}
           <div className="text-center mt-2">
             <h2 className="text-center pt-5 display-4">Featured Homes</h2>
           </div>
-          <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {homes.slice(0, 4).map((home) => (
-              <div key={home.id} className="pt-5 my-5">
+          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+            {homes.slice(0, 4).map((home, index) => (
+              <div key={home.id || `home-${index}`} className="pt-5 my-5">
                 <FeaturedHomes homes={home} />
               </div>
             ))}
           </div>
+
+          {/* Commercial Properties Section */}
           <div className="text-center mt-2">
             <h2 className="text-center pt-5 display-4">
               Commercial Properties
             </h2>
           </div>
-          <div className="row row-cols-1 row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {commercials.slice(0, 4).map((commercial) => (
-              <div key={commercial.id} className="pt-5 my-5">
+          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+            {commercials.slice(0, 4).map((commercial, index) => (
+              <div
+                key={commercial.id || `commercial-${index}`}
+                className="pt-5 my-5"
+              >
                 <CommercialProperties commercials={commercial} />
               </div>
             ))}
@@ -115,6 +141,7 @@ const Properties = () => {
         </div>
 
         <Details />
+        {/* Footer */}
         <Footer />
       </div>
     </>
@@ -130,19 +157,19 @@ export async function getStaticProps() {
   try {
     // Fetch apartments data
     const apartmentsResponse = await axios.get(
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments'
+      'http://localhost:3001/apartments'
     );
     const apartmentsData = apartmentsResponse.data;
 
     // Fetch homes data
     const homesResponse = await axios.get(
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/homes'
+      'http://localhost:3001/homes'
     );
     const homesData = homesResponse.data;
 
     // Fetch commercials data
     const commercialsResponse = await axios.get(
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials'
+      'http://localhost:3001/commercials'
     );
     const commercialsData = commercialsResponse.data;
 

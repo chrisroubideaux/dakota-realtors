@@ -12,7 +12,7 @@ const Nav = ({ onSearch }) => {
   useEffect(() => {
     // Fetch apartments data
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments')
+      .get('http://localhost:3001/apartments')
       .then((response) => {
         setApartmentsData(response.data);
       })
@@ -22,7 +22,7 @@ const Nav = ({ onSearch }) => {
 
     // Fetch homes data
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/homes')
+      .get('http://localhost:3001/homes')
       .then((response) => {
         setHomesData(response.data);
       })
@@ -32,7 +32,7 @@ const Nav = ({ onSearch }) => {
 
     // Fetch commercials data
     axios
-      .get('https://midwest-realtors-95d2cdb37007.herokuapp.com/commercials')
+      .get('http://localhost:3001/commercials')
       .then((response) => {
         setCommercialsData(response.data);
       })
