@@ -15,7 +15,7 @@ export default function Room({ apartments }) {
   return (
     <div>
       <Image
-        src={apartments.image3}
+        src={apartments.image3 || '/fallback-image.jpg'}
         className="image img-fluid"
         alt="mls"
         width={400}
@@ -36,7 +36,7 @@ export default function Room({ apartments }) {
           <div
             className="modal fade"
             id="exampleModal"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
@@ -68,7 +68,7 @@ export default function Room({ apartments }) {
                     >
                       <SwiperSlide className="conatiner">
                         <Image
-                          src={apartments.image1}
+                          src={apartments.image1 || '/fallback-image.jpg'}
                           className="image img-fluid"
                           alt="mls"
                           width={1500}
@@ -77,25 +77,27 @@ export default function Room({ apartments }) {
                       </SwiperSlide>
                       <SwiperSlide>
                         <Image
-                          src={apartments.image2}
+                          src={apartments.image2 || '/fallback-image.jpg'}
                           className="image img-fluid"
                           alt="mls"
                           width={1500}
                           height={500}
+                          layout="responsive"
                         />
                       </SwiperSlide>
                       <SwiperSlide>
                         <Image
-                          src={apartments.image3}
+                          src={apartments.image3 || '/fallback-image.jpg'}
                           className="image img-fluid"
                           alt="mls"
                           width={1500}
                           height={500}
+                          layout="responsive"
                         />
                       </SwiperSlide>
                       <SwiperSlide>
                         <Image
-                          src={apartments.image4}
+                          src={apartments.image4 || '/fallback-image.jpg'}
                           className="image img-fluid"
                           alt="mls"
                           width={1500}
@@ -105,9 +107,6 @@ export default function Room({ apartments }) {
                     </Swiper>
                   </>
                 </div>
-                {/*footer*/}
-
-                {/*footer*/}
               </div>
             </div>
           </div>

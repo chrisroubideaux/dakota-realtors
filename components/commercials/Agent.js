@@ -6,7 +6,7 @@ function Agent({ commercials }) {
   return (
     <div className="">
       <Image
-        src={commercials.photo}
+        src={commercials.photo || '/fallback-image.jpg'}
         alt="mls"
         className="imgs img-fluid"
         width={500}

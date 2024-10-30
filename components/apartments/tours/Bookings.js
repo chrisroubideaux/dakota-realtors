@@ -20,50 +20,41 @@ export default function Bookings({
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDayClick = (date) => {
-    // Handle the selected day
     setSelectedDay(date);
     setSelectedDate(date);
   };
 
-  // Function to handle the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!selectedSlot) {
-      // Handle validation or show an error message
       return;
     }
     try {
-      // Send a POST request to create or reschedule the appointment
       const response = await axios.post('http://localhost:3001/appointments', {
         apartmentId: apartments._id, // Send the apartment ID
         selectedSlot, // Send the selected time slot
-        appointmentId: selectedAppointment ? selectedAppointment._id : null, // Send the existing appointment ID if rescheduling
+        appointmentId: selectedAppointment ? selectedAppointment._id : null,
       });
 
       // Handle successful appointment creation or rescheduling
       console.log('Appointment created or rescheduled:', response.data);
 
       if (selectedAppointment) {
-        // Appointment has been rescheduled
         showAlertMessage(
           `Your appointment has been rescheduled ${selectedSlot}.`
         );
       } else {
-        // New appointment has been created
         showAlertMessage(
           `Your appointment has been successfully created for one hour from ${selectedSlot}.`
         );
       }
 
-      // Close the modal or perform any other desired actions
       setSelectedAppointment(null);
       setSelectedSlot('');
     } catch (error) {
-      // Handle errors (e.g., show an error message)
       console.error('Error creating or rescheduling appointment:', error);
 
-      // Display an error message to the user
       showAlertMessage(
         `Selected time slot is not available. Please choose another time slot ${selectedSlot}.`
       );
@@ -73,28 +64,22 @@ export default function Bookings({
   // Function to delete an appointment
   const handleDeleteAppointment = async (appointmentId) => {
     try {
-      // Send a DELETE request to delete the appointment
       const response = await axios.delete(
         `http://localhost:3001/appointments/${appointmentId}`
       );
 
-      // Handle successful appointment deletion
       console.log('Appointment deleted:', response.data);
 
-      // Close the modal or perform any other desired actions
       alert('Appointment has been canceled successfully.');
 
       onDeleteAppointment(appointmentId);
     } catch (error) {
-      // Handle errors (e.g., show an error message)
       console.error('Error deleting appointment:', error);
 
-      // Display an error message to the user
       alert('Error deleting appointment. Please try again later.');
     }
   };
 
-  // Function to display the alert message
   const showAlertMessage = (message) => {
     setAlertMessage(message);
     setShowAlert(true);
@@ -156,7 +141,6 @@ export default function Bookings({
               ></button>
             </div>
             <div className="modal-body">
-              {/* alert component */}
               {showAlert && (
                 <div
                   className="card mb-2"
@@ -176,15 +160,14 @@ export default function Bookings({
                   </div>
                 </div>
               )}
-              {/* list group component */}
               <div className="">
                 <div className="list-group-item list-group-item-action d-flex gap-3 py-3 ">
                   <Image
-                    src={apartments.photo}
+                    src={apartments.photo || '/fallback-image.jpg'}
                     className="avatar"
                     width={200}
                     height={100}
-                    alt="..."
+                    alt="photo"
                   />
                   <div className="d-flex gap-2 w-100 justify-content-between mt-1">
                     <div className="">
@@ -195,7 +178,7 @@ export default function Bookings({
                     <small className="opacity-50 text-nowrap">
                       <h6 className="">{apartments.days}</h6>
                       <h6 className="">{apartments.slot}</h6>
-                      {/* select time slot component */}
+
                       <select
                         value={selectedSlot}
                         onChange={(e) => setSelectedSlot(e.target.value)}
@@ -236,7 +219,6 @@ export default function Bookings({
               >
                 Back to calendar
               </button>
-
               <div className="d-flex justify-content-end">
                 <button
                   type="submit"
@@ -245,8 +227,6 @@ export default function Bookings({
                 >
                   Book Appointment
                 </button>
-
-                {/* */}
               </div>
             </div>
           </div>

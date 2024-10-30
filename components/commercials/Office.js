@@ -7,11 +7,11 @@ export default function Bed({ commercials }) {
     <div>
       <div className="">
         <Image
-          src={commercials.image2}
+          src={commercials.image2 || '/fallback-image.jpg'}
+          className="image img-fluid"
           alt="mls"
           width={400}
           height={200}
-          className="image img-fluid"
         />
       </div>
     </div>

@@ -38,19 +38,49 @@ export default function Sliders({ commercials }) {
         className="mySwiper"
       >
         <SwiperSlide className="swiper ">
-          <img src={commercials.image} alt="mls" className="image" />
+          <Image
+            src={commercials.image || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={commercials.image1} alt="mls" className="image" />
+          <Image
+            src={commercials.image1 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={commercials.image2} alt="mls" className="image" />
+          <Image
+            src={commercials.image2 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={commercials.image3} alt="mls" className="image" />
+          <Image
+            src={commercials.image3 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={commercials.image4} alt="mls" className="image" />
+          <Image
+            src={commercials.image4 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
 
         <div className="autoplay-progress" slot="container-end">

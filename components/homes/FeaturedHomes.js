@@ -13,7 +13,12 @@ export default function FeaturedApartments({ homes }) {
     <div>
       <a className="card-link" href={`/homes/${homes._id}`}>
         <div className="card " style={{ maxWidth: '306px' }}>
-          <img className="img" src={homes.image} alt="apartment" />
+          <img
+            className="img"
+            src={homes.image || '/fallback-image.jpg'}
+            alt="homes"
+            layout="responsive"
+          />
           <div className="card-body postion-relative">
             <h5 className="dark-text mb-1 fs-xs text-uppercase fw-bold pb-2">
               {homes.rentOrBuy}

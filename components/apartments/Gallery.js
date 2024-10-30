@@ -1,6 +1,7 @@
 // gallery componet
 'use client';
 import { useRef } from 'react';
+import Image from 'next/image';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -37,19 +38,49 @@ export default function Sliders({ apartments }) {
         className="mySwiper"
       >
         <SwiperSlide className="">
-          <img src={apartments.image} alt="mls" className="img-fluid" />
+          <Image
+            src={apartments.image || '/fallback-image.jpg'}
+            className="img-fluid"
+            alt="image"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="">
-          <img src={apartments.image1} alt="mls" className="img-fluid" />
+          <Image
+            src={apartments.image1 || '/fallback-image.jpg'}
+            className="img-fluid"
+            alt="image"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="">
-          <img src={apartments.image2} alt="mls" className="img-fluid" />
+          <Image
+            src={apartments.image2 || '/fallback-image.jpg'}
+            className="img-fluid"
+            alt="image"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="">
-          <img src={apartments.image3} alt="mls" className="img-fluid" />
+          <Image
+            src={apartments.image3 || '/fallback-image.jpg'}
+            className="img-fluid"
+            alt="image"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="">
-          <img src={apartments.image4} alt="mls" className="img-fluid" />
+          <Image
+            src={apartments.image4 || '/fallback-image.jpg'}
+            className="img-fluid"
+            alt="image"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
 
         <div className="autoplay-progress" slot="container-end">

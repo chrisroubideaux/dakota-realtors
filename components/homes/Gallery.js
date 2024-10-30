@@ -1,5 +1,6 @@
 // gallery componet
 'use client';
+import Image from 'next/image';
 import { useRef } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -37,19 +38,49 @@ export default function Sliders({ homes }) {
         className="mySwiper"
       >
         <SwiperSlide className="swiper ">
-          <img src={homes.image} alt="mls" className="image" />
+          <Image
+            src={homes.image || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={homes.image1} alt="mls" className="image" />
+          <Image
+            src={homes.image1 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={homes.image2} alt="mls" className="image" />
+          <Image
+            src={homes.image2 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={homes.image3} alt="mls" className="image" />
+          <Image
+            src={homes.image3 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
         <SwiperSlide className="swiper ">
-          <img src={homes.image4} alt="mls" className="image" />
+          <Image
+            src={homes.image4 || '/fallback-image.jpg'}
+            className="image"
+            alt="mls"
+            width={400}
+            height={400}
+          />
         </SwiperSlide>
 
         <div className="autoplay-progress" slot="container-end">

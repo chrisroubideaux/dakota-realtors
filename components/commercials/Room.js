@@ -37,7 +37,7 @@ export default function Room({ commercials }) {
             <div
               className="modal fade"
               id="exampleModal"
-              tabindex="-1"
+              tabIndex="-1"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
@@ -69,7 +69,7 @@ export default function Room({ commercials }) {
                       >
                         <SwiperSlide className="conatiner">
                           <Image
-                            src={commercials.image1}
+                            src={commercials.image1 || '/fallback-image.jpg'}
                             className="image img-fluid"
                             alt="mls"
                             width={1500}
@@ -78,7 +78,7 @@ export default function Room({ commercials }) {
                         </SwiperSlide>
                         <SwiperSlide>
                           <Image
-                            src={commercials.image2}
+                            src={commercials.image2 || '/fallback-image.jpg'}
                             className="image img-fluid"
                             alt="mls"
                             width={1500}
@@ -87,7 +87,7 @@ export default function Room({ commercials }) {
                         </SwiperSlide>
                         <SwiperSlide>
                           <Image
-                            src={commercials.image3}
+                            src={commercials.image3 || '/fallback-image.jpg'}
                             className="image img-fluid"
                             alt="mls"
                             width={1500}
@@ -96,7 +96,7 @@ export default function Room({ commercials }) {
                         </SwiperSlide>
                         <SwiperSlide>
                           <Image
-                            src={commercials.image4}
+                            src={commercials.image4 || '/fallback-image.jpg'}
                             className="image img-fluid"
                             alt="mls"
                             width={1500}
@@ -106,9 +106,6 @@ export default function Room({ commercials }) {
                       </Swiper>
                     </>
                   </div>
-                  {/*footer*/}
-
-                  {/*footer*/}
                 </div>
               </div>
             </div>

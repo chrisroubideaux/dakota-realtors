@@ -15,7 +15,11 @@ export default function FeaturedApartments({ apartments }) {
     <div>
       <Link className="card-link" href={`/apartments/${apartments._id}`}>
         <div className="card " style={{ maxWidth: '306px' }}>
-          <img className="img" src={apartments.image1} alt="apartment" />
+          <img
+            className="img"
+            src={apartments.image1 || '/fallback-image.jpg'}
+            alt="apartment"
+          />
           <div className="card-body postion-relative">
             <h5 className="dark-text mb-1 fs-xs text-uppercase fw-bold pb-2">
               {apartments.rentOrBuy}
@@ -52,5 +56,3 @@ export default function FeaturedApartments({ apartments }) {
     </div>
   );
 }
-
-

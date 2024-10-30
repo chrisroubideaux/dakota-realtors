@@ -2,6 +2,7 @@
 'use client';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 // component imports
 import Nav from '@/components/nav/Nav';
 import Navbar from '@/components/homes/Navbar';
@@ -18,31 +19,21 @@ import Bookings from '@/components/homes/tours/Bookings';
 import Layout from '@/components/homes/calculator/Layout';
 import Footer from '@/components/misc/Footer';
 
-//import Chart from '@/components/homes/calculator/Chart';
-//import Calculator from '@/components/homes/calculator/Calculator';
-
-// metadata
-
-export default function HomeInfo({ params }) {
-  //  const [homeValue, setHomeValue] = useState(0);
-  //  const [downPaymentPercentage, setDownPaymentPercentage] = useState(20);
-  //  const [interestRate, setInterestRate] = useState(4.5);
-  //  const [loanAmount, setLoanAmount] = useState(20);
-  //  const [loanTerm, setLoanTerm] = useState(30);
-  //  const [monthlyPayment, setMonthlyPayment] = useState(0);
+export default function HomeInfo({}) {
+  const { id } = useParams();
   const [home, setHome] = useState([]);
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/homes/${params.id}`)
+      .get(`http://localhost:3001/homes/${id}`)
       .then((response) => {
         setHome(response.data);
       })
       .catch((error) => {
         console.error('Error fetching homes:', error);
       });
-  }, [params.id]);
+  }, [id]);
   return (
     <>
       {/* page layout */}
@@ -116,7 +107,9 @@ export default function HomeInfo({ params }) {
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>
                 <div className="mt-3">
+                  {/*
                   <Maps />
+                  */}
                 </div>
                 <div className="d-flex justify-content-end"></div>
               </div>

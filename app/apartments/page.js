@@ -35,7 +35,7 @@ const Apartments = () => {
         <div className="container px-4 py-5" id="properties">
           <Tab />
           <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {apartments.slice(0, 4).map((apartment, index) => (
+            {apartments.slice(0, 8).map((apartment, index) => (
               <div key={apartment.id || `apartment-${index}`} className="">
                 <FeaturedApartments apartments={apartment} />
               </div>

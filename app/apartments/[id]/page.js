@@ -2,6 +2,7 @@
 'use client';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 // component imports
 import Nav from '@/components/nav/Nav';
 import Toolbar from '@/components/apartments/Toolbar';
@@ -11,27 +12,28 @@ import Navbar from '@/components/apartments/Navbar';
 import Amenities from '@/components/apartments/Amenities';
 import Bed from '@/components/apartments/Bed';
 import Cover from '@/components/apartments/Cover';
-import Maps from '@/components/misc/Maps';
+//import Maps from '@/components/misc/Maps';
 import Realtors from '@/components/apartments/Realtors';
 import Bookings from '@/components/apartments/tours/Bookings';
 import Room from '@/components/apartments/Room';
 import Floor from '@/components/apartments/Floor';
 import Footer from '@/components/misc/Footer';
 
-export default function Page({ params }) {
+export default function Page({}) {
+  const { id } = useParams();
   const [apartment, setApartment] = useState([]);
   const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/apartments/${params.id}`)
+      .get(`http://localhost:3001/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })
       .catch((error) => {
         console.error('Error fetching apartments:', error);
       });
-  }, [params.id]);
+  }, [id]);
 
   return (
     <>
@@ -105,7 +107,9 @@ export default function Page({ params }) {
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>
                 <div className="mt-3">
+                  {/*
                   <Maps />
+                  */}
                 </div>
                 <div className="d-flex justify-content-end"></div>
               </div>

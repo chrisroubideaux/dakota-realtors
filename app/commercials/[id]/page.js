@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import axios from 'axios';
 // component imports
 import Nav from '@/components/nav/Nav';
@@ -17,20 +18,21 @@ import Bookings from '@/components/commercials/tours/Bookings';
 import Amenities from '@/components/commercials/Amenties';
 import Footer from '@/components/misc/Footer';
 
-export default function CommercialInfo({ params }) {
+export default function CommercialInfo({}) {
+  const { id } = useParams();
   const [commercial, setCommercial] = useState([]);
   // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/commercials/${params.id}`)
+      .get(`http://localhost:3001/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })
       .catch((error) => {
         console.error('Error fetching commercials:', error);
       });
-  }, [params.id]);
+  }, [id]);
 
   return (
     <>
@@ -105,7 +107,9 @@ export default function CommercialInfo({ params }) {
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>
                 <div className="mt-3">
+                  {/*
                   <Maps />
+                  */}
                 </div>
                 <div className="d-flex justify-content-end"></div>
               </div>

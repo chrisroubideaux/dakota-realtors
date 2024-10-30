@@ -14,7 +14,11 @@ export default function CommercialProperties({ commercials }) {
     <div>
       <a className="card-link" href={`/commercials/${commercials._id}`}>
         <div className="card " style={{ maxWidth: '306px' }}>
-          <img className="img" src={commercials.image} alt="apartment" />
+          <img
+            className="img"
+            src={commercials.image || '/fallback-image.jpg'}
+            alt="commercial"
+          />
           <div className="card-body postion-relative">
             <h5 className="dark-text mb-1 fs-xs text-uppercase fw-bold pb-2">
               {commercials.rentOrBuy}

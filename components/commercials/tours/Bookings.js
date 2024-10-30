@@ -41,13 +41,12 @@ export default function Bookings({
       const response = await axios.post(
         'https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments',
         {
-          commercialsId: commercials._id, // Send the apartment ID
-          selectedSlot, // Send the selected time slot
-          appointmentId: selectedAppointment ? selectedAppointment._id : null, // Send the existing appointment ID if rescheduling
+          commercialsId: commercials._id,
+          selectedSlot,
+          appointmentId: selectedAppointment ? selectedAppointment._id : null,
         }
       );
 
-      // Handle successful appointment creation or rescheduling
       console.log('Appointment created or rescheduled:', response.data);
 
       if (selectedAppointment) {
@@ -56,20 +55,16 @@ export default function Bookings({
           `Your appointment has been rescheduled ${selectedSlot}.`
         );
       } else {
-        // New appointment has been created
         showAlertMessage(
           `Your appointment has been successfully created for one hour from ${selectedSlot}.`
         );
       }
 
-      // Close the modal or perform any other desired actions
       setSelectedAppointment(null);
       setSelectedSlot('');
     } catch (error) {
-      // Handle errors (e.g., show an error message)
       console.error('Error creating or rescheduling appointment:', error);
 
-      // Display an error message to the user
       showAlertMessage(
         `Selected time slot is not available. Please choose another time slot ${selectedSlot}.`
       );
@@ -79,28 +74,22 @@ export default function Bookings({
   // Function to delete an appointment
   const handleDeleteAppointment = async (appointmentId) => {
     try {
-      // Send a DELETE request to delete the appointment
       const response = await axios.delete(
         `'https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments/${appointmentId}`
       );
 
-      // Handle successful appointment deletion
       console.log('Appointment deleted:', response.data);
 
-      // Close the modal or perform any other desired actions
       alert('Appointment has been canceled successfully.');
 
       onDeleteAppointment(appointmentId);
     } catch (error) {
-      // Handle errors (e.g., show an error message)
       console.error('Error deleting appointment:', error);
 
-      // Display an error message to the user
       alert('Error deleting appointment. Please try again later.');
     }
   };
 
-  // Function to display the alert message
   const showAlertMessage = (message) => {
     setAlertMessage(message);
     setShowAlert(true);
@@ -181,15 +170,15 @@ export default function Bookings({
                   </div>
                 </div>
               )}
-              {/* list group component */}
+
               <div className="">
                 <div className="list-group-item list-group-item-action d-flex gap-3 py-3 ">
                   <Image
-                    src={commercials.photo}
+                    src={commercials.photo || '/fallback-image.jpg'}
                     className="avatar"
                     width={200}
                     height={100}
-                    alt="..."
+                    alt="image"
                   />
                   <div className="d-flex gap-2 w-100 justify-content-between mt-1">
                     <div className="">
@@ -200,7 +189,7 @@ export default function Bookings({
                     <small className="opacity-50 text-nowrap">
                       <h6 className="">{commercials.days}</h6>
                       <h6 className="">{commercials.slot}</h6>
-                      {/* select time slot component */}
+
                       <select
                         value={selectedSlot}
                         onChange={(e) => setSelectedSlot(e.target.value)}
@@ -250,8 +239,6 @@ export default function Bookings({
                 >
                   Book Appointment
                 </button>
-
-                {/* */}
               </div>
             </div>
           </div>

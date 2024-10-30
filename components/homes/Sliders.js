@@ -1,6 +1,7 @@
 // slider component
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -28,19 +29,54 @@ export default function Sliders({ homes }) {
           className=" mySwiper swiper-nav-onhover w-100"
         >
           <SwiperSlide className="swiper ">
-            <img src={homes.image} alt="mls" className="image" />
+            <Image
+              src={homes.image || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+              layout="responsive"
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={homes.image1} className="image" alt="" />
+            <Image
+              src={homes.image1 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+              layout="responsive"
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={homes.image2} className="image" alt="" />
+            <Image
+              src={homes.image2 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+              layout="responsive"
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={homes.image3} className="image" alt="" />
+            <Image
+              src={homes.image3 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+              layout="responsive"
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={homes.image4} className="image" alt="" />
+            <Image
+              src={homes.image4 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+              layout="responsive"
+            />
           </SwiperSlide>
         </Swiper>
       </div>

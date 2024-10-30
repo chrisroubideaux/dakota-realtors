@@ -1,5 +1,6 @@
 // slider components
 'use client';
+import Image from 'next/image';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -29,19 +30,49 @@ export default function Sliders({ commercials }) {
           className=" mySwiper swiper-nav-onhover w-100"
         >
           <SwiperSlide className="swiper ">
-            <img src={commercials.image} alt="mls" className="image" />
+            <Image
+              src={commercials.image || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={commercials.image1} className="image" alt="" />
+            <Image
+              src={commercials.image1 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={commercials.image2} className="image" alt="" />
+            <Image
+              src={commercials.image2 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={commercials.image3} className="image" alt="" />
+            <Image
+              src={commercials.image3 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={commercials.image4} className="image" alt="" />
+            <Image
+              src={commercials.image4 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
         </Swiper>
       </div>

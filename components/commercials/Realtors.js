@@ -1,6 +1,7 @@
 // agents component
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FaEnvelope,
   FaMobile,
@@ -17,10 +18,12 @@ function Realtors({ commercials }) {
         <div class="card mb-2" style={{ maxWidth: '540px' }}>
           <div class="row g-0">
             <div class="col-sm-4">
-              <img
-                src={commercials.photo}
+              <Image
+                src={commercials.photo || '/fallback-image.jpg'}
                 className="avatar mx-3 my-3"
-                alt="..."
+                alt="photo"
+                width={150}
+                height={100}
               />
             </div>
             <div class="col-md-8">

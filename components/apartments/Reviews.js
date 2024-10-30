@@ -56,10 +56,10 @@ const Reviews = ({ reviews }) => {
         >
           <SwiperSlide className="swiper">
             <Image
-              src={reviews.image1}
+              src={reviews.image1 || '/fallback-image.jpg'}
               className="slider img-fluid w-100"
               loading="lazy"
-              alt=""
+              alt="image"
               width={1000}
               height={250}
             />
@@ -67,7 +67,6 @@ const Reviews = ({ reviews }) => {
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4">
-                  {/* card */}
                   <div className="cards p-3 p-md-5 m-2 m-lg-6 ">
                     <h3 className="">{reviews.title}</h3>
                     <hr className="hr w-25 mx-auto" />
@@ -76,7 +75,7 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className=" p-2">{reviews.description}</p>
-                      {/* card-footer */}
+
                       <div className="card-footer d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -102,10 +101,10 @@ const Reviews = ({ reviews }) => {
           </SwiperSlide>
           <SwiperSlide className="swiper">
             <Image
-              src={reviews.image2}
+              src={reviews.image2 || '/fallback-image.jpg'}
               className="slider img-fluid w-100"
               loading="lazy"
-              alt=""
+              alt="image"
               width={1000}
               height={250}
             />
@@ -148,10 +147,10 @@ const Reviews = ({ reviews }) => {
           </SwiperSlide>
           <SwiperSlide className="swiper">
             <Image
-              src={reviews.image3}
+              src={reviews.image3 || '/fallback-image.jpg'}
               className="slider img-fluid w-100"
               loading="lazy"
-              alt=""
+              alt="image"
               width={1000}
               height={250}
             />
@@ -159,7 +158,6 @@ const Reviews = ({ reviews }) => {
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4 pe-3">
-                  {/* card */}
                   <div className="cards p-3 p-md-5 m-2 m-lg-6 ">
                     <h3 className="">{reviews.title2}</h3>
                     <hr className="hr w-25 mx-auto" />
@@ -168,7 +166,7 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className="p-2">{reviews.description2}</p>
-                      {/* card-footer */}
+
                       <div className="card-footer mb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -194,10 +192,10 @@ const Reviews = ({ reviews }) => {
           </SwiperSlide>
           <SwiperSlide className="swiper">
             <Image
-              src={reviews.image4}
+              src={reviews.image4 || '/fallback-image.jpg'}
               className="slider img-fluid"
               loading="lazy"
-              alt=""
+              alt="image"
               width={1000}
               height={250}
             />
@@ -205,7 +203,6 @@ const Reviews = ({ reviews }) => {
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4">
-                  {/* card */}
                   <div className="cards p-3 p-md-5 m-2 m-lg-6 ">
                     <h3 className="">{reviews.title3}</h3>
                     <hr className="hr w-25 mx-auto" />
@@ -214,7 +211,7 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className="p-2">{reviews.description3}</p>
-                      {/* card-footer */}
+
                       <div className="card-footer mb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -240,11 +237,11 @@ const Reviews = ({ reviews }) => {
           </SwiperSlide>
           <SwiperSlide className="swiper">
             <Image
-              src={reviews.image8}
+              src={reviews.image8 || '/fallback-image.jpg'}
               className="slider img-fluid d-block
              w-100"
               loading="lazy"
-              alt=""
+              alt="image"
               width={1000}
               height={250}
             />
@@ -261,7 +258,7 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className=" p-2 ">{reviews.description4}</p>
-                      {/* card-footer */}
+
                       <div className="card-footer mb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>

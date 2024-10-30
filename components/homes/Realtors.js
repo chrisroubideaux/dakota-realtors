@@ -1,6 +1,7 @@
 // agents component
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FaEnvelope,
   FaMobile,
@@ -14,13 +15,19 @@ function Realtors({ homes }) {
   return (
     <>
       <Link className="card-link" href={`/homes/${homes.id}`}>
-        <div class="card mb-2" style={{ maxWidth: '540px' }}>
-          <div class="row g-0">
-            <div class="col-sm-4">
-              <img src={homes.photo} className="avatar mx-3 my-3" alt="..." />
+        <div className="card mb-2" style={{ maxWidth: '540px' }}>
+          <div className="row g-0">
+            <div className="col-sm-4">
+              <Image
+                src={homes.photo || '/fallback-image.jpg'}
+                className="avatar mx-3 my-3"
+                alt="home"
+                width={150}
+                height={100}
+              />
             </div>
-            <div class="col-md-8">
-              <div class="card-body">
+            <div className="col-md-8">
+              <div className="card-body">
                 <h5 className="mb-2 fs-xs text-uppercase fw-bold">
                   {homes.name}
                 </h5>

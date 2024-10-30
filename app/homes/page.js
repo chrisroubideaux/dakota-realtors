@@ -34,7 +34,7 @@ const Homes = () => {
         <div className="container px-4 py-5" id="properties">
           <Tab />
           <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {homes.slice(0, 4).map((home, index) => (
+            {homes.slice(0, 8).map((home, index) => (
               <div key={home.id || `home-${index}`} className="pt-5 my-5">
                 <FeaturedHomes homes={home} />
               </div>

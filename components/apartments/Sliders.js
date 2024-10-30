@@ -1,5 +1,6 @@
 // slider component
 'use client';
+import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
@@ -28,22 +29,49 @@ export default function Sliders({ apartments }) {
           className=" mySwiper swiper-nav-onhover w-100"
         >
           <SwiperSlide className="swiper ">
-            <img src={apartments.image} alt="mls" className="image" />
-          </SwiperSlide>
-
-          <SwiperSlide className="swiper">
-            <img src={apartments.image1} className="image" alt="" />
-          </SwiperSlide>
-
-          <SwiperSlide className="swiper">
-            <img src={apartments.image2} className="image" alt="" />
-          </SwiperSlide>
-
-          <SwiperSlide className="swiper">
-            <img src={apartments.image3} className="image" alt="" />
+            <Image
+              src={apartments.image || '/fallback-image.jpg'}
+              alt="mls"
+              className="image"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
           <SwiperSlide className="swiper">
-            <img src={apartments.image4} className="image" alt="" />
+            <Image
+              src={apartments.image1 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
+          </SwiperSlide>
+          <SwiperSlide className="swiper">
+            <Image
+              src={apartments.image2 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
+          </SwiperSlide>
+          <SwiperSlide className="swiper">
+            <Image
+              src={apartments.image3 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
+          </SwiperSlide>
+          <SwiperSlide className="swiper">
+            <Image
+              src={apartments.image4 || '/fallback-image.jpg'}
+              className="image"
+              alt="mls"
+              width={400}
+              height={400}
+            />
           </SwiperSlide>
         </Swiper>
       </div>

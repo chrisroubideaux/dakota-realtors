@@ -11,26 +11,26 @@ export default function Bookings({ homes }) {
   return (
     <>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModalToggle"
         aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1"
+        tabIndex="-1"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="fw-normal fs-5" id="exampleModalToggleLabel">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="fw-normal fs-5" id="exampleModalToggleLabel">
                 Book your tour
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <a data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
                 <Calendar
                   className="calendar text-center "
@@ -40,41 +40,41 @@ export default function Bookings({ homes }) {
                 ></Calendar>
               </a>
             </div>
-            <div class="modal-footer"></div>
+            <div className="modal-footer"></div>
           </div>
         </div>
       </div>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModalToggle2"
         aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1"
+        tabIndex="-1"
       >
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h6 class=" fs-5" id="exampleModalToggleLabel2">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h6 className=" fs-5" id="exampleModalToggleLabel2">
                 Select a time
               </h6>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               {/* time component*/}
 
               <div className="">
                 <div className="list-group-item list-group-item-action d-flex gap-3 py-3 ">
                   <Image
-                    src={homes.photo}
+                    src={homes.photo || '/fallback-image.jpg'}
                     className=" avatar"
                     width={200}
                     height={100}
-                    alt="..."
+                    alt="image"
                   />
 
                   <div className="d-flex gap-2 w-100 justify-content-between mt-1 ">
@@ -102,9 +102,9 @@ export default function Bookings({ homes }) {
               </div>
             </div>
             {/* end time component*/}
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
-                class="btn btn-md"
+                className="btn btn-md"
                 data-bs-target="#exampleModalToggle"
                 data-bs-toggle="modal"
               >
@@ -115,7 +115,7 @@ export default function Bookings({ homes }) {
         </div>
       </div>
       <button
-        class="btn btn-md"
+        className="btn btn-md"
         data-bs-target="#exampleModalToggle"
         data-bs-toggle="modal"
       >
