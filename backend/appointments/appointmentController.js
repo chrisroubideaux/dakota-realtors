@@ -2,7 +2,7 @@
 
 const Appointment = require('./appointment');
 
-// CREATE a new appointment
+// Create a new appointment
 const createAppointment = async (req, res) => {
   try {
     const newAppointment = new Appointment(req.body);
@@ -16,7 +16,7 @@ const createAppointment = async (req, res) => {
   }
 };
 
-// READ all appointments
+// Get all appointments
 const getAllAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find();
@@ -28,7 +28,7 @@ const getAllAppointments = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-// READ an appointment by ID
+// Get an appointment by ID
 const getAppointmentById = async (req, res) => {
   try {
     const appointment = await Appointment.findById(req.params.id);
@@ -43,7 +43,7 @@ const getAppointmentById = async (req, res) => {
   }
 };
 
-// UPDATE an appointment by ID
+// Update an appointment by ID
 const updateAppointmentById = async (req, res) => {
   try {
     const updatedAppointment = await Appointment.findByIdAndUpdate(
@@ -63,7 +63,7 @@ const updateAppointmentById = async (req, res) => {
   }
 };
 
-// DELETE an appointment by ID
+// Delete an appointment by ID
 const deleteAppointmentById = async (req, res) => {
   try {
     const deletedAppointment = await Appointment.findByIdAndRemove(

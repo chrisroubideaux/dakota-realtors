@@ -15,7 +15,6 @@ const getUser = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Customize the user profile data you want to send to the client
     const userUserData = {
       fullName: user.fullName,
       email: user.email,
@@ -27,7 +26,6 @@ const getUser = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-// Function to get user profile (protected route)
 
 const getUserById = async (req, res) => {
   try {
@@ -50,8 +48,6 @@ const getUserById = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
-// Function to update user profile
 
 const updateUser = async (req, res) => {
   try {

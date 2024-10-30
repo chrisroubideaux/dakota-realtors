@@ -51,7 +51,7 @@ app.use(json());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
-// Define the verifyToken middleware function
+// Verify Token  for middleware function
 
 function verifyToken(req, res, next) {
   const token = req.headers['authorization'];
@@ -73,7 +73,6 @@ function verifyToken(req, res, next) {
   });
 }
 
-// Configure session middleware (optional if you're using JWT)
 const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -115,13 +114,11 @@ passport.use(
           return done(null, existingUser);
         }
 
-        // Create a new user with Google account details
         const newUser = new User({
           email: profile.emails[0].value,
           fullName: profile.displayName,
         });
 
-        // Save the new user to the database
         await newUser.save();
 
         return done(null, newUser);
@@ -146,6 +143,7 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+
 // facebook strategy
 
 passport.use(
@@ -162,14 +160,12 @@ passport.use(
       console.log('Facebook Profile Data:', profile);
 
       try {
-        // Check if the Facebook user is already registered in your database
         const existingUser = await User.findOne({ 'facebook.id': profile.id });
 
         if (existingUser) {
           return done(null, existingUser);
         }
 
-        // Create a new user with Facebook account details
         const newUser = new User({
           facebook: {
             id: profile.id,
@@ -220,27 +216,23 @@ app.use('/commercials', commercialRoutes);
 // appointments route
 app.use('/appointments', appointmentRoutes);
 
-//route for fetching a single appointment by ID
 //app.use('/appointments/:id', appointmentRoutes);
 
 // admin routes
 //app.use('/admin', adminRoutes);
 
-// agents routes
 app.use('/agents', agentRoutes);
 
-// auth routes and profile routes
 app.use('/auth', authRoutes);
 
 app.post('/auth', authRoutes);
 
 app.use('/user', userRoutes);
 
-// contact page
 app.get('/contact', (req, res) => {
   res.send('Contact page');
 });
-// about page
+
 app.get('/about', (req, res) => {
   res.send('About page');
 });
@@ -253,7 +245,6 @@ app.get(
   })
 );
 
-// Google OAuth register route
 app.get(
   '/auth/google/register',
   passport.authenticate('google', { scope: ['openid', 'profile', 'email'] })
@@ -266,7 +257,7 @@ app.get(
     scope: ['openid', 'profile', 'email'],
   })
 );
-// Google OAuth callback route
+
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
@@ -281,13 +272,11 @@ app.get(
   passport.authenticate('facebook', { scope: ['email'] })
 );
 
-// Facebook OAuth registration route
 app.get(
   '/auth/facebook/register',
   passport.authenticate('facebook', { scope: ['email'] })
 );
 
-// Facebook OAuth callback route for registration
 app.get(
   '/auth/facebook/callback/register',
   passport.authenticate('facebook', {
@@ -298,7 +287,6 @@ app.get(
   }
 );
 
-// Callback routes for both registration and login
 app.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook', {
@@ -314,12 +302,3 @@ app.get(
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-{
-  /*
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-*/
-}

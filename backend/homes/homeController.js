@@ -22,7 +22,7 @@ const getAllHomes = async (req, res) => {
   }
 };
 
-// GET a single home by ID
+// Get a single home by ID
 const getHomeById = async (req, res) => {
   try {
     const homeId = req.params.id;

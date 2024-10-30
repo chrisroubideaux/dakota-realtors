@@ -16,7 +16,6 @@ facebookRoutes.get(
   passport.authenticate('facebook', { scope: ['email', 'user_photos'] })
 );
 
-// Facebook OAuth callback route for registration
 facebookRoutes.get(
   '/facebook/callback/register',
   passport.authenticate('facebook', {
@@ -38,7 +37,6 @@ facebookRoutes.get(
 
       await newUser.save();
 
-      // Redirect to a page or send a JSON response with the token
       res.json({ token });
     } catch (err) {
       console.error(err);
@@ -46,7 +44,7 @@ facebookRoutes.get(
     }
   }
 );
-// Facebook OAuth callback route for login
+
 facebookRoutes.get(
   '/facebook/callback/login',
   passport.authenticate('facebook', {

@@ -23,7 +23,7 @@ const getAllCommercials = async (req, res) => {
   }
 };
 
-// GET a single commercial property by ID
+// Get a single commercial property by ID
 const getCommercialById = async (req, res) => {
   try {
     const commercialId = req.params.id;

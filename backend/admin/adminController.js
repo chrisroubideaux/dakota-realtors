@@ -46,7 +46,6 @@ const register = async (req, res) => {
     const newAdmin = new Admin({ email, password: hashedPassword, fullName });
     await newAdmin.save();
 
-    // Generate a JWT token for the new agent
     const token = jwt.sign({ _id: newAdmin._id }, process.env.JWT_SECRET);
 
     res.status(201).json({

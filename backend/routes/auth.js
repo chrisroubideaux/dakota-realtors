@@ -1,5 +1,4 @@
 // routes/auth.js
-// routes/auth.js
 const mongoose = require('mongoose');
 const express = require('express');
 const User = require('../models/user');
@@ -21,11 +20,9 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Check if the user already exists in the database
         let user = await User.findOne({ googleId: profile.id });
 
         if (!user) {
-          // Create a new user if not found
           user = new User({
             googleId: profile.id,
             googleDisplayName: profile.displayName,
@@ -34,7 +31,6 @@ passport.use(
           await user.save();
         }
 
-        // Pass the user to the next middleware
         done(null, user);
       } catch (error) {
         done(error);
