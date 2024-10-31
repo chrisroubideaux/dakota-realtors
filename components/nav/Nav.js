@@ -212,7 +212,7 @@ const Nav = ({ onSearch }) => {
                 </Link>
               </li>
             </ul>
-            {/*search bar component */}
+            {/*search bar component 
             <div className="nav justify-content-center pt-2">
               <div className="input-group mb-3 m-1" style={{ width: '20rem' }}>
                 <input
@@ -263,8 +263,12 @@ const Nav = ({ onSearch }) => {
                     ))}
                   </ul>
                 )}
+                  
               </div>
+            
+          
             </div>
+            */}
           </div>
         </div>
       </nav>

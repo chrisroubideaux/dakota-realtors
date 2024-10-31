@@ -15,7 +15,7 @@ export default function Home() {
             <div
               className="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block"
               style={{
-                backgroundImage: 'url(../homes/home2.jpg)',
+                backgroundImage: 'url(../sliders/image1.jpg)',
                 backgroundSize: 'cover',
                 borderRadius: '10px',
                 backgroundPosition: 'center',
@@ -91,6 +91,7 @@ export default function Home() {
     </>
   );
 }
+
 {
   /*
 import Link from 'next/link';

@@ -80,7 +80,7 @@ const Properties = () => {
             </h5>
             <Search apartments={apartments} onSearch={handleSearch} />
             <div className="container">
-              <ul className="nav justify-content-center list-unstyled d-flex pt-5">
+              <ul className="nav justify-content-center list-unstyled d-flex pt-2">
                 <li className="ms-3">
                   <Link className="text-muted" href="/">
                     <FaFacebook className="social-icons m-2" />

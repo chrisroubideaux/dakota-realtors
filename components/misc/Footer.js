@@ -1,11 +1,11 @@
 // footer comonent
-import Image from 'next/image';
+//import Image from 'next/image';
 import { FaFacebook, FaInstagram, FaTiktok, FaAngleDown } from 'react-icons/fa';
 
 export default function Footer() {
   return (
     <footer className="container pt-4 py-5">
-      <div className="container">
+      <div className="container pt-5 mt-5">
         <div className="row">
           <div className="col-xxl-5 col-lg-5 col-md-7">
             <div className="mb-7 mb-xl-0">
@@ -15,7 +15,7 @@ export default function Footer() {
                     src="https://pngimg.com/uploads/house/house_PNG55.png "
                     alt="logo"
                     className="text-inverse"
-                    width="100"
+                    width="80"
                     height="100"
                   />
                 </a>
