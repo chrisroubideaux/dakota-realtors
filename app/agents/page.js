@@ -30,12 +30,12 @@ function Agents() {
         <Banners />
         <div className="container text-center py-4 my-4 pt-5 mt-3">
           <div className="row row-cols-1 row-cols-1">
-            {agents.map((agents) => (
+            {agents.slice(0, 4).map((agent, index) => (
               <div
-                key={agents.id}
+                key={agent.id || `agent-${index}`}
                 className=" col-md-4 col-md-6 col-sm-12 mb-4"
               >
-                <Realtors agents={agents} />
+                <Realtors agents={agent} />
               </div>
             ))}
           </div>

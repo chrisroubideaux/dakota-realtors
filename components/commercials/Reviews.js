@@ -17,7 +17,6 @@ const Reviews = ({ reviews }) => {
     <>
       <div>
         <div className="pt-4">
-          {/* title */}
           <div className="container pt-5 mt-4">
             <h2 className="text-center pt-3 display-4">Reviews</h2>
             <hr className="hr w-25 mx-auto pt-5" />
@@ -58,11 +57,11 @@ const Reviews = ({ reviews }) => {
               src={reviews.image1 || '/fallback-image.jpg'}
               className="slider img-fluid w-100"
               loading="lazy"
-              alt=""
+              alt="mls"
               width={1000}
               height={250}
             />
-            {/* carousel-caption */}
+
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4">
@@ -74,7 +73,6 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className=" p-2">{reviews.description}</p>
-
                       <div className="card-footer d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -107,7 +105,6 @@ const Reviews = ({ reviews }) => {
               width={1000}
               height={250}
             />
-            {/* carousel-caption */}
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4 pe-3">
@@ -119,7 +116,6 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className="p-2">{reviews.description1}</p>
-
                       <div className="card-footer pb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -152,7 +148,6 @@ const Reviews = ({ reviews }) => {
               width={1000}
               height={250}
             />
-            {/* carousel-caption */}
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4 pe-3">
@@ -164,7 +159,6 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className="p-2">{reviews.description2}</p>
-
                       <div className="card-footer mb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -197,7 +191,6 @@ const Reviews = ({ reviews }) => {
               width={1000}
               height={250}
             />
-            {/* carousel-caption */}
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4">
@@ -209,7 +202,6 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className="p-2">{reviews.description3}</p>
-
                       <div className="card-footer mb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>
@@ -230,7 +222,6 @@ const Reviews = ({ reviews }) => {
               width={1000}
               height={250}
             />
-            {/* carousel-caption */}
             <div className="carousel-caption mb-5">
               <div className="row mt-auto justify-content-end z-index-9">
                 <div className="col-md-8 col-xl-6 col-xxl-4 pe-3">
@@ -242,7 +233,6 @@ const Reviews = ({ reviews }) => {
                     </div>
                     <div className="container p-3 p-sm-4">
                       <p className=" p-2 ">{reviews.description4}</p>
-
                       <div className="card-footer mb-4 d-flex align-items-center justify-content-center text-nowrap">
                         <span className="d-inline-block me-1">
                           <h6 className="pt-3 text-dark">Rating:</h6>

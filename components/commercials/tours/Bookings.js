@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
 //import Times from '@/components/properties/tours/Times';
-//import properties from '@/data/featured/properties';
 
 export default function Bookings({
   commercials,
@@ -15,7 +14,7 @@ export default function Bookings({
 
   const [date, setDate] = useState(new Date());
 
-  const [selectedSlot, setSelectedSlot] = useState(''); // State to store the selected time slot
+  const [selectedSlot, setSelectedSlot] = useState('');
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -23,7 +22,6 @@ export default function Bookings({
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDayClick = (date) => {
-    // Handle the selected day
     setSelectedDay(date);
     setSelectedDate(date);
   };
@@ -33,11 +31,9 @@ export default function Bookings({
     e.preventDefault();
 
     if (!selectedSlot) {
-      // Handle validation or show an error message
       return;
     }
     try {
-      // Send a POST request to create or reschedule the appointment
       const response = await axios.post(
         'https://midwest-realtors-95d2cdb37007.herokuapp.com/appointments',
         {
@@ -50,7 +46,6 @@ export default function Bookings({
       console.log('Appointment created or rescheduled:', response.data);
 
       if (selectedAppointment) {
-        // Appointment has been rescheduled
         showAlertMessage(
           `Your appointment has been rescheduled ${selectedSlot}.`
         );
@@ -150,7 +145,6 @@ export default function Bookings({
               ></button>
             </div>
             <div className="modal-body">
-              {/* alert component */}
               {showAlert && (
                 <div
                   className="card mb-2"
@@ -170,7 +164,6 @@ export default function Bookings({
                   </div>
                 </div>
               )}
-
               <div className="">
                 <div className="list-group-item list-group-item-action d-flex gap-3 py-3 ">
                   <Image
@@ -189,7 +182,6 @@ export default function Bookings({
                     <small className="opacity-50 text-nowrap">
                       <h6 className="">{commercials.days}</h6>
                       <h6 className="">{commercials.slot}</h6>
-
                       <select
                         value={selectedSlot}
                         onChange={(e) => setSelectedSlot(e.target.value)}

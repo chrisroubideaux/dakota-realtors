@@ -32,12 +32,10 @@ export default function CommercialProperties({ commercials }) {
               <FaMoneyBillWave className="card-icon mt-n1 me-2 mt-1" /> $
               {commercials.price}
             </h6>
-
             <h6 className="mb-2 fs-sm fw-semi-bold">
               <FaMapPin className="card-icon mt-n1 me-2 mt-1" />
               {commercials.location}
             </h6>
-
             <div className="card-footer d-flex align-items-center justify-content-center mx-3 pt-3 text-nowrap">
               <span className="d-inline-block me-1">
                 <FaChalkboardTeacher className="card-icon m-1 me-2" />
