@@ -15,12 +15,13 @@ import Details from '@/components/misc/Details';
 import Footer from '@/components/misc/Footer';
 
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
 
 const Properties = () => {
   const [apartments, setApartments] = useState([]);
   const [homes, setHomes] = useState([]);
   const [commercials, setCommercials] = useState([]);
-
+  const Typewriter = dynamic(() => import('typewriter-effect'), { ssr: false });
   // useEffect for fetching apartments
   useEffect(() => {
     axios
@@ -68,9 +69,15 @@ const Properties = () => {
         <div className="properties mt-4">
           <div className="container text-center pt-5">
             <h1 className="pt-5">Featured Properties</h1>
-            <p className="fs-3 text-light ">
-              Helping you find your dream home.
-            </p>
+            <h5 className="fs-3 text-light ">
+              <Typewriter
+                options={{
+                  strings: [' Helping you find your dream home.'],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </h5>
             <Search apartments={apartments} onSearch={handleSearch} />
             <div className="container">
               <ul className="nav justify-content-center list-unstyled d-flex pt-5">

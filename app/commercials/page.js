@@ -12,15 +12,6 @@ import Details from '@/components/misc/Details';
 //import Reviews from '@/components/commercials/Reviews';
 import Footer from '@/components/misc/Footer';
 
-// metadata
-{
-  /*
-export const metadata = {
-  title: 'dakota realtors | commercial listings',
-  description: 'nextjs real estate app',
-};
-*/
-}
 const Commercials = () => {
   const [commercials, setCommercials] = useState([]);
 

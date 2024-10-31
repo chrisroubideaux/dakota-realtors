@@ -6,7 +6,7 @@ function Mission() {
     <div className="container-fluid">
       <div className="row featurette pt-5">
         <div className="col-md-7">
-          <h3 className=" fw-normal display-5">Our main mission</h3>
+          <h1 className=" fw-normal display-5">Our main mission</h1>
           <p className="fw-normal fs-5">
             Our Mission at dakota realty is to help people find their dream
             home. We strive to provide the best service possible to our
@@ -30,7 +30,7 @@ function Mission() {
       <hr className="hr mt-5" />
       <div className="row featurette pt-5">
         <div className="col-md-7 order-md-2">
-          <h3 className=" fw-normal display-5">Best in the business</h3>
+          <h1 className=" fw-normal display-5">Best in the business</h1>
           <p className="fw-normal fs-5">
             Come and see wh ywe are the best reality company in town. We have a
             team of experts that will help you find the perfect home for you and
@@ -55,7 +55,7 @@ function Mission() {
       <hr className="hr mt-5" />
       <div className="row featurette pt-5 mt-5">
         <div className="col-md-7">
-          <h3 className="ml-5 fw-normal display-5">Striving for the best</h3>
+          <h1 className="ml-5 fw-normal display-5">Striving for the best</h1>
           <p className="fw-normal fs-5">
             Here at dakota realty we are always striving to be the best in the
             business. We are always looking for ways to improve our business and
