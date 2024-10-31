@@ -6,11 +6,11 @@ function Bio({ agents }) {
   return (
     <div className="">
       <Image
-        src={agents.photo}
+        src={agents.photo || '/fallback-image.jpg'}
         className="d-block mx-lg-auto img-fluid image"
         alt="img"
-        width="600"
-        height="500"
+        width={600}
+        height={500}
         loading="lazy"
       />
       <div className="container py-2 mt-2">

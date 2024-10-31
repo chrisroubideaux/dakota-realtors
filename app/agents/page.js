@@ -11,7 +11,6 @@ import Footer from '@/components/misc/Footer';
 
 function Agents() {
   const [agents, setAgents] = useState([]);
-
   useEffect(() => {
     axios
       .get('http://localhost:3001/agents')
@@ -22,6 +21,7 @@ function Agents() {
         console.error('Error fetching agents:', error);
       });
   }, []);
+
   return (
     <>
       <div className="layout">

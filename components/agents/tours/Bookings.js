@@ -65,16 +65,14 @@ export default function Bookings({ agents }) {
               ></button>
             </div>
             <div className="modal-body">
-              {/* time component*/}
-
               <div className="">
                 <div className="list-group-item list-group-item-action d-flex gap-3 py-3 ">
                   <Image
-                    src={agents.photo}
+                    src={agents.photo || '/fallback-image.jpg'}
                     className=" avatar"
                     width={200}
                     height={100}
-                    alt="..."
+                    alt="mls"
                   />
 
                   <div className="d-flex gap-2 w-100 justify-content-between mt-1 ">
@@ -85,7 +83,6 @@ export default function Bookings({ agents }) {
                     </div>
 
                     <small className="opacity-50 text-nowrap">
-                      {/* select component */}
                       <h6 className="">{agents.days}</h6>
                       <select>
                         <option value="1">{agents.slot}</option>
@@ -101,7 +98,7 @@ export default function Bookings({ agents }) {
                 </div>
               </div>
             </div>
-            {/* end time component*/}
+
             <div className="modal-footer">
               <button
                 className="btn btn-md"

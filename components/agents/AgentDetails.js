@@ -5,7 +5,11 @@ import { FaBriefcase, FaEnvelope, FaMobile } from 'react-icons/fa';
 function AgentDetails({ agents }) {
   return (
     <div className="media" style={{ maxWidth: '540px' }}>
-      <img src={agents.image} alt="mls" className="profile" />
+      <img
+        src={agents.image || '/fallback-image.jpg'}
+        alt="mls"
+        className="profile"
+      />
       <div className="container py-2">
         <h5 className=" mb-2 fs-sm fw-bold">{agents.title}</h5>
         <h6 className=" fw-bold">{agents.name}</h6>

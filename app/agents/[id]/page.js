@@ -1,6 +1,7 @@
 // agent bio page
 'use client';
 import axios from 'axios';
+import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 // component imports
 import Nav from '@/components/nav/Nav';
@@ -8,31 +9,20 @@ import Navbar from '@/components/agents/Navbar';
 import Bio from '@/components/agents/Bio';
 import Footer from '@/components/misc/Footer';
 
-// metadata
-{
-  /*
-export const metadata = {
-  title: 'dakota realtors | agent details page',
-  description: 'nextjs real estate app',
-};
-
-*/
-}
-
-const AgentBio = ({ params }) => {
+const AgentBio = ({}) => {
+  const { id } = useParams();
   const [agent, setAgent] = useState([]);
-  // const [appointment, setAppointment] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/agents/${params.id}`)
+      .get(`http://localhost:3001/agents/${id}`)
       .then((response) => {
         setAgent(response.data);
       })
       .catch((error) => {
         console.error('Error fetching agents:', error);
       });
-  }, [params.id]);
+  }, [id]);
 
   return (
     <>

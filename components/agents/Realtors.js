@@ -20,11 +20,11 @@ function Realtors({ agents }) {
           <div className="row g-0">
             <div className="col-sm-4">
               <Image
-                src={agents.image}
+                src={agents.image || '/fallback-image.jpg'}
                 width={120}
                 height={120}
                 className="avatar mx-3 my-3"
-                alt="..."
+                alt="mls"
               />
             </div>
             <div className="col-md-8">
