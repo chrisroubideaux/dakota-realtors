@@ -35,22 +35,22 @@ const formatMessageTimestamp = (timestamp) => {
 
   // Display the appropriate message
   if (isToday) {
-    return `${formattedDate}, ${formattedTime}`; // Include today's date
+    return `${formattedDate}, ${formattedTime}`;
   } else if (isYesterday) {
-    return `Yesterday, ${formattedTime}`; // Display 'Yesterday' with time
+    return `Yesterday, ${formattedTime}`;
   } else {
-    return `${formattedDate}, ${formattedTime}`; // Display full date for older messages
+    return `${formattedDate}, ${formattedTime}`;
   }
 };
 
 export default function ViewMessages({
   setActiveComponent,
-  currentEmployeeId,
+  currentAgentId,
   currentAdminId,
 }) {
   const [conversations, setConversations] = useState([]);
   const [admins, setAdmins] = useState([]);
-  const [employees, setEmployees] = useState([]);
+  const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
@@ -58,14 +58,14 @@ export default function ViewMessages({
   useEffect(() => {
     async function fetchData() {
       try {
-        const [messagesRes, adminsRes, employeesRes] = await Promise.all([
+        const [messagesRes, adminsRes, agentsRes] = await Promise.all([
           axios.get('http://localhost:3001/messages'),
           axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/employees'),
+          axios.get('http://localhost:3001/agents'),
         ]);
 
         setAdmins(adminsRes.data);
-        setEmployees(employeesRes.data);
+        setEmployees(agentsRes.data);
 
         const groupedConversations = groupMessagesByConversation(
           messagesRes.data
@@ -76,13 +76,13 @@ export default function ViewMessages({
             conv.senderId,
             conv.senderModel,
             adminsRes.data,
-            employeesRes.data
+            agentsRes.data
           );
 
           return {
             ...conv,
             senderName: sender?.name || 'Unknown Sender',
-            timestamp: formatMessageTimestamp(conv.latestMessage.timestamp), // Format the timestamp
+            timestamp: formatMessageTimestamp(conv.latestMessage.timestamp),
           };
         });
 
@@ -97,7 +97,6 @@ export default function ViewMessages({
     fetchData();
   }, [currentAdminId]);
 
-  // Group messages by sender and recipient, keeping only the latest message
   const groupMessagesByConversation = (allMessages) => {
     const grouped = {};
 
@@ -124,9 +123,9 @@ export default function ViewMessages({
     [senderId, recipientId].sort().join('-');
 
   // Find a user by ID and model (Admin/Employee)
-  const findUserById = (id, model, admins, employees) => {
+  const findUserById = (id, model, admins, agents) => {
     if (model === 'Admin') return admins.find((admin) => admin._id === id);
-    if (model === 'Employee') return employees.find((emp) => emp._id === id);
+    if (model === 'Agent') return agents.find((agent) => agent._id === id);
     return null;
   };
 
@@ -168,7 +167,7 @@ export default function ViewMessages({
                     </div>
                     <NewMessage
                       currentAdminId={currentAdminId}
-                      employees={employees}
+                      agents={agents}
                       admins={admins}
                       senderModel="Admin"
                       onRecipientSelect={handleRecipientSelect}
@@ -214,7 +213,6 @@ export default function ViewMessages({
                             <div className="fw-bold">
                               {conversation.timestamp}{' '}
                             </div>
-                            {/* Display formatted timestamp */}
                           </span>
                         </a>
                       </label>

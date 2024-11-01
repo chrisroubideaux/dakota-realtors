@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function NewMessage({
-  employees = [],
+  agents = [],
   admins = [],
   onRecipientSelect,
 }) {
@@ -9,13 +9,13 @@ export default function NewMessage({
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    if (employees.length > 0 || admins.length > 0) {
+    if (agents.length > 0 || admins.length > 0) {
       const storedRecipientId = localStorage.getItem('selectedRecipientId');
       console.log('Stored Recipient ID:', storedRecipientId);
 
       if (storedRecipientId) {
         const selectedRecipient =
-          employees.find((emp) => emp._id === storedRecipientId) ||
+          agents.find((agent) => agent._id === storedRecipientId) ||
           admins.find((admin) => admin._id === storedRecipientId);
 
         if (selectedRecipient) {
@@ -23,14 +23,14 @@ export default function NewMessage({
           setSelectedId(storedRecipientId);
           const recipientModel = storedRecipientId.startsWith('66')
             ? 'Admin'
-            : 'Employee';
+            : 'Agent';
           onRecipientSelect({ ...selectedRecipient, model: recipientModel });
         }
       }
 
       setIsDataLoaded(true);
     }
-  }, [employees, admins]);
+  }, [agents, admins]);
 
   const handleRecipientChange = (e) => {
     const selectedId = e.target.value;
@@ -38,11 +38,11 @@ export default function NewMessage({
     localStorage.setItem('selectedRecipientId', selectedId);
 
     const selectedRecipient =
-      employees.find((emp) => emp._id === selectedId) ||
+      agents.find((agent) => agent._id === selectedId) ||
       admins.find((admin) => admin._id === selectedId);
 
     if (selectedRecipient) {
-      const recipientModel = selectedId.startsWith('66') ? 'Admin' : 'Employee';
+      const recipientModel = selectedId.startsWith('66') ? 'Admin' : 'Agent';
       onRecipientSelect({ ...selectedRecipient, model: recipientModel });
     }
   };
@@ -102,9 +102,9 @@ export default function NewMessage({
                   value={selectedId}
                 >
                   <option value="">Contacts</option>
-                  {employees.map((emp) => (
-                    <option key={emp._id} value={emp._id}>
-                      {emp.name}
+                  {agents.map((agent) => (
+                    <option key={agent._id} value={agent._id}>
+                      {agent.name}
                     </option>
                   ))}
                   {admins.map((admin) => (
@@ -121,7 +121,7 @@ export default function NewMessage({
                     type="text"
                     className="form-control"
                     placeholder="Message"
-                    name="message" // Add name for the input
+                    name="message"
                     required
                   />
                   <button className="btn btn-primary" type="submit">

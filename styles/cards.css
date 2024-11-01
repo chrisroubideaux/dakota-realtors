@@ -93,18 +93,7 @@
   border-radius: 10px;
   margin: auto;
 }
-/* hover */
-.card:hover {
-  transform: scale(1.07);
-}
-      
-.cards:hover {
-  transform: scale(1.07);
-}
-      
-.avatar:hover {
-  transform: scale(1.07);
-}
+
 /* list-group */
       
 .list-group-item {  
@@ -136,7 +125,7 @@
 .card-icon:hover {
   color: #ef9f9f;
 }
-      
+/*      
 .card:hover {
   transform: scale(1.07);
 }
@@ -148,7 +137,7 @@
 .avatar:hover {
   transform: scale(1.07);
 }
-     
+ */    
 .badge {
   color: #DF6A9D;
   background-color: whitesmoke;

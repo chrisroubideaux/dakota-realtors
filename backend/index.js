@@ -15,6 +15,7 @@ const homeRoutes = require('./homes/homes');
 const userRoutes = require('./users/userRoutes');
 const agentRoutes = require('./agents/agents');
 const adminRoutes = require('./admin/admins');
+const messageRoutes = require('./messages/messages');
 
 // google auth
 const passport = require('passport');
@@ -104,6 +105,7 @@ app.use('/agents', agentRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/admins', adminRoutes);
+app.use('/messages', messageRoutes);
 app.get('/contact', (req, res) => {
   res.send('Contact page');
 });

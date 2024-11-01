@@ -39,7 +39,7 @@ export default function Sidebar({ setActiveComponent, admins }) {
             <span className="text-cap">
               <h4>Account</h4>
             </span>
-            <ul className=" nav nav-sm nav-tabs nav-vertical mb-4">
+            <ul className=" nav d-flex flex-column text-start mb-4 fw-bold">
               <li className="nav-item">
                 <Link className="nav-link" href={`/admins/${admins._id}`}>
                   <i className=" me-1 fs-6 fa-solid fa-person"></i>Bio
@@ -50,17 +50,13 @@ export default function Sidebar({ setActiveComponent, admins }) {
                   <i className="fs-6 fa-solid fa-money-bill"></i> Sales
                 </Link>
               </li>
+
               <li className="nav-item">
-                <Link className="nav-link" href="/openhouse/openhouse">
-                  <i className="fs-6 fa-solid fa-shop"></i> Open House
+                <Link className="nav-link" href="/calendar/calendar">
+                  <i className="fs-6 fa-solid fa-list-check"></i> Open House
                 </Link>
               </li>
 
-              <li className="nav-item">
-                <Link className="nav-link" href="/payroll/Payroll">
-                  <i className=" fs-6 fa-solid fa-money-bill"></i> Payroll
-                </Link>
-              </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/team/Team">
                   <i className="fs-6 fa-solid fa-users"></i> Team

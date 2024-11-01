@@ -20,6 +20,8 @@ export default function Notifications({ meetings }) {
   };
 
   // Fetch time-off requests
+  {
+    /*
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
@@ -32,7 +34,8 @@ export default function Notifications({ meetings }) {
 
     fetchTimeOffRequests();
   }, []);
-
+*/
+  }
   // Function to delete a meeting notification
   const deleteNotification = (meetingId) => {
     setVisibleMeetings((prevMeetings) =>
@@ -126,8 +129,6 @@ export default function Notifications({ meetings }) {
                 )}
               </div>
             </div>
-
-            {/* Time-Off Requests Section */}
 
             {/* Time-Off Requests Section */}
             <div className="accordion-item">

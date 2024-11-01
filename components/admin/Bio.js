@@ -30,13 +30,12 @@ export default function Bio({ admins }) {
   };
 
   const handleSaveChanges = async (e) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
     try {
-      const id = admin._id; // Assuming _id is used as the identifier
+      const id = admin._id;
       await axios.put(`http://localhost:3001/admins/${id}`, admin);
       console.log('Employee data updated successfully');
 
-      // Optionally, fetch the updated admin from the server
       const updatedAdmin = await axios.get(
         `http://localhost:3001/admins/${id}`
       );
@@ -134,7 +133,6 @@ export default function Bio({ admins }) {
                   </div>
                 </div>
 
-                {/* Add more fields for other admin information similar to the structure above */}
                 <div className="row mb-4">
                   <label
                     htmlFor="roleLabel"
@@ -384,13 +382,11 @@ export default function Bio({ admins }) {
                     />
                   </div>
                 </div>
-
-                {/* footer */}
                 <div className="card-footer pt-0">
                   <div className="d-flex justify-content-end gap-3 mt-2">
                     <button
                       type="button"
-                      className="btn btn-sm btn-primary"
+                      className="btn btn-sm "
                       onClick={handleEditClick}
                     >
                       {isEditing ? 'Cancel' : 'Edit Profile'}

@@ -6,7 +6,7 @@ import NewMessage from './NewMessage';
 export default function Messages({ setActiveComponent, currentAdminId }) {
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [employees, setEmployees] = useState([]);
+  const [agents, setAgents] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
@@ -14,12 +14,12 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const [adminsRes, employeesRes] = await Promise.all([
+        const [adminsRes, agentsRes] = await Promise.all([
           axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/employees'),
+          axios.get('http://localhost:3001/agents'),
         ]);
         setAdmins(adminsRes.data);
-        setEmployees(employeesRes.data);
+        setAgents(agentsRes.data);
       } catch (error) {
         console.error('Error fetching contacts:', error);
       }
@@ -27,10 +27,9 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     fetchContacts();
   }, []);
 
-  // Fetch messages when the recipient changes
   useEffect(() => {
     const fetchMessages = async () => {
-      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+      if (!activeRecipient) return;
 
       try {
         const response = await axios.get('http://localhost:3001/messages');
@@ -48,7 +47,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     };
     fetchMessages();
   }, [currentAdminId, activeRecipient]);
-  // Post method
+
   const sendMessage = async () => {
     if (!newMessage.trim() || !activeRecipient) {
       console.error('Message content and recipient must be provided');
@@ -77,8 +76,8 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   };
 
   const handleRecipientSelect = (recipient) => {
-    setActiveRecipient(recipient); // Update active recipient
-    setMessages([]); // Clear previous messages
+    setActiveRecipient(recipient);
+    setMessages([]);
   };
 
   const formatTimestamp = (timestamp) => {
@@ -144,7 +143,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
               </a>
               <NewMessage
                 currentAdminId={currentAdminId}
-                employees={employees}
+                agents={agents}
                 admins={admins}
                 onRecipientSelect={handleRecipientSelect}
               />

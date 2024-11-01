@@ -10,7 +10,7 @@ import Sidebar from '@/components/admin/Sidebar';
 import Bio from '@/components/admin/Bio';
 import Messages from '@/components/admin/Messages';
 import ViewMessages from '@/components/admin/ViewMessages';
-//import Notifications from '@/components/admin/Notifications';
+import Notifications from '@/components/admin/Notifications';
 //import Calendar from '@/components/calendar/Calendar';
 //import Schedule from '@/components/admin/Schedule';
 import TimeOff from '@/components/admin/TimeOff';
@@ -20,9 +20,9 @@ export default function Admin() {
   const [admin, setAdmin] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
   const [message, setMessage] = useState([]);
-  const [meetings, setMeetings] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
-  const [timeOffRequests, setTimeOffRequests] = useState([]);
+  //const [timeOffRequests, setTimeOffRequests] = useState([]);
   const [agentId, setAgentId] = useState('');
 
   // admin
@@ -53,41 +53,31 @@ export default function Admin() {
 
   // Fetch message data
   useEffect(() => {
-    if (id) {
-      const fetchMessageData = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:3001/messages/${id}`
-          );
-          console.log('Message data:', response.data);
-          setMessage(response.data);
-
-          if (response.data.length > 0) {
-            setSelectedRecipient(response.data[0].recipient);
-          }
-        } catch (error) {
-          console.error('Error fetching message data:', error);
-        }
-      };
-
-      fetchMessageData();
-    }
-  }, [id]);
-
-  // Fetch meetings
-  useEffect(() => {
     axios
-      .get('http://localhost:3001/meetings')
+      .get(`http://localhost:3001/messsages/${id}`)
       .then((response) => {
-        setMeetings(response.data);
+        setMessage(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching meetings:', error);
+        console.error('Error fetching messages:', error);
+      });
+  }, [id]);
+
+  // Fetch appointments
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/appointments')
+      .then((response) => {
+        setAppointments(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching appointments:', error);
       });
   }, []);
 
+  {
+    /*
   // timeoff api
-
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
@@ -101,6 +91,8 @@ export default function Admin() {
 
     fetchTimeOffRequests();
   }, []);
+  */
+  }
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
@@ -125,18 +117,16 @@ export default function Admin() {
         }
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
-        {
-          /*
+
       case 'Notifications':
         return (
           <Notifications
-            meetings={meetings}
-            timeOffRequests={timeOffRequests}
+            appointments={appointments}
+            //  timeOffRequests={timeOffRequests}
             setActiveComponent={setActiveComponent}
           />
         );
-        */
-        }
+
         {
           /*
       case 'Schedule':
@@ -148,6 +138,8 @@ export default function Admin() {
         );
         */
         }
+        {
+          /*
       case 'TimeOff':
         return (
           <TimeOff
@@ -155,6 +147,8 @@ export default function Admin() {
             setActiveComponent={setActiveComponent}
           />
         );
+        */
+        }
       default:
         return <Bio admins={admin} />;
     }

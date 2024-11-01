@@ -25,22 +25,6 @@ export default function Tab({ setActiveComponent }) {
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
-                onClick={() => setActiveComponent('Schedule')}
-              >
-                Schedule
-                <i className=" m-1 fa-solid fa-calendar-plus"></i>
-              </a>
-              <a
-                className="btn btn-soft-light btn-sm m-1"
-                href="#"
-                onClick={() => setActiveComponent('TimeOff')}
-              >
-                Time off
-                <i className=" m-1 fa-solid fa-book"></i>
-              </a>
-              <a
-                className="btn btn-soft-light btn-sm m-1"
-                href="#"
                 onClick={() => setActiveComponent('Notifications')}
               >
                 Notifications
@@ -58,7 +42,6 @@ export default function Tab({ setActiveComponent }) {
                 Messages
                 <i className=" m-1 fa-solid fa-message"></i>
               </a>
-
               <Link
                 className="btn btn-soft-light btn-sm m-1"
                 href="/calendar/calendars/"

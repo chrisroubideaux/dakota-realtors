@@ -136,10 +136,10 @@ p {
 /* buttons */
 
 .btn {
-  background-color:  #DF6A9D;
+  background-color:  #f888b9;
   color: #fafafa;
   border-radius: 30px;
-  font-weight: bold;
+ font-weight: normal;
 }
 
 .btn:hover {
