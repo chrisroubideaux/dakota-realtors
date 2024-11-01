@@ -33,7 +33,7 @@ export default function Tab({ setActiveComponent }) {
                   1
                 </span>
               </a>
-
+              {/*
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
@@ -42,10 +42,8 @@ export default function Tab({ setActiveComponent }) {
                 Messages
                 <i className=" m-1 fa-solid fa-message"></i>
               </a>
-              <Link
-                className="btn btn-soft-light btn-sm m-1"
-                href="/calendar/calendars/"
-              >
+              */}
+              <Link className="btn btn-soft-light btn-sm m-1" href="/calendars">
                 Calendar
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>
               </Link>

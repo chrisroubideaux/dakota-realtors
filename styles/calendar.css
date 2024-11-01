@@ -1,0 +1,131 @@
+/* styles/globals.css */
+.calendar {
+  color: #333;
+  color:  #F94C66; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(3, 3, 3, 0.1);
+}
+    
+.header, .yearHeader {
+  color:  #fe8fa0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5em;
+}
+    
+.icon {
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 0 10px;
+  user-select: none;
+}
+    
+.daysRow, .row {
+  display: flex;
+}
+    
+.day, .cell {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  margin: 2px;
+  border-radius: 5px;
+}
+    
+.day {
+  color: #fe8fa0;
+  background-color: #f1efef;
+  font-size: normal;
+  text-transform: uppercase;
+}
+    
+.cell {
+  cursor: pointer;
+  position: relative;
+  background-color: #fffbfb;
+  border-radius: 6px;
+  border: 1px solid #b5b5b5;
+  color: #333;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+    
+.cell.disabled {
+  background-color: #e9e9e9;
+  color: #aaa;
+  cursor: default;
+}
+    
+.cell.selected {
+  background-color: #fddfe3;
+}
+    
+.number {
+  color: #9b9b9b;  
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.2em;
+}
+    
+.event {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 2px 5px;
+  font-size: 0.8em;
+}
+    
+.list-group {
+  cursor: pointer;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+    
+.meetings {
+  background-color: #7eb0f1;
+  color: #fcfbfb;
+
+}
+
+.appointments {
+  background-color: #f17ed2;
+  border-color: #fe60b7;
+  color: #fffcfc;
+}
+
+.openhouse {
+  background-color:#b987ff;
+  border-color:  #c89afa; 
+  color: #fffbfb;
+}
+
+.payday {
+  background-color:#CDC1FF;
+  border-color:  #CDC1FF; 
+}
+.orders {
+  background-color:#f9f4d3;
+  border-color: #FFF7D1; 
+}
+    
+.video-chat {
+  background-color: #8bc34a;
+}
+    
+.reminder {
+  background-color: #03a9f4;
+}
+
+.todayDate {
+  color:#7E8EF1;
+  margin-top: 20px;
+  font-size: 1.2em;
+  text-align: center;
+}
