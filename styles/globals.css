@@ -139,12 +139,13 @@ p {
   background-color:  #f888b9;
   color: #fafafa;
   border-radius: 30px;
- font-weight: normal;
+ border: 1px solid #c9c9c9;
 }
 
 .btn:hover {
   transform: scale(1.07);
-  background-color:  #fc9fad;
+  background-color:  #f888b9;
+  color: #fcf7f7;
 }
 
 /* icons */

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import axios from 'axios';
 import CalendarEvent from './CalendarEvent';
-
+import { FaCalendarAlt } from 'react-icons/fa';
 const today = format(new Date(), 'MM/dd/yyyy');
 
 export default function CreateEvent({ meetings }) {
@@ -265,12 +265,13 @@ export default function CreateEvent({ meetings }) {
 
       {/* Create Event Button */}
       <button
-        className="btn btn-sm"
+        className="btn btn-sm badge"
         data-bs-target="#exampleModalToggle"
         data-bs-toggle="modal"
       >
         Create Event
         <i className="m-1 fa-solid fa-calendar-plus"></i>
+        <FaCalendarAlt className="m-1" />
       </button>
     </div>
   );

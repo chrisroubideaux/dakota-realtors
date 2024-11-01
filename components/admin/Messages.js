@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import NewMessage from './NewMessage';
+import {
+  FaVideo,
+  FaMoneyBillWave,
+  FaMapPin,
+  FaBed,
+  FaBath,
+} from 'react-icons/fa';
 
 export default function Messages({ setActiveComponent, currentAdminId }) {
   const [newMessage, setNewMessage] = useState('');
@@ -140,6 +147,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
               </a>
               <a href="#!" className="icon-md me-2 px-2">
                 <i className="social-icon fa-solid fa-video"></i>
+                <FaVideo className="social-icon fa-solid fa-video" />
               </a>
               <NewMessage
                 currentAdminId={currentAdminId}

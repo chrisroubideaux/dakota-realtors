@@ -1,5 +1,5 @@
 // Bio component
-// Bio component
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -386,7 +386,7 @@ export default function Bio({ admins }) {
                   <div className="d-flex justify-content-end gap-3 mt-2">
                     <button
                       type="button"
-                      className="btn btn-sm "
+                      className="btn btn-sm badge "
                       onClick={handleEditClick}
                     >
                       {isEditing ? 'Cancel' : 'Edit Profile'}

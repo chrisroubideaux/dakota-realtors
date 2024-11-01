@@ -1,5 +1,6 @@
 // Tab component
 import Link from 'next/link';
+import { FaCalendarAlt, FaBell, FaComment } from 'react-icons/fa';
 
 export default function Tab({ setActiveComponent }) {
   return (
@@ -10,7 +11,6 @@ export default function Tab({ setActiveComponent }) {
             <div className="d-none d-lg-block">
               <h1 className="h2">Personal info</h1>
             </div>
-
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb breadcrumb-light mb-0">
                 <li className="breadcrumb-item">Account</li>
@@ -23,29 +23,30 @@ export default function Tab({ setActiveComponent }) {
           <div className="col-auto">
             <div className="d-none d-lg-block">
               <a
-                className="btn btn-soft-light btn-sm m-1"
+                className="btn btn-sm m-1 badge"
                 href="#"
                 onClick={() => setActiveComponent('Notifications')}
               >
                 Notifications
-                <i className=" m-1 fa-solid fa-bell"></i>
+                <FaBell className="m-1" />
                 <span className="badge bg-soft-dark text-grey rounded-pill nav-link-badge">
                   1
                 </span>
               </a>
-              {/*
+
               <a
-                className="btn btn-soft-light btn-sm m-1"
+                className="btn btn-sm m-1 badge"
                 href="#"
                 onClick={() => setActiveComponent('Messages')}
               >
                 Messages
-                <i className=" m-1 fa-solid fa-message"></i>
+                <FaComment className=" m-1 " />
               </a>
-              */}
-              <Link className="btn btn-soft-light btn-sm m-1" href="/calendars">
+
+              <Link className="btn btn-sm  badge" href="/calendars">
                 Calendar
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>
+                <FaCalendarAlt className="m-1" />
               </Link>
             </div>
           </div>

@@ -36,7 +36,6 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
               </span>
               <span className="me-2 badge meetings rounded-pill">Meetings</span>
               {/*
-              
               <span className="me-2 inventory fw-bold text-dark rounded-pill">
                 Inventory
               </span>
@@ -70,21 +69,21 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
             <div className="btn-group" role="group" aria-label="Basic example">
               <button
                 type="button"
-                className="btn btn-sm"
+                className="btn btn-sm badge"
                 onClick={() => setActiveComponent('Month')}
               >
                 Month
               </button>
               <button
                 type="button"
-                className="btn btn-sm"
+                className="btn btn-sm badge"
                 onClick={() => setActiveComponent('Week')}
               >
                 Week
               </button>
               <button
                 type="button"
-                className="btn btn-sm"
+                className="btn btn-sm badge"
                 onClick={() => setActiveComponent('Day')}
               >
                 Day
@@ -92,7 +91,7 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
             </div>
           </li>
           <li className="nav-item me-2">
-            <Link className="btn btn-sm" href={`/admins/${admins._id}`}>
+            <Link className="btn btn-sm badge" href={`/admins/${admins._id}`}>
               Admin
               <i className="m-1 fa-solid fa-person"></i>
             </Link>
