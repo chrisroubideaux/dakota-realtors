@@ -12,7 +12,7 @@ import {
   isSameDay,
   getDay,
 } from 'date-fns';
-
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 const Calendar = ({ onSelectDate, meetings = [] }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -133,12 +133,12 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
 
     return (
       <div className="header py-3">
-        <button className="btn btn-sm" onClick={prevMonth}>
-          <i className="fa-solid fa-arrow-left"></i>
+        <button className="btn btn-sm badge" onClick={prevMonth}>
+          <FaLongArrowAltLeft className="fs-4" />
         </button>
         <div>{format(currentDate, dateFormat)}</div>
-        <button className="btn btn-sm" onClick={nextMonth}>
-          <i className="fa-solid fa-arrow-right"></i>
+        <button className="btn btn-sm badge" onClick={nextMonth}>
+          <FaLongArrowAltRight className="fs-4" />
         </button>
       </div>
     );
