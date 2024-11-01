@@ -37,7 +37,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'https://midwest-realtors-95d2cdb37007.herokuapp.com/register',
+        'http://localhost:3001/register',
         formData
       );
 
@@ -61,8 +61,7 @@ const Register = () => {
 
   // Oauth
   const handleGoogleRegister = () => {
-    const googleOAuthURL = 'http://localhost:3001/auth/google/callback';
-
+    const googleOAuthURL = 'http://localhost:3001/auth/google/register';
     window.open(
       googleOAuthURL,
       'Google OAuth',

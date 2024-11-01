@@ -11,11 +11,10 @@ import FeaturedApartments from '@/components/apartments/FeaturedApartments';
 import Details from '@/components/misc/Details';
 //import Reviews from '@/components/apartments/Reviews';
 import Footer from '@/components/misc/Footer';
-import dynamic from 'next/dynamic';
 
 const Apartments = () => {
   const [apartments, setApartments] = useState([]);
-  const Typewriter = dynamic(() => import('typewriter-effect'), { ssr: false });
+
   useEffect(() => {
     axios
       .get('http://localhost:3001/apartments')

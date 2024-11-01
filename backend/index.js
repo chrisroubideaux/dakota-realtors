@@ -7,28 +7,21 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 // auth routes
 const authRoutes = require('./routes/auth');
-const User = require('./models/user');
+//const User = require('./models/user');
 const apartmentRoutes = require('./apartments/apartments');
 const appointmentRoutes = require('./appointments/appointments');
 const commercialRoutes = require('./commercials/commercials');
 const homeRoutes = require('./homes/homes');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./users/userRoutes');
 const agentRoutes = require('./agents/agents');
-//const adminRoutes = require('./admin/admin');
+const adminRoutes = require('./admin/admins');
 
 // google auth
 const passport = require('passport');
-
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-const FacebookStrategy = require('passport-facebook').Strategy;
-
 require('dotenv').config();
-
 const app = express();
-//const port = 3001;
-const port = process.env.PORT || 3001;
 
+const port = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
 // mongoose
@@ -78,8 +71,7 @@ const sessionMiddleware = session({
   resave: false,
   saveUninitialized: true,
 });
-{
-  /*
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -90,112 +82,10 @@ app.use(
     },
   })
 );
-*/
-}
+
 app.use(sessionMiddleware);
 
-// google passport oAuth
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL:
-        process.env.GOOGLE_CALLBACK_URL ||
-        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/callback',
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        const existingUser = await User.findOne({
-          email: profile.emails[0].value,
-        });
-
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-
-        const newUser = new User({
-          email: profile.emails[0].value,
-          fullName: profile.displayName,
-        });
-
-        await newUser.save();
-
-        return done(null, newUser);
-      } catch (err) {
-        return done(err);
-      }
-    }
-  )
-);
-
-// Serialize user data to store in the session
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-// Deserialize user data when retrieving from the session
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
-
-// facebook strategy
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL:
-        process.env.FACEBOOK_CALLBACK_URL ||
-        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/callback',
-      profileFields: ['id', 'displayName', 'photos', 'emails'],
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      console.log('Facebook Profile Data:', profile);
-
-      try {
-        const existingUser = await User.findOne({ 'facebook.id': profile.id });
-
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-
-        const newUser = new User({
-          facebook: {
-            id: profile.id,
-            displayName: profile.displayName,
-            email: profile.emails[0].value,
-          },
-        });
-
-        await newUser.save();
-
-        return done(null, newUser);
-      } catch (err) {
-        return done(err);
-      }
-    }
-  )
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
+// api routes
 app.get('/properties', (req, res) => {
   res.send('properties page.');
 });
@@ -204,31 +94,16 @@ app.get('/', (req, res) => {
   res.send('cover page');
 });
 
-// apartments route
 app.use('/apartments', apartmentRoutes);
-
-// homes route
 app.use('/homes', homeRoutes);
-
-// commercial route
 app.use('/commercials', commercialRoutes);
-
-// appointments route
 app.use('/appointments', appointmentRoutes);
-
 //app.use('/appointments/:id', appointmentRoutes);
-
-// admin routes
-//app.use('/admin', adminRoutes);
-
+app.use('/admin', adminRoutes);
 app.use('/agents', agentRoutes);
-
 app.use('/auth', authRoutes);
-
-app.post('/auth', authRoutes);
-
-app.use('/user', userRoutes);
-
+app.use('/users', userRoutes);
+app.use('/admins', adminRoutes);
 app.get('/contact', (req, res) => {
   res.send('Contact page');
 });
@@ -237,14 +112,7 @@ app.get('/about', (req, res) => {
   res.send('About page');
 });
 
-// Google OAuth registration route
-app.get(
-  '/auth/google/register',
-  passport.authenticate('google', {
-    scope: ['openid', 'profile', 'email'],
-  })
-);
-
+// Oauth
 app.get(
   '/auth/google/register',
   passport.authenticate('google', { scope: ['openid', 'profile', 'email'] })
@@ -262,7 +130,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect('https://dakota-realtors.vercel.app/user');
+    res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
 
@@ -283,7 +151,7 @@ app.get(
     failureRedirect: '/login',
   }),
   (req, res) => {
-    res.redirect('https://dakota-realtors.vercel.app/user');
+    res.redirect(`http://localhost:3000/admins/${User}`);
   }
 );
 
@@ -293,7 +161,7 @@ app.get(
     failureRedirect: '/login',
   }),
   (req, res) => {
-    res.redirect('https://dakota-realtors.vercel.app/user');
+    res.redirect(`http://localhost:3000/admins/${User}`);
   }
 );
 

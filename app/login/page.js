@@ -29,7 +29,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/login',
+        'http://localhost:3001/auth/login',
         formData
       );
 
@@ -48,14 +48,12 @@ const Login = () => {
   // Add Google login function
   const handleGoogleLogin = () => {
     // Redirect the user to Google OAuth login
-    window.location.href =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/login';
+    window.location.href = 'http://localhost:3001/auth/google/login';
   };
 
   // Facebook registration function
   const handleFacebookLogin = () => {
-    const facebookOAuthURL =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/register';
+    const facebookOAuthURL = 'http://localhost:3001/auth/facebook/login';
 
     window.open(
       facebookOAuthURL,
@@ -122,9 +120,7 @@ const Login = () => {
               </li>
             </ul>
           </div>
-
           {error && <p style={{ color: 'red' }}>{error}</p>}
-
           <p className="pt-1 fw-bold">{"Don't have an account"}</p>
           <Link className="btn btn lg w-75" href="/register">
             Register
