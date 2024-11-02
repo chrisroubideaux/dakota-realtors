@@ -192,7 +192,7 @@ const Nav = ({ onSearch }) => {
                 </div>
               </li>
               <li className="nav-item mt-3">
-                <Link className="nav-link" href="/agents">
+                <Link className="nav-link" href="/team">
                   Agents
                 </Link>
               </li>

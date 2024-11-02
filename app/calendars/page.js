@@ -15,8 +15,8 @@ export default function Calendars() {
   const [admins, setAdmins] = useState([]);
   const [meetings, setMeetings] = useState([]);
 
+  // Fetch admins
   useEffect(() => {
-    // Fetch admins
     axios
       .get('http://localhost:3001/admins')
       .then((response) => {
@@ -62,27 +62,25 @@ export default function Calendars() {
     <>
       <div className="layout h-100">
         <Nav />
-
-        {/* Render Tab component for each admin */}
-        {admins.map((admin) => (
-          <Tab
-            setActiveComponent={setActiveComponent}
-            key={admin.id} // Unique key here
-            admins={admin}
-            meetings={meetings}
-          />
+        {admins.slice(0, 8).map((admin, index) => (
+          <div key={admin.id || `admin-${index}`} className="">
+            <Tab
+              setActiveComponent={setActiveComponent}
+              admins={admin}
+              meetings={meetings}
+            />
+          </div>
         ))}
-
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              {/* Render Sidebar component for each admin */}
-              {admins.map((admin) => (
-                <Sidebar
-                  setActiveComponent={setActiveComponent}
-                  key={admin.id} // Unique key here
-                  admins={admin}
-                />
+              {admins.slice(0, 8).map((admin, index) => (
+                <div key={admin.id || `admin-${index}`} className="">
+                  <Sidebar
+                    setActiveComponent={setActiveComponent}
+                    admins={admin}
+                  />
+                </div>
               ))}
             </div>
             <div className="col-lg-8 col-xxl-9">

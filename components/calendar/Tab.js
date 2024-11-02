@@ -1,8 +1,8 @@
 // Tab component
 import Link from 'next/link';
-import CalendarEvent from './CreateEvent';
+import CreateEvent from './CreateEvent';
 import { format } from 'date-fns';
-
+import { FaCalendarAlt } from 'react-icons/fa';
 const Tab = ({ setActiveComponent, admins, meetings }) => {
   const today = format(new Date(), 'MM/dd/yyyy');
   return (
@@ -55,15 +55,14 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
                   value={today}
                   readOnly
                 />
-                <button className="input-group-text bg-sm">
-                  <i className="social-icon fa-solid fa-calendar-days"></i>
+                <button className="btn btn-sm badge ">
+                  <FaCalendarAlt className="social-icon " />
                 </button>
               </div>
             </form>
           </li>
           <li className="nav-item me-2">
-            {/* CreateEvent button and modal */}
-            <CalendarEvent meetings={meetings} />
+            <CreateEvent meetings={meetings} />
           </li>
           <li className="nav-item me-2">
             <div className="btn-group" role="group" aria-label="Basic example">
