@@ -41,6 +41,104 @@ export default function Calendars() {
     switch (activeComponent) {
       case 'Week':
         return (
+          <Week meetings={meetings} setActiveComponent={setActiveComponent} />
+        );
+      case 'Day':
+        return (
+          <Day meetings={meetings} setActiveComponent={setActiveComponent} />
+        );
+      case 'Calendar':
+      default:
+        return (
+          <Calendar
+            meetings={meetings}
+            setActiveComponent={setActiveComponent}
+          />
+        );
+    }
+  };
+
+  return (
+    <>
+      <div className="layout h-100">
+        <Nav />
+
+        {/* Render Tab component for each admin */}
+        {admins.map((admin) => (
+          <Tab
+            setActiveComponent={setActiveComponent}
+            key={admin.id} // Unique key here
+            admins={admin}
+            meetings={meetings}
+          />
+        ))}
+
+        <div className="container-fluid ">
+          <div className="row">
+            <div className="col-lg-4 col-xxl-3">
+              {/* Render Sidebar component for each admin */}
+              {admins.map((admin) => (
+                <Sidebar
+                  setActiveComponent={setActiveComponent}
+                  key={admin.id} // Unique key here
+                  admins={admin}
+                />
+              ))}
+            </div>
+            <div className="col-lg-8 col-xxl-9">
+              <div className="mt-3">{renderComponent()}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+{
+  /*
+'use client';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Head from 'next/head';
+import Nav from '@/components/nav/Nav';
+import Sidebar from '@/components/admin/Sidebar';
+import Tab from '@/components/calendar/Tab';
+import Calendar from '@/components/calendar/Calendar';
+import Week from '@/components/calendar/Week';
+import Day from '@/components/calendar/Day';
+
+export default function Calendars() {
+  const [activeComponent, setActiveComponent] = useState('Calendars');
+  const [admins, setAdmins] = useState([]);
+  const [meetings, setMeetings] = useState([]);
+
+  useEffect(() => {
+    // Fetch admins
+    axios
+      .get('http://localhost:3001/admins')
+      .then((response) => {
+        setAdmins(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching admins:', error);
+      });
+
+    // Fetch meetings
+    axios
+      .get('http://localhost:3001/meetings')
+      .then((response) => {
+        setMeetings(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching meetings:', error);
+      });
+  }, []);
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Week':
+        return (
           <Week
             meetings={meetings}
             key={meetings.id}
@@ -107,4 +205,6 @@ export default function Calendars() {
       </div>
     </>
   );
+}
+*/
 }

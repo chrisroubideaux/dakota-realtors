@@ -15,7 +15,7 @@ export default function CreateEvent({ meetings }) {
   const [subject, setSubject] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [employees, setEmployees] = useState('');
+  const [agents, setAgents] = useState('');
 
   const handleDateSelection = (date) => {
     setSelectedDate(format(date, 'MM/dd/yyyy'));
@@ -27,10 +27,10 @@ export default function CreateEvent({ meetings }) {
       senderId: '66feb2d7bfdb4d747e58bcb9',
       senderModel: 'Admin',
       recipientIds: [invitee],
-      recipientModel: 'Employee',
+      recipientModel: 'Agent',
       isVideo: true,
       description: subject,
-      times: '8:00AM-4:00PM',
+      times: '8:00AM-5:00PM',
       slot: selectedTime,
       days: [selectedDate],
     };
@@ -56,16 +56,16 @@ export default function CreateEvent({ meetings }) {
   };
 
   useEffect(() => {
-    const fetchEmployees = async () => {
+    const fetchAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/employees');
-        setEmployees(response.data);
+        const response = await axios.get('http://localhost:3001/agents');
+        setAgents(response.data);
       } catch (error) {
         console.error('Error fetching employees:', error);
       }
     };
 
-    fetchEmployees();
+    fetchAgents();
   }, []);
 
   return (
@@ -223,14 +223,14 @@ export default function CreateEvent({ meetings }) {
                     <option className="text-dark" value="1">
                       Whole team
                     </option>
-                    {/* Map over employees instead of meetings */}
-                    {employees.map((employee) => (
+
+                    {agents.map((agent) => (
                       <option
                         className="text-dark"
-                        key={employee._id}
-                        value={employee._id}
+                        key={agent._id}
+                        value={agent._id}
                       >
-                        {employee.name}
+                        {agent.name}
                       </option>
                     ))}
                   </select>
