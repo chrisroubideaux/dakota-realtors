@@ -1,8 +1,10 @@
 // user schema
+// models/userModel.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
+    googleId: String,
     name: String,
     photo: String,
     email: String,
@@ -10,27 +12,10 @@ const userSchema = new mongoose.Schema(
     facebookId: String,
     facebookDisplayName: String,
     facebookEmail: String,
-    role: String,
     phone: String,
     address: String,
     city: String,
     state: String,
-    empId: String,
-    socialSec: String,
-    hireDate: Date,
-    endDate: Date,
-    isEmployed: {
-      type: Boolean,
-      default: true,
-    },
-    wage: Number,
-    emergencyContact1: String,
-    emergencyContact2: String,
-    role: {
-      type: String,
-      enum: ['admin', 'employee'],
-      required: true,
-    },
   },
   {
     timestamps: true,

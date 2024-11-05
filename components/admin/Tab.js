@@ -45,7 +45,6 @@ export default function Tab({ setActiveComponent }) {
 
               <Link className="btn btn-sm  badge" href="/calendars">
                 Calendar
-                <i className=" m-1 fa-solid fa-calendar-plus"></i>
                 <FaCalendarAlt className="m-1" />
               </Link>
             </div>

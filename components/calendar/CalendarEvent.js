@@ -1,3 +1,4 @@
+// Calendar
 import { useState, useEffect } from 'react';
 import {
   format,
@@ -153,10 +154,12 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
   };
 
   return (
-    <div className="calendar ">
-      <div className="align-items-center">{renderHeader()}</div>
-      {renderDays()}
-      {renderCells()}
+    <div className="calendar" style={{ minWidth: '350px' }}>
+      <div className="align-items-center">
+        {renderHeader()}
+        {renderDays()}
+        {renderCells()}
+      </div>
     </div>
   );
 };

@@ -1,19 +1,19 @@
-// Bio component
+// Profile component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function Bio({ admins }) {
+export default function Bio({ agents }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [admin, setAdmin] = useState(admins);
+  const [agent, setAgent] = useState(employees || {});
 
   useEffect(() => {
-    if (admins) {
-      setAdmin(admins);
+    if (agents) {
+      setAgent(agents);
     }
-  }, [admins]);
+  }, [agents]);
 
-  if (!admin || Object.keys(admin).length === 0) {
-    return <p>No employee data available.</p>;
+  if (!agent || Object.keys(agent).length === 0) {
+    return <p>No agent data available.</p>;
   }
 
   const handleEditClick = () => {
@@ -22,23 +22,23 @@ export default function Bio({ admins }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAdmin((prevState) => ({
+    setAgent((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+    console.log('Field Changed:', name, value);
   };
 
-  const handleSaveChanges = async (e) => {
-    e.preventDefault();
+  const handleSaveChanges = async () => {
     try {
-      const id = admin._id;
-      await axios.put(`http://localhost:3001/admins/${id}`, admin);
-      console.log('Employee data updated successfully');
+      const id = agent._id;
+      await axios.put(`http://localhost:3001/agents/${id}`, agent);
+      console.log('Agent data updated successfully');
 
-      const updatedAdmin = await axios.get(
-        `http://localhost:3001/admins/${id}`
+      const updatedAgent = await axios.get(
+        `http://localhost:3001/agents/${id}`
       );
-      setAdmin(updatedAdmin.data);
+      setAgent(updatedAgent.data);
       setIsEditing(false);
     } catch (error) {
       if (error.response) {
@@ -49,9 +49,7 @@ export default function Bio({ admins }) {
       } else {
         console.error('Error message:', error.message);
       }
-      alert(
-        'Failed to save employee data. Check the console for more details.'
-      );
+      alert('Failed to save agent data. Check the console for more details.');
     }
   };
 
@@ -67,28 +65,24 @@ export default function Bio({ admins }) {
               <form onSubmit={handleSaveChanges}>
                 <div className="row mb-4">
                   <label
-                    htmlFor="firstNameLabel"
+                    htmlFor="nameLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Full name
+                    Full Name
                   </label>
                   <div className="col-sm-9">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="name"
-                        id="firstNameLabel"
-                        placeholder="Full Name"
-                        aria-label="Full Name"
-                        value={admin.name}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      id="nameLabel"
+                      placeholder="Full Name"
+                      value={agent.name || ''}
+                      readOnly={!isEditing}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
                     htmlFor="emailLabel"
@@ -103,8 +97,7 @@ export default function Bio({ admins }) {
                       name="email"
                       id="emailLabel"
                       placeholder="email@example.com"
-                      aria-label="Email"
-                      value={admin.email}
+                      value={agent.email || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
@@ -119,44 +112,20 @@ export default function Bio({ admins }) {
                   </label>
                   <div className="col-sm-9">
                     <input
-                      type="text"
+                      type="tel"
                       className="form-control"
                       name="phone"
                       id="phoneLabel"
                       placeholder="xxx-xxx-xxxx"
-                      aria-label="Phone"
-                      value={admin.phone || ''}
+                      value={agent.phone || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
-                    htmlFor="roleLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    Role
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="role"
-                      id="roleLabel"
-                      placeholder="Role"
-                      aria-label="Role"
-                      value={admin.role}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="row mb-4">
-                  <label
-                    htmlFor="addressLabel"
+                    htmlFor="homeLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
                     Address
@@ -168,8 +137,7 @@ export default function Bio({ admins }) {
                       name="address"
                       id="addressLabel"
                       placeholder="1234 Main St"
-                      aria-label="Address"
-                      value={admin.address}
+                      value={agent.address || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
@@ -181,7 +149,7 @@ export default function Bio({ admins }) {
                       htmlFor="cityLabel"
                       className="col-sm-3 col-form-label form-label"
                     >
-                      City
+                      City/St/Zip
                     </label>
                     <input
                       type="type"
@@ -189,24 +157,14 @@ export default function Bio({ admins }) {
                       name="city"
                       id="cityLabel"
                       placeholder="1234 Main St"
-                      value={admin.city || ''}
+                      value={agent.city || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
-
                     {/*
-                    <select
-                      id="inputState"
-                      className="form-select "
-                      value={admins.state}
-                      disabled={!isEditing}
-                    >
+                    <select id="inputState" className="form-select ">
                       <option selected>State</option>
-                      <option
-                        value={admins.state}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
-                      ></option>
+                      <option>...</option>
                     </select>
                     */}
                     <input
@@ -215,9 +173,45 @@ export default function Bio({ admins }) {
                       name="state"
                       id="stateLabel"
                       placeholder="State"
-                      value={admin.state || ''}
+                      value={agent.state || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="titleLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Title
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      id="titleLabel"
+                      placeholder="Title"
+                      value={agent.title || ''}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="deptLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Dept
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="dept"
+                      id="deptLabel"
+                      placeholder="Department"
+                      value={agent.dept || ''}
                     />
                   </div>
                 </div>
@@ -240,24 +234,21 @@ export default function Bio({ admins }) {
                         type="text"
                         className="form-control"
                         name="empId"
-                        placeholder="EmpId"
-                        value={admin.empId || ''}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
+                        id="empIdLabel"
+                        placeholder="Employee ID"
+                        value={agent.empId || ''}
                       />
                       <input
                         type="text"
                         className="form-control"
                         name="socialSec"
+                        id="socialSecLabel"
                         placeholder="Social Security Number"
-                        value={admin.socialSec || ''}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
+                        value={agent.socialSec || ''}
                       />
                     </div>
                   </div>
                 </div>
-                {/* Wage */}
                 <div className="row mb-4">
                   <label
                     htmlFor="wageLabel"
@@ -270,10 +261,9 @@ export default function Bio({ admins }) {
                       type="text"
                       className="form-control"
                       name="wage"
-                      placeholder="$00.00"
-                      value={admin.wage || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
+                      id="wageLabel"
+                      placeholder="$28.00/hr"
+                      value={agent.wage || ''}
                     />
                   </div>
                 </div>
@@ -298,7 +288,7 @@ export default function Bio({ admins }) {
                         placeholder="Full name"
                         name="emergencyName"
                         id="emergencyName"
-                        value={admin.emergencyName || ''}
+                        value={agent.emergencyName || ''}
                         readOnly={!isEditing}
                         onChange={handleChange}
                       />
@@ -317,7 +307,7 @@ export default function Bio({ admins }) {
                       type="text"
                       className="form-control"
                       placeholder="xxx-xxx-xxxx"
-                      value={admin.emergencyContact1 || ''}
+                      value={agent.emergencyContact1 || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
@@ -345,16 +335,7 @@ export default function Bio({ admins }) {
                         id="firstNameLabel"
                         placeholder="First Name"
                         aria-label="First Name"
-                        readOnly={!isEditing}
-                        onChange={handleChange}
-                      />
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="lastName"
-                        id="lastNameLabel"
-                        placeholder="Last Name"
-                        aria-label="Last Name"
+                        value={agent.emergencyName2 || ''}
                         readOnly={!isEditing}
                         onChange={handleChange}
                       />
@@ -376,6 +357,7 @@ export default function Bio({ admins }) {
                       id="emailLabel"
                       placeholder="xxx-xxx-xxxx"
                       aria-label="phone"
+                      value={agent.emergencyContact2 || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
@@ -385,7 +367,7 @@ export default function Bio({ admins }) {
                   <div className="d-flex justify-content-end gap-3 mt-2">
                     <button
                       type="button"
-                      className="btn btn-sm badge "
+                      className="btn btn-sm btn-primary"
                       onClick={handleEditClick}
                     >
                       {isEditing ? 'Cancel' : 'Edit Profile'}

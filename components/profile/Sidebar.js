@@ -2,13 +2,13 @@
 import Link from 'next/link';
 import {
   FaUser,
-  FaPoll,
-  FaUsers,
   FaHouseUser,
+  FaSearch,
+  FaProjectDiagram,
   FaRegHandPeace,
 } from 'react-icons/fa';
 
-export default function Sidebar({ setActiveComponent, admins }) {
+export default function Sidebar({ setActiveComponent, users }) {
   const handleLogout = async () => {
     try {
       await fetch('http://localhost:3001/auth/logout', {
@@ -41,31 +41,34 @@ export default function Sidebar({ setActiveComponent, admins }) {
                 title="Verified user"
               />
             </div>
-            <h4 className="card-title mb-0">{admins.name}</h4>
-            <p className="card-text small">{admins.email}</p>
+            <h4 className="card-title mb-0">{users.name}</h4>
+            <p className="card-text small">{users.email}</p>
             <span className="text-cap">
               <h4>Account</h4>
             </span>
             <ul className=" nav d-flex flex-column text-start mb-4 fw-bold">
               <li className="nav-item">
-                <Link className="nav-link" href={`/admins/${admins._id}`}>
+                <Link className="nav-link" href={`/users/${users._id}`}>
                   <FaUser className="me-1 fs-6 " />
                   Bio
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/sales/sales">
-                  <FaPoll className="fs-6 fa-solid fa-money-bill " /> Sales
+                  <FaSearch className="fs-6 me-1" />
+                  Properties Viewed
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/calendar/calendar">
-                  <FaHouseUser className="fs-6 me-1" /> Open House
+                  <FaHouseUser className="fs-6 me-1" />
+                  Open House
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/team/Team">
-                  <FaUsers className="fs-6 fa-solid" /> Team
+                <Link className="nav-link" href="/calendar/calendar">
+                  <FaProjectDiagram className="fs-6 fa-solid" /> Profile
+                  Settings
                 </Link>
               </li>
               <li className="nav-item">

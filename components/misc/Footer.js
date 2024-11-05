@@ -232,11 +232,6 @@ export default function Footer() {
                         Community
                       </a>
                     </li>
-                    <li className="mb-2">
-                      <a href="#!" className="text-decoration-none text-reset">
-                        Webinars
-                      </a>
-                    </li>
                   </ul>
                 </div>
               </div>

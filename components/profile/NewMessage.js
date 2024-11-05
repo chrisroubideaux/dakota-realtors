@@ -1,30 +1,29 @@
-// New Messages component
+// New message component
 import { useState, useEffect } from 'react';
 
 export default function NewMessage({
   agents = [],
-  admins = [],
+  users = [],
   onRecipientSelect,
 }) {
   const [selectedId, setSelectedId] = useState('');
-  const [isDataLoaded, setIsDataLoaded] = useState(false); // Track loading state
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  // Load agents/admins, and only then read from localStorage
   useEffect(() => {
-    if (agents.length > 0 || admins.length > 0) {
+    if (agents.length > 0 || users.length > 0) {
       const storedRecipientId = localStorage.getItem('selectedRecipientId');
       console.log('Stored Recipient ID:', storedRecipientId);
 
       if (storedRecipientId) {
         const selectedRecipient =
           agents.find((agent) => agent._id === storedRecipientId) ||
-          admins.find((admin) => admin._id === storedRecipientId);
+          users.find((user) => user._id === storedRecipientId);
 
         if (selectedRecipient) {
           console.log('Selected Recipient Found:', selectedRecipient);
           setSelectedId(storedRecipientId);
           const recipientModel = storedRecipientId.startsWith('66')
-            ? 'Admin'
+            ? 'User'
             : 'Agent';
           onRecipientSelect({ ...selectedRecipient, model: recipientModel });
         }
@@ -32,7 +31,7 @@ export default function NewMessage({
 
       setIsDataLoaded(true);
     }
-  }, [agents, admins]);
+  }, [agents, users]);
 
   const handleRecipientChange = (e) => {
     const selectedId = e.target.value;
@@ -41,10 +40,10 @@ export default function NewMessage({
 
     const selectedRecipient =
       agents.find((agent) => agent._id === selectedId) ||
-      admins.find((admin) => admin._id === selectedId);
+      users.find((user) => user._id === selectedId);
 
     if (selectedRecipient) {
-      const recipientModel = selectedId.startsWith('66') ? 'Admin' : 'Employee';
+      const recipientModel = selectedId.startsWith('66') ? 'User' : 'Agent';
       onRecipientSelect({ ...selectedRecipient, model: recipientModel });
     }
   };
@@ -108,13 +107,14 @@ export default function NewMessage({
                       {agent.name}
                     </option>
                   ))}
-                  {admins.map((admin) => (
-                    <option key={admin._id} value={admin._id}>
-                      {admin.name}
+                  {users.map((user) => (
+                    <option key={user._id} value={user._id}>
+                      {user.name}
                     </option>
                   ))}
                 </select>
               </div>
+
               <form onSubmit={handleSendMessage}>
                 <div className="input-group" style={{ width: '30rem' }}>
                   <input
@@ -124,7 +124,7 @@ export default function NewMessage({
                     name="message"
                     required
                   />
-                  <button className="btn btn-md" type="submit">
+                  <button className="btn btn-sm" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>
                   </button>
                 </div>

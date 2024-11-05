@@ -5,7 +5,7 @@ export default function Avatar({ users }) {
   return (
     <div>
       <div className="">
-        <h3 className=" text-muted fw-bold">{users.fullName}</h3>
+        <h3 className=" text-muted fw-bold">{users.name}</h3>
         <img
           src={users.image}
           alt="mls"
