@@ -1,5 +1,4 @@
 /* globals.css */
-
 body,
 html {
   margin: 0;
@@ -139,15 +138,13 @@ p {
   background-color:  #f888b9;
   color: #fafafa;
   border-radius: 30px;
- border: 1px solid #c9c9c9;
- 
+  border: 1px solid #c9c9c9;
 }
 
 .btn:hover {
   transform: scale(1.07);
   background-color:  #f888b9;
   color: #fcf7f7;
- 
 }
 
 /* icons */
