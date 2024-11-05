@@ -1,20 +1,20 @@
-// Notifaction component
+// notifications
 import { useState, useEffect } from 'react';
 import { format, isValid } from 'date-fns';
 import axios from 'axios';
 
 export default function Notifications({ currentAgentId }) {
-  const [visibleMeetings, setVisibleMeetings] = useState([]);
+  const [visibleAppointments, setVisibleAppointments] = useState([]);
   const [visibleRequests, setVisibleRequests] = useState([]);
 
-  // Fetch meetings and time-off requests from the API
+  // Fetch appointment and time-off requests from the API
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const meetingsResponse = await axios.get(
-          'http://localhost:3001/meetings'
+        const appointmentsResponse = await axios.get(
+          'http://localhost:3001/appointments'
         );
-        setVisibleMeetings(meetingsResponse.data);
+        setVisibleAppointments(appointmentsResponse.data);
 
         const timeOffResponse = await axios.get(
           'http://localhost:3001/timeOff'
@@ -33,7 +33,6 @@ export default function Notifications({ currentAgentId }) {
     }
   }, [currentAgentId]);
 
-  // Helper function to format the date, defaulting to the current date if missing
   const formatDate = (dateString) => {
     const date = dateString ? new Date(dateString) : new Date();
 
@@ -45,21 +44,20 @@ export default function Notifications({ currentAgentId }) {
     return format(date, 'MM/dd/yyyy');
   };
 
-  // Function to "delete" a meeting by removing it from local state
-  const deleteMeeting = (meetingId) => {
-    setVisibleMeetings((prevMeetings) =>
-      prevMeetings.filter((meeting) => meeting._id !== meetingId)
+  const deleteAppointment = (appointmentId) => {
+    setVisibleAppointments((prevAppointments) =>
+      prevAppointments.filter(
+        (appointment) => appointment._id !== appointmentId
+      )
     );
   };
 
-  // Function to "delete" a request by removing it from local state
   const deleteRequest = (requestId) => {
     setVisibleRequests((prevRequests) =>
       prevRequests.filter((request) => request._id !== requestId)
     );
   };
 
-  // Function to delete all notifications
   const deleteAllNotifications = () => {
     setVisibleMeetings([]);
     setVisibleRequests([]);
@@ -68,14 +66,18 @@ export default function Notifications({ currentAgentId }) {
   return (
     <div className="mt-3 card">
       <div className="chat-container">
-        <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
-          <div className="card-body h-100 d-flex justify-content-between align-items-center">
-            <h5 className="d-flex fw-semi-bold">Notifications</h5>
-            <button className="btn btn-sm" onClick={deleteAllNotifications}>
+        <div className="card card-chat ">
+          <div className="card-body d-flex ">
+            {/*
+            <button
+              className="btn btn-sm badge"
+              onClick={deleteAllNotifications}
+            >
               Delete All
             </button>
+            */}
           </div>
-
+          <h6 className="fw-bold me-1">Notifications</h6>
           <div className="accordion" id="accordionExample">
             <div className="accordion-item">
               <h5 className="accordion-header">
@@ -87,7 +89,7 @@ export default function Notifications({ currentAgentId }) {
                   aria-expanded="true"
                   aria-controls="collapseMeetings"
                 >
-                  Meetings
+                  Appointments
                 </button>
               </h5>
               <div
@@ -95,38 +97,35 @@ export default function Notifications({ currentAgentId }) {
                 className="accordion-collapse collapse show"
                 data-bs-parent="#accordionExample"
               >
-                {visibleMeetings.length > 0 ? (
-                  visibleMeetings.map((meeting) => (
-                    <div className="accordion-body pb-1" key={meeting._id}>
+                {visibleAppointments.length > 0 ? (
+                  visibleAppointments.map((appointment) => (
+                    <div className="accordion-body pb-1" key={appointment._id}>
                       <div className="meeting-container">
                         <div className="meeting-item">
                           <strong>Date:</strong>
                           <span>
-                            {meeting.days.length > 0
-                              ? formatDate(meeting.days[0])
+                            {appointment.days.length > 0
+                              ? formatDate(appointment.days[0])
                               : 'N/A'}
                           </span>
                         </div>
                         <div className="meeting-item">
-                          <strong>Time:</strong> <span>{meeting.slot}</span>
-                        </div>
-                        <div className="meeting-item">
-                          <strong>Meeting Type:</strong>
-                          <span>{meeting.isVideo ? 'Video' : 'In-Person'}</span>
+                          <strong>Time:</strong> <span>{appointment.slot}</span>
                         </div>
                         <div className="meeting-item">
                           <strong>Attendees:</strong>
                           <span>
-                            {meeting.sender.name}, {meeting.recipient.name}
+                            {appointment.sender.name},{' '}
+                            {appointment.recipient.name}
                           </span>
                         </div>
                         <div className="meeting-item">
                           <strong>Subject:</strong>
-                          <span>{meeting.description || 'No subject'}</span>
+                          <span>{appointment.description || 'No subject'}</span>
                         </div>
                         <button
                           className="btn btn-sm mt-2"
-                          onClick={() => deleteMeeting(meeting._id)}
+                          onClick={() => deleteMeeting(appointment._id)}
                         >
                           Delete
                         </button>
@@ -134,11 +133,11 @@ export default function Notifications({ currentAgentId }) {
                     </div>
                   ))
                 ) : (
-                  <div>No meetings available</div>
+                  <div>No appointments available</div>
                 )}
               </div>
             </div>
-
+            {/*
             <div className="accordion-item">
               <h5 className="accordion-header">
                 <button
@@ -195,8 +194,9 @@ export default function Notifications({ currentAgentId }) {
                 ) : (
                   <div>No time-off requests available</div>
                 )}
-              </div>
+              </div>    
             </div>
+           */}
           </div>
         </div>
       </div>

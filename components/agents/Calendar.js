@@ -83,17 +83,21 @@ const Calendar = ({ onSelectDate, appointments = [] }) => {
         type: eventTypes.appointments,
         title: (
           <div className="">
-            Appointments: {meeting.sender.name} & {meeting.recipient.name}
+            Appointments: {appointment.sender.name} &{' '}
+            {appointment.recipient.name}
           </div>
         ),
-        slot: meeting.slot,
-        sender: meeting.sender.name,
-        recipient: meeting.recipient.name,
+        slot: appointment.slot,
+        sender: appointment.sender.name,
+        recipient: appointment.recipient.name,
       }));
     });
   };
 
-  const combinedEvents = [...recurringEvents, ...formatMeetings(meetings)];
+  const combinedEvents = [
+    ...recurringEvents,
+    ...formatAppointments(appointments),
+  ];
 
   const renderHeader = () => {
     const dateFormat = 'MMMM yyyy';

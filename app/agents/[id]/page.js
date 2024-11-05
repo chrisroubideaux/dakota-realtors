@@ -8,21 +8,18 @@ import Nav from '@/components/nav/Nav';
 import Tab from '@/components/agents/Tab';
 import Sidebar from '@/components/agents/Sidebar';
 import Profile from '@/components/agents/Profile';
-import Messages from '@/components/agents/Messages';
+//import Messages from '@/components/agents/Messages';
 import ViewMessages from '@/components/agents/ViewMessages';
 import Notifications from '@/components/agents/Notifications';
-//import Calendar from '@/components/agents/Calendar';
-//import TimeOff from '@/components/agetns/TimeOff';
+import Calendar from '@/components/agents/Calendar';
 
 export default function AgentBio() {
   const { id } = useParams();
   const [user, setUser] = useState([]);
   const [admin, setAdmin] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
-  const [message, setMessage] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
-  //const [timeOffRequests, setTimeOffRequests] = useState([]);
   const [agent, setAgent] = useState('');
 
   // admin
@@ -61,18 +58,6 @@ export default function AgentBio() {
       });
   }, [id]);
 
-  // Fetch message data
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/messsages/${id}`)
-      .then((response) => {
-        setMessage(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching messages:', error);
-      });
-  }, [id]);
-
   // Fetch appointments
   useEffect(() => {
     axios
@@ -85,80 +70,21 @@ export default function AgentBio() {
       });
   }, []);
 
-  {
-    /*
-  // timeoff api
-  useEffect(() => {
-    const fetchTimeOffRequests = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/timeOff');
-        setTimeOffRequests(response.data);
-        console.log('Time-off data:', response.data);
-      } catch (error) {
-        console.error('Error fetching time-off data:', error);
-      }
-    };
-
-    fetchTimeOffRequests();
-  }, []);
-  */
-  }
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
     switch (activeComponent) {
-      case 'Messages':
-        return (
-          <Messages
-            messages={message}
-            setActiveComponent={setActiveComponent}
-            currentAdminId={admin._id}
-            selectedRecipientId={agent}
-            recipientId={agent}
-            senderModel="Agent"
-            recipientModel="Admin"
-          />
-        );
-        {
-          /*
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
-        */
-        }
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
-
       case 'Notifications':
         return (
           <Notifications
             appointments={appointments}
-            //  timeOffRequests={timeOffRequests}
             setActiveComponent={setActiveComponent}
           />
         );
-
-        {
-          /*
-      case 'Schedule':
-        return (
-          <Schedule
-            meetings={meetings}
-            setActiveComponent={setActiveComponent}
-          />
-        );
-        */
-        }
-        {
-          /*
-      case 'TimeOff':
-        return (
-          <TimeOff
-            timeOffRequests={timeOffRequests}
-            setActiveComponent={setActiveComponent}
-          />
-        );
-        */
-        }
       default:
         return <Profile agents={agent} />;
     }
