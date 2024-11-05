@@ -33,7 +33,6 @@ export default function Tab({ setActiveComponent }) {
                   1
                 </span>
               </a>
-
               <a
                 className="btn btn-sm m-1 badge"
                 href="#"
@@ -42,7 +41,6 @@ export default function Tab({ setActiveComponent }) {
                 Messages
                 <FaComment className=" m-1 " />
               </a>
-
               <Link className="btn btn-sm  badge" href="/calendars">
                 Calendar
                 <FaCalendarAlt className="m-1" />

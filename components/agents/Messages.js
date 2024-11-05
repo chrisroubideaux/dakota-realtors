@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import NewMessages from './NewMessages';
+import NewMessages from './NewMessage';
 
 export default function Messages({
   setActiveComponent,

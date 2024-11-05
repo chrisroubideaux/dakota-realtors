@@ -74,7 +74,7 @@ export default function Notifications({ appointments }) {
                   aria-expanded="true"
                   aria-controls="collapseMeetings"
                 >
-                  Meetings
+                  Appointments
                 </button>
               </h5>
               <div

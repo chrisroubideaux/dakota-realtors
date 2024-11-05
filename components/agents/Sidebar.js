@@ -1,7 +1,16 @@
 // Sidebar component
 import Link from 'next/link';
+import Image from 'next/image';
 
-export default function Sidebar({ setActiveComponent, admins }) {
+import {
+  FaUser,
+  FaHouseUser,
+  FaUsers,
+  FaProjectDiagram,
+  FaRegHandPeace,
+} from 'react-icons/fa';
+
+export default function Sidebar({ setActiveComponent, agents }) {
   const handleLogout = async () => {
     try {
       await fetch('http://localhost:3001/auth/logout', {
@@ -19,19 +28,13 @@ export default function Sidebar({ setActiveComponent, admins }) {
       <div className="card mb-5">
         <div className="card-body" style={{ minWidth: '350px' }}>
           <div className="d-none d-lg-block mb-5">
-            <div className="avatar avatar-xxl avatar-circle mb-3">
-              <img
-                className="avatar"
-                src="./assets/img/160x160/img9.jpg"
-                alt=""
-              />
-              <img
-                className="avatar-status avatar-lg-status"
-                src="./assets/svg/illustrations/top-vendor.svg"
-                alt=""
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Verified user"
+            <div className="">
+              <Image
+                src={agents.image || '/fallback-image.jpg'}
+                width={120}
+                height={120}
+                className="avatar mx-3 my-3"
+                alt="mls"
               />
             </div>
             <h4 className="card-title mb-0">{agents.name}</h4>
@@ -42,27 +45,28 @@ export default function Sidebar({ setActiveComponent, admins }) {
             <ul className=" nav d-flex flex-column text-start mb-4 fw-bold">
               <li className="nav-item">
                 <Link className="nav-link" href={`/agents/${agents._id}`}>
-                  <i className=" me-1 fs-6 fa-solid fa-person"></i>Bio
+                  <FaUser className="me-1 fs-6 " />
+                  Bio
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/sales/sales">
-                  <i className="fs-6 fa-solid fa-money-bill"></i> Sales
+                  <FaProjectDiagram className="fs-6 fa-solid" /> Sales
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/calendar/calendar">
-                  <i className="fs-6 fa-solid fa-list-check"></i> Open House
+                  <FaHouseUser className="fs-6 me-1" /> Open House
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/team/Team">
-                  <i className="fs-6 fa-solid fa-users"></i> Team
+                <Link className="nav-link" href="/team">
+                  <FaUsers className="fs-6 fa-solid" /> Team
                 </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#" onClick={handleLogout}>
-                  <i className="fs-6 fa-solid fa-person-walking"></i> Log out
+                  <FaRegHandPeace className="fs-6 me-1" /> Log out
                 </a>
               </li>
             </ul>

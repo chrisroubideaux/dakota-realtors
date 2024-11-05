@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function Bio({ agents }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [agent, setAgent] = useState(employees || {});
+  const [agent, setAgent] = useState(agents || {});
 
   useEffect(() => {
     if (agents) {
@@ -161,19 +161,17 @@ export default function Bio({ agents }) {
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
-                    {/*
                     <select id="inputState" className="form-select ">
                       <option selected>State</option>
-                      <option>...</option>
+                      <option value={agent.state || ''}></option>
                     </select>
-                    */}
                     <input
                       type="text"
                       className="form-control"
-                      name="state"
-                      id="stateLabel"
-                      placeholder="State"
-                      value={agent.state || ''}
+                      name="Zip"
+                      id="zipCodeLabel"
+                      placeholder="Zip"
+                      // value={agent.state || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
@@ -199,24 +197,6 @@ export default function Bio({ agents }) {
                 </div>
                 <div className="row mb-4">
                   <label
-                    htmlFor="deptLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    Dept
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="dept"
-                      id="deptLabel"
-                      placeholder="Department"
-                      value={agent.dept || ''}
-                    />
-                  </div>
-                </div>
-                <div className="row mb-4">
-                  <label
                     htmlFor="firstNameLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
@@ -236,7 +216,7 @@ export default function Bio({ agents }) {
                         name="empId"
                         id="empIdLabel"
                         placeholder="Employee ID"
-                        value={agent.empId || ''}
+                        value={agent.agentId || ''}
                       />
                       <input
                         type="text"
@@ -307,6 +287,8 @@ export default function Bio({ agents }) {
                       type="text"
                       className="form-control"
                       placeholder="xxx-xxx-xxxx"
+                      name="emergencyContact1"
+                      id="emergencyContact1"
                       value={agent.emergencyContact1 || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
@@ -331,10 +313,9 @@ export default function Bio({ agents }) {
                       <input
                         type="text"
                         className="form-control"
-                        name="firstName"
-                        id="firstNameLabel"
-                        placeholder="First Name"
-                        aria-label="First Name"
+                        name="emergencyName2"
+                        id="emergencyName2"
+                        placeholder="Full Name"
                         value={agent.emergencyName2 || ''}
                         readOnly={!isEditing}
                         onChange={handleChange}
@@ -353,9 +334,8 @@ export default function Bio({ agents }) {
                     <input
                       type="phone"
                       className="form-control"
-                      name="phone"
-                      id="emailLabel"
-                      placeholder="xxx-xxx-xxxx"
+                      name="emergencyContact2"
+                      id="emergencyContact2"
                       aria-label="phone"
                       value={agent.emergencyContact2 || ''}
                       readOnly={!isEditing}
@@ -367,7 +347,7 @@ export default function Bio({ agents }) {
                   <div className="d-flex justify-content-end gap-3 mt-2">
                     <button
                       type="button"
-                      className="btn btn-sm btn-primary"
+                      className="btn btn-sm badge"
                       onClick={handleEditClick}
                     >
                       {isEditing ? 'Cancel' : 'Edit Profile'}
