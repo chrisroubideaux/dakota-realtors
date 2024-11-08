@@ -4,39 +4,7 @@ import axios from 'axios';
 
 export default function PropertyForm() {
   // State for form inputs
-  const [formData, setFormData] = useState({
-    mlsId: '',
-    name: '',
-    photo: '',
-    title: '',
-    phone: '',
-    email: '',
-    bio: '',
-    experience: '',
-    realtor: '',
-    propertyType: '',
-    rentOrBuy: '',
-    verified: '',
-    image1: '',
-    image2: '',
-    image3: '',
-    image4: '',
-    description: '',
-    rooms: '',
-    bathrooms: '',
-    centralAir: '',
-    washerAndDryer: '',
-    dishwasher: '',
-    flooring: '',
-    price: '',
-    morgage: '',
-    sqft: '',
-    address: '',
-    swimmingPool: '',
-    basement: '',
-    college: '',
-    communityCenter: '',
-  });
+  const [formData, setFormData] = useState({});
 
   // State for feedback messages
   const [message, setMessage] = useState('');
@@ -58,39 +26,7 @@ export default function PropertyForm() {
       setMessage('Property added successfully!');
       setError('');
       // Optionally reset the form
-      setFormData({
-        mlsId: '',
-        name: '',
-        photo: '',
-        title: '',
-        phone: '',
-        email: '',
-        bio: '',
-        experience: '',
-        realtor: '',
-        propertyType: '',
-        rentOrBuy: '',
-        verified: '',
-        image1: '',
-        image2: '',
-        image3: '',
-        image4: '',
-        description: '',
-        rooms: '',
-        bathrooms: '',
-        centralAir: '',
-        washerAndDryer: '',
-        dishwasher: '',
-        flooring: '',
-        price: '',
-        morgage: '',
-        sqft: '',
-        address: '',
-        swimmingPool: '',
-        basement: '',
-        college: '',
-        communityCenter: '',
-      });
+      setFormData({});
     } catch (err) {
       setError('Failed to add property. Please try again.');
       setMessage('');
@@ -268,15 +204,22 @@ export default function PropertyForm() {
                     Bed
                   </label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="bedrooms"
-                      value={formData.bathrooms}
+                    <select
+                      id="bed"
+                      className="form-select"
+                      name="bed"
+                      value={formData.rooms}
                       onChange={handleChange}
-                      placeholder="1 Bed"
                       required
-                    />
+                    >
+                      <option value="">Bedrooms</option>
+                      <option value="apartments">1 Bed</option>
+                      <option value="apartments">2 Bed</option>
+                      <option value="apartments">3 Bed</option>
+                      <option value="apartments">4 Bed</option>
+                      <option value="apartments">5 Bed</option>
+                      <option value="apartments">6 Bed</option>
+                    </select>
                   </div>
                 </div>
 
@@ -285,15 +228,22 @@ export default function PropertyForm() {
                     Bath
                   </label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="bathrooms"
+                    <select
+                      id="bed"
+                      className="form-select"
+                      name="bed"
                       value={formData.rooms}
                       onChange={handleChange}
-                      placeholder=" 1 Bath"
                       required
-                    />
+                    >
+                      <option value="">Bathrooms</option>
+                      <option value="apartments">1 Bath</option>
+                      <option value="apartments">2 Bath</option>
+                      <option value="apartments">3 Bath</option>
+                      <option value="apartments">4 Bath</option>
+                      <option value="apartments">5 Bath</option>
+                      <option value="apartments">6 Bath</option>
+                    </select>
                   </div>
                 </div>
 

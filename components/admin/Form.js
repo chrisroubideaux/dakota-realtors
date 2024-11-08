@@ -272,15 +272,20 @@ export default function PropertyForm() {
                     Bed
                   </label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="bedrooms"
+                    <select
+                      id="bed"
+                      className="form-select"
+                      name="bed"
                       value={formData.rooms}
                       onChange={handleChange}
-                      placeholder="1 Bed"
                       required
-                    />
+                    >
+                      <option value="">Bedrooms</option>
+                      <option value="apartments">1 Bed</option>
+                      <option value="apartments">2 Bed</option>
+                      <option value="apartments">3 Bed</option>
+                      <option value="apartments">4 Bed</option>
+                    </select>
                   </div>
                 </div>
                 {/*bathrooms*/}
@@ -289,15 +294,22 @@ export default function PropertyForm() {
                     Bath
                   </label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="bathrooms"
-                      value={formData.rooms}
+                    <select
+                      id="bed"
+                      className="form-select"
+                      name="bed"
+                      value={formData.bathrooms}
                       onChange={handleChange}
-                      placeholder=" 1 Bath"
                       required
-                    />
+                    >
+                      <option value="">Bathrooms</option>
+                      <option value="apartments">1 Bath</option>
+                      <option value="apartments">2 Bath</option>
+                      <option value="apartments">3 Bath</option>
+                      <option value="apartments">4 Bath</option>
+                      <option value="apartments">5 Bath</option>
+                      <option value="apartments">6 Bath</option>
+                    </select>
                   </div>
                 </div>
                 {/*central air*/}
