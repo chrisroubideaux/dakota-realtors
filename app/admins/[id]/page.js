@@ -13,6 +13,7 @@ import ViewMessages from '@/components/admin/ViewMessages';
 import Notifications from '@/components/admin/Notifications';
 import Form from '@/components/admin/Form';
 import HomeForm from '@/components/admin/HomeForm';
+import CommercialForm from '@/components/admin/CommercialForm';
 
 export default function Admin() {
   const { id } = useParams();
@@ -95,6 +96,8 @@ export default function Admin() {
         return <Form setActiveComponent={setActiveComponent} />;
       case 'HomeForm':
         return <HomeForm setActiveComponent={setActiveComponent} />;
+      case 'CommercialForm':
+        return <CommercialForm setActiveComponent={setActiveComponent} />;
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
 

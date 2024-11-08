@@ -75,7 +75,7 @@ export default function Tab({ setActiveComponent }) {
                       <a
                         className="dropdown-item"
                         href="#"
-                        onClick={() => setActiveComponent('MonthlyChart')}
+                        onClick={() => setActiveComponent('Recently')}
                       >
                         Recently Added
                       </a>

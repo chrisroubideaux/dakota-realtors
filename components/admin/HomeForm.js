@@ -1,10 +1,42 @@
-// form component for adding homes
+// Form component
 import { useState } from 'react';
 import axios from 'axios';
 
 export default function PropertyForm() {
   // State for form inputs
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    mlsId: '',
+    name: '',
+    photo: '',
+    title: '',
+    phone: '',
+    email: '',
+    bio: '',
+    experience: '',
+    realtor: '',
+    propertyType: '',
+    rentOrBuy: '',
+    verified: '',
+    image1: '',
+    image2: '',
+    image3: '',
+    image4: '',
+    description: '',
+    rooms: '',
+    bathrooms: '',
+    centralAir: '',
+    washerAndDryer: '',
+    dishwasher: '',
+    flooring: '',
+    price: '',
+    morgage: '',
+    sqft: '',
+    address: '',
+    swimmingPool: '',
+    basement: '',
+    college: '',
+    communityCenter: '',
+  });
 
   // State for feedback messages
   const [message, setMessage] = useState('');
@@ -20,13 +52,45 @@ export default function PropertyForm() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:3001/apartments',
+        'http://localhost:3001/homes',
         formData
       );
       setMessage('Property added successfully!');
       setError('');
       // Optionally reset the form
-      setFormData({});
+      setFormData({
+        mlsId: '',
+        name: '',
+        photo: '',
+        title: '',
+        phone: '',
+        email: '',
+        bio: '',
+        experience: '',
+        realtor: '',
+        propertyType: '',
+        rentOrBuy: '',
+        verified: '',
+        image1: '',
+        image2: '',
+        image3: '',
+        image4: '',
+        description: '',
+        rooms: '',
+        bathrooms: '',
+        centralAir: '',
+        washerAndDryer: '',
+        dishwasher: '',
+        flooring: '',
+        price: '',
+        morgage: '',
+        sqft: '',
+        address: '',
+        swimmingPool: '',
+        basement: '',
+        college: '',
+        communityCenter: '',
+      });
     } catch (err) {
       setError('Failed to add property. Please try again.');
       setMessage('');
@@ -203,22 +267,22 @@ export default function PropertyForm() {
                   <label className="col-sm-3 col-form-label form-label">
                     Bed
                   </label>
+
                   <div className="col-sm-9">
                     <select
-                      id="bed"
                       className="form-select"
-                      name="bed"
+                      name="rooms"
                       value={formData.rooms}
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Bedrooms</option>
-                      <option value="apartments">1 Bed</option>
-                      <option value="apartments">2 Bed</option>
-                      <option value="apartments">3 Bed</option>
-                      <option value="apartments">4 Bed</option>
-                      <option value="apartments">5 Bed</option>
-                      <option value="apartments">6 Bed</option>
+                      <option>Bedrooms</option>
+                      <option>1 bed</option>
+                      <option>2 bed</option>
+                      <option>3 bed</option>
+                      <option>4 bed</option>
+                      <option>5 bed</option>
+                      <option>6 bed</option>
                     </select>
                   </div>
                 </div>
@@ -229,20 +293,19 @@ export default function PropertyForm() {
                   </label>
                   <div className="col-sm-9">
                     <select
-                      id="bed"
                       className="form-select"
-                      name="bed"
-                      value={formData.rooms}
+                      name="bathrooms"
+                      value={formData.bathrooms}
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Bathrooms</option>
-                      <option value="apartments">1 Bath</option>
-                      <option value="apartments">2 Bath</option>
-                      <option value="apartments">3 Bath</option>
-                      <option value="apartments">4 Bath</option>
-                      <option value="apartments">5 Bath</option>
-                      <option value="apartments">6 Bath</option>
+                      <option>Bath</option>
+                      <option>1 bath</option>
+                      <option>2 bath</option>
+                      <option>3 bath</option>
+                      <option>4 bath</option>
+                      <option>5 bath</option>
+                      <option>6 bath</option>
                     </select>
                   </div>
                 </div>
@@ -255,7 +318,7 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="central air"
+                      name="centralAir"
                       value={formData.centralAir}
                       onChange={handleChange}
                       placeholder="Central Air"
@@ -272,7 +335,7 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="washer dryer"
+                      name="washerAndDryer"
                       value={formData.washerAndDryer}
                       onChange={handleChange}
                       placeholder="Washer & Dryer"
@@ -287,10 +350,11 @@ export default function PropertyForm() {
                   </label>
                   <div className="col-sm-9">
                     <input
+                      id="diswasher"
                       type="text"
                       className="form-control"
-                      name="washer dryer"
-                      value={formData.washerAndDryer}
+                      name="dishwasher"
+                      value={formData.dishwasher}
                       onChange={handleChange}
                       placeholder="Ex. Dishwasher / Garbage disposal"
                       required
@@ -306,7 +370,7 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="washer dryer"
+                      name="price"
                       value={formData.price}
                       onChange={handleChange}
                       placeholder="100,000"
@@ -323,8 +387,8 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="price"
-                      value={formData.price}
+                      name="morgage"
+                      value={formData.morgage}
                       onChange={handleChange}
                       placeholder="0,000/Monthly"
                       required
@@ -407,7 +471,7 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="swimming pool"
+                      name="swimmingPool"
                       value={formData.swimmingPool}
                       onChange={handleChange}
                       placeholder="Yes/No, Sqft 0000"
@@ -424,7 +488,7 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="pet friendly"
+                      name="basement"
                       value={formData.basement}
                       onChange={handleChange}
                       placeholder="Sqft 0000"
@@ -441,11 +505,11 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="school"
+                      name="college"
                       value={formData.college}
                       onChange={handleChange}
                       placeholder="Ex.Community College within 10 miles "
-                      required
+                      //required
                     />
                   </div>
                 </div>
@@ -458,11 +522,11 @@ export default function PropertyForm() {
                     <input
                       type="text"
                       className="form-control"
-                      name="community"
+                      name="communityCenter"
                       value={formData.communityCenter}
                       onChange={handleChange}
                       placeholder="Ex. Community Center within 5 miles "
-                      required
+                      //required
                     />
                   </div>
                 </div>
