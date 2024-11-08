@@ -76,7 +76,6 @@
 /* swiper */
 .swiper {
   height: 32rem;
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -87,7 +86,6 @@
 /* slider */
 .slider {
   height: 32rem;
- 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

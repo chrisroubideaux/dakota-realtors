@@ -133,7 +133,12 @@ p {
 }
 
 /* buttons */
-
+   
+.accordion-button:focus {
+  outline: none; 
+  box-shadow: none; 
+}
+ 
 .btn {
   background-color:  #f888b9;
   color: #fafafa;

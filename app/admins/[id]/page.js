@@ -11,9 +11,8 @@ import Bio from '@/components/admin/Bio';
 import Messages from '@/components/admin/Messages';
 import ViewMessages from '@/components/admin/ViewMessages';
 import Notifications from '@/components/admin/Notifications';
-//import Calendar from '@/components/calendar/Calendar';
-//import Schedule from '@/components/admin/Schedule';
-import TimeOff from '@/components/admin/TimeOff';
+import Form from '@/components/admin/Form';
+import HomeForm from '@/components/admin/HomeForm';
 
 export default function Admin() {
   const { id } = useParams();
@@ -22,7 +21,7 @@ export default function Admin() {
   const [message, setMessage] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
-  //const [timeOffRequests, setTimeOffRequests] = useState([]);
+
   const [agentId, setAgentId] = useState('');
 
   // admin
@@ -75,24 +74,6 @@ export default function Admin() {
       });
   }, []);
 
-  {
-    /*
-  // timeoff api
-  useEffect(() => {
-    const fetchTimeOffRequests = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/timeOff');
-        setTimeOffRequests(response.data);
-        console.log('Time-off data:', response.data);
-      } catch (error) {
-        console.error('Error fetching time-off data:', error);
-      }
-    };
-
-    fetchTimeOffRequests();
-  }, []);
-  */
-  }
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
@@ -109,12 +90,11 @@ export default function Admin() {
             recipientModel="Agent"
           />
         );
-        {
-          /*
-      case 'Calendar':
-        return <Calendar setActiveComponent={setActiveComponent} />;
-        */
-        }
+
+      case 'Form':
+        return <Form setActiveComponent={setActiveComponent} />;
+      case 'HomeForm':
+        return <HomeForm setActiveComponent={setActiveComponent} />;
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
 

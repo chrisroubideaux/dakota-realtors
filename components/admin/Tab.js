@@ -1,6 +1,6 @@
 // Tab component
 import Link from 'next/link';
-import { FaCalendarAlt, FaBell, FaComment } from 'react-icons/fa';
+import { FaCalendarAlt, FaBell, FaBuilding } from 'react-icons/fa';
 
 export default function Tab({ setActiveComponent }) {
   return (
@@ -33,13 +33,55 @@ export default function Tab({ setActiveComponent }) {
                   1
                 </span>
               </a>
-              <a
-                className="btn btn-sm m-1 badge"
-                href="#"
-                onClick={() => setActiveComponent('Messages')}
-              >
-                Messages
-                <FaComment className=" m-1 " />
+              <a className="nav-link badge bg-transparent fs-6">
+                <div className="dropdown">
+                  <button
+                    className=" btn btn-lg p-2 badge dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Add Property
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('Form')}
+                      >
+                        Apartments
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('HomeForm')}
+                      >
+                        Home
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('CommercialForm')}
+                      >
+                        Commercial
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('MonthlyChart')}
+                      >
+                        Recently Added
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </a>
               <Link className="btn btn-sm  badge" href="/calendars">
                 Calendar
