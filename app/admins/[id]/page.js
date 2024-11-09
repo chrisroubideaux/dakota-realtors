@@ -14,6 +14,7 @@ import Notifications from '@/components/admin/Notifications';
 import Form from '@/components/admin/Form';
 import HomeForm from '@/components/admin/HomeForm';
 import CommercialForm from '@/components/admin/CommercialForm';
+import { Apartments } from '@/components/admin/edit/Apartments';
 
 export default function Admin() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export default function Admin() {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
   const [message, setMessage] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [apartments, setApartments] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
 
   const [agentId, setAgentId] = useState('');
@@ -36,7 +38,7 @@ export default function Admin() {
         console.error('Error fetching agents:', error);
       });
   }, [id]);
-  //
+  // Agent
   useEffect(() => {
     const fetchAgentData = async () => {
       try {
@@ -75,6 +77,18 @@ export default function Admin() {
       });
   }, []);
 
+  // Fetch apartments
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/apartments')
+      .then((response) => {
+        setApartments(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartments:', error);
+      });
+  }, []);
+
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
@@ -100,6 +114,18 @@ export default function Admin() {
         return <CommercialForm setActiveComponent={setActiveComponent} />;
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
+      case 'Apartments':
+        return (
+          <>
+            {apartments.map((apartments, index) => (
+              <Apartments
+                key={index}
+                apartments={apartments} // Pass individual apartment data
+                setActiveComponent={setActiveComponent}
+              />
+            ))}
+          </>
+        );
 
       case 'Notifications':
         return (
