@@ -9,7 +9,7 @@ import {
   FaBath,
 } from 'react-icons/fa';
 
-export const Apartments = ({ apartments }) => {
+export const Apartments = ({ apartments, setActiveComponent }) => {
   return (
     <div>
       <div className="card overflow-hidden m-2 ">
@@ -50,7 +50,6 @@ export const Apartments = ({ apartments }) => {
                     sqft
                   </h6>
                 </span>
-
                 <span className="d-inline-block me-2">
                   <h6 className=" fs-sm fw-normal">
                     <FaMoneyBillWave className="card-icon " /> $

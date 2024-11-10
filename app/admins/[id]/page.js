@@ -15,6 +15,7 @@ import Form from '@/components/admin/Form';
 import HomeForm from '@/components/admin/HomeForm';
 import CommercialForm from '@/components/admin/CommercialForm';
 import { Apartments } from '@/components/admin/edit/Apartments';
+import EditApartment from '@/components/admin/edit/EditApartment';
 
 export default function Admin() {
   const { id } = useParams();
@@ -120,13 +121,19 @@ export default function Admin() {
             {apartments.map((apartments, index) => (
               <Apartments
                 key={index}
-                apartments={apartments} // Pass individual apartment data
+                apartments={apartments}
                 setActiveComponent={setActiveComponent}
               />
             ))}
           </>
         );
-
+      case 'EditApartment':
+        return (
+          <EditApartment
+            apartments={apartments}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'Notifications':
         return (
           <Notifications
