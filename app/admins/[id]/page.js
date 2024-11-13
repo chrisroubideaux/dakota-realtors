@@ -144,7 +144,7 @@ export default function Admin() {
       case 'EditApartment':
         return (
           <EditApartment
-            apartment={apartment}
+            apartments={apartment}
             setActiveComponent={setActiveComponent}
           />
         );

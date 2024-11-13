@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { FaCalendarAlt, FaBell, FaBuilding } from 'react-icons/fa';
 
-export default function Tab({ setActiveComponent }) {
+export default function Tab({ setActiveComponent, admins }) {
   return (
     <div className="mt-2">
       <div className="container content-space-1 content-space-b-lg-3">
@@ -83,6 +83,7 @@ export default function Tab({ setActiveComponent }) {
                   </ul>
                 </div>
               </a>
+              {/*
               <a className="nav-link badge bg-transparent fs-6">
                 <div className="dropdown">
                   <button
@@ -95,9 +96,13 @@ export default function Tab({ setActiveComponent }) {
                   </button>
                   <ul className="dropdown-menu">
                     <li>
-                      <Link className="dropdown-item" href={'/edit'}>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('Apartments')}
+                      >
                         Apartments
-                      </Link>
+                      </a>
                     </li>
                     <li>
                       <a
@@ -120,7 +125,13 @@ export default function Tab({ setActiveComponent }) {
                   </ul>
                 </div>
               </a>
-              <Link className="btn btn-sm  badge" href="/calendars">
+              */}
+              <Link className=" nav-link btn btn-sm badge" href="/edit">
+                Edit Property
+                <FaCalendarAlt className="m-1" />
+              </Link>
+
+              <Link className="btn btn-sm badge m-2" href="/calendars">
                 Calendar
                 <FaCalendarAlt className="m-1" />
               </Link>

@@ -9,12 +9,15 @@ import Sidebar from '@/components/admin/Sidebar';
 //import HomeForm from '@/components/homes/HomeForm';
 //import CommercialForm from '@/components/commercials/CommercialForm';
 import { Apartments } from '@/components/apartments/edit/Apartments';
-//import EditApartment from '@/components/admin/edit/EditApartment';
+import { Homes } from '@/components/homes/edit/Homes';
+import { Commercials } from '@/components/commercials/edit/Commericals';
 
 export default function Edit() {
   const [admins, setAdmins] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
   const [apartments, setApartments] = useState([]);
+  const [homes, setHomes] = useState([]);
+  const [commercials, setCommercials] = useState([]);
 
   // admin
   useEffect(() => {
@@ -24,9 +27,10 @@ export default function Edit() {
         setAdmins(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching agents:', error);
+        console.error('Error fetching admin:', error);
       });
   }, []);
+
   // apartments
   useEffect(() => {
     axios
@@ -38,16 +42,61 @@ export default function Edit() {
         console.error('Error fetching apartments:', error);
       });
   }, []);
+
+  // homes
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/homes`)
+      .then((response) => {
+        setHomes(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching homes:', error);
+      });
+  }, []);
+
+  // commercials
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/commercials')
+      .then((response) => {
+        setCommercials(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching admin:', error);
+      });
+  }, []);
+
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admins);
     switch (activeComponent) {
-      case 'Form':
+      case '':
         return <Form setActiveComponent={setActiveComponent} />;
-      case 'HomeForm':
-        return <HomeForm setActiveComponent={setActiveComponent} />;
-      case 'CommercialForm':
-        return <CommercialForm setActiveComponent={setActiveComponent} />;
+      case 'Homes':
+        return (
+          <>
+            {homes.map((homes, index) => (
+              <Homes
+                key={index}
+                homes={homes}
+                setActiveComponent={setActiveComponent}
+              />
+            ))}
+          </>
+        );
+      case 'Commercials':
+        return (
+          <>
+            {commercials.map((commercials, index) => (
+              <Commercials
+                key={index}
+                commercials={commercials}
+                setActiveComponent={setActiveComponent}
+              />
+            ))}
+          </>
+        );
 
       case 'Apartments':
         return (

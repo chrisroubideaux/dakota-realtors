@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function EditApartments({ apartments }) {
+export default function EditApartments({ setActiveComponent, apartments }) {
   const [isEditing, setIsEditing] = useState(false);
   const [apartment, setApartment] = useState(apartments);
 
@@ -57,7 +57,7 @@ export default function EditApartments({ apartments }) {
     <div className="mt-3">
       <div className="col-lg-9">
         <div className="d-grid gap-3 gap-lg-5">
-          <div className="card">
+          <div className="card" style={{ minWidth: '350px' }}>
             <div className="card-header border-bottom">
               <h4 className="card-header-title">Edit Apartment</h4>
             </div>
@@ -350,7 +350,6 @@ export default function EditApartments({ apartments }) {
                   <label className="col-sm-3 col-form-label form-label">
                     Bed
                   </label>
-
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <select
                       id="bed"
@@ -418,7 +417,6 @@ export default function EditApartments({ apartments }) {
                     )}
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
                     Central Air

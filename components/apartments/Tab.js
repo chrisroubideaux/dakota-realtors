@@ -8,13 +8,13 @@ export default function Tab({ setActiveComponent, admins }) {
         <div className="row align-items-center">
           <div className="col">
             <div className="d-none d-lg-block">
-              <h1 className="h2">Personal info</h1>
+              <h1 className="h2">Edit Property</h1>
             </div>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb breadcrumb-light mb-0">
-                <li className="breadcrumb-item">Account</li>
+                <li className="breadcrumb-item">Edit</li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  Personal Info
+                  Apartments, Homes, Commercial
                 </li>
               </ol>
             </nav>
@@ -70,14 +70,14 @@ export default function Tab({ setActiveComponent, admins }) {
               <a
                 className="btn btn-sm badge m-2"
                 href="#"
-                onClick={() => setActiveComponent('EditHome')}
+                onClick={() => setActiveComponent('Homes')}
               >
                 Edit Home
               </a>
               <a
                 className="btn btn-sm badge me-2"
                 href="#"
-                onClick={() => setActiveComponent('EditCommercial')}
+                onClick={() => setActiveComponent('Commercials')}
               >
                 Edit Commercial
               </a>
