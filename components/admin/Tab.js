@@ -95,13 +95,9 @@ export default function Tab({ setActiveComponent }) {
                   </button>
                   <ul className="dropdown-menu">
                     <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Apartments')}
-                      >
+                      <Link className="dropdown-item" href={'/edit'}>
                         Apartments
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function PropertyForm() {
-  // State for form inputs
   const [formData, setFormData] = useState({
     mlsId: '',
     name: '',

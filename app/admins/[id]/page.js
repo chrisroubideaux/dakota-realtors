@@ -24,6 +24,7 @@ export default function Admin() {
   const [message, setMessage] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [apartments, setApartments] = useState([]);
+  const [apartment, setApartment] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
 
   const [agentId, setAgentId] = useState('');
@@ -40,6 +41,7 @@ export default function Admin() {
       });
   }, [id]);
   // Agent
+
   useEffect(() => {
     const fetchAgentData = async () => {
       try {
@@ -89,7 +91,18 @@ export default function Admin() {
         console.error('Error fetching apartments:', error);
       });
   }, []);
+  // Fetch Apartment
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/apartments/${id}`)
+      .then((response) => {
+        setApartment(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartments:', error);
+      });
+  }, [id]);
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
@@ -127,10 +140,11 @@ export default function Admin() {
             ))}
           </>
         );
+
       case 'EditApartment':
         return (
           <EditApartment
-            apartments={apartments}
+            apartment={apartment}
             setActiveComponent={setActiveComponent}
           />
         );

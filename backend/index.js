@@ -115,6 +115,9 @@ app.get('/about', (req, res) => {
   res.send('About page');
 });
 
+app.get('/edit', (req, res) => {
+  res.send('edit page');
+});
 // Oauth
 app.get(
   '/auth/google/register',

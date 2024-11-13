@@ -1,4 +1,4 @@
-// apartment component
+// Apartment card for editing
 import {
   FaEnvelope,
   FaMobile,
@@ -33,13 +33,13 @@ export const Apartments = ({ apartments, setActiveComponent }) => {
               <h6 className="dark-text mb-1 fs-xs text-uppercase fw-bold pb-2">
                 {apartments.rentOrBuy}
               </h6>
-              <a
-                href="#"
+              <Link
                 className="btn btn-sm badge"
-                onClick={() => setActiveComponent('EditApartment')}
+                href={`/edit/${apartments._id}`}
+                //  onClick={() => setActiveComponent('editApartment')}
               >
                 Edit Property
-              </a>
+              </Link>
               <div
                 className="card-footer d-flex text-nowrap m-auto mt-3"
                 style={{ maxWidth: '55rem' }}

@@ -88,7 +88,6 @@ export default function Bio({ admins }) {
                     </div>
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
                     htmlFor="emailLabel"
@@ -131,7 +130,6 @@ export default function Bio({ admins }) {
                     />
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
                     htmlFor="roleLabel"

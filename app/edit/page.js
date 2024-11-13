@@ -1,34 +1,25 @@
-// Admins page
+// edit properties page
 'use client';
-// admin page
 import axios from 'axios';
-import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-// import
 import Nav from '@/components/nav/Nav';
-import Tab from '@/components/admin/Tab';
+import Tab from '@/components/apartments/Tab';
 import Sidebar from '@/components/admin/Sidebar';
-import Bio from '@/components/admin/Bio';
-import Messages from '@/components/admin/Messages';
-import ViewMessages from '@/components/admin/ViewMessages';
-import Notifications from '@/components/admin/Notifications';
-import Form from '@/components/admin/Form';
-import HomeForm from '@/components/admin/HomeForm';
-import CommercialForm from '@/components/admin/CommercialForm';
-import { Apartments } from '@/components/admin/edit/Apartments';
-import EditApartment from '@/components/admin/edit/EditApartment';
+//import Form from '@/components/apartments/Form';
+//import HomeForm from '@/components/homes/HomeForm';
+//import CommercialForm from '@/components/commercials/CommercialForm';
+import { Apartments } from '@/components/apartments/edit/Apartments';
+//import EditApartment from '@/components/admin/edit/EditApartment';
 
-export default function Admin() {
-  const { id } = useParams();
+export default function Edit() {
   const [admins, setAdmins] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
-  const [message, setMessage] = useState([]);
   const [apartments, setApartments] = useState([]);
 
   // admin
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/admins`)
+      .get('http://localhost:3001/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -36,11 +27,10 @@ export default function Admin() {
         console.error('Error fetching agents:', error);
       });
   }, []);
-
-  // Fetch apartments
+  // apartments
   useEffect(() => {
     axios
-      .get('http://localhost:3001/apartments')
+      .get(`http://localhost:3001/apartments`)
       .then((response) => {
         setApartments(response.data);
       })
@@ -48,7 +38,6 @@ export default function Admin() {
         console.error('Error fetching apartments:', error);
       });
   }, []);
-
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admins);
@@ -59,8 +48,7 @@ export default function Admin() {
         return <HomeForm setActiveComponent={setActiveComponent} />;
       case 'CommercialForm':
         return <CommercialForm setActiveComponent={setActiveComponent} />;
-      case 'ViewMessages':
-        return <ViewMessages setActiveComponent={setActiveComponent} />;
+
       case 'Apartments':
         return (
           <>
@@ -72,13 +60,6 @@ export default function Admin() {
               />
             ))}
           </>
-        );
-      case 'EditApartment':
-        return (
-          <EditApartment
-            apartments={apartments}
-            setActiveComponent={setActiveComponent}
-          />
         );
 
       default:
@@ -99,18 +80,25 @@ export default function Admin() {
     <>
       <Nav />
       <div className="layout h-100">
-        {/*<Navbar/> */}
-        <Tab setActiveComponent={setActiveComponent} />
+        {admins.map((admins, index) => (
+          <Tab
+            key={index}
+            admins={admins}
+            setActiveComponent={setActiveComponent}
+          />
+        ))}
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              {admins.map((admins, index) => (
-                <Sidebar
-                  key={index}
-                  admins={admins}
-                  setActiveComponent={setActiveComponent}
-                />
-              ))}
+              <>
+                {admins.map((admins, index) => (
+                  <Sidebar
+                    key={index}
+                    admins={admins}
+                    setActiveComponent={setActiveComponent}
+                  />
+                ))}
+              </>
             </div>
             <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
