@@ -1,18 +1,19 @@
+// Edit form for commercial component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function EditApartments({ setActiveComponent, apartments }) {
+export default function EditCommercials({ setActiveComponent, commercials }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [apartment, setApartment] = useState(apartments);
+  const [commercial, setCommercial] = useState(commercials);
 
   useEffect(() => {
-    if (apartments) {
-      setApartment(apartments);
+    if (commercial) {
+      setCommercial(commercial);
     }
-  }, [apartments]);
+  }, [commercial]);
 
-  if (!apartment || Object.keys(apartment).length === 0) {
-    return <p>No apartment data available.</p>;
+  if (!commercial || Object.keys(commercial).length === 0) {
+    return <p>No commercial data available.</p>;
   }
 
   const handleEditClick = () => {
@@ -21,7 +22,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setApartment((prevState) => ({
+    setCommercial((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -30,14 +31,14 @@ export default function EditApartments({ setActiveComponent, apartments }) {
   const handleSaveChanges = async (e) => {
     e.preventDefault();
     try {
-      const id = apartment._id;
-      await axios.put(`http://localhost:3001/apartments/${id}`, apartment);
-      console.log('Apartment data updated successfully');
+      const id = commercial._id;
+      await axios.put(`http://localhost:3001/commercials/${id}`, commercials);
+      console.log('Commercial data updated successfully');
 
-      const updatedApartment = await axios.get(
-        `http://localhost:3001/apartments/${id}`
+      const updatedCommercial = await axios.get(
+        `http://localhost:3001/commercials/${id}`
       );
-      setApartment(updatedApartment.data);
+      setCommercial(updatedCommercial.data);
       setIsEditing(false);
     } catch (error) {
       if (error.response) {
@@ -49,7 +50,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
         console.error('Error message:', error.message);
       }
       alert(
-        'Failed to save apartment data. Check the console for more details.'
+        'Failed to save commercial data. Check the console for more details.'
       );
     }
   };
@@ -59,7 +60,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
         <div className="d-grid gap-3 gap-lg-5">
           <div className="card" style={{ minWidth: '350px' }}>
             <div className="card-header border-bottom">
-              <h4 className="card-header-title">Edit Apartment</h4>
+              <h4 className="card-header-title">Edit Commercial</h4>
             </div>
             <div className="card-body">
               <form onSubmit={handleSaveChanges}>
@@ -72,7 +73,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="name"
-                      value={apartment.name || ''}
+                      value={commercial.name || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Agents Name"
@@ -102,7 +103,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="title"
-                      value={apartment.title || ''}
+                      value={commercial.title || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Title"
@@ -132,7 +133,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="phone"
-                      value={apartment.phone || ''}
+                      value={commercial.phone || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Phone Number"
@@ -161,7 +162,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="email"
-                      value={apartment.email || ''}
+                      value={commercial.email || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Email"
@@ -191,7 +192,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="realtor"
-                      value={apartment.realtor || ''}
+                      value={commercial.realtor || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Company Name"
@@ -221,7 +222,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="propertyType"
-                      value={apartment.propertyType || ''}
+                      value={commercial.propertyType || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="PropertyType"
@@ -251,7 +252,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="rentOrBuy"
-                      value={apartment.rentOrBuy || ''}
+                      value={commercial.rentOrBuy || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="0,000/Monthly"
@@ -283,7 +284,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                           type="file"
                           className="form-control"
                           name="image"
-                          value={apartment.image || ''}
+                          value={commercial.image || ''}
                           readOnly={!isEditing}
                           onChange={handleChange}
                           accept="image/*"
@@ -323,7 +324,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                         id="exampleFormControlTextarea1"
                         rows="3"
                         name="description"
-                        value={apartment.description || ''}
+                        value={commercial.description || ''}
                         readOnly={!isEditing}
                         onChange={handleChange}
                         placeholder="Description"
@@ -355,7 +356,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       id="bed"
                       className="form-select"
                       name="rooms"
-                      value={apartment.rooms || ''}
+                      value={commercial.rooms || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       //required
@@ -390,12 +391,12 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       id="bed"
                       className="form-select"
                       name="bathrooms"
-                      value={apartment.bathrooms || ''}
+                      value={commercial.bathrooms || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       //required
                     >
-                      <option value="">{apartment.bathrooms || ''}</option>
+                      <option value="">{commercial.bathrooms || ''}</option>
                       <option value="apartments">1 Bath</option>
                       <option value="apartments">2 Bath</option>
                       <option value="apartments">3 Bath</option>
@@ -426,7 +427,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="centralAir"
-                      value={apartment.centralAir || ''}
+                      value={commercial.centralAir || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Central Air"
@@ -456,7 +457,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="washerAndDryer"
-                      value={apartment.washerAndDryer || ''}
+                      value={commercial.washerAndDryer || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Washer & Dryer"
@@ -486,7 +487,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="flooring"
-                      value={apartment.flooring || ''}
+                      value={commercial.flooring || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Ex. Carpet, Vinyl, Tile, Hardwood"
@@ -540,7 +541,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="sqft"
-                      value={apartment.sqft || ''}
+                      value={commercial.sqft || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="0000"
@@ -569,7 +570,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="address"
-                      value={apartment.address || ''}
+                      value={commercial.address || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Ex. 1234 anywhere st, 00000"
@@ -598,7 +599,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="security"
-                      value={apartment.security || ''}
+                      value={commercial.security || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Secure Building"
@@ -627,7 +628,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="handicap"
-                      value={apartment.handicap || ''}
+                      value={commercial.handicap || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Handicap accsessible"
@@ -656,7 +657,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="yearBuilt"
-                      value={apartment.yearBuilt || ''}
+                      value={commercial.yearBuilt || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Year Built"
@@ -685,7 +686,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="garageCapacity"
-                      value={apartment.garageCapacity || ''}
+                      value={commercial.garageCapacity || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Ex. Single Garage"
@@ -714,7 +715,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       type="text"
                       className="form-control"
                       name="petFriendly"
-                      value={apartment.petFriendly || ''}
+                      value={commercial.petFriendly || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                       placeholder="Dogs or Cats"

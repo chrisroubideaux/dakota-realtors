@@ -7,14 +7,14 @@ import Tab from '@/components/apartments/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 import EditApartments from '@/components/apartments/edit/EditApartments';
 import HomeForm from '@/components/admin/HomeForm';
-import CommercialForm from '@/components/admin/CommercialForm';
+import EditCommercials from '@/components/commercials/edit/editCommercials';
 
 export default function EditProperties({}) {
   const { id } = useParams();
   const [admins, setAdmins] = useState([]);
   const [activeComponent, setActiveComponent] = useState('');
   const [apartment, setApartment] = useState([]);
-
+  const [commercial, setCommercial] = useState([]);
   // admin
   useEffect(() => {
     {
@@ -39,19 +39,36 @@ export default function EditProperties({}) {
         console.error('Error fetching apartments:', error);
       });
   }, [id]);
+  // Commercials
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/commercials/${id}`)
+      .then((response) => {
+        setCommercial(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching commercials:', error);
+      });
+  }, [id]);
 
   // render component
   const renderComponent = () => {
     switch (activeComponent) {
       case 'HomeForm':
         return <HomeForm setActiveComponent={setActiveComponent} />;
-      case 'CommercialForm':
-        return <CommercialForm setActiveComponent={setActiveComponent} />;
 
       case 'EditApartments':
         return (
           <EditApartments
             apartments={apartment}
+            setActiveComponent={setActiveComponent}
+          />
+        );
+
+      case 'EditCommercials':
+        return (
+          <EditCommercials
+            commercials={commercial}
             setActiveComponent={setActiveComponent}
           />
         );
