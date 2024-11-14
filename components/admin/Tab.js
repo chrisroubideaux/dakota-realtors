@@ -83,7 +83,7 @@ export default function Tab({ setActiveComponent, admins }) {
                   </ul>
                 </div>
               </a>
-              {/*
+
               <a className="nav-link badge bg-transparent fs-6">
                 <div className="dropdown">
                   <button
@@ -96,13 +96,13 @@ export default function Tab({ setActiveComponent, admins }) {
                   </button>
                   <ul className="dropdown-menu">
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Apartments')}
+                        href="/edit"
+                        //   onClick={() => setActiveComponent('Apartments')}
                       >
                         Apartments
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a
@@ -125,7 +125,7 @@ export default function Tab({ setActiveComponent, admins }) {
                   </ul>
                 </div>
               </a>
-              */}
+
               <Link className=" nav-link btn btn-sm badge" href="/edit">
                 Edit Property
                 <FaCalendarAlt className="m-1" />
