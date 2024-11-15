@@ -1,4 +1,5 @@
-// edit properties page
+// Edit homes card
+
 'use client';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -6,13 +7,13 @@ import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 
-import { Commercials } from '@/components/commercials/edit/Commericals';
+import { Homes } from '@/components/homes/edit/Homes';
 //import { EditCommercial } from '@/components/commercials/edit/EditCommerical';
 
-export default function Commercial() {
+export default function Home() {
   const [admins, setAdmins] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
-  const [commercials, setCommercials] = useState([]);
+  const [homes, setHomes] = useState([]);
 
   // admin
   useEffect(() => {
@@ -26,15 +27,15 @@ export default function Commercial() {
       });
   }, []);
 
-  // commercials
+  // homes
   useEffect(() => {
     axios
-      .get('http://localhost:3001/commercials')
+      .get('http://localhost:3001/homes')
       .then((response) => {
-        setCommercials(response.data);
+        setHomes(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching admin:', error);
+        console.error('Error fetching home data:', error);
       });
   }, []);
 
@@ -42,13 +43,13 @@ export default function Commercial() {
   const renderComponent = () => {
     console.log('Admin data for Bio:', admins);
     switch (activeComponent) {
-      case 'Commercials':
+      case 'Homes':
         return (
           <>
-            {commercials.map((commercials, index) => (
-              <Commercials
+            {homes.map((homes, index) => (
+              <Homes
                 key={index}
-                commercials={commercials}
+                homes={homes}
                 setActiveComponent={setActiveComponent}
               />
             ))}
@@ -58,10 +59,10 @@ export default function Commercial() {
       default:
         return (
           <>
-            {commercials.map((commercials, index) => (
-              <Commercials
+            {homes.map((homes, index) => (
+              <Homes
                 key={index}
-                commercials={commercials}
+                homes={homes}
                 setActiveComponent={setActiveComponent}
               />
             ))}

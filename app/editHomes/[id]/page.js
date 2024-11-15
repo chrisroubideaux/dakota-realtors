@@ -1,71 +1,57 @@
-// edit properties page
+// Edit homes page
 'use client';
 import axios from 'axios';
+import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
+import EditHome from '@/components/homes/edit/EditHome';
 
-import { Commercials } from '@/components/commercials/edit/Commericals';
-//import { EditCommercial } from '@/components/commercials/edit/EditCommerical';
-
-export default function Commercial() {
+export default function EditProperties({}) {
+  const { id } = useParams();
   const [admins, setAdmins] = useState([]);
-  const [activeComponent, setActiveComponent] = useState('PersonalInfo');
-  const [commercials, setCommercials] = useState([]);
+  const [activeComponent, setActiveComponent] = useState('');
+  const [home, setHome] = useState([]);
 
   // admin
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/admins')
-      .then((response) => {
-        setAdmins(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching admin:', error);
-      });
+    {
+      axios
+        .get(`http://localhost:3001/admins`)
+        .then((response) => {
+          setAdmins(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching admins:', error);
+        });
+    }
   }, []);
 
-  // commercials
+  // Fetch single home by id
+
   useEffect(() => {
     axios
-      .get('http://localhost:3001/commercials')
+      .get(`http://localhost:3001/homes/${id}`)
       .then((response) => {
-        setCommercials(response.data);
+        setHome(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching admin:', error);
+        console.error('Error fetching apartments:', error);
       });
-  }, []);
+  }, [id]);
 
   // render component
   const renderComponent = () => {
-    console.log('Admin data for Bio:', admins);
     switch (activeComponent) {
-      case 'Commercials':
+      case 'EditHomes':
         return (
-          <>
-            {commercials.map((commercials, index) => (
-              <Commercials
-                key={index}
-                commercials={commercials}
-                setActiveComponent={setActiveComponent}
-              />
-            ))}
-          </>
+          <EditHome homes={home} setActiveComponent={setActiveComponent} />
         );
 
       default:
         return (
-          <>
-            {commercials.map((commercials, index) => (
-              <Commercials
-                key={index}
-                commercials={commercials}
-                setActiveComponent={setActiveComponent}
-              />
-            ))}
-          </>
+          <EditHome homes={home} setActiveComponent={setActiveComponent} />
         );
     }
   };

@@ -94,7 +94,7 @@ export default function Tab({ setActiveComponent, admins }) {
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="/Homes">
+                    <Link className="dropdown-item" href="/editHomes">
                       Homes
                     </Link>
                   </li>
