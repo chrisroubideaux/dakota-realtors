@@ -1,6 +1,6 @@
 // Tab component
 import Link from 'next/link';
-import { FaCalendarAlt, FaBell, FaBuilding } from 'react-icons/fa';
+import { FaCalendarAlt, FaBell, FaUser } from 'react-icons/fa';
 
 export default function Tab({ setActiveComponent, admins }) {
   return (
@@ -33,7 +33,7 @@ export default function Tab({ setActiveComponent, admins }) {
                   1
                 </span>
               </a>
-              <a className="nav-link badge bg-transparent fs-6">
+              <Link className="nav-link badge bg-transparent fs-6">
                 <div className="dropdown">
                   <button
                     className=" btn btn-lg p-2 badge dropdown-toggle"
@@ -45,46 +45,46 @@ export default function Tab({ setActiveComponent, admins }) {
                   </button>
                   <ul className="dropdown-menu">
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
                         href="#"
                         onClick={() => setActiveComponent('Form')}
                       >
                         Apartments
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
                         href="#"
                         onClick={() => setActiveComponent('HomeForm')}
                       >
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
                         href="#"
                         onClick={() => setActiveComponent('CommercialForm')}
                       >
                         Commercial
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
                         href="#"
                         onClick={() => setActiveComponent('Recently')}
                       >
                         Recently Added
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
-              </a>
+              </Link>
 
-              <a className="nav-link badge bg-transparent fs-6">
+              <Link className="nav-link badge bg-transparent fs-6">
                 <div className="dropdown">
                   <button
                     className=" btn btn-lg p-2 badge dropdown-toggle"
@@ -105,35 +105,34 @@ export default function Tab({ setActiveComponent, admins }) {
                       </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('HomeForm')}
+                        href="/Homes"
+                        //   onClick={() => setActiveComponent('Apartments')}
                       >
-                        Home
-                      </a>
+                        Homes
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('CommercialForm')}
+                        href="/editCommercial"
+                        //   onClick={() => setActiveComponent('Apartments')}
                       >
-                        Commercial
-                      </a>
+                        Commercials
+                      </Link>
                     </li>
                   </ul>
                 </div>
-              </a>
-
-              <Link className=" nav-link btn btn-sm badge" href="/edit">
-                Edit Property
-                <FaCalendarAlt className="m-1" />
               </Link>
 
               <Link className="btn btn-sm badge m-2" href="/calendars">
                 Calendar
                 <FaCalendarAlt className="m-1" />
+              </Link>
+              <Link className="btn btn-sm badge" href={`/admins/${admins._id}`}>
+                Admin
+                <FaUser className="m-1" />
               </Link>
             </div>
           </div>

@@ -35,7 +35,7 @@ export const Commercials = ({ commercials, setActiveComponent }) => {
               </h6>
               <Link
                 className="btn btn-sm badge"
-                href={`/edit/${commercials._id}`}
+                href={`/editCommercial/${commercials._id}`}
               >
                 Edit Property
               </Link>

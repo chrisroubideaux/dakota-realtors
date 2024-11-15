@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Nav from '@/components/nav/Nav';
-import Tab from '@/components/apartments/Tab';
+import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 import EditApartments from '@/components/apartments/edit/EditApartments';
 import HomeForm from '@/components/admin/HomeForm';
