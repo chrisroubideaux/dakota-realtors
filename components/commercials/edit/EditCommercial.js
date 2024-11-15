@@ -57,12 +57,12 @@ function EditCommercial({ commercials }) {
     <div className="mt-3">
       <div className="col-lg-9">
         <div className="d-grid gap-3 gap-lg-5">
-          <div className="card">
+          <div className="card" style={{ maxWidth: '600px' }}>
             <div className="card-header border-bottom">
-              <h4 className="card-header-title">Edit Commercial</h4>
+              <h4 className="card-header-title">Edit Commercial Property</h4>
             </div>
             <div className="card-body">
-              <form onSubmit={handleSaveChanges} style={{ width: '350px' }}>
+              <form onSubmit={handleSaveChanges}>
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
                     Name

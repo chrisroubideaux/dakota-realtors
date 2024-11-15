@@ -57,7 +57,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
     <div className="mt-3">
       <div className="col-lg-9">
         <div className="d-grid gap-3 gap-lg-5">
-          <div className="card" style={{ minWidth: '350px' }}>
+          <div className="card" style={{ maxWidth: '600px' }}>
             <div className="card-header border-bottom">
               <h4 className="card-header-title">Edit Apartment</h4>
             </div>
