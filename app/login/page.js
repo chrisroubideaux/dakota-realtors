@@ -29,12 +29,12 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/auth/login',
+        'http://localhost:3001/users/login',
         formData
       );
 
       if (response.status === 200) {
-        window.location.href = '/user';
+        window.location.href = 'http://localhost:3001/users/login';
       } else {
         const data = response.data;
         setError(data.message);

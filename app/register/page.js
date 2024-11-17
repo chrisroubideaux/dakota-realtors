@@ -15,7 +15,7 @@ import {
 const Register = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -37,7 +37,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/register',
+        'http://localhost:3001/users',
         formData
       );
 
@@ -133,8 +133,8 @@ const Register = () => {
             className="form-control m-2 fw-bold"
             required
             type="text"
-            name="fullName"
-            value={formData.fullName}
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             placeholder="Enter Full Name"
           />

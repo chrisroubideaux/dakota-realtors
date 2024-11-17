@@ -7,6 +7,7 @@ const {
   getUserById,
   updateUserById,
   deleteUserById,
+  login,
 } = require('../users/userController');
 
 // Create a new user
@@ -23,5 +24,7 @@ userRoutes.put('/:id', updateUserById);
 
 // Delete an existing user by ID
 userRoutes.delete('/:id', deleteUserById);
+// Login user
+userRoutes.post('/login', login);
 
 module.exports = userRoutes;
