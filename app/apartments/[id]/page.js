@@ -35,6 +35,16 @@ export default function Page({}) {
       });
   }, [id]);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/appointments/${id}`)
+      .then((response) => {
+        setAppointment(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartments:', error);
+      });
+  }, [id]);
   return (
     <>
       <div className="layout h-100">
@@ -120,33 +130,4 @@ export default function Page({}) {
       <Footer />
     </>
   );
-}
-
-// Fetch data server side using getServerSideProps
-{
-  /*
-export async function getServerSideProps({ params }) {
-  try {
-    // GET request to fetch apartment data from server based on the ID in the URL
-    const response = await axios.get(
-      `https://midwest-realtors-95d2cdb37007.herokuapp.com/apartments/${params.id}`
-    );
-    const apartmentData = response.data;
-
-    // Return data as props to the component
-    return {
-      props: {
-        apartment: apartmentData,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching apartment details:', error);
-    return {
-      props: {
-        apartment: {},
-      },
-    };
-  }
-}
-*/
 }

@@ -188,7 +188,7 @@ export default function Admin() {
       <Nav />
       <div className="layout h-100">
         {/*<Navbar/> */}
-        <Tab setActiveComponent={setActiveComponent} />
+        <Tab admins={admin} setActiveComponent={setActiveComponent} />
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
