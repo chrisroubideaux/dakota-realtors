@@ -32,13 +32,10 @@ authRoutes.get('/logout', (req, res, next) => {
       return next(err);
     }
 
-    // Clear the token cookie (if you're using JWT cookies for session management)
-    res.clearCookie('token'); // Replace 'token' with the correct cookie name you're using
+    res.clearCookie('token');
 
-    // Optionally, redirect to the login page or send a success response
     res.status(200).json({ message: 'Logged out successfully' });
 
-    // If you want to redirect to the login page, use the following:
     res.redirect('http://localhost:3000/login');
   });
 });
