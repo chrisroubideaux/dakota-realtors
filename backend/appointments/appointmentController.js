@@ -1,23 +1,21 @@
 const Appointment = require('./appointment');
+
 const createAppointment = async (req, res) => {
   try {
-    const { name, email, days } = req.body;
+    const { agent, date, ...rest } = req.body;
 
     // Validate required fields
-    if (!name || !email) {
-      return res.status(400).json({ message: 'Name and email are required.' });
+    if (!agent || !date) {
+      return res.status(400).json({ message: 'Agent and date are required.' });
     }
 
-    // Create a new appointment
     const newAppointment = new Appointment({
-      ...req.body,
-      days: Array.isArray(days)
-        ? days
-        : days.split(',').map((day) => day.trim()), // Ensure days is an array
+      agent,
+      date,
+      ...rest,
     });
 
     const savedAppointment = await newAppointment.save();
-
     res.status(201).json({
       message: 'Appointment created successfully',
       appointment: savedAppointment,
@@ -26,19 +24,26 @@ const createAppointment = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// Get all appointments
 const getAllAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find();
-    res.status(200).json({
-      message: 'All appointments retrieved successfully',
-      appointments,
-    });
+    const appointments = await Appointment.find().lean(); // `.lean()` improves performance
+
+    // Mongoose virtuals are included automatically, but ensure they are serialized
+    res.status(200).json(
+      appointments.map((appointment) => ({
+        ...appointment,
+        dayOfWeek: appointment.date
+          ? new Date(appointment.date).toLocaleString('en-US', {
+              weekday: 'long',
+            })
+          : 'Unknown',
+      }))
+    );
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 // Get an appointment by ID
 const getAppointmentById = async (req, res) => {
   try {
