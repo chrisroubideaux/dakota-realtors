@@ -3,6 +3,32 @@ const Appointment = require('./appointment');
   /*
 const createAppointment = async (req, res) => {
   try {
+    const { agent, date, ...rest } = req.body;
+
+    // Validate required fields
+    if (!agent || !date) {
+      return res.status(400).json({ message: 'Agent and date are required.' });
+    }
+
+    const newAppointment = new Appointment({
+      agent,
+      date,
+      ...rest,
+    });
+
+    const savedAppointment = await newAppointment.save();
+    res.status(201).json({
+      message: 'Appointment created successfully',
+      appointment: savedAppointment,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+*/
+}
+const createAppointment = async (req, res) => {
+  try {
     const { agent, date, slot, ...rest } = req.body;
 
     if (!agent || !date || !slot) {
@@ -24,45 +50,6 @@ const createAppointment = async (req, res) => {
     const appointmentWithDayOfWeek = {
       ...savedAppointment.toObject(),
       dayOfWeek: savedAppointment.dayOfWeek, // Access the virtual field
-    };
-
-    res.status(201).json({
-      message: 'Appointment created successfully',
-      appointment: appointmentWithDayOfWeek,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-*/
-}
-
-const createAppointment = async (req, res) => {
-  try {
-    const { agent, date, slot, apartmentId, ...rest } = req.body;
-
-    // Validate required fields
-    if (!agent || !date || !slot || !apartmentId) {
-      return res
-        .status(400)
-        .json({ message: 'Agent, date, slot, and apartmentId are required.' });
-    }
-
-    // Create a new appointment
-    const newAppointment = new Appointment({
-      agent,
-      date,
-      slot,
-      apartmentId, // Save the apartment ID
-      ...rest,
-    });
-
-    const savedAppointment = await newAppointment.save();
-
-    // Include the virtual `dayOfWeek` in the response
-    const appointmentWithDayOfWeek = {
-      ...savedAppointment.toObject(),
-      dayOfWeek: savedAppointment.dayOfWeek,
     };
 
     res.status(201).json({

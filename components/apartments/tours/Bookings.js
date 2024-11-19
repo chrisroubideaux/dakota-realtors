@@ -31,7 +31,8 @@ export default function Bookings({
   const handleDayClick = (date) => {
     setSelectedDate(date);
   };
-
+  {
+    /*
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,7 +74,36 @@ export default function Bookings({
       showAlertMessage('Failed to book the appointment. Please try again.');
     }
   };
+*/
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    if (!selectedSlot || !selectedDate) {
+      showAlertMessage('Please select a time slot and a date.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3001/appointments', {
+        agent: apartments.realtor,
+        date: selectedDate.toISOString(),
+        slot: selectedSlot, // Include the selected slot
+        apartmentId: apartments._id,
+      });
+
+      console.log('Appointment created:', response.data);
+
+      showAlertMessage(
+        `Appointment successfully booked for ${selectedSlot} on ${selectedDate.toDateString()}`
+      );
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      showAlertMessage('Failed to book the appointment. Please try again.');
+    }
+  };
+
+  //
   const handleDeleteAppointment = async (appointmentId) => {
     try {
       const response = await axios.delete(
