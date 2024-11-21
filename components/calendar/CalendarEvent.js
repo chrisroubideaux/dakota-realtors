@@ -176,6 +176,8 @@ import {
   isSameMonth,
   isSameDay,
   parse,
+  setHours,
+  setMinutes,
 } from 'date-fns';
 
 const Calendar = ({ setActiveComponent, onSelectDate }) => {
@@ -195,39 +197,30 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
 
   const renderHeader = () => {
     const dateFormat = 'MMMM yyyy';
-
     return (
-      <div className="">
-        <div className="header py-3">
-          <button className="btn btn-sm" onClick={() => prevMonth()}>
-            <i className="fa-solid fa-arrow-left"></i>
-          </button>
-          <div>
-            <span>{format(currentDate, dateFormat)}</span>
-          </div>
-          <button className="btn btn-sm" onClick={() => nextMonth()}>
-            <i className="fa-solid fa-arrow-right"></i>
-          </button>
+      <div className="header py-3">
+        <button className="btn btn-sm" onClick={() => prevMonth()}>
+          <i className="fa-solid fa-arrow-left"></i>
+        </button>
+        <div>
+          <span>{format(currentDate, dateFormat)}</span>
         </div>
+        <button className="btn btn-sm" onClick={() => nextMonth()}>
+          <i className="fa-solid fa-arrow-right"></i>
+        </button>
       </div>
     );
   };
 
   const renderDays = () => {
     const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-    const days = [];
-
-    for (let i = 0; i < 7; i++) {
-      days.push(
-        <div className="day container-fluid" key={i}>
-          {daysOfWeek[i]}
-        </div>
-      );
-    }
-
     return (
-      <div className="">
-        <div className="daysRow">{days}</div>
+      <div className="daysRow">
+        {daysOfWeek.map((day, index) => (
+          <div key={index} className="day container-fluid">
+            {day}
+          </div>
+        ))}
       </div>
     );
   };
@@ -287,12 +280,17 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
       onSelectDate(day);
     }
 
-    if (eventTitle && eventType) {
-      setEvents([
-        ...events,
-        { date: format(day, 'yyyy-MM-dd'), type: eventType, title: eventTitle },
-      ]);
-    }
+    const [hours, minutes] = eventTime.split(':');
+    const eventDateTime = setMinutes(setHours(day, hours), minutes);
+
+    setEvents([
+      ...events,
+      {
+        date: format(eventDateTime, 'yyyy-MM-dd HH:mm:ss'),
+        type: eventType,
+        title: eventTitle,
+      },
+    ]);
   };
 
   const nextMonth = () => {

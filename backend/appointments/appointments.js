@@ -1,4 +1,3 @@
-// appointment routes
 const express = require('express');
 const appointmentRoutes = express.Router();
 const Appointment = require('./appointment');
@@ -27,8 +26,10 @@ appointmentRoutes.put('/:id', updateAppointmentById);
 appointmentRoutes.delete('/:id', deleteAppointmentById);
 
 module.exports = appointmentRoutes;
+
 {
   /*
+// appointment routes
 const express = require('express');
 const appointmentRoutes = express.Router();
 const Appointment = require('./appointment');

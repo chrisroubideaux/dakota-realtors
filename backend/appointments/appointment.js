@@ -28,12 +28,17 @@ const appointmentSchema = new mongoose.Schema(
     },
     apartmentId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Apartment', // Refers to the Apartment model
+      ref: 'Apartment',
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
   },
   {
-    timestamps: true, // Adds `createdAt` and `updatedAt`
+    timestamps: true,
   }
 );
 
@@ -54,7 +59,6 @@ appointmentSchema.virtual('dayOfWeek').get(function () {
 const Appointment = mongoose.model('Appointment', appointmentSchema);
 
 module.exports = Appointment;
-
 {
   /*
 const mongoose = require('mongoose');
@@ -83,6 +87,11 @@ const appointmentSchema = new mongoose.Schema(
     },
     agent: {
       type: String,
+      required: true,
+    },
+    apartmentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Apartment', // Refers to the Apartment model
       required: true,
     },
   },

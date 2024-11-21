@@ -10,6 +10,8 @@ const {
   login,
 } = require('../users/userController');
 
+// Login user (explicit route must come before any parameterized routes)
+userRoutes.post('/login', login);
 // Create a new user
 userRoutes.post('/', createUser);
 
@@ -24,7 +26,5 @@ userRoutes.put('/:id', updateUserById);
 
 // Delete an existing user by ID
 userRoutes.delete('/:id', deleteUserById);
-// Login user
-userRoutes.post('/login', login);
 
 module.exports = userRoutes;

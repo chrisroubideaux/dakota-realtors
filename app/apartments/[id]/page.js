@@ -112,7 +112,7 @@ export default function Page({}) {
                 <div className="mt-4">
                   <Realtors apartments={apartment} />
                 </div>
-                <Bookings apartments={apartment} />
+                <Bookings appointments={appointment} apartments={apartment} />
               </div>
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>

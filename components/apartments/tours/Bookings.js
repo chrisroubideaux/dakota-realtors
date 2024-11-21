@@ -76,6 +76,7 @@ export default function Bookings({
   };
 */
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -85,36 +86,28 @@ export default function Bookings({
     }
 
     try {
+      const appointmentDate = new Date(selectedDate);
+
       const response = await axios.post('http://localhost:3001/appointments', {
-        agent: apartments.realtor,
-        date: selectedDate.toISOString(),
-        slot: selectedSlot, // Include the selected slot
-        apartmentId: apartments._id,
+        agent: apartments.realtor, // The agent making the appointment
+        date: appointmentDate.toISOString(),
+        slot: selectedSlot, // Selected time slot
+        apartmentId: apartments._id, // Pass the apartment ID
+        userId: currentUser._id, // Include the current user's ID
       });
 
       console.log('Appointment created:', response.data);
 
       showAlertMessage(
-        `Appointment successfully booked for ${selectedSlot} on ${selectedDate.toDateString()}`
+        `Appointment successfully booked for ${selectedSlot} on ${appointmentDate.toDateString()}`
       );
+
+      // Reset states after successful booking
+      setSelectedAppointment(null);
+      setSelectedSlot('');
     } catch (error) {
       console.error('Error creating appointment:', error);
       showAlertMessage('Failed to book the appointment. Please try again.');
-    }
-  };
-
-  //
-  const handleDeleteAppointment = async (appointmentId) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/appointments/${appointmentId}`
-      );
-      console.log('Appointment deleted:', response.data);
-      alert('Appointment has been canceled successfully.');
-      onDeleteAppointment(appointmentId);
-    } catch (error) {
-      console.error('Error deleting appointment:', error);
-      alert('Error deleting appointment. Please try again later.');
     }
   };
 
@@ -269,12 +262,12 @@ export default function Bookings({
 // Modal component for booking a tour
 import React, { useState } from 'react';
 import Image from 'next/image';
-//import CalendarEvent from '@/components/calendar/CalendarEvent';
-import Calendar from 'react-calendar';
+import CalendarEvent from '@/components/calendar/CalendarEvent';
 import axios from 'axios';
 
 export default function Bookings({
   apartments,
+
   appointments,
   onUpdateAppointment,
   onDeleteAppointment,
@@ -283,10 +276,8 @@ export default function Bookings({
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [selectedDay, setSelectedDay] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // Helper function to get the day of the week
   const getDayOfWeek = (date) => {
     const days = [
       'Sunday',
@@ -300,11 +291,13 @@ export default function Bookings({
     return days[date.getDay()];
   };
 
+  
   const handleDayClick = (date) => {
-    setSelectedDay(date);
     setSelectedDate(date);
   };
+  
 
+  // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -314,45 +307,32 @@ export default function Bookings({
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/appointments', {
-        agent: apartments.realtor,
-        date: selectedDate.toISOString(),
-        selectedSlot,
-        apartmentId: apartments._id,
-        appointmentId: selectedAppointment ? selectedAppointment._id : null,
-      });
+      const appointmentDate = new Date(selectedDate);
 
-      console.log('Appointment created or rescheduled:', response.data);
-
-      showAlertMessage(
-        `Your appointment has been successfully booked for ${selectedSlot} on ${selectedDate.toDateString()} (${getDayOfWeek(
-          selectedDate
-        )}).`
+      const response = await axios.post(
+        'http://localhost:3001/appointments',
+        {
+          agent: apartments.realtor, // From props
+          date: appointmentDate.toISOString(), // Format date as ISO string
+          slot: selectedSlot, // Selected time slot
+          apartmentId: apartments._id, // From props
+        },
+        {
+          headers: { Authorization: `Bearer ${userToken}` }, // Include user token
+        }
       );
 
-      setSelectedAppointment(null);
-      setSelectedSlot('');
+      console.log('Appointment created:', response.data);
+
+      showAlertMessage(
+        `Appointment successfully booked for ${selectedSlot} on ${appointmentDate.toDateString()}`
+      );
+
+      setSelectedAppointment(null); // Reset selected appointment
+      setSelectedSlot(''); // Clear slot selection
     } catch (error) {
       console.error('Error creating appointment:', error);
       showAlertMessage('Failed to book the appointment. Please try again.');
-    }
-  };
-
-  const handleDeleteAppointment = async (appointmentId) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/appointments/${appointmentId}`
-      );
-
-      console.log('Appointment deleted:', response.data);
-
-      alert('Appointment has been canceled successfully.');
-
-      onDeleteAppointment(appointmentId);
-    } catch (error) {
-      console.error('Error deleting appointment:', error);
-
-      alert('Error deleting appointment. Please try again later.');
     }
   };
 
@@ -363,7 +343,6 @@ export default function Bookings({
 
   return (
     <>
-    
       <div
         className="modal fade"
         id="exampleModalToggle"
@@ -390,39 +369,12 @@ export default function Bookings({
                 data-bs-toggle="modal"
                 onClick={() => setShowAlert(false)}
               >
-                <Calendar
-                  className="calendar text-center"
-                  onClickDay={handleDayClick}
-                  value={selectedDay}
-                  tileClassName={({ date, view }) => {
-                    // Add conditional classes to each day tile (cell)
-                    const today = new Date();
-                    if (date.toDateString() === today.toDateString()) {
-                      return 'cell selected'; // Add a selected class for today's date
-                    }
-                    return 'cell';
-                  }}
-                  tileContent={({ date, view }) => {
-                    // Add events or additional content to each tile
-                    // For example, if you have appointments or meetings for a particular date
-                    const events = getEventsForDate(date); // Fetch events based on the date
-                    return (
-                      <div>
-                        {events.map((event, index) => (
-                          <div key={index} className={`event ${event.type}`}>
-                            {event.title}
-                          </div>
-                        ))}
-                      </div>
-                    );
-                  }}
-                />
+                <CalendarEvent onSelectDate={handleDayClick} />
               </a>
             </div>
           </div>
         </div>
       </div>
-
 
       <div
         className="modal fade"
@@ -493,18 +445,6 @@ export default function Bookings({
                         <option value={apartments.slot3}>
                           {apartments.slot3}
                         </option>
-                        <option value={apartments.slot4}>
-                          {apartments.slot4}
-                        </option>
-                        <option value={apartments.slot5}>
-                          {apartments.slot5}
-                        </option>
-                        <option value={apartments.slot6}>
-                          {apartments.slot6}
-                        </option>
-                        <option value={apartments.slot7}>
-                          {apartments.slot7}
-                        </option>
                       </select>
                     </small>
                   </div>
@@ -513,7 +453,7 @@ export default function Bookings({
             </div>
             <div className="modal-footer">
               <button
-                className="btn btn-md"
+                className="btn btn-sm badge"
                 data-bs-target="#exampleModalToggle"
                 data-bs-toggle="modal"
               >
@@ -521,7 +461,7 @@ export default function Bookings({
               </button>
               <button
                 type="submit"
-                className="btn btn-md"
+                className="btn btn-md badge"
                 onClick={handleSubmit}
               >
                 Book Appointment
@@ -531,9 +471,8 @@ export default function Bookings({
         </div>
       </div>
 
-     
       <button
-        className="btn btn-md"
+        className="btn btn-md badge"
         data-bs-target="#exampleModalToggle"
         data-bs-toggle="modal"
       >
