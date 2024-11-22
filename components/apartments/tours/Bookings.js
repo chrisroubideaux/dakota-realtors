@@ -88,13 +88,21 @@ export default function Bookings({
     try {
       const appointmentDate = new Date(selectedDate);
 
-      const response = await axios.post('http://localhost:3001/appointments', {
-        agent: apartments.realtor, // The agent making the appointment
-        date: appointmentDate.toISOString(),
-        slot: selectedSlot, // Selected time slot
-        apartmentId: apartments._id, // Pass the apartment ID
-        userId: currentUser._id, // Include the current user's ID
-      });
+      // Assuming user data is stored in state or context
+      const userId = currentUser._id;
+
+      const response = await axios.post(
+        'http://localhost:3001/appointments',
+        {
+          agent: apartments.realtor,
+          date: appointmentDate.toISOString(),
+          slot: selectedSlot,
+          apartmentId: apartments._id,
+        },
+        {
+          headers: { Authorization: `Bearer ${userToken}` },
+        }
+      );
 
       console.log('Appointment created:', response.data);
 
@@ -102,7 +110,6 @@ export default function Bookings({
         `Appointment successfully booked for ${selectedSlot} on ${appointmentDate.toDateString()}`
       );
 
-      // Reset states after successful booking
       setSelectedAppointment(null);
       setSelectedSlot('');
     } catch (error) {

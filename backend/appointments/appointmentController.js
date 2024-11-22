@@ -1,39 +1,46 @@
 const Appointment = require('./appointment');
+
 {
   /*
+
 const createAppointment = async (req, res) => {
   try {
-    const { agent, date, slot, ...rest } = req.body;
+    const { agent, date, slot, apartmentId, userId } = req.body;
 
-    if (!agent || !date || !slot) {
-      return res
-        .status(400)
-        .json({ message: 'Agent, date, and slot are required.' });
+    // Validate required fields
+    if (!agent || !date || !slot || !apartmentId || !userId) {
+      return res.status(400).json({ message: 'Missing required fields' });
     }
 
+    // Create the new appointment
     const newAppointment = new Appointment({
       agent,
       date,
-      slot, // Save the selected slot
-      ...rest,
+      slot,
+      apartmentId,
+      userId,
     });
 
+    // Save the appointment to the database
     const savedAppointment = await newAppointment.save();
 
-    // Include the virtual `dayOfWeek` in the response
-    const appointmentWithDayOfWeek = {
-      ...savedAppointment.toObject(),
-      dayOfWeek: savedAppointment.dayOfWeek, // Access the virtual field
-    };
+    // Populate related fields
+    const populatedAppointment = await savedAppointment.populate([
+      { path: 'apartmentId', select: 'name photo location' },
+      { path: 'userId', select: 'name phone location' },
+    ]);
 
+    // Return the populated appointment in the response
     res.status(201).json({
       message: 'Appointment created successfully',
-      appointment: appointmentWithDayOfWeek,
+      appointment: populatedAppointment,
     });
   } catch (err) {
+    console.error('Error in createAppointment:', err);
     res.status(500).json({ error: err.message });
   }
 };
+
 */
 }
 
