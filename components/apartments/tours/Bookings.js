@@ -31,52 +31,7 @@ export default function Bookings({
   const handleDayClick = (date) => {
     setSelectedDate(date);
   };
-  {
-    /*
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!selectedSlot || !selectedDate) {
-      showAlertMessage('Please select a time slot and a date.');
-      return;
-    }
-
-    const [hours, minutes] = selectedSlot.split(':');
-    const appointmentDateTime = new Date(selectedDate);
-    appointmentDateTime.setHours(parseInt(hours), parseInt(minutes));
-
-    try {
-      const response = await axios.post('http://localhost:3001/appointments', {
-        agent: apartments.realtor,
-        date: appointmentDateTime.toISOString(),
-        apartmentId: apartments._id,
-        appointmentId: selectedAppointment ? selectedAppointment._id : null,
-      });
-
-      console.log('Appointment created or rescheduled:', response.data);
-
-      showAlertMessage(
-        `Your appointment has been successfully booked for ${appointmentDateTime.toLocaleTimeString(
-          [],
-          {
-            hour: '2-digit',
-            minute: '2-digit',
-          }
-        )} on ${appointmentDateTime.toDateString()} (${getDayOfWeek(
-          appointmentDateTime
-        )}).`
-      );
-
-      setSelectedAppointment(null);
-      setSelectedSlot('');
-    } catch (error) {
-      console.error('Error creating appointment:', error);
-      showAlertMessage('Failed to book the appointment. Please try again.');
-    }
-  };
-*/
-  }
-
+  //
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -86,18 +41,29 @@ export default function Bookings({
     }
 
     try {
-      const appointmentDate = new Date(selectedDate);
+      const userToken = localStorage.getItem('authToken');
+      const userId = localStorage.getItem('userId');
 
-      // Assuming user data is stored in state or context
-      const userId = currentUser._id;
+      if (!userId || !userToken) {
+        const formattedDate = `Appointment Date: ${selectedDate.toDateString()} (${getDayOfWeek(
+          selectedDate
+        )})`;
+        showAlertMessage(
+          'You must be logged in to book an appointment.',
+          formattedDate,
+          true // Show the login button
+        );
+        return;
+      }
 
       const response = await axios.post(
         'http://localhost:3001/appointments',
         {
           agent: apartments.realtor,
-          date: appointmentDate.toISOString(),
+          date: selectedDate.toISOString(),
           slot: selectedSlot,
           apartmentId: apartments._id,
+          userId: userId,
         },
         {
           headers: { Authorization: `Bearer ${userToken}` },
@@ -107,19 +73,47 @@ export default function Bookings({
       console.log('Appointment created:', response.data);
 
       showAlertMessage(
-        `Appointment successfully booked for ${selectedSlot} on ${appointmentDate.toDateString()}`
+        `Appointment successfully booked for ${selectedSlot}`,
+        `Appointment Date: ${selectedDate.toDateString()} (${getDayOfWeek(
+          selectedDate
+        )})`
       );
-
-      setSelectedAppointment(null);
-      setSelectedSlot('');
     } catch (error) {
       console.error('Error creating appointment:', error);
-      showAlertMessage('Failed to book the appointment. Please try again.');
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        showAlertMessage(error.response.data.message);
+      } else {
+        showAlertMessage('Failed to book the appointment. Please try again.');
+      }
     }
   };
 
-  const showAlertMessage = (message) => {
-    setAlertMessage(message);
+  //
+  const showAlertMessage = (
+    message,
+    appointmentDate = '',
+    showLoginButton = false
+  ) => {
+    setAlertMessage(
+      <div>
+        <p className="mb-0">{message}</p>
+        {appointmentDate && <p className="mb-0">{appointmentDate}</p>}
+        {showLoginButton && (
+          <button
+            className="btn btn-md badge mt-2 w-100"
+            onClick={() => {
+              window.location.href = '/login'; // Adjust to match your login route
+            }}
+          >
+            Go to Login
+          </button>
+        )}
+      </div>
+    );
     setShowAlert(true);
   };
 

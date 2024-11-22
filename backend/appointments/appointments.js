@@ -1,29 +1,19 @@
 const express = require('express');
 const appointmentRoutes = express.Router();
-const Appointment = require('./appointment');
-
 const {
   getAllAppointments,
-  getAppointmentById,
   createAppointment,
+  getAppointmentById,
   updateAppointmentById,
   deleteAppointmentById,
 } = require('./appointmentController');
+const authenticateUser = require('../routes/authenticateUser');
 
-// Create a new agent
-appointmentRoutes.post('/', createAppointment);
-
-// Get all agent
-appointmentRoutes.get('/', getAllAppointments);
-
-// Get a single agent by ID
-appointmentRoutes.get('/:id', getAppointmentById);
-
-// Update an existing agent by ID
-appointmentRoutes.put('/:id', updateAppointmentById);
-
-// Delete an existing agent by ID
-appointmentRoutes.delete('/:id', deleteAppointmentById);
+appointmentRoutes.post('/', authenticateUser, createAppointment);
+appointmentRoutes.get('/', authenticateUser, getAllAppointments);
+appointmentRoutes.get('/:id', authenticateUser, getAppointmentById);
+appointmentRoutes.put('/:id', authenticateUser, updateAppointmentById);
+appointmentRoutes.delete('/:id', authenticateUser, deleteAppointmentById);
 
 module.exports = appointmentRoutes;
 

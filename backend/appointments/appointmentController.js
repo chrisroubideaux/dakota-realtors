@@ -2,7 +2,6 @@ const Appointment = require('./appointment');
 
 {
   /*
-
 const createAppointment = async (req, res) => {
   try {
     const { agent, date, slot, apartmentId, userId } = req.body;
@@ -40,20 +39,24 @@ const createAppointment = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 */
 }
-
+///
 const createAppointment = async (req, res) => {
   try {
     const { agent, date, slot, apartmentId, userId } = req.body;
 
-    // Validate required fields
     if (!agent || !date || !slot || !apartmentId || !userId) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    // Create the new appointment
+    if (typeof agent !== 'string') {
+      return res.status(400).json({ message: 'Agent must be a string' });
+    }
+    if (isNaN(new Date(date).getTime())) {
+      return res.status(400).json({ message: 'Invalid date format' });
+    }
+
     const newAppointment = new Appointment({
       agent,
       date,
@@ -62,23 +65,28 @@ const createAppointment = async (req, res) => {
       userId,
     });
 
-    // Save the appointment to the database
     const savedAppointment = await newAppointment.save();
 
     // Populate related fields
-    const populatedAppointment = await savedAppointment.populate([
-      { path: 'apartmentId', select: 'name photo location' },
-      { path: 'userId', select: 'name phone location' },
-    ]);
+    const populatedAppointment = await Appointment.findById(
+      savedAppointment._id
+    )
+      .populate('apartmentId', 'name photo location')
+      .populate('userId', 'name phone');
 
-    // Return the populated appointment in the response
     res.status(201).json({
       message: 'Appointment created successfully',
       appointment: populatedAppointment,
     });
   } catch (err) {
-    console.error('Error in createAppointment:', err);
-    res.status(500).json({ error: err.message });
+    if (err.name === 'ValidationError') {
+      console.error('Validation Error:', err.errors);
+      return res
+        .status(400)
+        .json({ error: 'Validation error', details: err.errors });
+    }
+    console.error('Error in createAppointment:', err.message);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -86,10 +94,9 @@ const createAppointment = async (req, res) => {
 const getAllAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find()
-      .populate('apartmentId', 'name location photo') // Populate apartment fields
-      .populate('userId', 'name phone address'); // Populate user fields
+      .populate('apartmentId', 'name location photo')
+      .populate('userId', 'name phone address');
 
-    // Format the response
     const formattedAppointments = appointments.map((appointment) => {
       const date = new Date(appointment.date);
       const formattedDate = date.toLocaleDateString('en-US', {
@@ -104,15 +111,15 @@ const getAllAppointments = async (req, res) => {
 
       return {
         _id: appointment._id,
-        name: appointment.agent, // Agent name
+        name: appointment.agent,
         date: formattedDate,
         time: formattedTime,
-        apartment: appointment.apartmentId, // Populated apartment details
-        user: appointment.userId, // Populated user details
-        slot: appointment.slot, // Include slot details
+        apartment: appointment.apartmentId,
+        user: appointment.userId,
+        slot: appointment.slot,
         createdAt: appointment.createdAt,
         updatedAt: appointment.updatedAt,
-        dayOfWeek: appointment.dayOfWeek, // Virtual field
+        dayOfWeek: appointment.dayOfWeek,
       };
     });
 

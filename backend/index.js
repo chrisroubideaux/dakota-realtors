@@ -47,26 +47,29 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
 // Verify Token  for middleware function
-
 function verifyToken(req, res, next) {
-  const token = req.headers['authorization'];
-  console.log('Token for Verification:', token);
-  if (!token) {
+  const authHeader = req.headers['authorization'];
+  console.log('Authorization Header:', authHeader);
+
+  if (!authHeader) {
     return res.status(401).json({ error: 'Authentication token is missing' });
   }
 
+  const token = authHeader.split(' ')[1];
+  console.log('Extracted Token:', token);
+
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
-      if (err.name === 'TokenExpiredError') {
-        return res.status(401).json({ error: 'Token has expired' });
-      }
-      console.error('Token verification error:', err);
+      console.error('Token verification failed:', err.message);
       return res.status(401).json({ error: 'Invalid token' });
     }
-    req.userId = decoded.id;
+
+    req.userId = decoded._id;
+    console.log('Token Verified, User ID:', req.userId);
     next();
   });
 }
+
 {
   /*
 const verifyToken = (req, res, next) => {
@@ -122,7 +125,7 @@ app.get('/', (req, res) => {
 app.use('/apartments', apartmentRoutes);
 app.use('/homes', homeRoutes);
 app.use('/commercials', commercialRoutes);
-app.use('/appointments', appointmentRoutes);
+app.use('/appointments', verifyToken, appointmentRoutes);
 //app.use('/appointments/:id', appointmentRoutes);
 app.use('/admin', adminRoutes);
 app.use('/agents', agentRoutes);
