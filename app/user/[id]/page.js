@@ -3,17 +3,12 @@
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-// import
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/profile/Tab';
 import Sidebar from '@/components/profile/Sidebar';
 import Bio from '@/components/profile/Bio';
-import Messages from '@/components/profile/Messages';
-import ViewMessages from '@/components/profile/ViewMessages';
 import Notifications from '@/components/profile/Notifications';
 import Calendar from '@/components/profile/Calendar';
-//import Schedule from '@/components/admin/Schedule';
-//import TimeOff from '@/components/admin/TimeOff';
 
 export default function User() {
   const { id } = useParams();
@@ -21,7 +16,6 @@ export default function User() {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
   const [message, setMessage] = useState([]);
   const [appointment, setAppointment] = useState([]);
-  //const [timeOffRequests, setTimeOffRequests] = useState([]);
   const [agentId, setAgentId] = useState('');
 
   // user
@@ -35,6 +29,7 @@ export default function User() {
         console.error('Error fetching agents:', error);
       });
   }, [id]);
+
   // Fetch agent data
   useEffect(() => {
     const fetchAgentData = async () => {
@@ -49,16 +44,15 @@ export default function User() {
     };
     fetchAgentData();
   }, []);
+
   // Fetch appointments
   useEffect(() => {
     const fetchAppointment = async () => {
       const authToken = localStorage.getItem('authToken') || token;
-
       if (!authToken) {
         console.error('User is not logged in.');
         return;
       }
-
       try {
         const response = await axios.get(
           `http://localhost:3001/appointments/${id}`,
@@ -69,7 +63,6 @@ export default function User() {
           }
         );
 
-        // Filter appointments by logged-in user ID (if needed)
         setAppointment(response.data);
       } catch (error) {
         console.error('Error fetching appointments:', error);
@@ -83,21 +76,13 @@ export default function User() {
   const renderComponent = () => {
     console.log('User data for Bio:', user);
     switch (activeComponent) {
-      case 'Messages':
+      case 'Calendar':
         return (
-          <Messages
-            messages={message}
+          <Calendar
+            appointments={appointment}
             setActiveComponent={setActiveComponent}
-            currentUserId={user._id}
-            selectedRecipientId={agentId}
-            recipientId={agentId}
-            senderModel="User"
-            recipientModel="Agent"
           />
         );
-
-      case 'Calendar':
-        return <Calendar setActiveComponent={setActiveComponent} />;
 
       case 'Notifications':
         return (
