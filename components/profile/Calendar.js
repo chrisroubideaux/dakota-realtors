@@ -15,6 +15,12 @@ import {
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import axios from 'axios';
 
+// Helper function to check if the date is valid
+const isValidDate = (date) => {
+  const parsedDate = new Date(date);
+  return !isNaN(parsedDate.getTime()); // Checks if the date is valid
+};
+
 const Calendar = ({ onSelectDate }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [appointments, setAppointments] = useState([]);
@@ -107,7 +113,12 @@ const Calendar = ({ onSelectDate }) => {
           ),
           slot: appointment.slot,
           sender: appointment.user.name,
-          recipient: appointment.name,
+          recipient: appointment.apartment.name, // Changed to agent's name
+          apartment: appointment.apartment,
+          user: appointment.user,
+          createdAt: appointment.createdAt,
+          updatedAt: appointment.updatedAt,
+          dayOfWeek: appointment.dayOfWeek,
         },
       ];
     });
@@ -265,13 +276,42 @@ const Calendar = ({ onSelectDate }) => {
                       {event.type === eventTypes.appointments && (
                         <div className="fs-6">
                           <h6>
-                            <strong>Time:</strong> {event.slot}
+                            <strong>Date:</strong>{' '}
+                            {format(new Date(event.date), 'MM/dd/yyyy')}
                           </h6>
                           <h6>
-                            <strong>Sender:</strong> {event.sender}
+                            <strong>Time:</strong> {event.time}
                           </h6>
                           <h6>
-                            <strong>Recipient:</strong> {event.recipient}
+                            <strong>Slot:</strong> {event.slot}
+                          </h6>
+                          <h6>
+                            <strong>Realtor:</strong> {event.apartment?.name}
+                          </h6>
+                          <h6>
+                            <strong>Address:</strong>{' '}
+                            {event.apartment?.location}
+                          </h6>
+                          <h6>
+                            <strong>User:</strong> {event.sender}
+                          </h6>
+                          <h6>
+                            <strong>Phone:</strong> {event.user?.phone}
+                          </h6>
+                          <h6>
+                            <strong>Created At:</strong>{' '}
+                            {isValidDate(event.createdAt)
+                              ? format(new Date(event.createdAt), 'MM/dd/yyyy')
+                              : 'Invalid Date'}
+                          </h6>
+                          <h6>
+                            <strong>Updated At:</strong>{' '}
+                            {isValidDate(event.updatedAt)
+                              ? format(new Date(event.updatedAt), 'MM/dd/yyyy')
+                              : 'Invalid Date'}
+                          </h6>
+                          <h6>
+                            <strong>Day of Week:</strong> {event.dayOfWeek}
                           </h6>
                         </div>
                       )}
