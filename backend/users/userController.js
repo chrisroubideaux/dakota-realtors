@@ -7,7 +7,7 @@ require('dotenv').config();
 // Password validation function
 const isPasswordValid = (password) => {
   const regex = /^(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|`~]).{10,}$/;
-  return regex.test(password); // Ensure the password is at least 10 chars and contains at least one number and one special char
+  return regex.test(password);
 };
 {
   /*
@@ -217,10 +217,37 @@ const login = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: 'Login successful', user, token, redirectTo }); // Include redirectTo here
+      .json({ message: 'Login successful', user, token, redirectTo });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
+  }
+};
+// Logout a user
+
+const logout = async (req, res) => {
+  try {
+    if (req.user?.oauthProvider) {
+      const redirectUrl = getOAuthLogoutUrl(req.user.oauthProvider);
+
+      res.clearCookie('token');
+
+      return res.status(200).json({
+        message: 'Logged out successfully via OAuth.',
+        redirectTo: redirectUrl,
+      });
+    }
+
+    res.clearCookie('token'); // Clear the JWT cookie
+    return res.status(200).json({
+      message: 'Logged out successfully.',
+      redirectTo: 'http://localhost:3000/login',
+    });
+  } catch (error) {
+    console.error('Error during logout:', error);
+    return res
+      .status(500)
+      .json({ message: 'Internal server error during logout.' });
   }
 };
 
@@ -231,4 +258,5 @@ module.exports = {
   updateUserById,
   deleteUserById,
   login,
+  logout,
 };

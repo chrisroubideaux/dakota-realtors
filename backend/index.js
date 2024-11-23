@@ -39,6 +39,8 @@ mongoose
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 };
 
 app.use(cors(corsOptions));

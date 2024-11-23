@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
+  // Form data
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,6 +22,9 @@ const Login = () => {
       [name]: value,
     });
   };
+  // Handle submit
+  {
+    /*
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,11 +35,38 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        // Save the token to localStorage
         const { token, redirectTo } = response.data;
         localStorage.setItem('authToken', token);
+       
+        window.location.href = redirectTo;
+      } else {
+        const data = response.data;
+        setError(data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Internal server error');
+    }
+  };
+*/
+  }
 
-        // Redirect to the dynamic route provided by the backend
+  // Handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/users/login',
+        formData
+      );
+
+      if (response.status === 200) {
+        const { token, user, redirectTo } = response.data;
+
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', user._id);
+
         window.location.href = redirectTo;
       } else {
         const data = response.data;
@@ -47,6 +78,7 @@ const Login = () => {
     }
   };
 
+  //  Google Oauth
   const handleGoogleLogin = () => {
     window.location.href = 'http://localhost:3001/auth/google/login';
   };

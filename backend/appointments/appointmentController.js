@@ -1,5 +1,5 @@
 const Appointment = require('./appointment');
-
+const jwt = require('jsonwebtoken'); // Ensure you have the jwt library
 {
   /*
 const createAppointment = async (req, res) => {
@@ -91,8 +91,24 @@ const createAppointment = async (req, res) => {
 };
 
 ///
+
 const getAllAppointments = async (req, res) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authentication token is missing' });
+  }
+
+  const token = authHeader.split(' ')[1]; // Extract token after "Bearer "
+  if (!token) {
+    return res.status(401).json({ error: 'Authentication token is missing' });
+  }
+
   try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Replace with your secret
+    console.log('Token Verified, User ID:', decoded._id); // Debugging output
+
+    // Proceed with fetching appointments
     const appointments = await Appointment.find()
       .populate('apartmentId', 'name location photo')
       .populate('userId', 'name phone address');
@@ -128,7 +144,8 @@ const getAllAppointments = async (req, res) => {
       appointments: formattedAppointments,
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('Error:', err.message);
+    return res.status(401).json({ error: 'Invalid or expired token' });
   }
 };
 

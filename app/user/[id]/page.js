@@ -15,13 +15,12 @@ import Calendar from '@/components/profile/Calendar';
 //import Schedule from '@/components/admin/Schedule';
 //import TimeOff from '@/components/admin/TimeOff';
 
-export default function Admin() {
+export default function User() {
   const { id } = useParams();
   const [user, setUser] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
   const [message, setMessage] = useState([]);
-  const [appointments, setAppointments] = useState([]);
-  const [selectedRecipient, setSelectedRecipient] = useState(null);
+  const [appointment, setAppointment] = useState([]);
   //const [timeOffRequests, setTimeOffRequests] = useState([]);
   const [agentId, setAgentId] = useState('');
 
@@ -50,49 +49,36 @@ export default function Admin() {
     };
     fetchAgentData();
   }, []);
-
-  // Fetch message data
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/messsages/${id}`)
-      .then((response) => {
-        setMessage(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching messages:', error);
-      });
-  }, [id]);
-
   // Fetch appointments
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/appointments')
-      .then((response) => {
-        setAppointments(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching appointments:', error);
-      });
-  }, []);
+    const fetchAppointment = async () => {
+      const authToken = localStorage.getItem('authToken') || token;
 
-  {
-    /*
-  // timeoff api
-  useEffect(() => {
-    const fetchTimeOffRequests = async () => {
+      if (!authToken) {
+        console.error('User is not logged in.');
+        return;
+      }
+
       try {
-        const response = await axios.get('http://localhost:3001/timeOff');
-        setTimeOffRequests(response.data);
-        console.log('Time-off data:', response.data);
+        const response = await axios.get(
+          `http://localhost:3001/appointments/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+
+        // Filter appointments by logged-in user ID (if needed)
+        setAppointment(response.data);
       } catch (error) {
-        console.error('Error fetching time-off data:', error);
+        console.error('Error fetching appointments:', error);
       }
     };
 
-    fetchTimeOffRequests();
-  }, []);
-  */
-  }
+    fetchAppointment();
+  }, [id]);
+
   // render component
   const renderComponent = () => {
     console.log('User data for Bio:', user);
@@ -113,40 +99,14 @@ export default function Admin() {
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
 
-      case 'ViewMessages':
-        return <ViewMessages setActiveComponent={setActiveComponent} />;
-
       case 'Notifications':
         return (
           <Notifications
-            appointments={appointments}
-            //  timeOffRequests={timeOffRequests}
+            appointments={appointment}
             setActiveComponent={setActiveComponent}
           />
         );
 
-        {
-          /*
-      case 'Schedule':
-        return (
-          <Schedule
-            meetings={meetings}
-            setActiveComponent={setActiveComponent}
-          />
-        );
-        */
-        }
-        {
-          /*
-      case 'TimeOff':
-        return (
-          <TimeOff
-            timeOffRequests={timeOffRequests}
-            setActiveComponent={setActiveComponent}
-          />
-        );
-        */
-        }
       default:
         return <Bio users={user} />;
     }

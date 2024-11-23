@@ -27,86 +27,89 @@ export default function Bookings({
     ];
     return days[date.getDay()];
   };
-
+  //
   const handleDayClick = (date) => {
     setSelectedDate(date);
   };
   //
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedSlot || !selectedDate) {
-      showAlertMessage('Please select a time slot and a date.');
+    // Dynamically retrieve auth token and user ID from localStorage
+    const authToken = localStorage.getItem('authToken');
+    const userId = localStorage.getItem('userId');
+
+    // Validate authentication
+    if (!authToken || !userId) {
+      showAlertMessage('You must be logged in to book an appointment.', true);
       return;
     }
 
+    // Validate slot and date
+    if (!selectedSlot) {
+      showAlertMessage('Please select a time slot.');
+      return;
+    }
+
+    if (!selectedDate || isNaN(new Date(selectedDate).getTime())) {
+      showAlertMessage('Please select a valid date.');
+      return;
+    }
+
+    // Prepare appointment data
+    const appointmentData = {
+      agent: apartments.realtor,
+      date: selectedDate.toISOString(),
+      slot: selectedSlot,
+      apartmentId: apartments._id,
+      userId,
+    };
+
     try {
-      const userToken = localStorage.getItem('authToken');
-      const userId = localStorage.getItem('userId');
-
-      if (!userId || !userToken) {
-        const formattedDate = `Appointment Date: ${selectedDate.toDateString()} (${getDayOfWeek(
-          selectedDate
-        )})`;
-        showAlertMessage(
-          'You must be logged in to book an appointment.',
-          formattedDate,
-          true // Show the login button
-        );
-        return;
-      }
-
+      // Send the request with authentication header
       const response = await axios.post(
         'http://localhost:3001/appointments',
+        appointmentData,
         {
-          agent: apartments.realtor,
-          date: selectedDate.toISOString(),
-          slot: selectedSlot,
-          apartmentId: apartments._id,
-          userId: userId,
-        },
-        {
-          headers: { Authorization: `Bearer ${userToken}` },
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
 
-      console.log('Appointment created:', response.data);
+      console.log('Appointment created successfully:', response.data);
 
+      // Show success message
       showAlertMessage(
-        `Appointment successfully booked for ${selectedSlot}`,
-        `Appointment Date: ${selectedDate.toDateString()} (${getDayOfWeek(
+        `Appointment successfully booked for ${selectedSlot} on ${new Date(
           selectedDate
-        )})`
+        ).toDateString()}.`
       );
     } catch (error) {
-      console.error('Error creating appointment:', error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        showAlertMessage(error.response.data.message);
+      console.error('Error creating appointment:', error.response || error);
+
+      // Handle specific error responses
+      if (error.response?.status === 400) {
+        showAlertMessage(
+          'Invalid request. Please check your input and try again.'
+        );
+      } else if (error.response?.status === 401) {
+        showAlertMessage('Authentication failed. Please log in again.', true);
       } else {
-        showAlertMessage('Failed to book the appointment. Please try again.');
+        showAlertMessage('Something went wrong. Please try again.');
       }
     }
   };
-
-  //
-  const showAlertMessage = (
-    message,
-    appointmentDate = '',
-    showLoginButton = false
-  ) => {
+  const showAlertMessage = (message, showLoginButton = false) => {
     setAlertMessage(
       <div>
         <p className="mb-0">{message}</p>
-        {appointmentDate && <p className="mb-0">{appointmentDate}</p>}
         {showLoginButton && (
           <button
             className="btn btn-md badge mt-2 w-100"
             onClick={() => {
-              window.location.href = '/login'; // Adjust to match your login route
+              window.location.href = '/login';
             }}
           >
             Go to Login

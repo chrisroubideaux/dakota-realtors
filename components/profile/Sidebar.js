@@ -11,13 +11,24 @@ import {
 export default function Sidebar({ setActiveComponent, users }) {
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3001/auth/logout', {
+      const response = await fetch('http://localhost:3001/users/logout', {
         method: 'GET',
         credentials: 'include',
       });
-      window.location.href = '/';
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userId');
+        window.location.href = data.redirectTo || '/login';
+      } else {
+        const errorData = await response.text();
+        console.error('Logout failed:', errorData);
+        alert('Failed to log out. Please try again.');
+      }
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('Error during logout:', error);
+      alert('An error occurred during logout. Please try again.');
     }
   };
 
@@ -72,10 +83,10 @@ export default function Sidebar({ setActiveComponent, users }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" onClick={handleLogout}>
+                <Link className="nav-link" href="#" onClick={handleLogout}>
                   <FaRegHandPeace className="fs-6 me-1" />
                   Log out
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -8,10 +8,13 @@ const {
   updateUserById,
   deleteUserById,
   login,
+  logout,
 } = require('../users/userController');
 
-// Login user (explicit route must come before any parameterized routes)
+// Login user
 userRoutes.post('/login', login);
+// Logout user
+userRoutes.get('/logout', logout);
 // Create a new user
 userRoutes.post('/', createUser);
 
