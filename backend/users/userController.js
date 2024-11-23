@@ -46,18 +46,15 @@ const createUser = async (req, res) => {
   } = req.body;
 
   try {
-    // Check for required fields
     if (!name || !email) {
       return res.status(400).json({ message: 'Name and email are required.' });
     }
 
-    // Check if the email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ message: 'Email already exists.' });
     }
 
-    // Handle OAuth registration (Google or Facebook)
     if (googleId || facebookId) {
       const newUser = new User({
         googleId,
@@ -87,7 +84,6 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Validate password strength if registering with credentials
     if (!password || !confirmPassword) {
       return res.status(400).json({ message: 'Password is required.' });
     }
@@ -99,16 +95,13 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Passwords do not match.' });
     }
 
-    // Hash the password
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create a new user with credentials
     const newUser = new User({
       name,
       email,
@@ -208,11 +201,8 @@ const login = async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
-
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-
     const redirectTo = `http://localhost:3000/user/${user._id}`;
-
     console.log('Generated Token:', token);
 
     res
@@ -223,8 +213,8 @@ const login = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-// Logout a user
 
+// Logout a user
 const logout = async (req, res) => {
   try {
     if (req.user?.oauthProvider) {
@@ -238,7 +228,7 @@ const logout = async (req, res) => {
       });
     }
 
-    res.clearCookie('token'); // Clear the JWT cookie
+    res.clearCookie('token');
     return res.status(200).json({
       message: 'Logged out successfully.',
       redirectTo: 'http://localhost:3000/login',

@@ -99,16 +99,15 @@ const getAllAppointments = async (req, res) => {
     return res.status(401).json({ error: 'Authentication token is missing' });
   }
 
-  const token = authHeader.split(' ')[1]; // Extract token after "Bearer "
+  const token = authHeader.split(' ')[1];
   if (!token) {
     return res.status(401).json({ error: 'Authentication token is missing' });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Replace with your secret
-    console.log('Token Verified, User ID:', decoded._id); // Debugging output
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Token Verified, User ID:', decoded._id);
 
-    // Proceed with fetching appointments
     const appointments = await Appointment.find()
       .populate('apartmentId', 'name location photo')
       .populate('userId', 'name phone address');

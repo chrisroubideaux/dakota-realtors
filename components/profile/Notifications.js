@@ -7,37 +7,39 @@ export default function Notifications({ userId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch appointments on mount
   useEffect(() => {
     const fetchAppointments = async () => {
-      setLoading(true);
       try {
-        // Get the token from localStorage
         const authToken = localStorage.getItem('authToken');
 
         if (!authToken) {
+          console.error('User is not logged in');
           setError('User is not logged in');
           return;
         }
 
-        // Make the API request with the token in the Authorization header
+        console.log('Auth Token:', authToken);
+
         const response = await axios.get('http://localhost:3001/appointments', {
           headers: {
-            Authorization: `Bearer ${authToken}`, // Pass the token here
+            Authorization: `Bearer ${authToken}`,
           },
         });
 
-        setAppointments(response.data);
-      } catch (error) {
-        setError('Error fetching appointments.');
-        console.error(error);
+        setAppointments(response.data.appointments);
+      } catch (err) {
+        console.error(
+          'Error fetching appointments:',
+          err.response?.data || err.message
+        );
+        setError(err.response?.data?.error || 'Error fetching appointments');
       } finally {
         setLoading(false);
       }
     };
 
     fetchAppointments();
-  }, [userId]); // Re-run when userId changes
+  }, [userId]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -101,14 +103,14 @@ export default function Notifications({ userId }) {
                         <span>{formatDate(appointments.date)}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>Time:</strong> <span>{appointments.time}</span>
+                        <strong>Time:</strong> <span>{appointments.slot}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>Apartment:</strong>{' '}
+                        <strong>Realtor:</strong>{' '}
                         <span>{appointments.apartment?.name || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>Location:</strong>{' '}
+                        <strong>address:</strong>{' '}
                         <span>{appointments.apartment?.location || 'N/A'}</span>
                       </div>
                       <button
