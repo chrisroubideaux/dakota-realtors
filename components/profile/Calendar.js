@@ -271,7 +271,10 @@ const Calendar = ({ onSelectDate }) => {
               <div className="modal-body">
                 {selectedDayEvents.length > 0 ? (
                   selectedDayEvents.map((event, index) => (
-                    <div key={index} className={`box ${event.type}`}>
+                    <div
+                      key={index}
+                      className={`calendar bg-transparent m-2 ${event.type}`}
+                    >
                       <h6 className="py-3 fs-6 mt-2">{event.title}</h6>
                       {event.type === eventTypes.appointments && (
                         <div className="fs-6">
@@ -279,9 +282,7 @@ const Calendar = ({ onSelectDate }) => {
                             <strong>Date:</strong>{' '}
                             {format(new Date(event.date), 'MM/dd/yyyy')}
                           </h6>
-                          <h6>
-                            <strong>Time:</strong> {event.time}
-                          </h6>
+
                           <h6>
                             <strong>Slot:</strong> {event.slot}
                           </h6>
@@ -293,7 +294,7 @@ const Calendar = ({ onSelectDate }) => {
                             {event.apartment?.location}
                           </h6>
                           <h6>
-                            <strong>User:</strong> {event.sender}
+                            <strong>Client:</strong> {event.sender}
                           </h6>
                           <h6>
                             <strong>Phone:</strong> {event.user?.phone}
