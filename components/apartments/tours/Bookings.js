@@ -1,3 +1,4 @@
+// Modal component for booking a tour
 import React, { useState } from 'react';
 import Image from 'next/image';
 import CalendarEvent from '@/components/calendar/CalendarEvent';
@@ -27,26 +28,24 @@ export default function Bookings({
     ];
     return days[date.getDay()];
   };
-  //
+  // Handle day click
   const handleDayClick = (date) => {
     setSelectedDate(date);
   };
-  //
+
+  //Handle submit
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Dynamically retrieve auth token and user ID from localStorage
     const authToken = localStorage.getItem('authToken');
     const userId = localStorage.getItem('userId');
 
-    // Validate authentication
     if (!authToken || !userId) {
       showAlertMessage('You must be logged in to book an appointment.', true);
       return;
     }
 
-    // Validate slot and date
     if (!selectedSlot) {
       showAlertMessage('Please select a time slot.');
       return;
@@ -112,7 +111,7 @@ export default function Bookings({
               window.location.href = '/login';
             }}
           >
-            Go to Login
+            You must be logged in to book an appointment
           </button>
         )}
       </div>
@@ -260,7 +259,6 @@ export default function Bookings({
     </>
   );
 }
-
 {
   /*
 // Modal component for booking a tour
@@ -271,7 +269,6 @@ import axios from 'axios';
 
 export default function Bookings({
   apartments,
-
   appointments,
   onUpdateAppointment,
   onDeleteAppointment,
@@ -294,54 +291,94 @@ export default function Bookings({
     ];
     return days[date.getDay()];
   };
-
-  
+  // Handle day click
   const handleDayClick = (date) => {
     setSelectedDate(date);
   };
-  
 
-  // handle submit
+  //Handle submit
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedSlot || !selectedDate) {
-      showAlertMessage('Please select a time slot and a date.');
+    const authToken = localStorage.getItem('authToken');
+    const userId = localStorage.getItem('userId');
+
+    if (!authToken || !userId) {
+      showAlertMessage('You must be logged in to book an appointment.', true);
       return;
     }
 
-    try {
-      const appointmentDate = new Date(selectedDate);
+    if (!selectedSlot) {
+      showAlertMessage('Please select a time slot.');
+      return;
+    }
 
+    if (!selectedDate || isNaN(new Date(selectedDate).getTime())) {
+      showAlertMessage('Please select a valid date.');
+      return;
+    }
+
+    // Prepare appointment data
+    const appointmentData = {
+      agent: apartments.realtor,
+      date: selectedDate.toISOString(),
+      slot: selectedSlot,
+      apartmentId: apartments._id,
+      userId,
+    };
+
+    try {
+      // Send the request with authentication header
       const response = await axios.post(
         'http://localhost:3001/appointments',
+        appointmentData,
         {
-          agent: apartments.realtor, // From props
-          date: appointmentDate.toISOString(), // Format date as ISO string
-          slot: selectedSlot, // Selected time slot
-          apartmentId: apartments._id, // From props
-        },
-        {
-          headers: { Authorization: `Bearer ${userToken}` }, // Include user token
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
 
-      console.log('Appointment created:', response.data);
+      console.log('Appointment created successfully:', response.data);
 
+      // Show success message
       showAlertMessage(
-        `Appointment successfully booked for ${selectedSlot} on ${appointmentDate.toDateString()}`
+        `Appointment successfully booked for ${selectedSlot} on ${new Date(
+          selectedDate
+        ).toDateString()}.`
       );
-
-      setSelectedAppointment(null); // Reset selected appointment
-      setSelectedSlot(''); // Clear slot selection
     } catch (error) {
-      console.error('Error creating appointment:', error);
-      showAlertMessage('Failed to book the appointment. Please try again.');
+      console.error('Error creating appointment:', error.response || error);
+
+      // Handle specific error responses
+      if (error.response?.status === 400) {
+        showAlertMessage(
+          'Invalid request. Please check your input and try again.'
+        );
+      } else if (error.response?.status === 401) {
+        showAlertMessage('Authentication failed. Please log in again.', true);
+      } else {
+        showAlertMessage('Something went wrong. Please try again.');
+      }
     }
   };
-
-  const showAlertMessage = (message) => {
-    setAlertMessage(message);
+  const showAlertMessage = (message, showLoginButton = false) => {
+    setAlertMessage(
+      <div>
+        <p className="mb-0">{message}</p>
+        {showLoginButton && (
+          <button
+            className="btn btn-md badge mt-2 w-100"
+            onClick={() => {
+              window.location.href = '/login';
+            }}
+          >
+            You must be logged in to book an appointment
+          </button>
+        )}
+      </div>
+    );
     setShowAlert(true);
   };
 
