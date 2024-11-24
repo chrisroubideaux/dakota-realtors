@@ -15,10 +15,9 @@ import {
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import axios from 'axios';
 
-// Helper function to check if the date is valid
 const isValidDate = (date) => {
   const parsedDate = new Date(date);
-  return !isNaN(parsedDate.getTime()); // Checks if the date is valid
+  return !isNaN(parsedDate.getTime());
 };
 
 const Calendar = ({ onSelectDate }) => {
@@ -113,7 +112,7 @@ const Calendar = ({ onSelectDate }) => {
           ),
           slot: appointment.slot,
           sender: appointment.user.name,
-          recipient: appointment.apartment.name, // Changed to agent's name
+          recipient: appointment.apartment.name,
           apartment: appointment.apartment,
           user: appointment.user,
           createdAt: appointment.createdAt,
@@ -284,7 +283,7 @@ const Calendar = ({ onSelectDate }) => {
                           </h6>
 
                           <h6>
-                            <strong>Slot:</strong> {event.slot}
+                            <strong>Time:</strong> {event.slot}
                           </h6>
                           <h6>
                             <strong>Realtor:</strong> {event.apartment?.name}
@@ -300,15 +299,9 @@ const Calendar = ({ onSelectDate }) => {
                             <strong>Phone:</strong> {event.user?.phone}
                           </h6>
                           <h6>
-                            <strong>Created At:</strong>{' '}
+                            <strong>Booked:</strong>{' '}
                             {isValidDate(event.createdAt)
                               ? format(new Date(event.createdAt), 'MM/dd/yyyy')
-                              : 'Invalid Date'}
-                          </h6>
-                          <h6>
-                            <strong>Updated At:</strong>{' '}
-                            {isValidDate(event.updatedAt)
-                              ? format(new Date(event.updatedAt), 'MM/dd/yyyy')
                               : 'Invalid Date'}
                           </h6>
                           <h6>
