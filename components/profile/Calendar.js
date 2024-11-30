@@ -366,6 +366,14 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                 ) : (
                   <p>No events for this day.</p>
                 )}
+                <div className="modal-footer">
+                  <button
+                    className="btn btn-md badge"
+                    onClick={() => setShowAddModal(true)}
+                  >
+                    Reschedule
+                  </button>
+                </div>
               </div>
             </div>
           </div>
