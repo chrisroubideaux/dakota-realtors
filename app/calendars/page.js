@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Nav from '@/components/nav/Nav';
 import Sidebar from '@/components/admin/Sidebar';
 import Tab from '@/components/calendar/Tab';
-import Calendar from '@/components/calendar/Calendar';
+import Calendar from '@/components/calendar/Calendars';
 import Week from '@/components/calendar/Week';
 import Day from '@/components/calendar/Day';
 

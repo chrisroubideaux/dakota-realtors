@@ -6,8 +6,14 @@ const {
   getAppointmentById,
   updateAppointmentById,
   deleteAppointmentById,
+  fetchAvailableSlots,
 } = require('./appointmentController');
 const authenticateUser = require('../routes/authenticateUser');
+appointmentRoutes.get(
+  '/available-slots',
+  authenticateUser,
+  fetchAvailableSlots
+);
 
 appointmentRoutes.post('/', authenticateUser, createAppointment);
 appointmentRoutes.get('/', authenticateUser, getAllAppointments);

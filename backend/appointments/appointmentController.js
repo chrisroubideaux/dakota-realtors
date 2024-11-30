@@ -166,20 +166,81 @@ const getAppointmentById = async (req, res) => {
 // Update an appointment by ID
 const updateAppointmentById = async (req, res) => {
   try {
+    const { userId, apartmentId } = req.body;
+
+    await Appointment.updateMany(
+      { userId, apartmentId, isActive: true },
+      { isActive: false }
+    );
+
     const updatedAppointment = await Appointment.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { ...req.body, isActive: true },
       { new: true }
     );
+
     if (!updatedAppointment) {
       return res.status(404).json({ message: 'Appointment not found' });
     }
+
     res.status(200).json({
       message: 'Appointment updated successfully',
       appointment: updatedAppointment,
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
+  }
+};
+// Fetch available slots for a given date and apartmentId
+const fetchAvailableSlots = async (req, res) => {
+  try {
+    const { date, apartmentId } = req.query;
+
+    if (!date || !apartmentId) {
+      return res
+        .status(400)
+        .json({ message: 'Date and apartmentId are required' });
+    }
+
+    const parsedDate = new Date(date);
+    if (isNaN(parsedDate.getTime())) {
+      return res.status(400).json({ message: 'Invalid date format' });
+    }
+
+    const appointments = await Appointment.find({
+      date: {
+        $gte: parsedDate.setHours(0, 0, 0, 0),
+        $lt: parsedDate.setHours(23, 59, 59, 999),
+      },
+      apartmentId: apartmentId,
+      isActive: true,
+    });
+
+    const bookedSlots = appointments.map((appointment) => appointment.slot);
+
+    const allSlots = [
+      'slot',
+      'slot2',
+      'slot3',
+      'slot4',
+      'slot5',
+      'slot6',
+      'slot7',
+    ];
+
+    // Filter out booked slots from all available slots
+    const availableSlots = allSlots.filter(
+      (slot) => !bookedSlots.includes(slot)
+    );
+
+    res.status(200).json({
+      message: 'Available slots fetched successfully',
+      slots: availableSlots,
+    });
+  } catch (err) {
+    console.error('Error fetching available slots:', err.message);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -204,6 +265,7 @@ module.exports = {
   getAppointmentById,
   updateAppointmentById,
   deleteAppointmentById,
+  fetchAvailableSlots,
 };
 
 {

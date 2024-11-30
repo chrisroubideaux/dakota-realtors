@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { format, isValid } from 'date-fns';
 import axios from 'axios';
+import Link from 'next/link';
+import RescheduleCalendar from '../calendar/RescheduleCalendar';
 
 export default function Notifications({ userId }) {
   const [appointments, setAppointments] = useState([]);
@@ -82,7 +84,6 @@ export default function Notifications({ userId }) {
 
       setAppointmentToDelete(null);
       setShowToast(false);
-      // Use toast instead of browser alert
       alert('Appointment successfully canceled.');
     } catch (err) {
       console.error(
@@ -95,7 +96,7 @@ export default function Notifications({ userId }) {
 
   const cancelDelete = () => {
     setShowToast(false);
-    setAppointmentToDelete(null); // Clear the selected appointment
+    setAppointmentToDelete(null);
   };
 
   const deleteAllNotifications = () => {
@@ -151,21 +152,20 @@ export default function Notifications({ userId }) {
                         <span>{formatDate(appointment.date)}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>Time:</strong> <span>{appointment.time}</span>
-                      </div>
-                      <div className="meeting-item">
-                        <strong>Slot:</strong> <span>{appointment.slot}</span>
+                        <strong>Time:</strong> <span>{appointment.slot}</span>
                       </div>
                       <div className="meeting-item">
                         <strong>Realtor:</strong>{' '}
-                        <span>{appointment.apartment?.name || 'N/A'}</span>
+                        <span className="text-gray">
+                          {appointment.apartment?.name || 'N/A'}
+                        </span>
                       </div>
                       <div className="meeting-item">
                         <strong>Address:</strong>{' '}
                         <span>{appointment.apartment?.location || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>User:</strong>{' '}
+                        <strong>Client:</strong>{' '}
                         <span>{appointment.user?.name || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
@@ -173,7 +173,7 @@ export default function Notifications({ userId }) {
                         <span>{appointment.user?.phone || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>Created At:</strong>{' '}
+                        <strong>Booked:</strong>{' '}
                         <span>{formatDate(appointment.createdAt)}</span>
                       </div>
                       <div className="meeting-item">
@@ -191,15 +191,15 @@ export default function Notifications({ userId }) {
                         Cancel Appointment
                       </button>
 
-                      {/* Toast for this specific appointment */}
+                      <RescheduleCalendar />
                       {showToast && appointmentToDelete === appointment._id && (
                         <div
-                          className="toast show"
+                          className="toast show bg-transparent"
                           role="alert"
                           aria-live="assertive"
                           aria-atomic="true"
                         >
-                          <div className="toast-header">
+                          <div className="toast-header bg-transparent">
                             <strong className="me-auto">Confirmation</strong>
                             <button
                               type="button"
@@ -209,8 +209,7 @@ export default function Notifications({ userId }) {
                             ></button>
                           </div>
                           <div className="toast-body bg-transparent">
-                            Are you sure you want to cancel this booked
-                            appointment?
+                            Are you sure you want to cancel appointment?
                             <div className="mt-2">
                               <button
                                 className=" btn btn-sm badge me-2"
@@ -245,10 +244,11 @@ export default function Notifications({ userId }) {
 
 {
   /*
-
 import { useState, useEffect } from 'react';
 import { format, isValid } from 'date-fns';
 import axios from 'axios';
+import Link from 'next/link';
+import RescheduleCalendar from '../calendar/RescheduleCalendar';
 
 export default function Notifications({ userId }) {
   const [appointments, setAppointments] = useState([]);
@@ -342,7 +342,7 @@ export default function Notifications({ userId }) {
 
   const cancelDelete = () => {
     setShowToast(false);
-    setAppointmentToDelete(null); // Clear the selected appointment
+    setAppointmentToDelete(null);
   };
 
   const deleteAllNotifications = () => {
@@ -397,22 +397,22 @@ export default function Notifications({ userId }) {
                         <strong>Date:</strong>{' '}
                         <span>{formatDate(appointment.date)}</span>
                       </div>
+
                       <div className="meeting-item">
-                        <strong>Time:</strong> <span>{appointment.time}</span>
-                      </div>
-                      <div className="meeting-item">
-                        <strong>Slot:</strong> <span>{appointment.slot}</span>
+                        <strong>Time:</strong> <span>{appointment.slot}</span>
                       </div>
                       <div className="meeting-item">
                         <strong>Realtor:</strong>{' '}
-                        <span>{appointment.apartment?.name || 'N/A'}</span>
+                        <span className="text-gray">
+                          {appointment.apartment?.name || 'N/A'}
+                        </span>
                       </div>
                       <div className="meeting-item">
                         <strong>Address:</strong>{' '}
                         <span>{appointment.apartment?.location || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>User:</strong>{' '}
+                        <strong>Client:</strong>{' '}
                         <span>{appointment.user?.name || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
@@ -420,7 +420,7 @@ export default function Notifications({ userId }) {
                         <span>{appointment.user?.phone || 'N/A'}</span>
                       </div>
                       <div className="meeting-item">
-                        <strong>Created At:</strong>{' '}
+                        <strong>Booked:</strong>{' '}
                         <span>{formatDate(appointment.createdAt)}</span>
                       </div>
                       <div className="meeting-item">
@@ -437,6 +437,50 @@ export default function Notifications({ userId }) {
                       >
                         Cancel Appointment
                       </button>
+                      
+                      <Link
+                        className="btn btn-sm badge mt-2 me-3"
+                        href={`/apartments/${appointment.apartment?._id}`}
+                      >
+                        Reschedule
+                      </Link>
+                      *
+                      <RescheduleCalendar />
+                      {showToast && appointmentToDelete === appointment._id && (
+                        <div
+                          className="toast show bg-transparent"
+                          role="alert"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        >
+                          <div className="toast-header bg-transparent">
+                            <strong className="me-auto">Confirmation</strong>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              aria-label="Close"
+                              onClick={cancelDelete}
+                            ></button>
+                          </div>
+                          <div className="toast-body bg-transparent">
+                            Are you sure you want to cancel appointment?
+                            <div className="mt-2">
+                              <button
+                                className=" btn btn-sm badge me-2"
+                                onClick={confirmDelete}
+                              >
+                                Confirm
+                              </button>
+                              <button
+                                className="btn btn-sm badge"
+                                onClick={cancelDelete}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <hr />
                   </div>
@@ -448,42 +492,9 @@ export default function Notifications({ userId }) {
           </div>
         </div>
       </div>
-      {showToast && (
-        <div
-          className="toast show"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div className="toast-header">
-            <strong className="me-auto">Confirmation</strong>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={cancelDelete}
-            ></button>
-          </div>
-          <div className="toast-body bg-transparent">
-            Are you sure you want to cancel this booked appointment?
-            <div className="mt-2">
-              <button
-                className=" btn btn-sm badge me-2"
-                onClick={confirmDelete}
-              >
-                Confirm
-              </button>
-              <button className="btn btn-sm badge" onClick={cancelDelete}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
-
 
 
 */

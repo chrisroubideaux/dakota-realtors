@@ -16,6 +16,7 @@ import {
   setHours,
   setMinutes,
 } from 'date-fns';
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 
 const Calendar = ({ setActiveComponent, onSelectDate }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -36,14 +37,12 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
     const dateFormat = 'MMMM yyyy';
     return (
       <div className="header py-3">
-        <button className="btn btn-sm" onClick={() => prevMonth()}>
-          <i className="fa-solid fa-arrow-left"></i>
+        <button className="btn btn-sm badge" onClick={prevMonth}>
+          <FaLongArrowAltLeft className="fs-4" />
         </button>
-        <div>
-          <span>{format(currentDate, dateFormat)}</span>
-        </div>
-        <button className="btn btn-sm" onClick={() => nextMonth()}>
-          <i className="fa-solid fa-arrow-right"></i>
+        <div>{format(currentDate, dateFormat)}</div>
+        <button className="btn btn-sm badge" onClick={nextMonth}>
+          <FaLongArrowAltRight className="fs-4" />
         </button>
       </div>
     );
@@ -179,11 +178,16 @@ import {
   setHours,
   setMinutes,
 } from 'date-fns';
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 
 const Calendar = ({ setActiveComponent, onSelectDate }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
+
+  //  const [eventTime, setEventTime] = useState('12:00'); // Default value for eventTime
+  //const [eventType, setEventType] = useState('meeting'); // Default value for eventType
+  //const [eventTitle, setEventTitle] = useState('Sample Event'); // Default value for eventTitle
   const today = new Date();
 
   useEffect(() => {
@@ -199,14 +203,12 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
     const dateFormat = 'MMMM yyyy';
     return (
       <div className="header py-3">
-        <button className="btn btn-sm" onClick={() => prevMonth()}>
-          <i className="fa-solid fa-arrow-left"></i>
+        <button className="btn btn-sm badge" onClick={prevMonth}>
+          <FaLongArrowAltLeft className="fs-4" />
         </button>
-        <div>
-          <span>{format(currentDate, dateFormat)}</span>
-        </div>
-        <button className="btn btn-sm" onClick={() => nextMonth()}>
-          <i className="fa-solid fa-arrow-right"></i>
+        <div>{format(currentDate, dateFormat)}</div>
+        <button className="btn btn-sm badge" onClick={nextMonth}>
+          <FaLongArrowAltRight className="fs-4" />
         </button>
       </div>
     );
@@ -280,17 +282,21 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
       onSelectDate(day);
     }
 
-    const [hours, minutes] = eventTime.split(':');
-    const eventDateTime = setMinutes(setHours(day, hours), minutes);
+    if (eventTime && eventType && eventTitle) {
+      const [hours, minutes] = eventTime.split(':');
+      const eventDateTime = setMinutes(setHours(day, hours), minutes);
 
-    setEvents([
-      ...events,
-      {
-        date: format(eventDateTime, 'yyyy-MM-dd HH:mm:ss'),
-        type: eventType,
-        title: eventTitle,
-      },
-    ]);
+      setEvents([
+        ...events,
+        {
+          date: format(eventDateTime, 'yyyy-MM-dd HH:mm:ss'),
+          type: eventType,
+          title: eventTitle,
+        },
+      ]);
+    } else {
+      console.error('Missing event details: time, type, or title.');
+    }
   };
 
   const nextMonth = () => {
