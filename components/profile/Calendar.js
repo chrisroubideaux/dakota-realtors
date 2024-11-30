@@ -27,14 +27,14 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
   const [error, setError] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [selectedSlot, setSelectedSlot] = useState(''); // Track the selected slot
-  const [selectedAppointment, setSelectedAppointment] = useState(null); // Track the selected appointment
+  const [selectedSlot, setSelectedSlot] = useState('');
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   const isValidDate = (date) => {
     const parsedDate = new Date(date);
     return !isNaN(parsedDate.getTime());
   };
-  // Fetch appointments when the component mounts
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -66,7 +66,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     fetchAppointments();
   }, []);
 
-  // Utility functions for generating events and formatting appointments
   const eventTypes = {
     openhouse: 'open house',
     appointments: 'appointments',
@@ -135,7 +134,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     ...formatAppointments(appointments),
   ];
 
-  // Render the header with month navigation
   const renderHeader = () => {
     const dateFormat = 'MMMM yyyy';
     return (
@@ -151,7 +149,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     );
   };
 
-  // Render the days of the week header
   const renderDays = () => {
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     return (
@@ -165,7 +162,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     );
   };
 
-  // Render the days of the current month
   const renderCells = () => {
     const monthStart = startOfMonth(currentDate);
     const monthEnd = endOfMonth(monthStart);
@@ -232,28 +228,23 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     return <div className="body">{rows}</div>;
   };
 
-  // Handle date click to open modal
   const onDateClick = (day, events) => {
     setSelectedDate(day);
     setShowModal(true);
     setSelectedDayEvents(events);
   };
 
-  // Move to next month
   const nextMonth = () => {
     setCurrentDate(addMonths(currentDate, 1));
   };
 
-  // Move to previous month
   const prevMonth = () => {
     setCurrentDate(subMonths(currentDate, 1));
   };
 
-  // Show loading or error messages
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  // Second modal - Add Appointment
   const handleAddAppointment = async (appointmentData) => {
     try {
       const authToken = localStorage.getItem('authToken');
@@ -273,7 +264,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
         }
       );
 
-      // After adding the appointment, close the modal and fetch updated appointments
       setShowAddModal(false);
       setAppointments((prevAppointments) => [
         ...prevAppointments,
@@ -366,24 +356,25 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                 ) : (
                   <p>No events for this day.</p>
                 )}
-                <div className="modal-footer">
-                  <button
-                    className="btn btn-md badge"
-                    onClick={() => setShowAddModal(true)}
-                  >
-                    Reschedule
-                  </button>
-                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="btn btn-md badge"
+                  onClick={() => setShowAddModal(true)}
+                >
+                  Reschedule
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
+
       {/* Second Modal - Add Appointment */}
       {showAddModal && (
         <div
           className="modal fade show d-block"
-          id="addAppointmentModal"
+          id="exampleModalToggle2"
           aria-hidden="true"
           tabIndex="-1"
         >
@@ -403,60 +394,67 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                 ></button>
               </div>
               <div className="modal-body">
-                {showAlert && (
-                  <div className="alert alert-info">{alertMessage}</div>
-                )}
-                <div>
-                  {appointments.length > 0 ? (
-                    appointments.map((appointment) => (
-                      <div
-                        key={appointment._id}
-                        className="list-group-item d-flex gap-3 py-3"
-                      >
-                        <Image
-                          src={
-                            appointment.apartment?.photo ||
-                            '/fallback-image.jpg'
-                          }
-                          className="avatar"
-                          width={200}
-                          height={100}
-                          alt="photo"
-                        />
-                        <div className="d-flex flex-column w-100">
-                          <h6>{appointment.apartment?.name || 'N/A'}</h6>
-                          <h6>{appointment.date || 'N/A'}</h6>
-                          <h6>Current Time: {appointment.slot}</h6>
-                          <label htmlFor={`slot-${appointment._id}`}>
-                            Select a new time:
-                          </label>
-                          <select
-                            id={`slot-${appointment._id}`}
-                            value={selectedSlot}
-                            onChange={(e) => {
-                              setSelectedSlot(e.target.value);
-                              setSelectedAppointment(appointment._id);
-                            }}
-                          >
-                            <option value="">Select a time slot</option>
-                            {Object.entries(appointment)
-                              .filter(
-                                ([key, value]) =>
-                                  key.startsWith('slot') && value
-                              )
-                              .map(([key, value]) => (
-                                <option key={key} value={value}>
-                                  {value}
-                                </option>
-                              ))}
-                          </select>
-                        </div>
+                {appointments.length > 0 ? (
+                  appointments.map((appointment) => (
+                    <div
+                      key={appointment._id}
+                      className="list-group-item d-flex gap-3 py-3"
+                    >
+                      <Image
+                        src={
+                          appointment.apartment?.photo || '/fallback-image.jpg'
+                        }
+                        className="avatar"
+                        width={200}
+                        height={100}
+                        alt="photo"
+                      />
+                      <div className="d-flex flex-column w-100">
+                        <h6>{appointment.apartment?.name || 'N/A'}</h6>
+                        <h6>{appointment.date || 'N/A'}</h6>
+                        <h6>Current Time: {appointment.slot}</h6>
+                        <label htmlFor={`slot-${appointment._id}`}>
+                          Select a new time:
+                        </label>
+                        <select
+                          id={`slot-${appointment._id}`}
+                          value={selectedSlot}
+                          onChange={(e) => {
+                            setSelectedSlot(e.target.value);
+                            setSelectedAppointment(appointment._id);
+                          }}
+                        >
+                          <option value="">Select a time slot</option>
+                          {Object.entries(appointment)
+                            .filter(
+                              ([key, value]) => key.startsWith('slot') && value
+                            )
+                            .map(([key, value]) => (
+                              <option key={key} value={value}>
+                                {value}
+                              </option>
+                            ))}
+                        </select>
                       </div>
-                    ))
-                  ) : (
-                    <p>No appointments available.</p>
-                  )}
-                </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No appointments available.</p>
+                )}
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="btn btn-md badge"
+                  onClick={() => {
+                    handleAddAppointment({
+                      date: format(selectedDate, 'yyyy-MM-dd'),
+                      slot: selectedSlot,
+                      user: { name: userId },
+                    });
+                  }}
+                >
+                  Save Appointment
+                </button>
               </div>
             </div>
           </div>
