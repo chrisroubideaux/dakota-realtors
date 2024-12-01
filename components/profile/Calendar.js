@@ -290,7 +290,7 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  const handleUpdateAppointment = async (appointmentId, updatedData) => {
+  const handleUpdateAppointment = async (id, updatedData) => {
     try {
       const authToken = localStorage.getItem('authToken');
       if (!authToken) {
@@ -300,7 +300,7 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
       }
 
       const response = await axios.put(
-        `http://localhost:3001/appointments/${appointmentId}`,
+        `http://localhost:3001/appointments/${id}`, // Use 'id' here
         updatedData,
         {
           headers: {
@@ -315,7 +315,7 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
       // Update the local state with the updated appointment
       setAppointments((prevAppointments) =>
         prevAppointments.map((appointment) =>
-          appointment._id === appointmentId
+          appointment._id === id
             ? { ...appointment, ...response.data.appointment }
             : appointment
         )
@@ -504,11 +504,15 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                 <button
                   className="btn btn-md badge"
                   onClick={() => {
-                    handleUpdateAppointment({
-                      date: format(selectedDate, 'yyyy-MM-dd'),
-                      slot: selectedSlot,
-                      user: { name: userId },
-                    });
+                    if (selectedAppointment && selectedSlot) {
+                      handleUpdateAppointment(selectedAppointment, {
+                        slot: selectedSlot,
+                      });
+                    } else {
+                      setError(
+                        'Please select a valid appointment and time slot.'
+                      );
+                    }
                   }}
                 >
                   Save Appointment
