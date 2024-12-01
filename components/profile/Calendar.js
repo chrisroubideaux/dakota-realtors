@@ -29,34 +29,35 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
   const [alertMessage, setAlertMessage] = useState('');
   const [selectedSlot, setSelectedSlot] = useState('');
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [selectedSlots, setSelectedSlots] = useState({});
 
   const isValidDate = (date) => {
     const parsedDate = new Date(date);
     return !isNaN(parsedDate.getTime());
   };
 
+  const handleSlotChange = (appointmentId, newSlot) => {
+    setSelectedSlots((prevState) => ({
+      ...prevState,
+      [appointmentId]: newSlot,
+    }));
+  };
+
   useEffect(() => {
     const fetchAppointments = async () => {
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) {
+        setError('Authentication token is missing.');
+        return;
+      }
+
       try {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) {
-          console.error('User is not logged in');
-          setError('User is not logged in');
-          return;
-        }
-
         const response = await axios.get('http://localhost:3001/appointments', {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
+          headers: { Authorization: `Bearer ${authToken}` },
         });
-
         setAppointments(response.data.appointments);
       } catch (err) {
-        console.error(
-          'Error fetching appointments:',
-          err.response?.data || err.message
-        );
+        console.error('Error fetching appointments:', err);
         setError(err.response?.data?.error || 'Error fetching appointments');
       } finally {
         setLoading(false);
@@ -65,7 +66,39 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
 
     fetchAppointments();
   }, []);
+  //
 
+  const handleReschedule = async (appointmentId, newSlot) => {
+    try {
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) {
+        setError('Authentication token is missing.');
+        return;
+      }
+
+      await axios.patch(
+        `http://localhost:3001/appointments/${appointmentId}`,
+        { slot: newSlot },
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+        }
+      );
+
+      // Update local state to reflect the changes
+      setAppointments((prevAppointments) =>
+        prevAppointments.map((appointment) =>
+          appointment._id === appointmentId
+            ? { ...appointment, slot: newSlot }
+            : appointment
+        )
+      );
+    } catch (err) {
+      console.error('Error rescheduling appointment:', err);
+      setError(err.response?.data?.error || 'Error rescheduling appointment');
+    }
+  };
+
+  //
   const eventTypes = {
     openhouse: 'open house',
     appointments: 'appointments',
@@ -99,10 +132,16 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
 
   const formatAppointments = (appointments) => {
     if (!Array.isArray(appointments)) {
+      console.error('Appointments data is not an array:', appointments);
       return [];
     }
 
     return appointments.flatMap((appointment) => {
+      if (!appointment.date || !appointment.user || !appointment.apartment) {
+        console.warn('Missing required fields in appointment:', appointment);
+        return [];
+      }
+
       const parsedDate = new Date(appointment.date);
       const formattedDate = format(parsedDate, 'yyyy-MM-dd');
 
@@ -112,8 +151,10 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
           type: eventTypes.appointments,
           title: (
             <div>
-              {appointment.name} with {appointment.user.name}
-              <div className="small-text">{appointment.slot}</div>
+              {appointment.name || 'N/A'} with {appointment.user.name || 'N/A'}
+              <div className="small-text">
+                {appointment.slot || 'No slot provided'}
+              </div>
             </div>
           ),
           slot: appointment.slot,
@@ -123,7 +164,7 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
           user: appointment.user,
           createdAt: appointment.createdAt,
           updatedAt: appointment.updatedAt,
-          dayOfWeek: appointment.dayOfWeek,
+          dayOfWeek: appointment.dayOfWeek || 'Unknown',
         },
       ];
     });
@@ -171,16 +212,16 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     const rows = [];
     let days = [];
     let day = startDate;
-    let formattedDate = '';
 
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        formattedDate = format(day, 'd');
-        const cloneDay = day;
-
-        const eventsForDay = combinedEvents.filter((event) =>
-          isSameDay(day, new Date(event.date))
-        );
+        const eventsForDay = combinedEvents.filter((event) => {
+          if (!event.date) {
+            console.warn('Event with missing date:', event);
+            return false;
+          }
+          return isSameDay(day, new Date(event.date));
+        });
 
         const isOpenHouse = eventsForDay.some(
           (event) => event.type === eventTypes.openhouse
@@ -200,9 +241,9 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                 : ''
             }`}
             key={day}
-            onClick={() => onDateClick(cloneDay, eventsForDay)}
+            onClick={() => onDateClick(day, eventsForDay)}
           >
-            <span className="number">{formattedDate}</span>
+            <span className="number">{format(day, 'd')}</span>
 
             {eventsForDay.map((event, index) => (
               <div
@@ -227,11 +268,15 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
     }
     return <div className="body">{rows}</div>;
   };
-
   const onDateClick = (day, events) => {
+    if (!events || !Array.isArray(events)) {
+      console.warn('Invalid events for selected date:', events);
+      setSelectedDayEvents([]);
+    } else {
+      setSelectedDayEvents(events);
+    }
     setSelectedDate(day);
     setShowModal(true);
-    setSelectedDayEvents(events);
   };
 
   const nextMonth = () => {
@@ -245,7 +290,7 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  const handleAddAppointment = async (appointmentData) => {
+  const handleUpdateAppointment = async (appointmentId, updatedData) => {
     try {
       const authToken = localStorage.getItem('authToken');
       if (!authToken) {
@@ -254,9 +299,9 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
         return;
       }
 
-      const response = await axios.post(
-        'http://localhost:3001/appointments',
-        appointmentData,
+      const response = await axios.put(
+        `http://localhost:3001/appointments/${appointmentId}`,
+        updatedData,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -264,17 +309,23 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
         }
       );
 
+      // Close the modal after a successful update
       setShowAddModal(false);
-      setAppointments((prevAppointments) => [
-        ...prevAppointments,
-        response.data.appointment,
-      ]);
+
+      // Update the local state with the updated appointment
+      setAppointments((prevAppointments) =>
+        prevAppointments.map((appointment) =>
+          appointment._id === appointmentId
+            ? { ...appointment, ...response.data.appointment }
+            : appointment
+        )
+      );
     } catch (err) {
       console.error(
-        'Error adding appointment:',
+        'Error updating appointment:',
         err.response?.data || err.message
       );
-      setError('Error adding appointment');
+      setError('Error updating appointment');
     }
   };
 
@@ -284,7 +335,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
       {renderDays()}
       {renderCells()}
 
-      {/* First Modal - View Events */}
       {showModal && (
         <div
           className="modal fade show d-block"
@@ -323,7 +373,6 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                             <strong>Date:</strong>{' '}
                             {format(new Date(event.date), 'MM/dd/yyyy')}
                           </h6>
-
                           <h6>
                             <strong>Time:</strong> {event.slot}
                           </h6>
@@ -418,20 +467,29 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                         </label>
                         <select
                           id={`slot-${appointment._id}`}
-                          value={selectedSlot}
+                          value={
+                            selectedAppointment === appointment._id
+                              ? selectedSlot
+                              : ''
+                          }
                           onChange={(e) => {
                             setSelectedSlot(e.target.value);
                             setSelectedAppointment(appointment._id);
                           }}
                         >
                           <option value="">Select a time slot</option>
-                          {Object.entries(appointment)
-                            .filter(
-                              ([key, value]) => key.startsWith('slot') && value
-                            )
-                            .map(([key, value]) => (
-                              <option key={key} value={value}>
-                                {value}
+                          {[
+                            '9:00 AM - 10:00 AM',
+                            '10:00 AM - 11:00 AM',
+                            '11:00 AM - 12:00 PM',
+                            '1:00 PM - 2:00 PM',
+                            '2:00 PM - 3:00 PM',
+                            '3:00 PM - 4:00 PM',
+                          ]
+                            .filter((slot) => slot !== appointment.slot)
+                            .map((slot) => (
+                              <option key={slot} value={slot}>
+                                {slot}
                               </option>
                             ))}
                         </select>
@@ -446,7 +504,7 @@ export default function Calendar({ onSelectDate, apartments, userId }) {
                 <button
                   className="btn btn-md badge"
                   onClick={() => {
-                    handleAddAppointment({
+                    handleUpdateAppointment({
                       date: format(selectedDate, 'yyyy-MM-dd'),
                       slot: selectedSlot,
                       user: { name: userId },
