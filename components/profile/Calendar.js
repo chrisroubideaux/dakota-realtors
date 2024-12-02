@@ -149,7 +149,7 @@ export default function Calendar() {
       }
 
       const parsedDate = new Date(appointment.date);
-      const formattedDate = format(parsedDate, 'yyyy-MM-dd');
+      const formattedDate = format(parsedDate, 'MM/dd/yyyy');
 
       return [
         {
@@ -299,8 +299,13 @@ export default function Calendar() {
                 ></button>
               </div>
               <div className="modal-body">
-                <p>Selected Date: {format(selectedDate, 'MMMM dd, yyyy')}</p>
-                <label>Select a new time slot:</label>
+                <p>
+                  Reschedule for:
+                  {selectedDate
+                    ? format(selectedDate, 'MM/dd/yyyy')
+                    : 'N/A'}{' '}
+                </p>
+
                 {appointments.length > 0 ? (
                   appointments.map((appointment) => (
                     <div
@@ -316,7 +321,7 @@ export default function Calendar() {
                         height={100}
                         alt="photo"
                       />
-                      <div className="d-flex flex-column w-100">
+                      <div className="d-flex flex-column align-items-end w-100 ">
                         <h6>{appointment.apartment?.name || 'N/A'}</h6>
                         <h6>{appointment.date || 'N/A'}</h6>
                         <h6>Current Time: {appointment.slot}</h6>
@@ -360,7 +365,7 @@ export default function Calendar() {
               </div>
               <div className="modal-footer">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-sm badge"
                   onClick={() =>
                     handleUpdateAppointment(selectedAppointment, {
                       date: selectedDate,
