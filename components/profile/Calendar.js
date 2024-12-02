@@ -10,6 +10,7 @@ import {
   addDays,
   isSameMonth,
   isSameDay,
+  getDay,
 } from 'date-fns';
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import axios from 'axios';
@@ -50,7 +51,7 @@ export default function Calendar() {
 
     fetchAppointments();
   }, []);
-
+  //
   const handleUpdateAppointment = async (id, updatedData) => {
     try {
       const authToken = localStorage.getItem('authToken');
@@ -89,7 +90,7 @@ export default function Calendar() {
       setError('Error updating appointment');
     }
   };
-
+  //
   const nextMonth = () => setCurrentDate(addMonths(currentDate, 1));
   const prevMonth = () => setCurrentDate(subMonths(currentDate, 1));
 
@@ -107,7 +108,82 @@ export default function Calendar() {
     setSelectedDate(selectedDateWithoutTime);
     setShowAddModal(true);
   };
+  //
+  const eventTypes = {
+    openhouse: 'open house',
+    appointments: 'appointments',
+  };
+  const generateRecurringEvents = (currentMonth) => {
+    let events = [];
+    const start = startOfMonth(currentMonth);
+    const end = endOfMonth(currentMonth);
+    let day = start;
 
+    while (day <= end) {
+      const dayOfWeek = getDay(day); // This now works
+      if (dayOfWeek === 0) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.openhouse,
+          title: (
+            <>
+              Open House
+              <div className="small-text">10 AM - 3 PM</div>
+            </>
+          ),
+        });
+      }
+      day = addDays(day, 1);
+    }
+
+    return events;
+  };
+  const formatAppointments = (appointments) => {
+    if (!Array.isArray(appointments)) {
+      console.error('Appointments data is not an array:', appointments);
+      return [];
+    }
+
+    return appointments.flatMap((appointment) => {
+      if (!appointment.date || !appointment.user || !appointment.apartment) {
+        console.warn('Missing required fields in appointment:', appointment);
+        return [];
+      }
+
+      const parsedDate = new Date(appointment.date);
+      const formattedDate = format(parsedDate, 'yyyy-MM-dd');
+
+      return [
+        {
+          date: formattedDate,
+          type: eventTypes.appointments,
+          title: (
+            <div>
+              {appointment.name || 'N/A'} with {appointment.user.name || 'N/A'}
+              <div className="small-text">
+                {appointment.slot || 'No slot provided'}
+              </div>
+            </div>
+          ),
+          slot: appointment.slot,
+          sender: appointment.user.name,
+          recipient: appointment.apartment.name,
+          apartment: appointment.apartment,
+          user: appointment.user,
+          createdAt: appointment.createdAt,
+          updatedAt: appointment.updatedAt,
+          dayOfWeek: appointment.dayOfWeek || 'Unknown',
+        },
+      ];
+    });
+  };
+
+  const combinedEvents = [
+    ...generateRecurringEvents(currentDate),
+    ...formatAppointments(appointments),
+  ];
+
+  //
   const renderHeader = () => (
     <div className="header py-3">
       <button className="btn btn-sm badge" onClick={prevMonth}>
@@ -119,7 +195,7 @@ export default function Calendar() {
       </button>
     </div>
   );
-
+  //
   const renderCells = () => {
     const monthStart = startOfMonth(currentDate);
     const startDate = startOfWeek(monthStart);
@@ -133,6 +209,15 @@ export default function Calendar() {
         const isToday = isSameDay(dayCopy, new Date());
         const isSelected = isSameDay(dayCopy, selectedDate);
 
+        // Filter events for the current day
+        const eventsForDay = combinedEvents.filter((event) =>
+          isSameDay(dayCopy, new Date(event.date))
+        );
+
+        const isOpenHouse = eventsForDay.some(
+          (event) => event.type === eventTypes.openhouse
+        );
+
         const cellClass = `cell ${
           !isSameMonth(dayCopy, monthStart)
             ? 'disabled'
@@ -140,19 +225,23 @@ export default function Calendar() {
             ? 'selected'
             : isToday
             ? 'today'
+            : isOpenHouse
+            ? 'openhouse'
             : ''
         }`;
-
-        const appointment = appointments.find((appt) =>
-          isSameDay(new Date(appt.date), dayCopy)
-        );
 
         const cellContent = (
           <>
             <span className="number">{format(dayCopy, 'd')}</span>
-            {appointment && (
-              <div className="appointment-label">{appointment.slot}</div>
-            )}
+            {eventsForDay.map((event, index) => (
+              <div
+                key={index}
+                className={`event ${event.type}`}
+                title={event.title}
+              >
+                {event.title}
+              </div>
+            ))}
           </>
         );
 
@@ -162,10 +251,7 @@ export default function Calendar() {
           <div
             className={cellClass}
             key={dayCopy}
-            onClick={() => {
-              setSelectedAppointment(appointment?._id || null);
-              onDateClick(dayCopy);
-            }}
+            onClick={() => onDateClick(dayCopy, eventsForDay)}
           >
             {cellContent}
           </div>
