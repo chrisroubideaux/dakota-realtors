@@ -62,7 +62,7 @@ export default function Calendar() {
       }
 
       const response = await axios.put(
-        `http://localhost:3001/appointments/${id}`, // Use 'id' here
+        `http://localhost:3001/appointments/${id}`,
         updatedData,
         {
           headers: {
@@ -71,10 +71,8 @@ export default function Calendar() {
         }
       );
 
-      // Close the modal after a successful update
       setShowAddModal(false);
 
-      // Update the local state with the updated appointment
       setAppointments((prevAppointments) =>
         prevAppointments.map((appointment) =>
           appointment._id === id
@@ -120,7 +118,7 @@ export default function Calendar() {
     let day = start;
 
     while (day <= end) {
-      const dayOfWeek = getDay(day); // This now works
+      const dayOfWeek = getDay(day);
       if (dayOfWeek === 0) {
         events.push({
           date: format(day, 'yyyy-MM-dd'),
@@ -196,6 +194,20 @@ export default function Calendar() {
     </div>
   );
   //
+
+  const renderDays = () => {
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return (
+      <div className="daysRow">
+        {daysOfWeek.map((day, i) => (
+          <div className="day container-fluid" key={i}>
+            {day}
+          </div>
+        ))}
+      </div>
+    );
+  };
+  //
   const renderCells = () => {
     const monthStart = startOfMonth(currentDate);
     const startDate = startOfWeek(monthStart);
@@ -269,8 +281,9 @@ export default function Calendar() {
   };
 
   return (
-    <div>
+    <div className="">
       {renderHeader()}
+      <div className="px-1">{renderDays()}</div>
       {renderCells()}
 
       {showAddModal && selectedDate && (
@@ -287,7 +300,7 @@ export default function Calendar() {
               </div>
               <div className="modal-body">
                 <p>Selected Date: {format(selectedDate, 'MMMM dd, yyyy')}</p>
-                <label htmlFor="slot-select">Select a new time slot:</label>
+                <label>Select a new time slot:</label>
                 {appointments.length > 0 ? (
                   appointments.map((appointment) => (
                     <div
