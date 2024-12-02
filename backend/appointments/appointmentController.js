@@ -164,6 +164,8 @@ const getAppointmentById = async (req, res) => {
 };
 
 // Update an appointment by ID
+{
+  /*
 const updateAppointmentById = async (req, res) => {
   try {
     const { userId, apartmentId } = req.body;
@@ -192,6 +194,75 @@ const updateAppointmentById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+*/
+}
+//
+{
+  /*
+const updateAppointmentById = async (req, res) => {
+  try {
+    const { userId, apartmentId, date, slot } = req.body;
+
+    // Deactivate any previous appointments for the same user/apartment
+    await Appointment.updateMany(
+      { userId, apartmentId, isActive: true },
+      { isActive: false }
+    );
+
+    // Update the appointment
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body, date, slot, isActive: true }, // Include date and slot
+      { new: true }
+    );
+
+    if (!updatedAppointment) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
+
+    res.status(200).json({
+      message: 'Appointment updated successfully',
+      appointment: updatedAppointment,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+*/
+}
+
+const updateAppointmentById = async (req, res) => {
+  try {
+    const { date, slot } = req.body;
+
+    // Ensure the date is in the future
+    if (new Date(date) <= new Date()) {
+      return res
+        .status(400)
+        .json({ error: 'Cannot reschedule to a past date' });
+    }
+
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      req.params.id,
+      { date, slot, isActive: true },
+      { new: true }
+    );
+
+    if (!updatedAppointment) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
+
+    res.status(200).json({
+      message: 'Appointment updated successfully',
+      appointment: updatedAppointment,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 // Fetch available slots for a given date and apartmentId
 const fetchAvailableSlots = async (req, res) => {
   try {

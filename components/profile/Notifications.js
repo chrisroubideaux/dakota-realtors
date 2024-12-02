@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import RescheduleCalendar from '../calendar/RescheduleCalendar';
 
-export default function Notifications({ userId }) {
+export default function Notifications({ setActiveComponent, userId }) {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -191,7 +191,13 @@ export default function Notifications({ userId }) {
                         Cancel Appointment
                       </button>
 
-                      <RescheduleCalendar />
+                      <a
+                        className="btn btn-sm m-1 badge"
+                        href="#"
+                        onClick={() => setActiveComponent('Calendar')}
+                      >
+                        Reschedule
+                      </a>
                       {showToast && appointmentToDelete === appointment._id && (
                         <div
                           className="toast show bg-transparent"
