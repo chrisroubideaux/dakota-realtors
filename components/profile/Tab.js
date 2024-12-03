@@ -79,8 +79,6 @@ const Tab = ({ setActiveComponent }) => {
           </li>
         </ul>
       </div>
-
-      {/* Display Upcoming Meetings */}
     </>
   );
 };

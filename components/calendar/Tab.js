@@ -1,9 +1,9 @@
 // Tab component
 import Link from 'next/link';
-import CreateEvent from './CreateEvent';
+import Calendars from '../calendar/Calendars';
 import { format } from 'date-fns';
 import { FaCalendarAlt } from 'react-icons/fa';
-const Tab = ({ setActiveComponent, admins, meetings }) => {
+const Tab = ({ setActiveComponent, admins, appointments }) => {
   const today = format(new Date(), 'MM/dd/yyyy');
   return (
     <>
@@ -62,7 +62,7 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
             </form>
           </li>
           <li className="nav-item me-2">
-            <CreateEvent meetings={meetings} />
+            <Calendars appointments={appointments} />
           </li>
           <li className="nav-item me-2">
             <div className="btn-group" role="group" aria-label="Basic example">

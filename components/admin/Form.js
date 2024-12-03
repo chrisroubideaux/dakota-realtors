@@ -1,4 +1,4 @@
-// Form
+// Form component
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -38,16 +38,13 @@ export default function PropertyForm() {
     availableUnits: '',
   });
 
-  // State for feedback messages
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  // Handle form field changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -57,7 +54,7 @@ export default function PropertyForm() {
       );
       setMessage('Property added successfully!');
       setError('');
-      // Optionally reset the form
+
       setFormData({
         mlsId: '',
         name: '',

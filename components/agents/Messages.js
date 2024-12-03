@@ -15,7 +15,6 @@ export default function Messages({
   const [admins, setAdmins] = useState([]);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch agents and admins on component load
   useEffect(() => {
     const fetchContacts = async () => {
       try {
@@ -32,10 +31,9 @@ export default function Messages({
     fetchContacts();
   }, []);
 
-  // Fetch messages when the recipient changes
   useEffect(() => {
     const fetchMessages = async () => {
-      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+      if (!activeRecipient) return;
 
       try {
         const response = await axios.get('http://localhost:3001/messages');

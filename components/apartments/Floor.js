@@ -1,4 +1,4 @@
-// floor plan component
+// Floor plan component
 'use client';
 import {
   FaRuler,

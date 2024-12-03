@@ -1,4 +1,4 @@
-// login form
+// Login form
 'use client';
 import axios from 'axios';
 import Link from 'next/link';

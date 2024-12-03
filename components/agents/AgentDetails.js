@@ -1,4 +1,4 @@
-// agent details component
+// Agent details component
 'use client';
 import { FaBriefcase, FaEnvelope, FaMobile } from 'react-icons/fa';
 

@@ -7,9 +7,8 @@ export default function NewMessage({
   onRecipientSelect,
 }) {
   const [selectedId, setSelectedId] = useState('');
-  const [isDataLoaded, setIsDataLoaded] = useState(false); // Track loading state
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  // Load agents/admins, and only then read from localStorage
   useEffect(() => {
     if (agents.length > 0 || admins.length > 0) {
       const storedRecipientId = localStorage.getItem('selectedRecipientId');

@@ -1,3 +1,4 @@
+// New messages componnet
 import { useState, useEffect } from 'react';
 
 export default function NewMessage({

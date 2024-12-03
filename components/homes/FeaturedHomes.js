@@ -1,4 +1,4 @@
-// featured component
+// Featured component
 'use client';
 import {
   FaBuilding,

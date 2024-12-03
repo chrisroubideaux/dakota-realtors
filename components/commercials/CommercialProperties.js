@@ -1,4 +1,4 @@
-// featured properties component
+// Featured properties component
 'use client';
 import {
   FaBuilding,

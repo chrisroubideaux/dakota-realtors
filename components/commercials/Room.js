@@ -1,12 +1,9 @@
-// rooms component
+// Rooms component
 'use client';
 import Image from 'next/image';
-import { useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper';
-import { FaMapPin, FaArrowAltCircleDown } from 'react-icons/fa';
-
+import { FaArrowAltCircleDown } from 'react-icons/fa';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';

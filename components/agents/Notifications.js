@@ -7,7 +7,6 @@ export default function Notifications({ currentAgentId }) {
   const [visibleAppointments, setVisibleAppointments] = useState([]);
   const [visibleRequests, setVisibleRequests] = useState([]);
 
-  // Fetch appointment and time-off requests from the API
   useEffect(() => {
     const fetchNotifications = async () => {
       try {

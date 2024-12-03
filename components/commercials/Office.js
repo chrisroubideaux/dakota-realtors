@@ -1,4 +1,4 @@
-// office component
+// Office component
 'use client';
 import Image from 'next/image';
 

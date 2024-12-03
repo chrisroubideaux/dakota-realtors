@@ -1,4 +1,4 @@
-// iconbar component
+// Iconbar component
 import { FaBriefcase, FaEnvelope, FaMobile } from 'react-icons/fa';
 
 export default function Iconbar({ homes }) {

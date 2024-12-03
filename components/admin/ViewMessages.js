@@ -1,9 +1,9 @@
+// View message component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import NewMessage from './NewMessage';
 
-// Helper function to format message timestamps
 const formatMessageTimestamp = (timestamp) => {
   const messageDate = new Date(timestamp);
   const today = new Date();
@@ -16,7 +16,6 @@ const formatMessageTimestamp = (timestamp) => {
     hour12: true,
   });
 
-  // Format full date as MM/DD/YYYY
   const formattedDate = messageDate.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',

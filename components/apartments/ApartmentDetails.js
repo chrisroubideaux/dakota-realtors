@@ -1,4 +1,4 @@
-// apartment details Component
+// Apartment details Component
 import {
   FaBath,
   FaBed,

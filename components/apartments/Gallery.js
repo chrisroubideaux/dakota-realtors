@@ -1,16 +1,12 @@
-// gallery componet
+// Gallery componet
 'use client';
 import { useRef } from 'react';
 import Image from 'next/image';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
-// import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper';
 
 export default function Sliders({ apartments }) {

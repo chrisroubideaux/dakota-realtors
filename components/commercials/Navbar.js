@@ -1,4 +1,4 @@
-// breadcrumb component
+// Breadcrumb component
 import Link from 'next/link';
 //import { FaHouseUser } from 'react-icons/fa';
 

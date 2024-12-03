@@ -1,4 +1,4 @@
-// cover component
+// Cover component
 'use client';
 import Image from 'next/image';
 

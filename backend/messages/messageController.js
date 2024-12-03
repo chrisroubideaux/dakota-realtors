@@ -16,20 +16,16 @@ const createMessage = async (req, res) => {
       parentMessage,
     } = req.body;
 
-    // Determine the models based on sender and recipient types
     const SenderModel = senderModel === 'Admin' ? Admin : Agent;
     const RecipientModel = recipientModel === 'Admin' ? Admin : Agent;
 
-    // Fetch sender and recipient documents
     const senderDoc = await SenderModel.findById(sender);
     const recipientDoc = await RecipientModel.findById(recipient);
 
-    // Check if sender and recipient documents exist
     if (!senderDoc || !recipientDoc) {
       return res.status(404).json({ error: 'Sender or recipient not found' });
     }
 
-    // Create new message
     const newMessage = new Message({
       sender,
       recipient,
@@ -41,10 +37,8 @@ const createMessage = async (req, res) => {
       parentMessage,
     });
 
-    // Save the message
     const savedMessage = await newMessage.save();
 
-    // Prepare response with names
     const response = {
       _id: savedMessage._id,
       sender: savedMessage.sender,

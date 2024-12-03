@@ -1,6 +1,4 @@
-// mission component
-import Image from 'next/image';
-
+// Mission component
 function Mission() {
   return (
     <div className="container-fluid">

@@ -1,4 +1,4 @@
-// Edit component for commercial
+// Commercial card component
 import {
   FaEnvelope,
   FaMobile,

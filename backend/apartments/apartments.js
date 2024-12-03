@@ -1,6 +1,36 @@
 // apartment routes
 const express = require('express');
 const apartmentRoutes = express.Router();
+
+const {
+  createApartment,
+  getAllApartments,
+  getApartmentById,
+  updateApartmentById,
+  deleteApartmentById,
+} = require('./apartmentController');
+
+// Create a new apartment
+apartmentRoutes.post('/', createApartment);
+
+// Get all apartments
+apartmentRoutes.get('/', getAllApartments);
+
+// Get a single apartment by ID
+apartmentRoutes.get('/:id', getApartmentById);
+
+// Update an existing apartment by ID
+apartmentRoutes.put('/:id', updateApartmentById);
+
+// Delete an existing apartment by ID
+apartmentRoutes.delete('/:id', deleteApartmentById);
+
+module.exports = apartmentRoutes;
+
+{
+  /*
+const express = require('express');
+const apartmentRoutes = express.Router();
 const Apartment = require('./apartment');
 
 const {
@@ -102,3 +132,5 @@ apartmentRoutes.delete('/:id', async (req, res) => {
 });
 
 module.exports = apartmentRoutes;
+*/
+}

@@ -1,3 +1,4 @@
+// Tab component
 import Link from 'next/link';
 import { FaCalendarAlt, FaBell, FaUser } from 'react-icons/fa';
 

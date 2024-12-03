@@ -1,3 +1,4 @@
+// Messages component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
@@ -17,7 +18,6 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   const [admins, setAdmins] = useState([]);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch employees and admins on component load
   useEffect(() => {
     const fetchContacts = async () => {
       try {

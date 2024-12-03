@@ -1,4 +1,4 @@
-// cover component for apartments
+// Cover component for apartments
 'use client';
 import Image from 'next/image';
 

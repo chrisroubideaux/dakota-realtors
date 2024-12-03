@@ -1,4 +1,4 @@
-// toolbar component
+// Toolbar component
 'use client';
 import {
   FaBath,

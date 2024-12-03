@@ -1,4 +1,4 @@
-// toolbar component
+// Toolbar component
 'use client';
 import {
   FaBath,
@@ -8,7 +8,6 @@ import {
   FaMapPin,
   FaMoneyBill,
 } from 'react-icons/fa';
-// Import statements...
 
 function Toolbar({ apartments }) {
   return (

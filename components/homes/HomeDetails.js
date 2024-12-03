@@ -1,4 +1,4 @@
-// details Component
+// Details Component
 'use client';
 import {
   FaBath,

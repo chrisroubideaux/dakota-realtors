@@ -1,11 +1,9 @@
-// rooms component
+// Rooms component
 import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper';
 import { FaMapPin, FaArrowAltCircleDown } from 'react-icons/fa';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -24,7 +22,6 @@ export default function Room({ apartments }) {
 
       <div className="position-absolute bottom-0 end-0 mb-3 me-5 mt-5">
         <span className="">
-          {/*modal*/}
           <button
             type="button"
             className="d-none d-md-inline-block btn btn-sm btn-light me-5 mt-5 m-5"

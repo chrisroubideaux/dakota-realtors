@@ -1,4 +1,4 @@
-// times component
+// Times component
 //import Select from '@/components/agents/tours/Select';
 import Image from 'next/image';
 export default function Times({ agents }) {
@@ -16,9 +16,7 @@ export default function Times({ agents }) {
           <div>
             <h6 className=" mb-0">{agents.appointments}</h6>
           </div>
-          <small className="opacity-50 text-nowrap text-white">
-            {/*  <Select agents={agents} /> */}
-          </small>
+          <small className="opacity-50 text-nowrap text-white"></small>
         </div>
       </div>
     </div>

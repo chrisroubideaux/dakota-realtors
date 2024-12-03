@@ -3,42 +3,40 @@
 import { useState, useEffect } from 'react';
 import { format, isSameDay, addDays, subDays } from 'date-fns';
 
-const Day = ({ setActiveComponent, meetings }) => {
+const Day = ({ setActiveComponent, appointments }) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [events, setEvents] = useState([]);
-
-  // Calculate the maximum range for 3 days back and 3 days forward
   const threeDaysAgo = subDays(new Date(), 3);
   const threeDaysAhead = addDays(new Date(), 3);
 
   useEffect(() => {
     const storedEvents = JSON.parse(localStorage.getItem('dayEvents')) || [];
 
-    const formattedMeetings = meetings.map((meeting) => {
-      const meetingDate = new Date(meeting.days[0]);
-      const [startTime, endTime] = meeting.slot
+    const formattedAppointments = appointments.map((appointments) => {
+      const appointmentDate = new Date(appointment.days[0]);
+      const [startTime, endTime] = appointment.slot
         .split('-')
         .map((time) => time.trim());
       const hour = parseInt(startTime);
 
       return {
-        date: meetingDate,
+        date: appointmentDate,
         hour: hour,
-        attendees: `${meeting.sender.name}, ${meeting.recipient.name}`,
-        type: meeting.isVideo ? 'Video' : 'Meeting',
+        attendees: `${appointments.sender.name}, ${appointments.recipient.name}`,
+        type: appointments.isVideo ? 'Video' : 'Appointment',
         time: `${startTime} - ${endTime}`,
       };
     });
 
     const currentDayEvents = [
       ...storedEvents,
-      ...formattedMeetings.filter((meeting) =>
-        isSameDay(meeting.date, currentDay)
+      ...formattedAppointments.filter((appointment) =>
+        isSameDay(appointment.date, currentDay)
       ),
     ];
 
     setEvents(currentDayEvents);
-  }, [currentDay, meetings]);
+  }, [currentDay, appointments]);
 
   const renderHeader = () => {
     const dateFormat = 'EEEE, MMM d yyyy';

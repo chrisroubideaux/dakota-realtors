@@ -33,7 +33,7 @@ export const Homes = ({ homes, setActiveComponent }) => {
               </h6>
               <Link
                 className="btn btn-sm badge"
-                href={`/editHome/${homes._id}`}
+                href={`/editHomes/${homes._id}`}
                 //  onClick={() => setActiveComponent('editApartment')}
               >
                 Edit Property

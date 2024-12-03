@@ -1,4 +1,4 @@
-//layout component for chart js
+// Layout component for chart js
 import { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';

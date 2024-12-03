@@ -1,4 +1,4 @@
-//
+// Commercial property form component
 import { useState } from 'react';
 import axios from 'axios';
 

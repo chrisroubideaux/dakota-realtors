@@ -1,13 +1,11 @@
-// slider components
+// Slider components
 'use client';
 import Image from 'next/image';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-// import required modules
 import { Navigation, Pagination } from 'swiper';
 
 export default function Sliders({ commercials }) {

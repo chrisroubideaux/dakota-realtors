@@ -1,4 +1,4 @@
-// select component for selecting time slots
+// Select component for selecting time slots
 
 export default function Select({ agents }) {
   return (

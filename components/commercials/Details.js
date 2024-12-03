@@ -1,4 +1,4 @@
-// detials component for commercials
+// Detials component for commercials
 'use client';
 import {
   FaBuilding,

@@ -1,5 +1,5 @@
+// Bannert component
 'use client';
-// Banner component for the commercial page
 import Link from 'next/link';
 import Search from '../nav/Search';
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';

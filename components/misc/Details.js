@@ -1,4 +1,4 @@
-// details component
+// Details component
 import {
   FaCalendarDay,
   FaCommentDollar,

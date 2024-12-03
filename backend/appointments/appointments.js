@@ -1,3 +1,4 @@
+// appointment routes
 const express = require('express');
 const appointmentRoutes = express.Router();
 const {
@@ -9,6 +10,7 @@ const {
   fetchAvailableSlots,
 } = require('./appointmentController');
 const authenticateUser = require('../routes/authenticateUser');
+
 appointmentRoutes.get(
   '/available-slots',
   authenticateUser,

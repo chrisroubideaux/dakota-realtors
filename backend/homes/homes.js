@@ -1,7 +1,35 @@
-//homes routes
+// homes routes
 const express = require('express');
 const homeRoutes = express.Router();
-const Home = require('./home');
+
+const {
+  getAllHomes,
+  getHomeById,
+  createHome,
+  updateHomeById,
+  deleteHomeById,
+} = require('./homeController');
+
+// Create a new home
+homeRoutes.post('/', createHome);
+
+// Fetch all homes
+homeRoutes.get('/', getAllHomes);
+
+// Fetch home by id
+homeRoutes.get('/:id', getHomeById);
+
+// Update an existing home by id
+homeRoutes.put('/:id', updateHomeById);
+
+// Delete an existing home by id
+homeRoutes.delete('/:id', deleteHomeById);
+
+module.exports = homeRoutes;
+{
+  /*
+const express = require('express');
+const homeRoutes = express.Router();
 
 const {
   getAllHomes,
@@ -96,3 +124,5 @@ homeRoutes.delete('/:id', async (req, res) => {
 });
 
 module.exports = homeRoutes;
+*/
+}

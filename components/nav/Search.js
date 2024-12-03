@@ -1,12 +1,11 @@
+// Search bar
 'use client';
-// search bar for the navbar
 import { useState, useRef, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 import axios from 'axios';
 
 const SearchBar = ({ onSearch }) => {
-  // fetch apartments, homes, and commercials data
   useEffect(() => {
     axios
       .get('http://localhost:3001/apartments')
@@ -17,7 +16,6 @@ const SearchBar = ({ onSearch }) => {
         console.error('Error fetching apartments:', error);
       });
 
-    // Fetch homes data
     axios
       .get('http://localhost:3001/homes')
       .then((response) => {
@@ -27,7 +25,6 @@ const SearchBar = ({ onSearch }) => {
         console.error('Error fetching homes:', error);
       });
 
-    // Fetch commercials data
     axios
       .get('http://localhost:3001/commercials')
       .then((response) => {
@@ -38,7 +35,6 @@ const SearchBar = ({ onSearch }) => {
       });
   }, []);
 
-  // search logic
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const dropdownRef = useRef(null);

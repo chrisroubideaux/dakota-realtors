@@ -1,4 +1,4 @@
-// amenties component
+// Amenties component
 'use client';
 import {
   FaTemperatureHigh,

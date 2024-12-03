@@ -1,3 +1,4 @@
+// appointment schema
 const mongoose = require('mongoose');
 const appointmentSchema = new mongoose.Schema(
   {
@@ -37,7 +38,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     isActive: {
       type: Boolean,
-      default: true, // Defaults to true for newly created appointments
+      default: true,
     },
   },
   {

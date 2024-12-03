@@ -1,4 +1,4 @@
-// apartment component
+// Apartment component
 import {
   FaEnvelope,
   FaMobile,

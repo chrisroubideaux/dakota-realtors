@@ -1,4 +1,4 @@
-// bio component
+// Bio component
 import Image from 'next/image';
 import { FaBriefcase, FaEnvelope, FaMobile } from 'react-icons/fa';
 

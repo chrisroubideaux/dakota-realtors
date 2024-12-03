@@ -1,13 +1,12 @@
 // Notifaction component
 import { useState, useEffect } from 'react';
 import { format, isValid } from 'date-fns';
-import axios from 'axios';
+//import axios from 'axios';
 
 export default function Notifications({ meetings }) {
   const [visibleMeetings, setVisibleMeetings] = useState(meetings);
   const [timeOffRequests, setTimeOffRequests] = useState([]);
 
-  // Helper function to format dates
   const formatDate = (dateString) => {
     const date = dateString ? new Date(dateString) : new Date();
 
@@ -36,21 +35,19 @@ export default function Notifications({ meetings }) {
   }, []);
 */
   }
-  // Function to delete a meeting notification
+
   const deleteNotification = (meetingId) => {
     setVisibleMeetings((prevMeetings) =>
       prevMeetings.filter((meeting) => meeting._id !== meetingId)
     );
   };
 
-  // Function to delete a time-off request
   const deleteTimeOffRequest = (requestId) => {
     setTimeOffRequests((prevRequests) =>
       prevRequests.filter((request) => request._id !== requestId)
     );
   };
 
-  // Function to delete all notifications
   const deleteAllNotifications = () => {
     setVisibleMeetings([]);
     setTimeOffRequests([]);
@@ -130,7 +127,6 @@ export default function Notifications({ meetings }) {
               </div>
             </div>
 
-            {/* Time-Off Requests Section */}
             <div className="accordion-item">
               <h5 className="accordion-header">
                 <button

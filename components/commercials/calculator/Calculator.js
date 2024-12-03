@@ -1,4 +1,4 @@
-// calculator component
+// Calculator component
 
 import { useEffect, useState } from 'react';
 

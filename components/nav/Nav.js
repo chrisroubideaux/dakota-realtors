@@ -1,5 +1,5 @@
+// Nav component
 'use client';
-// nav component
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,10 +7,7 @@ import { FaAngleDown, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 
 const Nav = ({ onSearch }) => {
-  // fetch apartments, homes, and commercials data
-
   useEffect(() => {
-    // Fetch apartments data
     axios
       .get('http://localhost:3001/apartments')
       .then((response) => {
@@ -20,7 +17,6 @@ const Nav = ({ onSearch }) => {
         console.error('Error fetching apartments:', error);
       });
 
-    // Fetch homes data
     axios
       .get('http://localhost:3001/homes')
       .then((response) => {
@@ -30,7 +26,6 @@ const Nav = ({ onSearch }) => {
         console.error('Error fetching homes:', error);
       });
 
-    // Fetch commercials data
     axios
       .get('http://localhost:3001/commercials')
       .then((response) => {
@@ -41,7 +36,6 @@ const Nav = ({ onSearch }) => {
       });
   }, []);
 
-  // search logic
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const dropdownRef = useRef(null);

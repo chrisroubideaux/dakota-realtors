@@ -1,4 +1,4 @@
-// banner component
+// Banner component
 'use client';
 import Iconbar from '@/components/misc/Iconbar';
 

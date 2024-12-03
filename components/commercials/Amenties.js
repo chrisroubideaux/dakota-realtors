@@ -1,4 +1,4 @@
-// amenties compnents
+// Amenties compnents
 'use client';
 import {
   FaTemperatureHigh,

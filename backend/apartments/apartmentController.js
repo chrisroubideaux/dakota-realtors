@@ -44,18 +44,7 @@ const getApartmentById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-{
-  /*
-const getApartmentById = async (req, res) => {
-  try {
-    const apartment = await Apartment.findById(req.params.id);
-    res.status(200).json(apartment);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-*/
-}
+
 // Update an apartment by ID
 const updateApartmentById = async (req, res) => {
   try {

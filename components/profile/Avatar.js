@@ -1,4 +1,4 @@
-// avatar component
+// Avatar component
 import { FaEnvelope, FaMobile } from 'react-icons/fa';
 
 export default function Avatar({ users }) {

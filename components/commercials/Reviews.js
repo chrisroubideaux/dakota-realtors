@@ -1,4 +1,4 @@
-// reviews component
+// Reviews component
 //import  { useRef, useState } from "react";
 'use client';
 import Image from 'next/image';
@@ -8,7 +8,6 @@ import Iconbar from '@/components/misc/Iconbar';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-// import required modules
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper';
 import { FaStar, FaQuoteLeft, FaAward, FaCalendar } from 'react-icons/fa';
 

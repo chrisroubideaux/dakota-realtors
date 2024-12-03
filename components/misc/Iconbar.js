@@ -1,4 +1,4 @@
-// icon bar component
+// Icon bar component
 import { FaCalendar, FaHourglass, FaThumbsUp, FaUser } from 'react-icons/fa';
 
 function Iconbar() {

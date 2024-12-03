@@ -1,8 +1,8 @@
-// maps component
+// Maps component
 import GoogleMapReact from 'google-map-react';
 
 export default function SimpleMap() {
-  const chicagoTimeZoneOffset = -5 * 60; // Chicago is in UTC-5
+  const chicagoTimeZoneOffset = -5 * 60;
 
   const defaultProps = {
     center: {

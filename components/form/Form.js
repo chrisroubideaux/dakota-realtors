@@ -1,4 +1,4 @@
-// register form
+// Register form
 'use client';
 import Link from 'next/link';
 

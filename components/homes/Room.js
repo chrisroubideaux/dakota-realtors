@@ -1,7 +1,6 @@
-// room component
+// Room component
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper';
 import { FaArrowAltCircleDown } from 'react-icons/fa';
 // Import Swiper styles

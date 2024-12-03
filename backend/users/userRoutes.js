@@ -13,8 +13,10 @@ const {
 
 // Login user
 userRoutes.post('/login', login);
+
 // Logout user
 userRoutes.get('/logout', logout);
+
 // Create a new user
 userRoutes.post('/', createUser);
 

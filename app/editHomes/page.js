@@ -1,12 +1,10 @@
 // Edit homes card
-
 'use client';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
-
 import { Homes } from '@/components/homes/edit/Homes';
 //import { EditCommercial } from '@/components/commercials/edit/EditCommerical';
 

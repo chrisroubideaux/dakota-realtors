@@ -1,4 +1,4 @@
-// bedroom component
+// Bedroom component
 'use client';
 import Image from 'next/image';
 

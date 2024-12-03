@@ -16,7 +16,6 @@ const formatMessageTimestamp = (timestamp) => {
     hour12: true,
   });
 
-  // Format full date as MM/DD/YYYY
   const formattedDate = messageDate.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',

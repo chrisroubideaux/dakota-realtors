@@ -1,4 +1,4 @@
-// featured apartments component
+// Featured apartments component
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';

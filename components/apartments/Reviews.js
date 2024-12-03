@@ -1,7 +1,6 @@
-// reviews component
+// Reviews component
 'use client';
 //import  { useRef, useState } from "react";
-
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Iconbar from '@/components/misc/Iconbar';
@@ -9,7 +8,6 @@ import Iconbar from '@/components/misc/Iconbar';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-// import required modules
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper';
 import { FaStar, FaQuoteLeft, FaAward, FaCalendar } from 'react-icons/fa';
 
@@ -18,7 +16,6 @@ const Reviews = ({ reviews }) => {
     <>
       <div>
         <div className="pt-4">
-          {/* title */}
           <div className="container pt-5 mt-4">
             <h2 className="text-center pt-3 display-4">Reviews</h2>
             <hr className="hr w-25 mx-auto pt-5" />

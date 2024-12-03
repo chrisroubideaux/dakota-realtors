@@ -1,4 +1,4 @@
-// modal component for booking a tour
+// Bookings component
 import { useState } from 'react';
 import Image from 'next/image';
 import Calendar from 'react-calendar';

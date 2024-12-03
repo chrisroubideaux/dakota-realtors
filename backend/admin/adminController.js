@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// Define allowed fields for update
 const allowedUpdateFields = [
   'name',
   'phone',
@@ -18,13 +17,24 @@ const allowedUpdateFields = [
   'wage',
 ];
 
-// Function to validate update fields
+// Function to check if a string contains at least one digit and one special character
+function isPasswordValid(password) {
+  const digitRegex = /\d/;
+  const specialCharRegex = /[!@#$%^&*]/;
+
+  return (
+    password.length >= 10 &&
+    digitRegex.test(password) &&
+    specialCharRegex.test(password)
+  );
+}
+// Validate updated fields
 const validateUpdateFields = (updateFields) => {
   return Object.keys(updateFields).every((field) =>
     allowedUpdateFields.includes(field)
   );
 };
-
+// Create new admin
 const createAdmin = async (req, res) => {
   try {
     const newAdmin = new Admin(req.body);
@@ -34,7 +44,7 @@ const createAdmin = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
+// Fetch all admins
 const getAllAdmins = async (req, res) => {
   try {
     const admins = await Admin.find();
@@ -43,17 +53,15 @@ const getAllAdmins = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
+// Get admin by id
 const getAdminById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Check if `id` is a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'Invalid admin ID' });
     }
 
-    // Convert the string `id` to a MongoDB ObjectId
     const objectId = new mongoose.Types.ObjectId(id);
 
     const admin = await Admin.findById(objectId);
@@ -69,38 +77,7 @@ const getAdminById = async (req, res) => {
       .json({ message: 'Failed to fetch admin', error: error.message });
   }
 };
-
-{
-  /*
-const getAdminById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    // Check if `id` is a valid ObjectId
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: 'Invalid admin ID' });
-    }
-
-    // Convert the string `id` to a MongoDB ObjectId
-    const objectId = mongoose.Types.ObjectId(id);
-
-    const admin = await Admin.findById(objectId);
-
-    if (!admin) {
-      res.status(404).json({ message: 'Admin not found' });
-      return;
-    }
-
-    res.status(200).json(admin);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'Failed to fetch admin', error: error.message });
-  }
-};
-
-*/
-}
+// Update admin by id
 const updateAdminById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -124,7 +101,7 @@ const updateAdminById = async (req, res) => {
       .json({ message: 'Failed to update admin', error: error.message });
   }
 };
-
+// Delete admin by id
 const deleteAdminById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -176,7 +153,6 @@ const getPendingRequests = async (req, res) => {
         }))
     );
 
-    // Combine both results
     const allPendingRequests = [...pendingRequests, ...pendingAgentRequests];
 
     res.status(200).json(allPendingRequests);
@@ -185,7 +161,7 @@ const getPendingRequests = async (req, res) => {
   }
 };
 
-// Update time-off request status
+// Update resquest status
 const updateRequestStatus = async (req, res) => {
   const { adminId, requestId } = req.params;
   const { status } = req.body;
@@ -195,7 +171,6 @@ const updateRequestStatus = async (req, res) => {
   }
 
   try {
-    // Update request status in Admin
     const admin = await Admin.findOneAndUpdate(
       { _id: adminId, 'timeOffRequests._id': requestId },
       { $set: { 'timeOffRequests.$.status': status } },
@@ -269,17 +244,7 @@ const register = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-// Function to check if a string contains at least one digit and one special character
-function isPasswordValid(password) {
-  const digitRegex = /\d/;
-  const specialCharRegex = /[!@#$%^&*]/;
 
-  return (
-    password.length >= 10 &&
-    digitRegex.test(password) &&
-    specialCharRegex.test(password)
-  );
-}
 // Login admin
 
 const login = async (req, res) => {
@@ -317,97 +282,3 @@ module.exports = {
   register,
   login,
 };
-{
-  /*
-const adminModel = require('./adminModel');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
-
-// Function to check if a string contains at least one digit and one special character
-function isPasswordValid(password) {
-  const digitRegex = /\d/;
-  const specialCharRegex = /[!@#$%^&*]/;
-
-  return (
-    password.length >= 10 &&
-    digitRegex.test(password) &&
-    specialCharRegex.test(password)
-  );
-}
-
-// Register admin user
-const register = async (req, res) => {
-  const { email, password, confirmPassword, fullName } = req.body;
-
-  try {
-    const existingAdmin = await Admin.findOne({ email });
-
-    if (existingAdmin) {
-      return res.status(409).json({ message: 'Email already exists' });
-    }
-
-    if (!isPasswordValid(password)) {
-      return res.status(400).json({
-        message:
-          'Password must be at least 10 characters long and contain at least one number and one special character.',
-      });
-    }
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({
-        message: 'Password and password confirmation do not match.',
-      });
-    }
-
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-    const newAdmin = new Admin({ email, password: hashedPassword, fullName });
-    await newAdmin.save();
-
-    const token = jwt.sign({ _id: newAdmin._id }, process.env.JWT_SECRET);
-
-    res.status(201).json({
-      message: 'Admin user registered successfully',
-      admin: newAdmin,
-      token,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
-// Login an existing agent
-const login = async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const admin = await admin.findOne({ email });
-
-    if (!admin) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    const passwordMatch = await bcrypt.compare(password, admin.password);
-
-    if (!passwordMatch) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    const token = jwt.sign({ _id: admin._id }, process.env.JWT_SECRET);
-
-    res.status(200).json({ token, admin });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
-module.exports = {
-  register,
-  login,
-};
-*/
-}

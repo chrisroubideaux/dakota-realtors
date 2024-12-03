@@ -1,8 +1,7 @@
+// Notifications component
 import { useState, useEffect } from 'react';
 import { format, isValid } from 'date-fns';
 import axios from 'axios';
-import Link from 'next/link';
-import RescheduleCalendar from '../calendar/RescheduleCalendar';
 
 export default function Notifications({ setActiveComponent, userId }) {
   const [appointments, setAppointments] = useState([]);

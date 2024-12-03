@@ -1,4 +1,4 @@
-// features component
+// Features component
 import Image from 'next/image';
 import Link from 'next/link';
 import apartment1 from '@/public/properties/apartment1.jpg';
