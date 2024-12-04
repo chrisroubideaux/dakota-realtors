@@ -16,7 +16,6 @@ const Apartments = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check if user is logged in by checking for authToken
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
       setIsLoggedIn(true);

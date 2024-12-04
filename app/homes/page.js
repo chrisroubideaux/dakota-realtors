@@ -11,10 +11,21 @@ import Details from '@/components/misc/Details';
 //import Reviews from '@/components/homes/Reviews';
 import Footer from '@/components/misc/Footer';
 
+// Fetch all homes
+
 const Homes = () => {
   const [homes, setHomes] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Fetch homes
   useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+    // Fetch homes
     axios
       .get('http://localhost:3001/homes')
       .then((response) => {
@@ -24,6 +35,7 @@ const Homes = () => {
         console.error('Error fetching apartments:', error);
       });
   }, []);
+
   return (
     <>
       <div className="layout">

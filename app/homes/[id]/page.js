@@ -22,8 +22,40 @@ import Footer from '@/components/misc/Footer';
 export default function HomeInfo({}) {
   const { id } = useParams();
   const [home, setHome] = useState([]);
-  // const [appointment, setAppointment] = useState([]);
+  const [appointment, setAppointment] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+
+    // Fetch home details by id
+    axios
+      .get(`http://localhost:3001/homes/${id}`)
+      .then((response) => {
+        setHome(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartment:', error);
+      });
+
+    // Fetch appointment data for this apartment
+    axios
+      .get(`http://localhost:3001/appointments/${id}`)
+      .then((response) => {
+        setAppointment(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching appointments:', error);
+      });
+  }, [id]);
+
+  {
+    /*
   useEffect(() => {
     axios
       .get(`http://localhost:3001/homes/${id}`)
@@ -34,6 +66,8 @@ export default function HomeInfo({}) {
         console.error('Error fetching homes:', error);
       });
   }, [id]);
+  */
+  }
   return (
     <>
       {/* page layout */}
@@ -102,7 +136,13 @@ export default function HomeInfo({}) {
                 <div className="mt-4">
                   <Realtors homes={home} />
                 </div>
-                <Bookings homes={home} />
+                {isLoggedIn ? (
+                  <Bookings appointments={appointment} homes={home} />
+                ) : (
+                  <div className="alert alert-warning">
+                    You must be logged in to book an appointment.
+                  </div>
+                )}
               </div>
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>

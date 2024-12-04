@@ -1,4 +1,3 @@
-// appointment schema
 const mongoose = require('mongoose');
 const appointmentSchema = new mongoose.Schema(
   {
@@ -29,8 +28,14 @@ const appointmentSchema = new mongoose.Schema(
     apartmentId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Apartment',
-      required: true,
+      required: false,
     },
+    homeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Home',
+      required: false,
+    },
+
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -67,7 +72,6 @@ module.exports = Appointment;
 {
   /*
 const mongoose = require('mongoose');
-
 const appointmentSchema = new mongoose.Schema(
   {
     mlsId: String,
@@ -99,10 +103,20 @@ const appointmentSchema = new mongoose.Schema(
       ref: 'Apartment',
       required: true,
     },
+    homeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Home',
+      required: true,
+    },
+
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   {
@@ -121,7 +135,7 @@ appointmentSchema.virtual('dayOfWeek').get(function () {
     'Friday',
     'Saturday',
   ];
-  return days[this.date.getDay()]; // Calculate the day of the week
+  return days[this.date.getDay()];
 });
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);
