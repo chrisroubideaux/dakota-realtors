@@ -14,8 +14,17 @@ import Footer from '@/components/misc/Footer';
 
 const Commercials = () => {
   const [commercials, setCommercials] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+
+    // Fetch commercials
     axios
       .get('http://localhost:3001/commercials')
       .then((response) => {
@@ -25,6 +34,7 @@ const Commercials = () => {
         console.error('Error fetching commercials:', error);
       });
   }, []);
+
   return (
     <>
       <div className="layout">

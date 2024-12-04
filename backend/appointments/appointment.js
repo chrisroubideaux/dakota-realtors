@@ -35,6 +35,11 @@ const appointmentSchema = new mongoose.Schema(
       ref: 'Home',
       required: false,
     },
+    commercialId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Commercial',
+      required: false,
+    },
 
     userId: {
       type: mongoose.Schema.Types.ObjectId,

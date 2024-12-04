@@ -147,7 +147,7 @@ export default function Calendar() {
       if (
         !appointment.date ||
         !appointment.user ||
-        (!appointment.apartment && !appointment.home)
+        (!appointment.apartment && !appointment.home && !appointment.commercial)
       ) {
         console.warn('Missing required fields in appointment:', appointment);
         return [];
@@ -171,9 +171,13 @@ export default function Calendar() {
           slot: appointment.slot,
           sender: appointment.user.name,
           recipient:
-            appointment.apartment?.name || appointment.home?.name || 'No Name',
+            appointment.apartment?.name ||
+            appointment.home?.name ||
+            appointment.commercial?.name ||
+            'No Name',
           apartment: appointment.apartment,
-          home: appointment.home, // Added home field
+          home: appointment.home,
+          commercial: appointment.commercial,
           user: appointment.user,
           createdAt: appointment.createdAt,
           updatedAt: appointment.updatedAt,
@@ -310,7 +314,7 @@ export default function Calendar() {
                     ? format(selectedDate, 'MM/dd/yyyy')
                     : 'N/A'}{' '}
                 </p>
-
+                {/*
                 {appointments.length > 0 ? (
                   appointments.map((appointment) => (
                     <div
@@ -334,6 +338,71 @@ export default function Calendar() {
                           {appointment.home?.name ||
                             appointment.apartment?.name ||
                             'N/A'}{' '}
+                        </h6>
+                        <h6>{appointment.date || 'N/A'}</h6>
+                        <h6>Current Time: {appointment.slot}</h6>
+                        <label htmlFor={`slot-${appointment._id}`}>
+                          Select a new time:
+                        </label>
+                        <select
+                          id={`slot-${appointment._id}`}
+                          value={
+                            selectedAppointment === appointment._id
+                              ? selectedSlot
+                              : ''
+                          }
+                          onChange={(e) => {
+                            setSelectedSlot(e.target.value);
+                            setSelectedAppointment(appointment._id);
+                          }}
+                        >
+                          <option value="">Select a time slot</option>
+                          {[
+                            '9:00 AM - 10:00 AM',
+                            '10:00 AM - 11:00 AM',
+                            '11:00 AM - 12:00 PM',
+                            '1:00 PM - 2:00 PM',
+                            '2:00 PM - 3:00 PM',
+                            '3:00 PM - 4:00 PM',
+                          ]
+                            .filter((slot) => slot !== appointment.slot)
+                            .map((slot) => (
+                              <option key={slot} value={slot}>
+                                {slot}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No appointments available.</p>
+                )}
+               */}
+                {appointments.length > 0 ? (
+                  appointments.map((appointment) => (
+                    <div
+                      key={appointment._id}
+                      className="list-group-item d-flex gap-3 py-3"
+                    >
+                      <Image
+                        src={
+                          appointment.home?.photo ||
+                          appointment.apartment?.photo ||
+                          appointment.commercial?.photo ||
+                          '/fallback-image.jpg'
+                        }
+                        className="avatar"
+                        width={200}
+                        height={100}
+                        alt="photo"
+                      />
+                      <div className="d-flex flex-column align-items-end w-100 ">
+                        <h6>
+                          {appointment.home?.name ||
+                            appointment.apartment?.name ||
+                            appointment.commercial?.name ||
+                            'N/A'}
                         </h6>
                         <h6>{appointment.date || 'N/A'}</h6>
                         <h6>Current Time: {appointment.slot}</h6>

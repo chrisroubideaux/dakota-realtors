@@ -21,16 +21,35 @@ import Footer from '@/components/misc/Footer';
 export default function CommercialInfo({}) {
   const { id } = useParams();
   const [commercial, setCommercial] = useState([]);
-  // const [appointment, setAppointment] = useState([]);
+  const [appointment, setAppointment] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+
+    // Fetch commercial property by id
     axios
       .get(`http://localhost:3001/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching commercials:', error);
+        console.error('Error fetching commercial properties:', error);
+      });
+
+    // Fetch appointment by id
+    axios
+      .get(`http://localhost:3001/appointments/${id}`)
+      .then((response) => {
+        setAppointment(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching appointments:', error);
       });
   }, [id]);
 
@@ -102,7 +121,16 @@ export default function CommercialInfo({}) {
                 <div className="mt-4">
                   <Realtors commercials={commercial} />
                 </div>
-                <Bookings commercials={commercial} />
+                {isLoggedIn ? (
+                  <Bookings
+                    appointments={appointment}
+                    commercials={commercial}
+                  />
+                ) : (
+                  <div className="alert alert-warning">
+                    You must be logged in to book an appointment.
+                  </div>
+                )}
               </div>
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>

@@ -44,16 +44,20 @@ const createAppointment = async (req, res) => {
 ///
 const createAppointment = async (req, res) => {
   try {
-    const { agent, date, slot, apartmentId, homeId, userId } = req.body;
+    const { agent, date, slot, apartmentId, homeId, commercialId, userId } =
+      req.body;
 
+    // Validate required fields
     if (!agent || !date || !slot || !userId) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    if (!apartmentId && !homeId) {
+    if (!apartmentId && !homeId && !commercialId) {
       return res
         .status(400)
-        .json({ message: 'Either apartmentId or homeId is required' });
+        .json({
+          message: 'Either apartmentId, homeId, or commercialId is required',
+        });
     }
 
     if (typeof agent !== 'string') {
@@ -64,12 +68,14 @@ const createAppointment = async (req, res) => {
       return res.status(400).json({ message: 'Invalid date format' });
     }
 
+    // Create the new appointment
     const newAppointment = new Appointment({
       agent,
       date,
       slot,
       apartmentId: apartmentId || null,
       homeId: homeId || null,
+      commercialId: commercialId || null,
       userId,
     });
 
@@ -81,6 +87,7 @@ const createAppointment = async (req, res) => {
     )
       .populate('apartmentId', 'name photo location')
       .populate('homeId', 'name photo location')
+      .populate('commercialId', 'name photo location')
       .populate('userId', 'name phone');
 
     res.status(201).json({
@@ -119,6 +126,7 @@ const getAllAppointments = async (req, res) => {
     const appointments = await Appointment.find()
       .populate('apartmentId', 'name location photo')
       .populate('homeId', 'name location photo')
+      .populate('commercialId', 'name location photo') // Populating commercialId
       .populate('userId', 'name phone address');
 
     const formattedAppointments = appointments.map((appointment) => {
@@ -133,7 +141,14 @@ const getAllAppointments = async (req, res) => {
         minute: '2-digit',
       });
 
-      const isHomeAppointment = appointment.homeId && !appointment.apartmentId;
+      const isHomeAppointment =
+        appointment.homeId &&
+        !appointment.apartmentId &&
+        !appointment.commercialId;
+      const isCommercialAppointment =
+        appointment.commercialId &&
+        !appointment.apartmentId &&
+        !appointment.homeId;
 
       return {
         _id: appointment._id,
@@ -141,7 +156,13 @@ const getAllAppointments = async (req, res) => {
         date: formattedDate,
         time: formattedTime,
         home: isHomeAppointment ? appointment.homeId : undefined,
-        apartment: !isHomeAppointment ? appointment.apartmentId : undefined,
+        apartment:
+          !isHomeAppointment && !isCommercialAppointment
+            ? appointment.apartmentId
+            : undefined,
+        commercial: isCommercialAppointment
+          ? appointment.commercialId
+          : undefined,
         user: appointment.userId,
         slot: appointment.slot,
         createdAt: appointment.createdAt,

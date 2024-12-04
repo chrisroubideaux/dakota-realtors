@@ -40,10 +40,10 @@ export default function HomeInfo({}) {
         setHome(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching apartment:', error);
+        console.error('Error fetching home:', error);
       });
 
-    // Fetch appointment data for this apartment
+    // Fetch appointment by id
     axios
       .get(`http://localhost:3001/appointments/${id}`)
       .then((response) => {
@@ -54,23 +54,8 @@ export default function HomeInfo({}) {
       });
   }, [id]);
 
-  {
-    /*
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/homes/${id}`)
-      .then((response) => {
-        setHome(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching homes:', error);
-      });
-  }, [id]);
-  */
-  }
   return (
     <>
-      {/* page layout */}
       <div className="layout h-100">
         <Nav />
         <div className="container my-5">

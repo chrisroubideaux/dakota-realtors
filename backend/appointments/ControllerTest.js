@@ -44,15 +44,22 @@ const createAppointment = async (req, res) => {
 ///
 const createAppointment = async (req, res) => {
   try {
-    const { agent, date, slot, apartmentId, userId } = req.body;
+    const { agent, date, slot, apartmentId, homeId, userId } = req.body;
 
-    if (!agent || !date || !slot || !apartmentId || !userId) {
+    if (!agent || !date || !slot || !userId) {
       return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    if (!apartmentId && !homeId) {
+      return res
+        .status(400)
+        .json({ message: 'Either apartmentId or homeId is required' });
     }
 
     if (typeof agent !== 'string') {
       return res.status(400).json({ message: 'Agent must be a string' });
     }
+
     if (isNaN(new Date(date).getTime())) {
       return res.status(400).json({ message: 'Invalid date format' });
     }
@@ -61,7 +68,8 @@ const createAppointment = async (req, res) => {
       agent,
       date,
       slot,
-      apartmentId,
+      apartmentId: apartmentId || null,
+      homeId: homeId || null,
       userId,
     });
 
@@ -72,6 +80,7 @@ const createAppointment = async (req, res) => {
       savedAppointment._id
     )
       .populate('apartmentId', 'name photo location')
+      .populate('homeId', 'name photo location')
       .populate('userId', 'name phone');
 
     res.status(201).json({
@@ -91,7 +100,6 @@ const createAppointment = async (req, res) => {
 };
 
 ///
-
 const getAllAppointments = async (req, res) => {
   const authHeader = req.headers.authorization;
 
@@ -110,6 +118,7 @@ const getAllAppointments = async (req, res) => {
 
     const appointments = await Appointment.find()
       .populate('apartmentId', 'name location photo')
+      .populate('homeId', 'name location photo')
       .populate('userId', 'name phone address');
 
     const formattedAppointments = appointments.map((appointment) => {
@@ -124,12 +133,15 @@ const getAllAppointments = async (req, res) => {
         minute: '2-digit',
       });
 
+      const isHomeAppointment = appointment.homeId && !appointment.apartmentId;
+
       return {
         _id: appointment._id,
         name: appointment.agent,
         date: formattedDate,
         time: formattedTime,
-        apartment: appointment.apartmentId,
+        home: isHomeAppointment ? appointment.homeId : undefined,
+        apartment: !isHomeAppointment ? appointment.apartmentId : undefined,
         user: appointment.userId,
         slot: appointment.slot,
         createdAt: appointment.createdAt,
@@ -196,42 +208,8 @@ const updateAppointmentById = async (req, res) => {
 };
 */
 }
+
 //
-{
-  /*
-const updateAppointmentById = async (req, res) => {
-  try {
-    const { userId, apartmentId, date, slot } = req.body;
-
-    // Deactivate any previous appointments for the same user/apartment
-    await Appointment.updateMany(
-      { userId, apartmentId, isActive: true },
-      { isActive: false }
-    );
-
-    // Update the appointment
-    const updatedAppointment = await Appointment.findByIdAndUpdate(
-      req.params.id,
-      { ...req.body, date, slot, isActive: true }, // Include date and slot
-      { new: true }
-    );
-
-    if (!updatedAppointment) {
-      return res.status(404).json({ message: 'Appointment not found' });
-    }
-
-    res.status(200).json({
-      message: 'Appointment updated successfully',
-      appointment: updatedAppointment,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
-  }
-};
-*/
-}
-
 const updateAppointmentById = async (req, res) => {
   try {
     const { date, slot } = req.body;

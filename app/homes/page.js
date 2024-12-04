@@ -17,7 +17,6 @@ const Homes = () => {
   const [homes, setHomes] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Fetch homes
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
@@ -25,7 +24,7 @@ const Homes = () => {
     } else {
       setIsLoggedIn(false);
     }
-    // Fetch homes
+
     axios
       .get('http://localhost:3001/homes')
       .then((response) => {
@@ -65,7 +64,6 @@ const Homes = () => {
 
 export default Homes;
 
-// Function fetching data on the server side using getServerSideProps
 {
   /*
 export async function getServerSideProps() {

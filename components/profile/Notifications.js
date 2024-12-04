@@ -157,6 +157,7 @@ export default function Notifications({ setActiveComponent, userId }) {
                         <span className="text-gray">
                           {appointment.home?.name ||
                             appointment.apartment?.name ||
+                            appointment.commercial?.name ||
                             'N/A'}
                         </span>
                       </div>
@@ -165,6 +166,7 @@ export default function Notifications({ setActiveComponent, userId }) {
                         <span>
                           {appointment.home?.location ||
                             appointment.apartment?.location ||
+                            appointment.commercial?.location ||
                             'N/A'}
                         </span>
                       </div>
@@ -188,6 +190,7 @@ export default function Notifications({ setActiveComponent, userId }) {
                         <strong>Day of Week:</strong>{' '}
                         <span>{appointment.dayOfWeek || 'N/A'}</span>
                       </div>
+
                       <button
                         className="btn btn-sm badge mt-2"
                         onClick={() => handleDeleteClick(appointment._id)}
