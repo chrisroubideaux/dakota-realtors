@@ -1,4 +1,6 @@
-// login page
+// Login page
+'use client';
+
 'use client';
 import axios from 'axios';
 import Link from 'next/link';
@@ -150,24 +152,35 @@ const Login = () => {
 };
 
 export default Login;
-
 {
   /*
+'use client';
+
 'use client';
 import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
-// metadata
-
 const Login = () => {
+  // Form data
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   const [error, setError] = useState(null);
+
+  // Add the handleChange function here
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Handle submit
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -179,12 +192,12 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        // Save the token to localStorage
-        const { token } = response.data;
-        localStorage.setItem('authToken', token);
+        const { token, user, redirectTo } = response.data;
 
-        // Redirect to the dashboard or home page
-        window.location.href = 'http://localhost:3000/dashboard';
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', user._id);
+
+        window.location.href = redirectTo;
       } else {
         const data = response.data;
         setError(data.message);
@@ -195,13 +208,11 @@ const Login = () => {
     }
   };
 
-  // Add Google login function
+  //  Google Oauth
   const handleGoogleLogin = () => {
-    // Redirect the user to Google OAuth login
     window.location.href = 'http://localhost:3001/auth/google/login';
   };
 
-  // Facebook registration function
   const handleFacebookLogin = () => {
     const facebookOAuthURL = 'http://localhost:3001/auth/facebook/login';
 
@@ -212,6 +223,7 @@ const Login = () => {
       'width=300,height=300'
     );
   };
+
   return (
     <div>
       <div className="text-center py-5">
@@ -247,6 +259,18 @@ const Login = () => {
           />
 
           <div className="container">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="isAgent"
+              checked={formData.isAgent || false}
+              onChange={(e) =>
+                setFormData({ ...formData, isAgent: e.target.checked })
+              }
+            />
+            <label className="form-check-label" htmlFor="isAgent">
+              Login as Agent
+            </label>
             <button className="w-100 btn btn-md" type="submit">
               Login
             </button>

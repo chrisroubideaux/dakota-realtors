@@ -13,7 +13,7 @@ import {
 
 function Amenities({ commercials }) {
   return (
-    <ul className="list-group w-100 pt-2 pb-4 m-4 ">
+    <ul className="list-group w-100 pt-2 pb-4 m-4 bg-transparent">
       <h6 className="mb-0 p-3 pb-1 fw-normal">
         <FaTemperatureHigh className="card-icon me-2" />
         {commercials.centralAir}

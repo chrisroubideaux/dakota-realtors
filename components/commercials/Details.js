@@ -15,7 +15,7 @@ import {
 export default function Details({ commercials }) {
   return (
     <div>
-      <ul className="list-group w-100 pt-2 pb-4 m-4">
+      <ul className="list-group w-100 pt-2 pb-4 m-4 bg-transparent">
         <h6 className="mb-0  p-3 pb-1 fw-bold">
           <FaBuilding className="card-icons me-2" />
           {commercials.propertyType}
