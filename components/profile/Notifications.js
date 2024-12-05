@@ -414,12 +414,20 @@ export default function Notifications({ setActiveComponent, userId }) {
                       <div className="meeting-item">
                         <strong>Realtor:</strong>{' '}
                         <span className="text-gray">
-                          {appointment.apartment?.name || 'N/A'}
+                          {appointment.home?.name ||
+                            appointment.apartment?.name ||
+                            appointment.commercial?.name ||
+                            'N/A'}
                         </span>
                       </div>
                       <div className="meeting-item">
                         <strong>Address:</strong>{' '}
-                        <span>{appointment.apartment?.location || 'N/A'}</span>
+                        <span>
+                          {appointment.home?.location ||
+                            appointment.apartment?.location ||
+                            appointment.commercial?.location ||
+                            'N/A'}
+                        </span>
                       </div>
                       <div className="meeting-item">
                         <strong>Client:</strong>{' '}
@@ -441,6 +449,7 @@ export default function Notifications({ setActiveComponent, userId }) {
                         <strong>Day of Week:</strong>{' '}
                         <span>{appointment.dayOfWeek || 'N/A'}</span>
                       </div>
+
                       <button
                         className="btn btn-sm badge mt-2"
                         onClick={() => handleDeleteClick(appointment._id)}

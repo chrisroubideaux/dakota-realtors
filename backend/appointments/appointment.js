@@ -25,6 +25,10 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    agentId: {
+      type: String,
+      required: false,
+    },
     apartmentId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Apartment',

@@ -41,7 +41,8 @@ const createAppointment = async (req, res) => {
 };
 */
 }
-///
+/// Create appointemnts
+
 const createAppointment = async (req, res) => {
   try {
     const { agent, date, slot, apartmentId, homeId, commercialId, userId } =
@@ -53,11 +54,9 @@ const createAppointment = async (req, res) => {
     }
 
     if (!apartmentId && !homeId && !commercialId) {
-      return res
-        .status(400)
-        .json({
-          message: 'Either apartmentId, homeId, or commercialId is required',
-        });
+      return res.status(400).json({
+        message: 'Either apartmentId, homeId, or commercialId is required',
+      });
     }
 
     if (typeof agent !== 'string') {
@@ -106,7 +105,8 @@ const createAppointment = async (req, res) => {
   }
 };
 
-///
+/// Fetch all appoinemnts
+
 const getAllAppointments = async (req, res) => {
   const authHeader = req.headers.authorization;
 
@@ -180,6 +180,8 @@ const getAllAppointments = async (req, res) => {
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
 };
+
+///
 
 // Get an appointment by ID
 const getAppointmentById = async (req, res) => {

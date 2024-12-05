@@ -18,8 +18,8 @@ export default function AgentBio() {
   const [user, setUser] = useState([]);
   const [admin, setAdmin] = useState([]);
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
-  const [appointments, setAppointments] = useState([]);
-  const [selectedRecipient, setSelectedRecipient] = useState(null);
+  const [appointment, setAppointment] = useState([]);
+  //const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [agent, setAgent] = useState('');
 
   // admin
@@ -60,28 +60,48 @@ export default function AgentBio() {
 
   // Fetch appointments
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/appointments')
-      .then((response) => {
-        setAppointments(response.data);
-      })
-      .catch((error) => {
+    const fetchAppointment = async () => {
+      const authToken = localStorage.getItem('authToken') || token;
+      if (!authToken) {
+        console.error('User is not logged in.');
+        return;
+      }
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/appointments/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+
+        setAppointment(response.data);
+      } catch (error) {
         console.error('Error fetching appointments:', error);
-      });
-  }, []);
+      }
+    };
+
+    fetchAppointment();
+  }, [id]);
 
   // render component
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
     switch (activeComponent) {
       case 'Calendar':
-        return <Calendar setActiveComponent={setActiveComponent} />;
+        return (
+          <Calendar
+            appointments={appointment}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
       case 'Notifications':
         return (
           <Notifications
-            appointments={appointments}
+            appointments={appointment}
             setActiveComponent={setActiveComponent}
           />
         );
