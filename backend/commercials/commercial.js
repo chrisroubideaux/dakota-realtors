@@ -31,7 +31,7 @@ const commercialSchema = {
   flooring: String,
   price: String,
   mortgage: String,
-  sqft: Number,
+  sqft: String,
   location: String,
   address: String,
   security: String,

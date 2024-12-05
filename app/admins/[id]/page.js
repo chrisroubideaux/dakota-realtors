@@ -11,6 +11,7 @@ import Bio from '@/components/admin/Bio';
 import Messages from '@/components/admin/Messages';
 import ViewMessages from '@/components/admin/ViewMessages';
 import Notifications from '@/components/admin/Notifications';
+import Calendar from '@/components/admin/Calendar';
 import Form from '@/components/admin/Form';
 import HomeForm from '@/components/admin/HomeForm';
 import CommercialForm from '@/components/admin/CommercialForm';
@@ -122,6 +123,8 @@ export default function Admin() {
 
       case 'Form':
         return <Form setActiveComponent={setActiveComponent} />;
+      case 'Calendar':
+        return <Calendar setActiveComponent={setActiveComponent} />;
       case 'HomeForm':
         return <HomeForm setActiveComponent={setActiveComponent} />;
       case 'CommercialForm':

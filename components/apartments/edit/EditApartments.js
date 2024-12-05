@@ -353,19 +353,21 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <select
-                      id="bed"
+                      id="rooms"
                       className="form-select"
                       name="rooms"
                       value={apartment.rooms || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
-                      //required
                     >
-                      <option value="">{apartment.rooms}</option>
-                      <option value="apartment">1 Bed</option>
-                      <option value="apartment">2 Bed</option>
-                      <option value="">3 Bed</option>
-                      <option value="">4 Bed</option>
+                      <option value="" disabled>
+                        Rooms
+                      </option>
+                      <option value="studio">Studio</option>
+                      <option value="1 Bed">1 Bed</option>
+                      <option value="2 Bed">2 Bed</option>
+                      <option value="3 Bed">3 Bed</option>
+                      <option value="4 Bed">4 Bed</option>
                     </select>
                     <button
                       type="button"
@@ -388,7 +390,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <select
-                      id="bed"
+                      id="bathrooms"
                       className="form-select"
                       name="bathrooms"
                       value={apartment.bathrooms || ''}
@@ -396,13 +398,13 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                       onChange={handleChange}
                       //required
                     >
-                      <option value="">{apartment.bathrooms || ''}</option>
-                      <option value="apartments">1 Bath</option>
-                      <option value="apartments">2 Bath</option>
-                      <option value="apartments">3 Bath</option>
-                      <option value="apartments">4 Bath</option>
-                      <option value="apartments">5 Bath</option>
-                      <option value="apartments">6 Bath</option>
+                      <option value="" disabled>
+                        Bathrooms
+                      </option>
+                      <option value="1 Bath">1 Bath</option>
+                      <option value="2 Bath">2 Bath</option>
+                      <option value="3 Bath">3 Bath</option>
+                      <option value="4 Bath">4 Bath</option>
                     </select>
                     <button
                       type="button"
@@ -447,10 +449,39 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                     )}
                   </div>
                 </div>
+                <div className="row mb-4">
+                  <label className="col-sm-3 col-form-label form-label">
+                    Dishwasher
+                  </label>
+                  <div className="col-sm-9 d-flex align-items-center gap-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="dishwasher"
+                      value={apartment.dishwasher || ''}
+                      readOnly={!isEditing}
+                      onChange={handleChange}
+                      placeholder="Dishwasher"
+                      //required
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-sm badge"
+                      onClick={handleEditClick}
+                    >
+                      {isEditing ? 'Cancel' : 'Edit'}
+                    </button>
+                    {isEditing && (
+                      <button type="submit" className="btn btn-sm btn-success">
+                        Save
+                      </button>
+                    )}
+                  </div>
+                </div>
 
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
-                    Washer/dryer
+                    Wash/dryer
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <input
@@ -510,32 +541,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                   <label className="col-sm-3 col-form-label form-label">
                     Sqft
                   </label>
-                  {/*
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="sqft"
-                      value={apartment.sqft || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
-                      placeholder="0000"
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-sm badge"
-                      onClick={handleEditClick}
-                    >
-                      {isEditing ? 'Cancel' : 'Edit '}
-                    </button>
-                    {isEditing && (
-                      <button type="submit" className="btn btn-sm btn-success">
-                        Save
-                      </button>
-                    )}
 
-                  </div>
-                  */}
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <input
                       type="text"
@@ -592,7 +598,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
 
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
-                    Security
+                    Secure Building
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <input
@@ -621,7 +627,7 @@ export default function EditApartments({ setActiveComponent, apartments }) {
 
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
-                    Handicap
+                    Handicap Accsessible
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <input
@@ -734,7 +740,34 @@ export default function EditApartments({ setActiveComponent, apartments }) {
                     )}
                   </div>
                 </div>
-
+                <div className="row mb-4">
+                  <label className="col-sm-3 col-form-label form-label">
+                    Available Units
+                  </label>
+                  <div className="col-sm-9 d-flex align-items-center gap-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="availableUnits"
+                      value={apartment.availableUnits || ''}
+                      readOnly={!isEditing}
+                      onChange={handleChange}
+                      placeholder="Available Units"
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-sm badge"
+                      onClick={handleEditClick}
+                    >
+                      {isEditing ? 'Cancel' : 'Edit'}
+                    </button>
+                    {isEditing && (
+                      <button type="submit" className="btn btn-sm btn-success">
+                        Save
+                      </button>
+                    )}
+                  </div>
+                </div>
                 <div className="card-footer pt-0">
                   <div className="d-flex justify-content-end gap-3 mt-2">
                     <button

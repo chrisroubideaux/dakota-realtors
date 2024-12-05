@@ -349,28 +349,26 @@ function EditHomes({ homes }) {
                     )}
                   </div>
                 </div>
+
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
-                    Bath
+                    Bed
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <select
-                      id="bathrooms"
+                      id="bedroom"
                       className="form-select"
-                      name="bathrooms"
-                      value={
-                        isEditing ? home.bathrooms || '' : home.bathrooms || ''
-                      }
+                      name="rooms"
+                      value={isEditing ? home.rooms || '' : home.rooms || ''}
                       readOnly={!isEditing}
                       onChange={isEditing ? handleChange : undefined}
                     >
-                      <option value="">{home.bathrooms || ''}</option>
-                      <option value="1">1 Bath</option>
-                      <option value="2">2 Bath</option>
-                      <option value="3">3 Bath</option>
-                      <option value="4">4 Bath</option>
-                      <option value="5">5 Bath</option>
-                      <option value="6">6 Bath</option>
+                      <option value="1">1 Bed</option>
+                      <option value="2">2 Bed</option>
+                      <option value="3">3 Bed</option>
+                      <option value="4">4 Bed</option>
+                      <option value="5">5 Bed</option>
+                      <option value="6">6 Bed</option>
                     </select>
 
                     <button
@@ -389,23 +387,25 @@ function EditHomes({ homes }) {
                 </div>
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
-                    Bed
+                    Bath
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <select
-                      id="bedroom"
+                      id="bathrooms"
                       className="form-select"
-                      name="rooms"
-                      value={isEditing ? home.rooms || '' : home.rooms || ''}
+                      name="bathrooms"
+                      value={
+                        isEditing ? home.bathrooms || '' : home.bathrooms || ''
+                      }
                       readOnly={!isEditing}
                       onChange={isEditing ? handleChange : undefined}
                     >
-                      <option value="">{home.rooms || ''}</option>
-                      <option value="1">Studio</option>
-                      <option value="1">1 Room</option>
-                      <option value="2">2 Rooms</option>
-                      <option value="3">3 Rooms</option>
-                      <option value="4">4 Rooms</option>
+                      <option value="1">1 Bath</option>
+                      <option value="2">2 Bath</option>
+                      <option value="3">3 Bath</option>
+                      <option value="4">4 Bath</option>
+                      <option value="5">5 Bath</option>
+                      <option value="6">6 Bath</option>
                     </select>
 
                     <button
@@ -439,12 +439,9 @@ function EditHomes({ homes }) {
                       readOnly={!isEditing}
                       onChange={isEditing ? handleChange : undefined}
                     >
-                      <option value="">{home.washerAndDryer || ''}</option>
                       <option value="1">Washer & Dryer</option>
-                      <option value="1">Yes</option>
-                      <option value="2">No</option>
-                      <option value="3">3 Rooms</option>
-                      <option value="4">4 Rooms</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
                     </select>
 
                     <button
@@ -479,12 +476,9 @@ function EditHomes({ homes }) {
                       readOnly={!isEditing}
                       onChange={isEditing ? handleChange : undefined}
                     >
-                      <option value="">{home.dishwasher || ''}</option>
-                      <option value="1">Dishwasher</option>
+                      <option value="1">Dishwasher/Disposal</option>
                       <option value="1">Yes</option>
                       <option value="2">No</option>
-                      <option value="3">3 Rooms</option>
-                      <option value="4">4 Rooms</option>
                     </select>
 
                     <button
@@ -705,12 +699,10 @@ function EditHomes({ homes }) {
                       readOnly={!isEditing}
                       onChange={isEditing ? handleChange : undefined}
                     >
-                      <option value="">{home.garageCapacity || ''}</option>
-                      <option value="1">Garage Capacity</option>
-                      <option value="1">Single</option>
-                      <option value="2">double</option>
-                      <option value="3">Triple</option>
-                      <option value="4">4</option>
+                      <option value="single">Single</option>
+                      <option value="double">double</option>
+                      <option value="triple">Triple</option>
+                      <option value="4"> 4 Car</option>
                     </select>
 
                     <button
@@ -729,7 +721,7 @@ function EditHomes({ homes }) {
                 </div>
                 <div className="row mb-4">
                   <label className="col-sm-3 col-form-label form-label">
-                    Pool
+                    Swimming Pool
                   </label>
                   <div className="col-sm-9 d-flex align-items-center gap-2">
                     <select
@@ -745,7 +737,7 @@ function EditHomes({ homes }) {
                       onChange={isEditing ? handleChange : undefined}
                     >
                       <option value="">{home.swimmingPool || ''}</option>
-                      <option value="1">Swimming Pool</option>
+
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
@@ -772,11 +764,9 @@ function EditHomes({ homes }) {
                     <input
                       type="text"
                       className="form-control"
-                      name="swimmingPoolSize"
+                      name="poolSize"
                       value={
-                        isEditing
-                          ? home.swimmingPoolSize || ''
-                          : home.swimmingPoolSize || ''
+                        isEditing ? home.poolSize || '' : home.poolSize || ''
                       }
                       readOnly={!isEditing}
                       onChange={isEditing ? handleChange : undefined}
@@ -805,7 +795,7 @@ function EditHomes({ homes }) {
                     <input
                       type="text"
                       className="form-control"
-                      name="swimmingPoolSize"
+                      name="basement"
                       value={
                         isEditing ? home.basement || '' : home.basement || ''
                       }

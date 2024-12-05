@@ -17,7 +17,7 @@ import {
 
 function Amenities({ homes }) {
   return (
-    <ul className="list-group w-100 pt-2 pb-4 m-4 ">
+    <ul className="list-group w-100 pt-2 pb-4 m-4 bg-transparent ">
       <h6 className="mb-0 p-3 pb-1 fw-semi-bold">
         <FaTemperatureHigh className="card-icon me-2" />
         {homes.centralAir}

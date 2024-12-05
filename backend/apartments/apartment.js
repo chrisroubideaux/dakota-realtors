@@ -29,7 +29,7 @@ const apartmentSchema = new mongoose.Schema({
   fitnessCenter: String,
   flooring: String,
   price: String,
-  sqft: Number,
+  sqft: String,
   location: String,
   address: String,
   security: String,
@@ -52,7 +52,17 @@ const apartmentSchema = new mongoose.Schema({
   days: String,
 });
 
-// Create the Apartment model
 const Apartment = mongoose.model('Apartment', apartmentSchema);
 
 module.exports = Apartment;
+{
+  /*
+
+rooms: {
+    type: String,
+    required: true,
+    enum: ['studio', '1 Bed', '2 Bed', '3 Bed', '4 Bed'],
+  },
+
+  */
+}
