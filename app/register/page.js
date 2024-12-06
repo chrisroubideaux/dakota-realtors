@@ -205,18 +205,13 @@ export default Register;
 
 {
   /*
+// register page
 'use client';
 import axios from 'axios';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaTiktok,
-  FaGoogle,
-} from 'react-icons/fa';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
   const router = useRouter();
@@ -275,11 +270,12 @@ const Register = () => {
       );
 
       if (response.status === 201) {
-        const { token } = response.data;
+        const { token, redirectTo } = response.data;
         localStorage.setItem('token', token);
 
-        if (response.data.redirectTo) {
-          router.push(response.data.redirectTo);
+        // Redirect to the appropriate route
+        if (redirectTo) {
+          router.push(redirectTo);
         }
 
         setSuccessMessage('Registration successful!');
@@ -292,36 +288,34 @@ const Register = () => {
     }
   };
 
-  // Oauth
   const handleGoogleRegister = () => {
     const googleOAuthURL = 'http://localhost:3001/auth/google/register';
+    // Open the OAuth URL in a new window for Google
     window.open(
       googleOAuthURL,
       'Google OAuth',
-      'align-item-center',
-      'width=300,height=300'
+      'align-item-center,width=500,height=600'
     );
   };
 
   const handleFacebookRegister = () => {
     const facebookOAuthURL = 'http://localhost:3001/auth/facebook/register';
-
+    // Open the OAuth URL in a new window for Facebook
     window.open(
       facebookOAuthURL,
       'Facebook OAuth',
-      'align-item-center',
-      'width=300,height=300'
+      'align-item-center,width=500,height=600'
     );
   };
 
   return (
     <div className="container">
-      <div className="text-center ">
+      <div className="text-center">
         <Link href="/" className="nav-item">
           <img
             className="mb-4"
             src="https://pngimg.com/uploads/house/house_PNG55.png"
-            alt=""
+            alt="logo"
             width="72"
             height="57"
           />
@@ -347,7 +341,6 @@ const Register = () => {
             onChange={handleChange}
             placeholder="Enter Email"
           />
-
           <input
             className={`form-control m-2 fw-bold ${
               passwordError || passwordStrengthError ? 'is-invalid' : ''
@@ -376,12 +369,12 @@ const Register = () => {
           {passwordStrengthError && (
             <p className="text-danger fw-bold">{passwordStrengthError}</p>
           )}
-
           <div className="container">
             <button className="w-100 btn btn-md" type="submit">
               Register
             </button>
             <h6 className="text-muted pt-3">or register with</h6>
+
             <ul className="nav justify-content-center list-unstyled d-flex pt-2 ">
               <li className="ms-3">
                 <button
@@ -402,10 +395,6 @@ const Register = () => {
             </ul>
           </div>
 
-          {passwordError && (
-            <p className="text-danger fw-bold">{passwordError}</p>
-          )}
-
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
           {successMessage && <p className="text-success">{successMessage}</p>}
 
@@ -421,5 +410,7 @@ const Register = () => {
 };
 
 export default Register;
+
+
 */
 }
