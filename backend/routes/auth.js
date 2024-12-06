@@ -52,10 +52,33 @@ authRoutes.get('/logout', (req, res) => {
 });
 */
 }
+
 // Google OAuth login route
 authRoutes.get(
   '/google/login',
   passport.authenticate('google', { scope: ['email', 'openid', 'profile'] })
+);
+// Facebook Login Route
+authRoutes.get(
+  '/facebook/login',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
+
+// Facebook Callback Route
+authRoutes.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res) => {
+    // Redirect after successful login
+    const userId = req.user.id; // Ensure req.user is populated in Passport's deserializeUser
+    res.redirect(`http://localhost:3000/dashboard?user=${userId}`);
+  }
+);
+
+// Facebook Register Route (Optional if login and register are the same)
+authRoutes.get(
+  '/facebook/register',
+  passport.authenticate('facebook', { scope: ['email'] })
 );
 
 module.exports = authRoutes;

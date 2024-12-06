@@ -21,7 +21,7 @@ passport.use(
           const role =
             profile.emails[0].value === process.env.MAIN_ADMIN_EMAIL
               ? 'admin'
-              : 'employee';
+              : 'user';
 
           admin = new Admin({
             googleId: profile.id,

@@ -1,4 +1,34 @@
 // Maps component
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+
+export default function Maps() {
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+  const mapContainerStyle = {
+    width: '100%',
+    height: '50vh',
+  };
+
+  const center = {
+    lat: 41.8781,
+    lng: -87.6298,
+  };
+
+  return (
+    <LoadScript googleMapsApiKey={googleMapsApiKey}>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        center={center}
+        zoom={11}
+      >
+        <Marker position={center} />
+      </GoogleMap>
+    </LoadScript>
+  );
+}
+
+{
+  /*
 import GoogleMapReact from 'google-map-react';
 
 export default function SimpleMap() {
@@ -26,4 +56,6 @@ export default function SimpleMap() {
       </GoogleMapReact>
     </div>
   );
+}
+*/
 }

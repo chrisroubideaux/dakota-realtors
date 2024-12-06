@@ -166,6 +166,7 @@ const Register = () => {
               Register
             </button>
             <h6 className="text-muted pt-3">or register with</h6>
+
             <ul className="nav justify-content-center list-unstyled d-flex pt-2 ">
               <li className="ms-3">
                 <button
@@ -185,9 +186,7 @@ const Register = () => {
               </li>
             </ul>
           </div>
-          <button className="w-100 btn btn-md" type="submit">
-            Register
-          </button>
+
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
           {successMessage && <p className="text-success">{successMessage}</p>}
 

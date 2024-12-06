@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 // auth routes
 const authRoutes = require('./routes/auth');
-//const User = require('./models/user');
+//const User = require('./users/userModel');
 const apartmentRoutes = require('./apartments/apartments');
 const appointmentRoutes = require('./appointments/appointments');
 const commercialRoutes = require('./commercials/commercials');
@@ -17,11 +17,16 @@ const agentRoutes = require('./agents/agents');
 const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messages');
 const meetingRoutes = require('./meetings/meetings');
+//const FacebookStrategy = require('passport-facebook').Strategy;
+// Import the Facebook Passport configuration
+require('./routes/facebookConfig');
+
 // google auth
 const passport = require('passport');
-require('dotenv').config();
-const app = express();
 
+require('dotenv').config();
+
+const app = express();
 const port = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
@@ -95,6 +100,8 @@ const verifyToken = (req, res, next) => {
   }
 };
 */
+  // testing
+  ////
 }
 const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET,
@@ -136,6 +143,7 @@ app.use('/users', userRoutes);
 app.use('/admins', adminRoutes);
 app.use('/messages', messageRoutes);
 app.use('/meetings', meetingRoutes);
+
 app.get('/contact', (req, res) => {
   res.send('Contact page');
 });
@@ -186,7 +194,7 @@ app.get(
     failureRedirect: '/login',
   }),
   (req, res) => {
-    res.redirect(`http://localhost:3000/admins/${User}`);
+    res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
 
@@ -196,7 +204,7 @@ app.get(
     failureRedirect: '/login',
   }),
   (req, res) => {
-    res.redirect(`http://localhost:3000/admins/${User}`);
+    res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
 

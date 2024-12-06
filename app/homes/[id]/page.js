@@ -132,9 +132,7 @@ export default function HomeInfo({}) {
               <div className="col-md-6">
                 <h3 className="text-center fw-bold mt-2">Map</h3>
                 <div className="mt-3">
-                  {/*
                   <Maps />
-                  */}
                 </div>
                 <div className="d-flex justify-content-end"></div>
               </div>
