@@ -17,15 +17,12 @@ const agentRoutes = require('./agents/agents');
 const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messages');
 const meetingRoutes = require('./meetings/meetings');
-//const FacebookStrategy = require('passport-facebook').Strategy;
-// Import the Facebook Passport configuration
+
+// Oauth
+const passport = require('passport');
 require('./routes/facebookConfig');
 
-// google auth
-const passport = require('passport');
-
 require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
@@ -100,8 +97,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 */
-  // testing
-  ////
+  /// Session middleware
 }
 const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET,
@@ -183,29 +179,32 @@ app.get(
   passport.authenticate('facebook', { scope: ['email'] })
 );
 
-app.get(
-  '/auth/facebook/register',
-  passport.authenticate('facebook', { scope: ['email'] })
-);
-
-app.get(
-  '/auth/facebook/callback/register',
-  passport.authenticate('facebook', {
-    failureRedirect: '/login',
-  }),
-  (req, res) => {
-    res.redirect(`http://localhost:3000/admins/${userId}`);
-  }
-);
-
+// Facebook OAuth callback route (Updated to handle dynamic redirect)
 app.get(
   '/auth/facebook/callback',
-  passport.authenticate('facebook', {
-    failureRedirect: '/login',
-  }),
+  passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect(`http://localhost:3000/admins/${userId}`);
+    console.log('Authenticated user:', req.user);
+    if (req.user) {
+      const { role, id } = req.user;
+
+      if (role === 'admin') {
+        res.redirect(`http://localhost:3000/admins/${id}`);
+      } else if (role === 'agent') {
+        res.redirect(`http://localhost:3000/agents/${id}`);
+      } else if (role === 'user') {
+        res.redirect(`http://localhost:3000/users/${id}`);
+      } else {
+        res.redirect('/login');
+      }
+    } else {
+      res.redirect('/login');
+    }
   }
+);
+app.get(
+  '/auth/facebook/login',
+  passport.authenticate('facebook', { scope: ['email'] })
 );
 
 // port

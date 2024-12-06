@@ -40,38 +40,35 @@ authRoutes.get('/logout', (req, res, next) => {
   });
 });
 
-{
-  /*
-authRoutes.get('/logout', (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/http://localhost:3000/login');
-  });
-});
-*/
-}
-
 // Google OAuth login route
 authRoutes.get(
   '/google/login',
   passport.authenticate('google', { scope: ['email', 'openid', 'profile'] })
 );
-// Facebook Login Route
-authRoutes.get(
-  '/facebook/login',
-  passport.authenticate('facebook', { scope: ['email'] })
-);
+//
 
-// Facebook Callback Route
+// Facebook OAuth callback route
 authRoutes.get(
   '/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res) => {
-    // Redirect after successful login
-    const userId = req.user.id; // Ensure req.user is populated in Passport's deserializeUser
-    res.redirect(`http://localhost:3000/dashboard?user=${userId}`);
+    console.log('Authenticated user:', req.user); // Debug log
+    if (req.user) {
+      const { role, id } = req.user;
+      console.log(`Role: ${role}, ID: ${id}`); // Debug log
+
+      if (role === 'admin') {
+        res.redirect(`http://localhost:3000/admins/${id}`);
+      } else if (role === 'agent') {
+        res.redirect(`http://localhost:3000/agents/${id}`);
+      } else if (role === 'user') {
+        res.redirect(`http://localhost:3000/users/${id}`);
+      } else {
+        res.redirect('/login');
+      }
+    } else {
+      res.redirect('/login');
+    }
   }
 );
 
@@ -80,5 +77,28 @@ authRoutes.get(
   '/facebook/register',
   passport.authenticate('facebook', { scope: ['email'] })
 );
+
+//
+// Middleware to check roles
+function checkRole(role) {
+  return (req, res, next) => {
+    if (req.isAuthenticated() && req.user && req.user.role === role) {
+      return next();
+    }
+    res.status(403).json({ message: 'Forbidden: Insufficient role' });
+  };
+}
+
+authRoutes.get('/admin', checkRole('admin'), (req, res) => {
+  res.redirect(`/admins/${req.user._id}`);
+});
+
+authRoutes.get('/users', checkRole('user'), (req, res) => {
+  res.redirect(`/users/${req.user._id}`);
+});
+
+authRoutes.get('/agents', checkRole('agent'), (req, res) => {
+  res.redirect(`/agents/${req.user._id}`);
+});
 
 module.exports = authRoutes;

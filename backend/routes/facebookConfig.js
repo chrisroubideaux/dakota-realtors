@@ -1,8 +1,8 @@
-// facebookPassport.js
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../users/userModel');
-
+const Agent = require('../agents/agent');
+const Admin = require('../admin/adminModel');
 require('dotenv').config();
 
 passport.use(
@@ -10,95 +10,97 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-      profileFields: ['id', 'displayName', 'photos', 'emails'],
+      callbackURL: '/auth/facebook/callback',
+      profileFields: ['id', 'emails', 'name', 'displayName', 'photos'],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await User.findOne({ 'facebook.id': profile.id });
-        if (!user) {
-          user = new User({
-            facebook: {
-              id: profile.id,
-              displayName: profile.displayName,
-              email: profile.emails?.[0]?.value,
-            },
-          });
-          await user.save();
+        const email = profile.emails[0]?.value;
+        console.log('Facebook profile email:', email);
+
+        let user = await Admin.findOne({ email });
+        if (user) {
+          user.role = 'admin';
+          console.log('Admin user found:', user);
+          return done(null, user);
         }
-        return done(null, user);
-      } catch (error) {
-        return done(error, false);
+
+        user = await User.findOne({ email });
+        if (user) {
+          user.role = 'user';
+          console.log('User found:', user);
+          return done(null, user);
+        }
+
+        user = await Agent.findOne({ email });
+        if (user) {
+          user.role = 'agent';
+          console.log('Agent found:', user);
+          return done(null, user);
+        }
+
+        console.log('User not found');
+        return done(null, false, { message: 'User not found in any role' });
+      } catch (err) {
+        console.error('Error in Facebook Strategy:', err);
+        return done(err, null);
       }
     }
   )
 );
 
-// Serialize and deserialize user
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-});
-
 {
   /*
+// facebookPassport.js
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
-const User = require('../users/userModal');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const User = require('../users/userModel');
+const Agent = require('../agents/agent');
+const Admin = require('../admin/adminModel');
+require('dotenv').config();
 
 passport.use(
   new FacebookStrategy(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-      profileFields: ['id', 'displayName', 'photos', 'emails'],
+      callbackURL: '/auth/facebook/callback',
+      profileFields: ['id', 'emails', 'name', 'displayName', 'photos'],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await User.findOne({ 'facebook.id': profile.id });
-        if (!user) {
-          user = new User({
-            facebook: {
-              id: profile.id,
-              displayName: profile.displayName,
-              email: profile.emails?.[0]?.value,
-            },
-          });
-          await user.save();
+        const email = profile.emails[0]?.value;
+
+        // Check Admins first
+        let user = await Admin.findOne({ email });
+        if (user) {
+          user.role = 'admin';
+          return done(null, user);
         }
-        return done(null, user);
-      } catch (error) {
-        return done(error, false);
+
+        // Check Users/Clients
+        user = await User.findOne({ email });
+        if (user) {
+          user.role = 'user';
+          return done(null, user);
+        }
+
+        // Check Agents
+        user = await Agent.findOne({ email });
+        if (user) {
+          user.role = 'agent';
+          return done(null, user);
+        }
+
+        // If no user found, handle as needed (e.g., create a new user or reject)
+        return done(null, false, { message: 'User not found in any role' });
+      } catch (err) {
+        return done(err, null);
       }
     }
   )
 );
 
-// Serialize user
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
 
-// Deserialize user
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-});
 */
 }
