@@ -209,29 +209,8 @@ app.get(
 );
 
 // port
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
-
-  // Log memory usage at startup
-  const memoryUsage = process.memoryUsage();
-  console.log('Memory Usage at startup:', {
-    rss: (memoryUsage.rss / 1024 / 1024).toFixed(2) + ' MB',
-    heapTotal: (memoryUsage.heapTotal / 1024 / 1024).toFixed(2) + ' MB',
-    heapUsed: (memoryUsage.heapUsed / 1024 / 1024).toFixed(2) + ' MB',
-    external: (memoryUsage.external / 1024 / 1024).toFixed(2) + ' MB',
-  });
-
-  // Periodic memory usage logging every 10 seconds
-  setInterval(() => {
-    const periodicMemoryUsage = process.memoryUsage();
-    console.log('Periodic Memory Usage:', {
-      rss: (periodicMemoryUsage.rss / 1024 / 1024).toFixed(2) + ' MB',
-      heapTotal:
-        (periodicMemoryUsage.heapTotal / 1024 / 1024).toFixed(2) + ' MB',
-      heapUsed: (periodicMemoryUsage.heapUsed / 1024 / 1024).toFixed(2) + ' MB',
-      external: (periodicMemoryUsage.external / 1024 / 1024).toFixed(2) + ' MB',
-    });
-  }, 10000); // Logs memory usage every 10 seconds
 });
 
 {
