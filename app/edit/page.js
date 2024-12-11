@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
-//import Form from '@/components/apartments/Form';
 //import HomeForm from '@/components/homes/HomeForm';
 //import CommercialForm from '@/components/commercials/CommercialForm';
 import { Apartments } from '@/components/apartments/edit/Apartments';
@@ -71,8 +70,6 @@ export default function Edit() {
   const renderComponent = () => {
     console.log('Admin data for Bio:', admins);
     switch (activeComponent) {
-      case '':
-        return <Form setActiveComponent={setActiveComponent} />;
       case 'Homes':
         return (
           <>

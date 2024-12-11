@@ -1,4 +1,6 @@
 // New Messages component
+{
+  /*
 import { useState, useEffect } from 'react';
 
 export default function NewMessage({
@@ -134,4 +136,6 @@ export default function NewMessage({
       </div>
     </div>
   );
+}
+*/
 }

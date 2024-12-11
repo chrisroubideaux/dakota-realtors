@@ -1,4 +1,6 @@
 // View messages
+{
+  /*
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
@@ -220,4 +222,6 @@ export default function ViewMessages({
       </div>
     </div>
   );
+}
+*/
 }
