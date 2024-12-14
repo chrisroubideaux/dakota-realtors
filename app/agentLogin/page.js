@@ -30,7 +30,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/agents/login',
+        'http://dakota-realtors.duckdns.org/agents/agents/login',
         formData
       );
 
@@ -53,11 +53,13 @@ const Login = () => {
 
   //  Google Oauth
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/google/login';
+    window.location.href =
+      'http://dakota-realtors.duckdns.org/agents/auth/google/login';
   };
 
   const handleFacebookLogin = () => {
-    const facebookOAuthURL = 'http://localhost:3001/auth/facebook/login';
+    const facebookOAuthURL =
+      'http://dakota-realtors.duckdns.org/agents/auth/facebook/login';
 
     window.open(
       facebookOAuthURL,
@@ -80,7 +82,6 @@ const Login = () => {
           />
         </Link>
         <h2 className="fw-bold">Login to Your Account</h2>
-
         <form className="form text-center" onSubmit={handleSubmit}>
           <input
             className="form-control m-2 fw-bold"

@@ -18,7 +18,7 @@ export default function EditCommercials() {
   // admin
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('http://dakota-realtors.duckdns.org/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -29,7 +29,7 @@ export default function EditCommercials() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/commercials/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })

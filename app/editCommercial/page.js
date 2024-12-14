@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
-
 import { Commercials } from '@/components/commercials/edit/Commericals';
 //import { EditCommercial } from '@/components/commercials/edit/EditCommerical';
 
@@ -17,7 +16,7 @@ export default function Commercial() {
   // admin
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('http://dakota-realtors.duckdns.org/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -29,7 +28,7 @@ export default function Commercial() {
   // commercials
   useEffect(() => {
     axios
-      .get('http://localhost:3001/commercials')
+      .get('http://dakota-realtors.duckdns.org/commercials')
       .then((response) => {
         setCommercials(response.data);
       })

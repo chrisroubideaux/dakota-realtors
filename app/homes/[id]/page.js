@@ -35,7 +35,7 @@ export default function HomeInfo({}) {
 
     // Fetch home details by id
     axios
-      .get(`http://localhost:3001/homes/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/homes/${id}`)
       .then((response) => {
         setHome(response.data);
       })
@@ -45,7 +45,7 @@ export default function HomeInfo({}) {
 
     // Fetch appointment by id
     axios
-      .get(`http://localhost:3001/appointments/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/appointments/${id}`)
       .then((response) => {
         setAppointment(response.data);
       })

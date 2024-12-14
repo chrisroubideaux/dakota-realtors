@@ -18,7 +18,7 @@ export default function EditProperties({}) {
   useEffect(() => {
     {
       axios
-        .get(`http://localhost:3001/admins`)
+        .get(`http://dakota-realtors.duckdns.org/admins`)
         .then((response) => {
           setAdmins(response.data);
         })
@@ -32,12 +32,12 @@ export default function EditProperties({}) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/homes/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/homes/${id}`)
       .then((response) => {
         setHome(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching apartments:', error);
+        console.error('Error fetching homes:', error);
       });
   }, [id]);
 

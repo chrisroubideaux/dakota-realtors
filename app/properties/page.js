@@ -13,7 +13,6 @@ import FeaturedHomes from '@/components/homes/FeaturedHomes';
 import CommercialProperties from '@/components/commercials/CommercialProperties';
 import Details from '@/components/misc/Details';
 import Footer from '@/components/misc/Footer';
-
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
 
@@ -25,7 +24,7 @@ const Properties = () => {
   // useEffect for fetching apartments
   useEffect(() => {
     axios
-      .get('http://localhost:3001/apartments')
+      .get('http://dakota-realtors.duckdns.org/apartments')
       .then((response) => {
         setApartments(response.data);
       })
@@ -37,7 +36,7 @@ const Properties = () => {
   // useEffect for fetching homes
   useEffect(() => {
     axios
-      .get('http://localhost:3001/homes')
+      .get('http://dakota-realtors.duckdns.org/homes')
       .then((response) => {
         setHomes(response.data);
       })
@@ -53,7 +52,7 @@ const Properties = () => {
   // useEffect for fetching commercial properties
   useEffect(() => {
     axios
-      .get('http://localhost:3001/commercials')
+      .get('http://dakota-realtors.duckdns.org/commercials')
       .then((response) => {
         setCommercials(response.data);
       })

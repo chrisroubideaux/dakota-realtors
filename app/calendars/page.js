@@ -18,7 +18,7 @@ export default function Calendars() {
   // Fetch admins
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('http://dakota-realtors.duckdns.org/admins ')
       .then((response) => {
         setAdmins(response.data);
       })

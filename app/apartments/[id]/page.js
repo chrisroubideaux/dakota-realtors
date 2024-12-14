@@ -22,7 +22,7 @@ export default function Page({}) {
   const { id } = useParams();
   const [apartment, setApartment] = useState([]);
   const [appointment, setAppointment] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -34,7 +34,7 @@ export default function Page({}) {
 
     // Fetch apartment details
     axios
-      .get(`http://localhost:3001/apartments/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })

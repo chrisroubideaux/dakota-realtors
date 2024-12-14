@@ -25,31 +25,31 @@ export default function AgentBio() {
   // admin
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/admins/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/admins/${id}`)
       .then((response) => {
         setAdmin(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching agents:', error);
+        console.error('Error fetching admin:', error);
       });
   }, [id]);
 
   // user
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/users/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching agents:', error);
+        console.error('Error fetching users:', error);
       });
   }, [id]);
 
   // agent
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/agents/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/agents/${id}`)
       .then((response) => {
         setAgent(response.data);
       })
@@ -68,7 +68,7 @@ export default function AgentBio() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:3001/appointments/${id}`,
+          `http://dakota-realtors.duckdns.org/appointments/${id}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,

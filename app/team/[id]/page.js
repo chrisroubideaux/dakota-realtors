@@ -15,7 +15,7 @@ const AgentBio = ({}) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/agents/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/agents/${id}`)
       .then((response) => {
         setAgent(response.data);
       })
