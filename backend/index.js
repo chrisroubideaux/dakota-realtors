@@ -144,10 +144,6 @@ app.get('/contact', (req, res) => {
   res.send('Contact page');
 });
 
-app.get('/about', (req, res) => {
-  res.send('About page');
-});
-
 app.get('/edit', (req, res) => {
   res.send('edit page');
 });
