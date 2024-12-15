@@ -54,7 +54,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
       'http://localhost:3000',
-      'https://dakota-realtors-roigvr51r-chrisroubideauxs-projects.vercel.app',
+      'https://dakota-realtors-h2qatcz95-chrisroubideauxs-projects.vercel.app',
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
