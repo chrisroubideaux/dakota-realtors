@@ -126,7 +126,8 @@ const sessionMiddleware = session({
   resave: false,
   saveUninitialized: true,
 });
-
+{
+  /*
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -134,6 +135,18 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: false,
+    },
+  })
+);
+*/
+}
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
     },
   })
 );

@@ -13,7 +13,7 @@ import Footer from '@/components/misc/Footer';
 
 const Apartments = () => {
   const [apartments, setApartments] = useState([]);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -25,7 +25,7 @@ const Apartments = () => {
 
     // Fetch apartments data
     axios
-      .get('https://dakota-realtors.duckdns.org/apartments')
+      .get('http://dakota-realtors.duckdns.org/apartments')
       .then((response) => {
         setApartments(response.data);
       })
