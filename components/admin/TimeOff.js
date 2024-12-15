@@ -11,7 +11,9 @@ export default function TimeOff() {
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/timeoff');
+        const response = await axios.get(
+          'https://dakota-realtors.duckdns.org/timeoff'
+        );
         setTimeOffRequests(response.data);
       } catch (error) {
         console.error('Error fetching time-off requests:', error);
@@ -41,9 +43,12 @@ export default function TimeOff() {
   // Function to update time-off request status
   const updateRequestStatus = async (id, status) => {
     try {
-      const response = await axios.put(`http://localhost:3001/timeoff/${id}`, {
-        status,
-      });
+      const response = await axios.put(
+        `https://dakota-realtors.duckdns.org/timeoff/${id}`,
+        {
+          status,
+        }
+      );
       // Update the state with the new status
       setTimeOffRequests((prevRequests) =>
         prevRequests.map((request) =>

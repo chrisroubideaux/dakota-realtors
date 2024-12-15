@@ -58,9 +58,9 @@ export default function ViewMessages({
     async function fetchData() {
       try {
         const [messagesRes, adminsRes, agentsRes] = await Promise.all([
-          axios.get('http://localhost:3001/messages'),
-          axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/agents'),
+          axios.get('https://dakota-realtors.duckdns.org/messages'),
+          axios.get('https://dakota-realtors.duckdns.org/admins'),
+          axios.get('https://dakota-realtors.duckdns.org/agents'),
         ]);
 
         setAdmins(adminsRes.data);

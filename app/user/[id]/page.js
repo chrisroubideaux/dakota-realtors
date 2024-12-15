@@ -21,7 +21,7 @@ export default function User() {
   // user
   useEffect(() => {
     axios
-      .get(`http://dakota-realtors.duckdns.org/users/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -35,7 +35,7 @@ export default function User() {
     const fetchAgentData = async () => {
       try {
         const response = await axios.get(
-          'http://dakota-realtors.duckdns.org/agents'
+          'https://dakota-realtors.duckdns.org/agents'
         );
         if (response.data.length > 0) {
           setAgentId(response.data[0]._id);
@@ -57,7 +57,7 @@ export default function User() {
       }
       try {
         const response = await axios.get(
-          `http://dakota-realtors.duckdns.org/appointments/${id}`,
+          `https://dakota-realtors.duckdns.org/appointments/${id}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,
