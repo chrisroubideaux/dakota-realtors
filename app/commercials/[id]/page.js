@@ -34,7 +34,7 @@ export default function CommercialInfo({}) {
 
     // Fetch commercial property by id
     axios
-      .get(`http://dakota-realtors.duckdns.org/commercials/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })
@@ -44,7 +44,7 @@ export default function CommercialInfo({}) {
 
     // Fetch appointment by id
     axios
-      .get(`http://dakota-realtors.duckdns.org/appointments/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/appointments/${id}`)
       .then((response) => {
         setAppointment(response.data);
       })

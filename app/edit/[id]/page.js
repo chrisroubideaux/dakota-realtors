@@ -19,7 +19,7 @@ export default function EditProperties({}) {
   useEffect(() => {
     {
       axios
-        .get(`http://localhost:3001/admins`)
+        .get(`https://dakota-realtors.duckdns.org/admins`)
         .then((response) => {
           setAdmins(response.data);
         })
@@ -31,7 +31,7 @@ export default function EditProperties({}) {
   // Apartments
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/apartments/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })
@@ -44,7 +44,7 @@ export default function EditProperties({}) {
   // Apartments
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/commercials/${id}`)
+      .get(`http://dakota-realtors.duckdns.org/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })

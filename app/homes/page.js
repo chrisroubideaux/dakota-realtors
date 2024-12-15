@@ -26,7 +26,7 @@ const Homes = () => {
     }
 
     axios
-      .get('http://dakota-realtors.duckdns.org/homes')
+      .get('https://dakota-realtors.duckdns.org/homes')
       .then((response) => {
         setHomes(response.data);
       })

@@ -25,7 +25,7 @@ const Apartments = () => {
 
     // Fetch apartments data
     axios
-      .get('dakota-realtors.duckdns.org/apartments')
+      .get('https://dakota-realtors.duckdns.org/apartments')
       .then((response) => {
         setApartments(response.data);
       })

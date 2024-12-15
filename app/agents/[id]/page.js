@@ -25,7 +25,7 @@ export default function AgentBio() {
   // admin
   useEffect(() => {
     axios
-      .get(`http://dakota-realtors.duckdns.org/admins/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/admins/${id}`)
       .then((response) => {
         setAdmin(response.data);
       })
@@ -37,7 +37,7 @@ export default function AgentBio() {
   // user
   useEffect(() => {
     axios
-      .get(`http://dakota-realtors.duckdns.org/users/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -49,7 +49,7 @@ export default function AgentBio() {
   // agent
   useEffect(() => {
     axios
-      .get(`http://dakota-realtors.duckdns.org/agents/${id}`)
+      .get(`https://dakota-realtors.duckdns.org/agents/${id}`)
       .then((response) => {
         setAgent(response.data);
       })
@@ -68,7 +68,7 @@ export default function AgentBio() {
       }
       try {
         const response = await axios.get(
-          `http://dakota-realtors.duckdns.org/appointments/${id}`,
+          `https://dakota-realtors.duckdns.org/appointments/${id}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,
