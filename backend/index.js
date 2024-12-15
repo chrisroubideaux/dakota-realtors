@@ -24,7 +24,9 @@ require('./routes/facebookConfig');
 
 require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 3001;
+//const port = process.env.PORT || 3001;
+const port = process.env.PORT || 80;
+
 const mongoURI = process.env.MONGO_URI;
 
 // mongoose
