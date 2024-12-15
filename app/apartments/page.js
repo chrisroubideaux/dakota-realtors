@@ -13,7 +13,7 @@ import Footer from '@/components/misc/Footer';
 
 const Apartments = () => {
   const [apartments, setApartments] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
