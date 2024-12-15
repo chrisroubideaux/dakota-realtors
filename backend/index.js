@@ -40,10 +40,7 @@ mongoose
 // cors middleware
 const corsOptions = {
   // origin: 'http://localhost:3000',
-  origin:
-    process.env.CLIENT_BASE_URL ||
-    'http://localhost:3000' ||
-    '  https://dakota-realtors-6stm3gel7-chrisroubideauxs-projects.vercel.app ',
+  origin: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
   credentials: true,
   allowedHeaders: ['Authorization', 'Content-Type'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
