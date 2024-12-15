@@ -38,6 +38,8 @@ mongoose
   });
 
 // cors middleware
+{
+  /*
 const corsOptions = {
   // origin: 'http://localhost:3000',
   origin: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
@@ -45,6 +47,26 @@ const corsOptions = {
   allowedHeaders: ['Authorization', 'Content-Type'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 };
+*/
+}
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://dakota-realtors-6stm3gel7-chrisroubideauxs-projects.vercel.app',
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+};
+
 app.use(cors(corsOptions));
 app.use(json());
 app.use(express.json());
