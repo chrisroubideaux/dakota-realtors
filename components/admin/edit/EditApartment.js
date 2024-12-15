@@ -33,14 +33,11 @@ export default function EditApartment({ apartments }) {
     e.preventDefault();
     try {
       const id = apartments._id;
-      await axios.put(
-        `https://dakota-realtors.duckdns.org/apartments/${id}`,
-        apartments
-      );
+      await axios.put(`http://localhost:3001/apartments/${id}`, apartments);
       console.log('Apartment data updated successfully');
 
       const updatedApartment = await axios.get(
-        `https://dakota-realtors.duckdns.org/apartments/${id}`
+        `http://localhost:3001/apartments/${id}`
       );
       setApartment(updatedApartment.data);
       setIsEditing(false);

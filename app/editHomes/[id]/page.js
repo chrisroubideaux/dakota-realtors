@@ -18,7 +18,7 @@ export default function EditProperties({}) {
   useEffect(() => {
     {
       axios
-        .get(`https://dakota-realtors.duckdns.org/admins`)
+        .get(`http://localhost:3001/admins`)
         .then((response) => {
           setAdmins(response.data);
         })
@@ -32,7 +32,7 @@ export default function EditProperties({}) {
 
   useEffect(() => {
     axios
-      .get(`https://dakota-realtors.duckdns.org/homes/${id}`)
+      .get(`http://localhost:3001/homes/${id}`)
       .then((response) => {
         setHome(response.data);
       })

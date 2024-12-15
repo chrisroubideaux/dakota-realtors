@@ -34,7 +34,7 @@ export default function Page({}) {
 
     // Fetch apartment details
     axios
-      .get(`https://dakota-realtors.duckdns.org/apartments/${id}`)
+      .get(`http://localhost:3001/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })

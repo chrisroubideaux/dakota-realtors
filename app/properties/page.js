@@ -24,7 +24,7 @@ const Properties = () => {
   // useEffect for fetching apartments
   useEffect(() => {
     axios
-      .get('https://dakota-realtors.duckdns.org/apartments')
+      .get('http://localhost:3001/apartments')
       .then((response) => {
         setApartments(response.data);
       })
@@ -36,7 +36,7 @@ const Properties = () => {
   // useEffect for fetching homes
   useEffect(() => {
     axios
-      .get('https://dakota-realtors.duckdns.org/homes')
+      .get('http://localhost:3001/homes')
       .then((response) => {
         setHomes(response.data);
       })
@@ -52,7 +52,7 @@ const Properties = () => {
   // useEffect for fetching commercial properties
   useEffect(() => {
     axios
-      .get('https://dakota-realtors.duckdns.org/commercials')
+      .get('http://localhost:3001/commercials')
       .then((response) => {
         setCommercials(response.data);
       })

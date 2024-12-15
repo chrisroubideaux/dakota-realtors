@@ -19,7 +19,7 @@ export default function EditProperties({}) {
   useEffect(() => {
     {
       axios
-        .get(`https://dakota-realtors.duckdns.org/admins`)
+        .get(`http://localhost:3001/admins`)
         .then((response) => {
           setAdmins(response.data);
         })
@@ -31,7 +31,7 @@ export default function EditProperties({}) {
   // Apartments
   useEffect(() => {
     axios
-      .get(`https://dakota-realtors.duckdns.org/apartments/${id}`)
+      .get(`http://localhost:3001/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })
@@ -44,7 +44,7 @@ export default function EditProperties({}) {
   // Apartments
   useEffect(() => {
     axios
-      .get(`http://dakota-realtors.duckdns.org/commercials/${id}`)
+      .get(`http://localhost:3001/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })
@@ -70,7 +70,7 @@ export default function EditProperties({}) {
       case 'EditCommercial':
         return (
           <EditCommercial
-            commercials={commercial} // Pass single commercial object
+            commercials={commercial}
             setActiveComponent={setActiveComponent}
           />
         );

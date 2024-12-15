@@ -14,7 +14,7 @@ export default function Profile({}) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios
-      .get(`https://dakota-realtors.duckdns.org/users`, {
+      .get(`http://localhost:3001/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

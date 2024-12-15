@@ -14,7 +14,7 @@ function Team() {
   const [agents, setAgents] = useState([]);
   useEffect(() => {
     axios
-      .get('http://dakota-realtors.duckdns.org/agents')
+      .get('http://localhost:3001/agents')
       .then((response) => {
         setAgents(response.data);
       })

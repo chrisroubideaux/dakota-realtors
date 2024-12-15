@@ -40,30 +40,10 @@ mongoose
   });
 
 // cors middleware
-{
-  /*
+
 const corsOptions = {
   // origin: 'http://localhost:3000',
   origin: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
-  credentials: true,
-  allowedHeaders: ['Authorization', 'Content-Type'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-};
-*/
-}
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'https://dakota-realtors-h2qatcz95-chrisroubideauxs-projects.vercel.app',
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
   credentials: true,
   allowedHeaders: ['Authorization', 'Content-Type'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -128,8 +108,7 @@ const sessionMiddleware = session({
   resave: false,
   saveUninitialized: true,
 });
-{
-  /*
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -137,18 +116,6 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: false,
-    },
-  })
-);
-*/
-}
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: process.env.NODE_ENV === 'production',
     },
   })
 );

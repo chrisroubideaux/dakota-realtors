@@ -51,7 +51,7 @@ export default function PropertyForm() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'https://dakota-realtors.duckdns.org/commercials',
+        'http://localhost:3001/commercials',
         formData
       );
       setMessage('Property added successfully!');

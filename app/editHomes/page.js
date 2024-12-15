@@ -16,7 +16,7 @@ export default function Home() {
   // admin
   useEffect(() => {
     axios
-      .get('https://dakota-realtors.duckdns.org/admins')
+      .get('http://localhost:3001/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -28,7 +28,7 @@ export default function Home() {
   // homes
   useEffect(() => {
     axios
-      .get('https://dakota-realtors.duckdns.org/homes')
+      .get('http://localhost:3001/homes')
       .then((response) => {
         setHomes(response.data);
       })

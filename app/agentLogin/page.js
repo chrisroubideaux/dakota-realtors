@@ -30,7 +30,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'https://dakota-realtors.duckdns.org/agents/agents/login',
+        'http://localhost:3001/agents/agents/login',
         formData
       );
 
@@ -53,13 +53,11 @@ const Login = () => {
 
   //  Google Oauth
   const handleGoogleLogin = () => {
-    window.location.href =
-      'https://dakota-realtors.duckdns.org/agents/auth/google/login';
+    window.location.href = 'http://localhost:3001/agents/auth/google/login';
   };
 
   const handleFacebookLogin = () => {
-    const facebookOAuthURL =
-      'https://dakota-realtors.duckdns.org/agents/auth/facebook/login';
+    const facebookOAuthURL = 'http://localhost:3001/agents/auth/facebook/login';
 
     window.open(
       facebookOAuthURL,

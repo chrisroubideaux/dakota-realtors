@@ -26,7 +26,7 @@ const Commercials = () => {
 
     // Fetch commercials
     axios
-      .get('https://dakota-realtors.duckdns.org/commercials ')
+      .get('http://localhost:3001/commercials ')
       .then((response) => {
         setCommercials(response.data);
       })
