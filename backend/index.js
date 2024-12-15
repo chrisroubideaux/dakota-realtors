@@ -20,7 +20,7 @@ const meetingRoutes = require('./meetings/meetings');
 
 // Oauth
 const passport = require('passport');
-//require('./routes/facebookConfig');
+require('./routes/facebookConfig');
 
 require('dotenv').config();
 const app = express();
