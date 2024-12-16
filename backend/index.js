@@ -132,6 +132,9 @@ app.get('/properties', (req, res) => {
 app.get('/', (req, res) => {
   res.send('cover page');
 });
+app.get('/', (req, res) => {
+  res.redirect('http://localhost:3001');
+});
 
 app.use('/apartments', apartmentRoutes);
 app.use('/homes', homeRoutes);
