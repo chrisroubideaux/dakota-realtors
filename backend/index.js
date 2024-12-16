@@ -1,4 +1,5 @@
 // main app
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');
@@ -17,6 +18,8 @@ const agentRoutes = require('./agents/agents');
 const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messages');
 const meetingRoutes = require('./meetings/meetings');
+
+// Set up routes and other server-related tasks...
 
 // Oauth
 const passport = require('passport');

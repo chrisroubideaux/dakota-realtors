@@ -7,4 +7,7 @@ const nextConfig = {
   },
 };
 
+// Ensure NODE_ENV is set to a default value if it's undefined
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = nextConfig;
