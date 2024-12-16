@@ -1,6 +1,6 @@
 {
   "name": "realtors",
-  "proxy": "http://localhost:3001",
+  "proxy": "https://dakota-realtors.onrender.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
