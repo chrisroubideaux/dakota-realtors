@@ -43,11 +43,11 @@ const Login = () => {
 
         // Redirect based on role
         if (user.role === 'admin') {
-          window.location.href = `http://localhost:3000/admins/${user._id}`;
+          window.location.href = `http://https://dakota-realtors.vercel.app/admins/${user._id}`;
         } else if (user.role === 'agent') {
-          window.location.href = `http://localhost:3000/agents/${user._id}`;
+          window.location.href = `https://dakota-realtors.vercel.app/agents/${user._id}`;
         } else {
-          window.location.href = `http://localhost:3000/user/${user._id}`;
+          window.location.href = `https://dakota-realtors.vercel.app/user/${user._id}`;
         }
       } else {
         setError(response.data.message || 'Login failed');
