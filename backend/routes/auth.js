@@ -18,7 +18,7 @@ authRoutes.get(
     console.log('req.user:', req.user);
     if (req.user) {
       const id = req.user.id;
-      res.redirect(`http://localhost:3000/admins/${id}`);
+      res.redirect(`https://dakota-realtors.vercel.app/admins/${id}`);
     } else {
       res.redirect('/');
     }
@@ -36,7 +36,7 @@ authRoutes.get('/logout', (req, res, next) => {
 
     res.status(200).json({ message: 'Logged out successfully' });
 
-    res.redirect('http://localhost:3000/login');
+    res.redirect('https://dakota-realtors.vercel.app/login');
   });
 });
 
@@ -58,11 +58,11 @@ authRoutes.get(
       console.log(`Role: ${role}, ID: ${id}`);
 
       if (role === 'admin') {
-        res.redirect(`http://localhost:3000/admins/${id}`);
+        res.redirect(`https://dakota-realtors.vercel.app/admins/${id}`);
       } else if (role === 'agent') {
-        res.redirect(`http://localhost:3000/agents/${id}`);
+        res.redirect(`https://dakota-realtors.vercel.app/agents/${id}`);
       } else if (role === 'user') {
-        res.redirect(`http://localhost:3000/user/${id}`);
+        res.redirect(`https://dakota-realtors.vercel.app/user/${id}`);
       } else {
         res.redirect('/login');
       }

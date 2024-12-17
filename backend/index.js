@@ -19,15 +19,12 @@ const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messages');
 const meetingRoutes = require('./meetings/meetings');
 
-// Set up routes and other server-related tasks...
-
 // Oauth
 const passport = require('passport');
 require('./routes/facebookConfig');
 
 require('dotenv').config();
 const app = express();
-//const port = process.env.PORT || 3001;
 const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
@@ -178,7 +175,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect(`http://localhost:3000/admins/${userId}`);
+    res.redirect(`https://dakota-realtors.vercel.app/admins/${userId}`);
   }
 );
 
@@ -198,11 +195,11 @@ app.get(
       const { role, id } = req.user;
 
       if (role === 'admin') {
-        res.redirect(`http://localhost:3000/admins/${id}`);
+        res.redirect(`https://dakota-realtors.vercel.app/admins/${id}`);
       } else if (role === 'agent') {
-        res.redirect(`http://localhost:3000/agents/${id}`);
+        res.redirect(`https://dakota-realtors.vercel.app/agents/${id}`);
       } else if (role === 'user') {
-        res.redirect(`http://localhost:3000/users/${id}`);
+        res.redirect(`https://dakota-realtors.vercel.app/users/${id}`);
       } else {
         res.redirect('/login');
       }

@@ -85,7 +85,7 @@ const createAgent = async (req, res) => {
         message: 'New agent created successfully via OAuth.',
         agent: newAgent,
         token,
-        redirectTo: `http://localhost:3000/agents/${newAgent._id}`,
+        redirectTo: `https://dakota-realtors.vercel.app/agents/${newAgent._id}`,
       });
     }
 
@@ -132,7 +132,7 @@ const createAgent = async (req, res) => {
       message: 'New agent created successfully.',
       agent: newAgent,
       token,
-      redirectTo: `http://localhost:3000/agents/${newAgent._id}`,
+      redirectTo: `https://dakota-realtors.vercel.app/agents/${newAgent._id}`,
     });
   } catch (err) {
     console.error(err);
@@ -236,7 +236,7 @@ const updateTimeOffRequest = async (req, res) => {
 
     const agent = await Agent.findById(agentId);
     if (!agent) {
-      return res.status(404).json({ error: 'Employee not found' });
+      return res.status(404).json({ error: 'Agent not found' });
     }
 
     const requestIndex = agent.timeOffRequests.findIndex(
@@ -345,7 +345,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     const token = jwt.sign({ _id: agent._id }, process.env.JWT_SECRET);
-    const redirectTo = `http://localhost:3000/agents/${agent._id}`;
+    const redirectTo = `https://dakota-realtors.vercel.app/agents/${agent._id}`;
     console.log('Generated Token:', token);
 
     res
@@ -373,7 +373,7 @@ const logout = async (req, res) => {
     res.clearCookie('token');
     return res.status(200).json({
       message: 'Logged out successfully.',
-      redirectTo: 'http://localhost:3000/login',
+      redirectTo: 'https://dakota-realtors.vercel.app/login',
     });
   } catch (error) {
     console.error('Error during logout:', error);

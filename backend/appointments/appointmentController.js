@@ -126,7 +126,7 @@ const getAllAppointments = async (req, res) => {
     const appointments = await Appointment.find()
       .populate('apartmentId', 'name location photo')
       .populate('homeId', 'name location photo')
-      .populate('commercialId', 'name location photo') // Populating commercialId
+      .populate('commercialId', 'name location photo')
       .populate('userId', 'name phone address');
 
     const formattedAppointments = appointments.map((appointment) => {
