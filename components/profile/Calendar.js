@@ -36,9 +36,12 @@ export default function Calendar() {
       }
 
       try {
-        const response = await axios.get('http://localhost:3001/appointments', {
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/appointments',
+          {
+            headers: { Authorization: `Bearer ${authToken}` },
+          }
+        );
         setAppointments(response.data.appointments);
       } catch (err) {
         console.error('Error fetching appointments:', err);
@@ -61,7 +64,7 @@ export default function Calendar() {
       }
 
       const response = await axios.put(
-        `http://localhost:3001/appointments/${id}`,
+        `https://dakota-realtors.onrender.com/appointments/${id}`,
         updatedData,
         {
           headers: {

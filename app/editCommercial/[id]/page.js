@@ -18,7 +18,7 @@ export default function EditCommercials() {
   // admin
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://dakota-realtors.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })

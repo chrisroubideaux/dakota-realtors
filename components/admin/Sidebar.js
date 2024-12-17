@@ -11,7 +11,7 @@ import {
 export default function Sidebar({ setActiveComponent, admins }) {
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3001/auth/logout', {
+      await fetch('https://dakota-realtors.onrender.com/auth/logout', {
         method: 'GET',
         credentials: 'include',
       });

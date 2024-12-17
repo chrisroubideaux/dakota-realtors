@@ -32,11 +32,14 @@ export default function Bio({ agents }) {
   const handleSaveChanges = async () => {
     try {
       const id = agent._id;
-      await axios.put(`http://localhost:3001/agents/${id}`, agent);
+      await axios.put(
+        `https://dakota-realtors.onrender.com/agents/${id}`,
+        agent
+      );
       console.log('Agent data updated successfully');
 
       const updatedAgent = await axios.get(
-        `http://localhost:3001/agents/${id}`
+        `https://dakota-realtors.onrender.com/agents/${id}`
       );
       setAgent(updatedAgent.data);
       setIsEditing(false);

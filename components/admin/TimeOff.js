@@ -11,7 +11,9 @@ export default function TimeOff() {
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/timeoff');
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/timeoff'
+        );
         setTimeOffRequests(response.data);
       } catch (error) {
         console.error('Error fetching time-off requests:', error);

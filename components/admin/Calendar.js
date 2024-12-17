@@ -220,14 +220,13 @@ const Calendar = ({ onSelectDate, appointments = [] }) => {
           (event) => event.type === eventTypes.openhouse
         );
 
-        // Add 'today' class to the current date
         const dayClass = `cell ${
           !isSameMonth(day, monthStart)
             ? 'disabled'
             : isSameDay(day, selectedDate)
             ? 'selected'
             : isSameDay(day, today)
-            ? 'today' // Apply 'today' class for current date
+            ? 'today'
             : isOpenHouse
             ? 'openhouse'
             : ''

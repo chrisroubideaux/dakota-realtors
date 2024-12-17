@@ -24,7 +24,7 @@ const Properties = () => {
   // useEffect for fetching apartments
   useEffect(() => {
     axios
-      .get('http://localhost:3001/apartments')
+      .get('https://dakota-realtors.onrender.com/apartments')
       .then((response) => {
         setApartments(response.data);
       })
@@ -36,7 +36,7 @@ const Properties = () => {
   // useEffect for fetching homes
   useEffect(() => {
     axios
-      .get('http://localhost:3001/homes')
+      .get('https://dakota-realtors.onrender.com/homes')
       .then((response) => {
         setHomes(response.data);
       })
@@ -52,7 +52,7 @@ const Properties = () => {
   // useEffect for fetching commercial properties
   useEffect(() => {
     axios
-      .get('http://localhost:3001/commercials')
+      .get('https://dakota-realtors.onrender.com/commercials')
       .then((response) => {
         setCommercials(response.data);
       })

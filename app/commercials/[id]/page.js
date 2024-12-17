@@ -34,7 +34,7 @@ export default function CommercialInfo({}) {
 
     // Fetch commercial property by id
     axios
-      .get(`http://localhost:3001/commercials/${id}`)
+      .get(`https://dakota-realtors.onrender.com/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })
@@ -44,7 +44,7 @@ export default function CommercialInfo({}) {
 
     // Fetch appointment by id
     axios
-      .get(`http://localhost:3001/appointments/${id}`)
+      .get(`https://dakota-realtors.onrender.com/appointments/${id}`)
       .then((response) => {
         setAppointment(response.data);
       })

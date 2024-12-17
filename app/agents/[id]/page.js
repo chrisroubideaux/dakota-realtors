@@ -25,7 +25,7 @@ export default function AgentBio() {
   // admin
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/admins/${id}`)
+      .get(`https://dakota-realtors.onrender.com/admins/${id}`)
       .then((response) => {
         setAdmin(response.data);
       })
@@ -37,7 +37,7 @@ export default function AgentBio() {
   // user
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/users/${id}`)
+      .get(`https://dakota-realtors.onrender.com/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -49,7 +49,7 @@ export default function AgentBio() {
   // agent
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/agents/${id}`)
+      .get(`https://dakota-realtors.onrender.com/agents/${id}`)
       .then((response) => {
         setAgent(response.data);
       })
@@ -68,7 +68,7 @@ export default function AgentBio() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:3001/appointments/${id}`,
+          `https://dakota-realtors.onrender.com/appointments/${id}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,

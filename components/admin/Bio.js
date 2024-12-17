@@ -33,13 +33,13 @@ export default function Bio({ admins }) {
     try {
       const id = admin._id;
       await axios.put(
-        `https://dakota-realtors.duckdns.org/admins/${id}`,
+        `https://dakota-realtors.onrender.com/admins/${id}`,
         admin
       );
       console.log('Employee data updated successfully');
 
       const updatedAdmin = await axios.get(
-        `https://dakota-realtors.duckdns.org/admins/${id}`
+        `https://dakota-realtors.onrender.com/admins/${id}`
       );
       setAdmin(updatedAdmin.data);
       setIsEditing(false);

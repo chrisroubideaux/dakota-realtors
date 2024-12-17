@@ -23,11 +23,14 @@ export default function RescheduleCalendar({ apartments, userId }) {
           return;
         }
 
-        const response = await axios.get('http://localhost:3001/appointments', {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/appointments',
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
 
         setAppointments(response.data.appointments);
       } catch (err) {
@@ -81,7 +84,7 @@ export default function RescheduleCalendar({ apartments, userId }) {
 
     try {
       const response = await axios.put(
-        'http://localhost:3001/appointments',
+        'https://dakota-realtors.onrender.com/appointments',
         appointmentData,
         {
           headers: {

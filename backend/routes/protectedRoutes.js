@@ -23,7 +23,7 @@ passport.use(
           const role =
             profile.emails[0].value === process.env.MAIN_ADMIN_EMAIL
               ? 'admin'
-              : 'employee';
+              : 'user';
 
           // Create a new user if they don't exist
           admin = new Admin({

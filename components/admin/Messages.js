@@ -22,8 +22,8 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     const fetchContacts = async () => {
       try {
         const [adminsRes, agentsRes] = await Promise.all([
-          axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/agents'),
+          axios.get('https://dakota-realtors.onrender.com/admins'),
+          axios.get('https://dakota-realtors.onrender.com/agents'),
         ]);
         setAdmins(adminsRes.data);
         setAgents(agentsRes.data);
@@ -39,7 +39,9 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
       if (!activeRecipient) return;
 
       try {
-        const response = await axios.get('http://localhost:3001/messages');
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/messages'
+        );
         const filteredMessages = response.data.filter(
           (msg) =>
             (msg.sender._id === currentAdminId &&
@@ -72,7 +74,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/messages',
+        'https://dakota-realtors.onrender.com/messages',
         messageData
       );
       setMessages((prevMessages) => [...prevMessages, response.data]);

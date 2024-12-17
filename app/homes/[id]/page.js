@@ -35,7 +35,7 @@ export default function HomeInfo({}) {
 
     // Fetch home details by id
     axios
-      .get(`http://localhost:3001/homes/${id}`)
+      .get(`https://dakota-realtors.onrender.com/homes/${id}`)
       .then((response) => {
         setHome(response.data);
       })
@@ -45,7 +45,7 @@ export default function HomeInfo({}) {
 
     // Fetch appointment by id
     axios
-      .get(`http://localhost:3001/appointments/${id}`)
+      .get(`https://dakota-realtors.onrender.com/appointments/${id}`)
       .then((response) => {
         setAppointment(response.data);
       })

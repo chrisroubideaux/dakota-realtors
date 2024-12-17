@@ -26,7 +26,7 @@ const Commercials = () => {
 
     // Fetch commercials
     axios
-      .get('http://localhost:3001/commercials ')
+      .get('https://dakota-realtors.onrender.com/commercials ')
       .then((response) => {
         setCommercials(response.data);
       })
@@ -53,9 +53,7 @@ const Commercials = () => {
           </div>
         </div>
         <Details />
-
         {/* <Reviews /> */}
-
         <Footer />
       </div>
     </>

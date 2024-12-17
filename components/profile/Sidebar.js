@@ -11,10 +11,13 @@ import {
 export default function Sidebar({ setActiveComponent, users }) {
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:3001/users/logout', {
-        method: 'GET',
-        credentials: 'include',
-      });
+      const response = await fetch(
+        'https://dakota-realtors.onrender.com/users/logout',
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

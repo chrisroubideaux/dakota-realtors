@@ -32,10 +32,12 @@ function EditHomes({ homes }) {
     e.preventDefault();
     try {
       const id = home._id;
-      await axios.put(`http://localhost:3001/homes/${id}`, home);
+      await axios.put(`https://dakota-realtors.onrender.com/homes/${id}`, home);
       console.log('Home data updated successfully');
 
-      const updatedHome = await axios.get(`http://localhost:3001/homes/${id}`);
+      const updatedHome = await axios.get(
+        `https://dakota-realtors.onrender.com/homes/${id}`
+      );
       setHome(updatedHome.data);
       setIsEditing(false);
     } catch (error) {

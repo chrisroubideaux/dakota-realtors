@@ -32,11 +32,14 @@ function EditCommercial({ commercials }) {
     e.preventDefault();
     try {
       const id = commercial._id;
-      await axios.put(`http://localhost:3001/commercials/${id}`, commercial);
+      await axios.put(
+        `https://dakota-realtors.onrender.com/commercials/${id}`,
+        commercial
+      );
       console.log('Commercial data updated successfully');
 
       const updatedCommercial = await axios.get(
-        `http://localhost:3001/commercials/${id}`
+        `https://dakota-realtors.onrender.com/commercials/${id}`
       );
       setCommercial(updatedCommercial.data);
       setIsEditing(false);

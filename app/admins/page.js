@@ -28,7 +28,7 @@ export default function Admin() {
   // admin
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/admins`)
+      .get(`https://dakota-realtors.onrender.com/admins`)
       .then((response) => {
         setAdmins(response.data);
       })
@@ -40,7 +40,7 @@ export default function Admin() {
   // Fetch apartments
   useEffect(() => {
     axios
-      .get('http://localhost:3001/apartments')
+      .get('https://dakota-realtors.onrender.com/apartments')
       .then((response) => {
         setApartments(response.data);
       })

@@ -16,7 +16,7 @@ export default function Home() {
   // admin
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://dakota-realtors.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -28,7 +28,7 @@ export default function Home() {
   // homes
   useEffect(() => {
     axios
-      .get('http://localhost:3001/homes')
+      .get('https://dakota-realtors.onrender.com/homes')
       .then((response) => {
         setHomes(response.data);
       })

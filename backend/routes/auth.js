@@ -52,17 +52,17 @@ authRoutes.get(
   '/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res) => {
-    console.log('Authenticated user:', req.user); // Debug log
+    console.log('Authenticated user:', req.user);
     if (req.user) {
       const { role, id } = req.user;
-      console.log(`Role: ${role}, ID: ${id}`); // Debug log
+      console.log(`Role: ${role}, ID: ${id}`);
 
       if (role === 'admin') {
         res.redirect(`http://localhost:3000/admins/${id}`);
       } else if (role === 'agent') {
         res.redirect(`http://localhost:3000/agents/${id}`);
       } else if (role === 'user') {
-        res.redirect(`http://localhost:3000/users/${id}`);
+        res.redirect(`http://localhost:3000/user/${id}`);
       } else {
         res.redirect('/login');
       }

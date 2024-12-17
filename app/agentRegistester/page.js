@@ -58,7 +58,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/agents',
+        'https://dakota-realtors.onrender.com/agents',
         formData
       );
 
@@ -81,7 +81,8 @@ const Register = () => {
   };
   //
   const handleGoogleRegister = () => {
-    const googleOAuthURL = 'http://localhost:3001/agents/auth/google/register';
+    const googleOAuthURL =
+      'https://dakota-realtors.onrender.com/agents/auth/google/register';
     window.open(
       googleOAuthURL,
       'Google OAuth',
@@ -92,7 +93,7 @@ const Register = () => {
 
   const handleFacebookRegister = () => {
     const facebookOAuthURL =
-      'http://localhost:3001/agents/auth/facebook/register';
+      'https://dakota-realtors.onrender.com/agents/auth/facebook/register';
 
     window.open(
       facebookOAuthURL,

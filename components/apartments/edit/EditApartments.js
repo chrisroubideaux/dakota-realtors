@@ -32,11 +32,14 @@ export default function EditApartments({ setActiveComponent, apartments }) {
     e.preventDefault();
     try {
       const id = apartment._id;
-      await axios.put(`http://localhost:3001/apartments/${id}`, apartment);
+      await axios.put(
+        `https://dakota-realtors.onrender.com/apartments/${id}`,
+        apartment
+      );
       console.log('Apartment data updated successfully');
 
       const updatedApartment = await axios.get(
-        `http://localhost:3001/apartments/${id}`
+        `https://dakota-realtors.onrender.com/apartments/${id}`
       );
       setApartment(updatedApartment.data);
       setIsEditing(false);

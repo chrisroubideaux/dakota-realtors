@@ -21,7 +21,7 @@ export default function User() {
   // user
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/users/${id}`)
+      .get(`https://dakota-realtors.onrender.com/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -34,7 +34,9 @@ export default function User() {
   useEffect(() => {
     const fetchAgentData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/agents');
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/agents'
+        );
         if (response.data.length > 0) {
           setAgentId(response.data[0]._id);
         }
@@ -55,7 +57,7 @@ export default function User() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:3001/appointments/${id}`,
+          `https://dakota-realtors.onrender.com/appointments/${id}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,

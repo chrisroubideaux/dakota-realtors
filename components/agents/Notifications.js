@@ -20,11 +20,14 @@ export default function Notifications({ setActiveComponent, agentId }) {
           return;
         }
 
-        const response = await axios.get('http://localhost:3001/appointments', {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/appointments',
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
 
         // Filter appointments to only include those for the logged-in agent
         const agentAppointments = response.data.appointments.filter(
@@ -72,7 +75,7 @@ export default function Notifications({ setActiveComponent, agentId }) {
       }
 
       await axios.delete(
-        `http://localhost:3001/appointments/${appointmentToDelete}`,
+        `https://dakota-realtors.onrender.com/appointments/${appointmentToDelete}`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         }

@@ -16,7 +16,7 @@ export default function Commercial() {
   // admin
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://dakota-realtors.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -28,7 +28,7 @@ export default function Commercial() {
   // commercials
   useEffect(() => {
     axios
-      .get('http://localhost:3001/commercials')
+      .get('https://dakota-realtors.onrender.com/commercials')
       .then((response) => {
         setCommercials(response.data);
       })

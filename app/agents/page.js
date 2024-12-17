@@ -13,7 +13,7 @@ function Agents() {
   const [agents, setAgents] = useState([]);
   useEffect(() => {
     axios
-      .get(' http://localhost:3001/agents')
+      .get(' https://dakota-realtors.onrender.com/agents')
       .then((response) => {
         setAgents(response.data);
       })

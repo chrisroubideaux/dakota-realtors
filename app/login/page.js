@@ -29,7 +29,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/users/login',
+        'https://dakota-realtors.onrender.com/users/login',
         formData
       );
 
@@ -43,11 +43,11 @@ const Login = () => {
 
         // Redirect based on role
         if (user.role === 'admin') {
-          window.location.href = `http://localhost:3001/admins/${user._id}`;
+          window.location.href = `http://localhost:3000/admins/${user._id}`;
         } else if (user.role === 'agent') {
-          window.location.href = `http://localhost:3001/${user._id}`;
+          window.location.href = `http://localhost:3000/agents/${user._id}`;
         } else {
-          window.location.href = `http://localhost:3001/user/${user._id}`;
+          window.location.href = `http://localhost:3000/user/${user._id}`;
         }
       } else {
         setError(response.data.message || 'Login failed');
@@ -60,12 +60,14 @@ const Login = () => {
 
   // Google OAuth
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/google/login';
+    window.location.href =
+      'https://dakota-realtors.onrender.com/auth/google/login';
   };
 
   // Facebook OAuth
   const handleFacebookLogin = () => {
-    const facebookOAuthURL = 'http://localhost:3001/auth/facebook/login';
+    const facebookOAuthURL =
+      'https://dakota-realtors.onrender.com/auth/facebook/login';
     window.open(facebookOAuthURL, '_self');
   };
 

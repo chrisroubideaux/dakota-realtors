@@ -34,7 +34,7 @@ export default function Page({}) {
 
     // Fetch apartment details
     axios
-      .get(`http://localhost:3001/apartments/${id}`)
+      .get(`https://dakota-realtors.onrender.com/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })

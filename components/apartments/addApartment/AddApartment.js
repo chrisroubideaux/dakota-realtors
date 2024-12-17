@@ -50,7 +50,7 @@ export default function PropertyForm() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:3001/apartments',
+        'https://dakota-realtors.onrender.com/apartments',
         formData
       );
       setMessage('Property added successfully!');

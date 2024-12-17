@@ -68,7 +68,7 @@ export default function Bookings({
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/appointments',
+        'https://dakota-realtors.onrender.com/appointments',
         appointmentData,
         {
           headers: {

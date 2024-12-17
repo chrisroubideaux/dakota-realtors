@@ -33,7 +33,7 @@ export default function Admin() {
   // admin
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/admins/${id}`)
+      .get(`https://dakota-realtors.onrender.com/admins/${id}`)
       .then((response) => {
         setAdmin(response.data);
       })
@@ -46,7 +46,9 @@ export default function Admin() {
   useEffect(() => {
     const fetchAgentData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/agents');
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/agents'
+        );
         if (response.data.length > 0) {
           setAgentId(response.data[0]._id);
         }
@@ -60,7 +62,7 @@ export default function Admin() {
   // Fetch message data
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/messsages/${id}`)
+      .get(`https://dakota-realtors.onrender.com/messsages/${id}`)
       .then((response) => {
         setMessage(response.data);
       })
@@ -72,7 +74,7 @@ export default function Admin() {
   // Fetch appointments
   useEffect(() => {
     axios
-      .get('http://localhost:3001/appointments')
+      .get('https://dakota-realtors.onrender.com/appointments')
       .then((response) => {
         setAppointments(response.data);
       })
@@ -84,7 +86,7 @@ export default function Admin() {
   // Fetch apartments
   useEffect(() => {
     axios
-      .get('http://localhost:3001/apartments')
+      .get('https://dakota-realtors.onrender.com/apartments')
       .then((response) => {
         setApartments(response.data);
       })
@@ -96,7 +98,7 @@ export default function Admin() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/apartments/${id}`)
+      .get(`https://dakota-realtors.onrender.com/apartments/${id}`)
       .then((response) => {
         setApartment(response.data);
       })

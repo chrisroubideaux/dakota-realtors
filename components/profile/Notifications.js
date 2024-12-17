@@ -20,11 +20,14 @@ export default function Notifications({ setActiveComponent, userId }) {
           return;
         }
 
-        const response = await axios.get('http://localhost:3001/appointments', {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const response = await axios.get(
+          'https://dakota-realtors.onrender.com/appointments',
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
 
         setAppointments(response.data.appointments);
       } catch (err) {
@@ -67,7 +70,7 @@ export default function Notifications({ setActiveComponent, userId }) {
 
       // Call API to delete appointment
       await axios.delete(
-        `http://localhost:3001/appointments/${appointmentToDelete}`,
+        `https://dakota-realtors.onrender.com/appointments/${appointmentToDelete}`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         }

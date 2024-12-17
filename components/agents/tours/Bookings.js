@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
-//import properties from '@/data/featured/properties';
 
 export default function Bookings({ agents }) {
   const [value, onChange, onClickTile] = useState(new Date());
