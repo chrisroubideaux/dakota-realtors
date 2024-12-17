@@ -29,7 +29,7 @@ export default function EditCommercials() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/commercials/${id}`)
+      .get(`https://dakota-realtors.onrender.com/commercials/${id}`)
       .then((response) => {
         setCommercial(response.data);
       })
