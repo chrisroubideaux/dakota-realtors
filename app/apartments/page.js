@@ -25,7 +25,7 @@ const Apartments = () => {
 
     // Fetch apartments data
     axios
-      .get('https://dakota-realtors.onrender.com/apartments')
+      .get('http://localhost:3001/apartments')
       .then((response) => {
         setApartments(response.data);
       })
