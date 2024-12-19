@@ -72,7 +72,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <div className="text-center py-5">
         <Link href="/" className="nav-item">
           <img

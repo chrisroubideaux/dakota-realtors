@@ -14,7 +14,6 @@ const Login = () => {
 
   const [error, setError] = useState(null);
 
-  // Add the handleChange function here
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,7 +23,6 @@ const Login = () => {
   };
 
   // Handle submit
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -70,7 +68,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <div className="text-center py-5">
         <Link href="/" className="nav-item">
           <img

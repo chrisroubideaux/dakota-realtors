@@ -1,8 +1,8 @@
+// Commercial by id page
 'use client';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
-// component imports
 import Nav from '@/components/nav/Nav';
 import Navbar from '@/components/commercials/Navbar';
 import Toolbar from '@/components/commercials/Toolbar';
@@ -56,90 +56,92 @@ export default function CommercialInfo({}) {
   return (
     <>
       <div className="layout h-100">
-        <Nav />
-        <div className="container my-5">
-          <div className="container-fluid">
-            <Navbar />
-          </div>
-          <div className="mt-3">
-            <Toolbar commercials={commercial} />
-            <div className="row gx-2">
-              <div className="col-md-8">
-                <Cover commercials={commercial} />
-              </div>
-              <div className="col-md-4">
-                <div className="d-flex justify-content-end">
-                  <Office commercials={commercial} />
-                </div>
-                <div className="d-flex justify-content-end mt-3">
-                  <Room commercials={commercial} />
-                </div>
-              </div>
+        <div className="container-fluid">
+          <Nav />
+          <div className="container my-5">
+            <div className="container-fluid">
+              <Navbar />
             </div>
-            <div className="container mt-5 py-4 my-4">
-              <hr className="hr w-25 mx-auto pt-5" />
+            <div className="mt-3">
+              <Toolbar commercials={commercial} />
+              <div className="row gx-2">
+                <div className="col-md-8">
+                  <Cover commercials={commercial} />
+                </div>
+                <div className="col-md-4">
+                  <div className="d-flex justify-content-end">
+                    <Office commercials={commercial} />
+                  </div>
+                  <div className="d-flex justify-content-end mt-3">
+                    <Room commercials={commercial} />
+                  </div>
+                </div>
+              </div>
+              <div className="container mt-5 py-4 my-4">
+                <hr className="hr w-25 mx-auto pt-5" />
 
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="container">
-                    <h3 className="fw-bold me-5 text-center">
-                      Property Details
-                    </h3>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="container">
+                      <h3 className="fw-bold me-5 text-center">
+                        Property Details
+                      </h3>
+                    </div>
+                    <div className=" ">
+                      <Details commercials={commercial} />
+                    </div>
                   </div>
-                  <div className=" ">
-                    <Details commercials={commercial} />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <h3 className="fw-bold text-center">Description</h3>
-                  <div className="container d-flex justify-content-end fs-6 m-4">
-                    {commercial.description}
+                  <div className="col-md-6">
+                    <h3 className="fw-bold text-center">Description</h3>
+                    <div className="container d-flex justify-content-end fs-6 m-4">
+                      {commercial.description}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="container">
-            <div className="row py-4">
-              <div className="col-md-6">
-                <h2 className=" text-center fw-bold">Amenities</h2>
-                <Amenities commercials={commercial} />
-              </div>
-              <div className="col-md-6">
-                <h3 className="text-center fw-bold mt-3">Floor Plan</h3>
-                <div className="">
-                  <Floor commercials={commercial} />
+            <div className="container">
+              <div className="row py-4">
+                <div className="col-md-6">
+                  <h2 className=" text-center fw-bold">Amenities</h2>
+                  <Amenities commercials={commercial} />
                 </div>
-                <div className="d-flex justify-content-end"></div>
+                <div className="col-md-6">
+                  <h3 className="text-center fw-bold mt-3">Floor Plan</h3>
+                  <div className="">
+                    <Floor commercials={commercial} />
+                  </div>
+                  <div className="d-flex justify-content-end"></div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="container">
-            <div className="row py-4">
-              <div className="col-md-6">
-                <h2 className=" text-center fw-bold">{commercial.title}</h2>
-                <div className="mt-4">
-                  <Realtors commercials={commercial} />
-                </div>
-                {isLoggedIn ? (
-                  <Bookings
-                    appointments={appointment}
-                    commercials={commercial}
-                  />
-                ) : (
-                  <div className="alert alert-warning">
-                    You must be logged in to book an appointment.
+            <div className="container">
+              <div className="row py-4">
+                <div className="col-md-6">
+                  <h2 className=" text-center fw-bold">{commercial.title}</h2>
+                  <div className="mt-4">
+                    <Realtors commercials={commercial} />
                   </div>
-                )}
-              </div>
-              <div className="col-md-6">
-                <h3 className="text-center fw-bold mt-2">Map</h3>
-                <div className="mt-3">
-                  <Maps />
+                  {isLoggedIn ? (
+                    <Bookings
+                      appointments={appointment}
+                      commercials={commercial}
+                    />
+                  ) : (
+                    <div className="alert alert-warning">
+                      You must be logged in to book an appointment.
+                    </div>
+                  )}
                 </div>
-                <div className="d-flex justify-content-end"></div>
+                <div className="col-md-6">
+                  <h3 className="text-center fw-bold mt-2">Map</h3>
+                  <div className="mt-3">
+                    <Maps />
+                  </div>
+                  <div className="d-flex justify-content-end"></div>
+                </div>
+                <Layout />
               </div>
-              <Layout />
             </div>
           </div>
         </div>
@@ -147,38 +149,4 @@ export default function CommercialInfo({}) {
       <Footer />
     </>
   );
-}
-// Fetch data on the server side using getServerSideProps
-{
-  /*
-export async function getServerSideProps({ params }) {
-  const { id } = params;
-
-  // Fetch the commercial data based on the 'id' parameter
-  try {
-    const response = await axios.get(
-      `http://localhost:3001/commercials/${params.id}`
-    );
-    const commercial = response.data;
-
-    // Return the 'commercial' data as props
-    return {
-      props: {
-        commercial,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching commercial data:', error);
-
-    // You can handle errors here, e.g., redirect to an error page
-    return {
-      redirect: {
-        destination: '/error', // Replace with your error page URL
-        permanent: false,
-      },
-    };
-  }
-}
-
-*/
 }

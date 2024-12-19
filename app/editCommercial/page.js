@@ -6,7 +6,6 @@ import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 import { Commercials } from '@/components/commercials/edit/Commericals';
-//import { EditCommercial } from '@/components/commercials/edit/EditCommerical';
 
 export default function Commercial() {
   const [admins, setAdmins] = useState([]);
@@ -72,27 +71,29 @@ export default function Commercial() {
     <>
       <Nav />
       <div className="layout h-100">
-        {admins.map((admins, index) => (
-          <Tab
-            key={index}
-            admins={admins}
-            setActiveComponent={setActiveComponent}
-          />
-        ))}
-        <div className="container-fluid py-3">
-          <div className="row">
-            <div className="col-lg-4 col-xxl-3">
-              <>
-                {admins.map((admins, index) => (
-                  <Sidebar
-                    key={index}
-                    admins={admins}
-                    setActiveComponent={setActiveComponent}
-                  />
-                ))}
-              </>
+        <div className="container-fluid">
+          {admins.map((admins, index) => (
+            <Tab
+              key={index}
+              admins={admins}
+              setActiveComponent={setActiveComponent}
+            />
+          ))}
+          <div className="container-fluid py-3">
+            <div className="row">
+              <div className="col-lg-4 col-xxl-3">
+                <>
+                  {admins.map((admins, index) => (
+                    <Sidebar
+                      key={index}
+                      admins={admins}
+                      setActiveComponent={setActiveComponent}
+                    />
+                  ))}
+                </>
+              </div>
+              <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
             </div>
-            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
         </div>
       </div>

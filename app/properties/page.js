@@ -63,92 +63,90 @@ const Properties = () => {
 
   return (
     <>
-      <div className="layout h-100">
-        <Nav />
-        <div className="properties mt-4">
-          <div className="container text-center pt-5">
-            <h1 className="pt-5">Featured Properties</h1>
-            <h5 className="fs-3 text-light ">
-              <Typewriter
-                options={{
-                  strings: [' Helping you find your dream home.'],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            </h5>
-            <Search apartments={apartments} onSearch={handleSearch} />
-            <div className="container">
-              <ul className="nav justify-content-center list-unstyled d-flex pt-2">
-                <li className="ms-3">
-                  <Link className="text-muted" href="/">
-                    <FaFacebook className="social-icons m-2" />
-                  </Link>
-                </li>
-                <li className="ms-3">
-                  <Link className="text-muted" href="/">
-                    <FaInstagram className="social-icons m-2" />
-                  </Link>
-                </li>
-                <li className="ms-3">
-                  <Link className="text-muted" href="/">
-                    <FaYoutube className="social-icons m-2" />
-                  </Link>
-                </li>
-                <li className="ms-3">
-                  <Link className="text-muted" href="/">
-                    <FaTiktok className="social-icons m-2" />
-                  </Link>
-                </li>
-              </ul>
+      <div className="layout">
+        <div className="container-fluid">
+          <Nav />
+          <div className="properties mt-4">
+            <div className="container text-center pt-5">
+              <h1 className="pt-5">Featured Properties</h1>
+              <h5 className="fs-3 text-light ">
+                <Typewriter
+                  options={{
+                    strings: [' Helping you find your dream home.'],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </h5>
+              <Search apartments={apartments} onSearch={handleSearch} />
+              <div className="container">
+                <ul className="nav justify-content-center list-unstyled d-flex pt-2">
+                  <li className="ms-3">
+                    <Link className="text-muted" href="/">
+                      <FaFacebook className="social-icons m-2" />
+                    </Link>
+                  </li>
+                  <li className="ms-3">
+                    <Link className="text-muted" href="/">
+                      <FaInstagram className="social-icons m-2" />
+                    </Link>
+                  </li>
+                  <li className="ms-3">
+                    <Link className="text-muted" href="/">
+                      <FaYoutube className="social-icons m-2" />
+                    </Link>
+                  </li>
+                  <li className="ms-3">
+                    <Link className="text-muted" href="/">
+                      <FaTiktok className="social-icons m-2" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
+          <Featured />
+          <div className="container">
+            <Tab />
+            {/* Apartments Section */}
+            <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+              {apartments.slice(0, 4).map((apartment, index) => (
+                <div key={apartment.id || `apartment-${index}`} className="">
+                  <FeaturedApartments apartments={apartment} />
+                </div>
+              ))}
+            </div>
+            {/* Homes Section */}
+            <div className="text-center mt-2">
+              <h2 className="text-center pt-5 display-4">Featured Homes</h2>
+            </div>
+            <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+              {homes.slice(0, 4).map((home, index) => (
+                <div key={home.id || `home-${index}`} className="pt-5 my-5">
+                  <FeaturedHomes homes={home} />
+                </div>
+              ))}
+            </div>
+            {/* Commercial Properties Section */}
+            <div className="text-center mt-2">
+              <h2 className="text-center pt-5 display-4">
+                Commercial Properties
+              </h2>
+            </div>
+            <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+              {commercials.slice(0, 4).map((commercial, index) => (
+                <div
+                  key={commercial.id || `commercial-${index}`}
+                  className="pt-5 my-5"
+                >
+                  <CommercialProperties commercials={commercial} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <Details />
+          <Footer />
         </div>
-        <Featured />
-        <div className="container">
-          <Tab />
-          {/* Apartments Section */}
-          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {apartments.slice(0, 4).map((apartment, index) => (
-              <div key={apartment.id || `apartment-${index}`} className="">
-                <FeaturedApartments apartments={apartment} />
-              </div>
-            ))}
-          </div>
-
-          {/* Homes Section */}
-          <div className="text-center mt-2">
-            <h2 className="text-center pt-5 display-4">Featured Homes</h2>
-          </div>
-          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {homes.slice(0, 4).map((home, index) => (
-              <div key={home.id || `home-${index}`} className="pt-5 my-5">
-                <FeaturedHomes homes={home} />
-              </div>
-            ))}
-          </div>
-
-          {/* Commercial Properties Section */}
-          <div className="text-center mt-2">
-            <h2 className="text-center pt-5 display-4">
-              Commercial Properties
-            </h2>
-          </div>
-          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {commercials.slice(0, 4).map((commercial, index) => (
-              <div
-                key={commercial.id || `commercial-${index}`}
-                className="pt-5 my-5"
-              >
-                <CommercialProperties commercials={commercial} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <Details />
-        {/* Footer */}
-        <Footer />
       </div>
     </>
   );

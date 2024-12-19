@@ -3,7 +3,6 @@
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-// import
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
@@ -59,7 +58,7 @@ export default function Admin() {
     fetchAgentData();
   }, []);
 
-  // Fetch message data
+  // Fetch messages
   useEffect(() => {
     axios
       .get(`https://dakota-realtors.onrender.com/messsages/${id}`)
@@ -192,14 +191,19 @@ export default function Admin() {
     <>
       <Nav />
       <div className="layout h-100">
-        {/*<Navbar/> */}
-        <Tab admins={admin} setActiveComponent={setActiveComponent} />
-        <div className="container-fluid py-3">
-          <div className="row">
-            <div className="col-lg-4 col-xxl-3">
-              <Sidebar admins={admin} setActiveComponent={setActiveComponent} />
+        <div className="container-fluid">
+          {/*<Navbar/> */}
+          <Tab admins={admin} setActiveComponent={setActiveComponent} />
+          <div className="container-fluid py-3">
+            <div className="row">
+              <div className="col-lg-4 col-xxl-3">
+                <Sidebar
+                  admins={admin}
+                  setActiveComponent={setActiveComponent}
+                />
+              </div>
+              <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
             </div>
-            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
         </div>
       </div>

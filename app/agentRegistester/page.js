@@ -104,7 +104,7 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="text-center">
         <Link href="/" className="nav-item">
           <img

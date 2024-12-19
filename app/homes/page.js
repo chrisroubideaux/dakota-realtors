@@ -38,60 +38,28 @@ const Homes = () => {
   return (
     <>
       <div className="layout">
-        <Nav />
-        <Heros />
-        <Banners />
+        <div className="container-fluid">
+          <Nav />
+          <Heros />
+          <Banners />
 
-        <div className="container px-4 py-5" id="properties">
-          <Tab />
-          <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
-            {homes.slice(0, 8).map((home, index) => (
-              <div key={home.id || `home-${index}`} className="pt-5 my-5">
-                <FeaturedHomes homes={home} />
-              </div>
-            ))}
+          <div className="container px-4 py-5" id="properties">
+            <Tab />
+            <div className="row row-cols-1 row-cols-lg-3 row-cols-lg-4 g-4 py-5">
+              {homes.slice(0, 8).map((home, index) => (
+                <div key={home.id || `home-${index}`} className="pt-5 my-5">
+                  <FeaturedHomes homes={home} />
+                </div>
+              ))}
+            </div>
           </div>
+          <Details />
+          {/* <Reviews /> */}
+          <Footer />
         </div>
-        <Details />
-
-        {/* <Reviews /> */}
-
-        <Footer />
       </div>
     </>
   );
 };
 
 export default Homes;
-
-{
-  /*
-export async function getServerSideProps() {
-  try {
-    // GET request to fetch homes data from server
-    const response = await axios.get(
-      'http://localhost:3001/homes'
-    );
-    const homes = response.data;
-
-    // Return the 'homes' data as props
-    return {
-      props: {
-        homes,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching homes:', error);
-
-    // handle errors
-    return {
-      redirect: {
-        destination: '/error',
-        permanent: false,
-      },
-    };
-  }
-}
-
-*/
-}

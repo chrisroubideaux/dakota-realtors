@@ -57,123 +57,93 @@ export default function HomeInfo({}) {
   return (
     <>
       <div className="layout h-100">
-        <Nav />
-        <div className="container my-5">
-          <div className="container-fluid">
-            <Navbar />
-          </div>
-          <div className="mt-3">
-            <Toolbar homes={home} />
-            <div className="row gx-2">
-              <div className="col-md-8">
-                <Cover homes={home} />
-              </div>
-              <div className="col-md-4">
-                <div className="d-flex justify-content-end">
-                  <Bed homes={home} />
+        <div className="container-fluid">
+          <Nav />
+          <div className="container my-5">
+            <div className="container-fluid">
+              <Navbar />
+            </div>
+            <div className="mt-3">
+              <Toolbar homes={home} />
+              <div className="row gx-2">
+                <div className="col-md-8">
+                  <Cover homes={home} />
                 </div>
-                <div className="d-flex justify-content-end mt-3">
-                  <Room homes={home} />
+                <div className="col-md-4">
+                  <div className="d-flex justify-content-end">
+                    <Bed homes={home} />
+                  </div>
+                  <div className="d-flex justify-content-end mt-3">
+                    <Room homes={home} />
+                  </div>
+                </div>
+              </div>
+              <div className="container mt-5 py-4 my-4">
+                <hr className="hr w-25 mx-auto pt-5" />
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="container">
+                      <h3 className="fw-bold me-5 text-center">
+                        Property Details
+                      </h3>
+                    </div>
+                    <div className=" ">
+                      <HomeDetails homes={home} />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <h3 className="fw-bold text-center">Description</h3>
+                    <div className="container d-flex justify-content-end fs-6 m-4">
+                      {home.description}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="container mt-5 py-4 my-4">
-              <hr className="hr w-25 mx-auto pt-5" />
-              <div className="row">
+            <div className="container mt-5 pt-5">
+              <div className="row py-4">
                 <div className="col-md-6">
-                  <div className="container">
-                    <h3 className="fw-bold me-5 text-center">
-                      Property Details
-                    </h3>
-                  </div>
-                  <div className=" ">
-                    <HomeDetails homes={home} />
-                  </div>
+                  <h2 className=" text-center fw-bold">Amenities</h2>
+                  <Amenities homes={home} />
                 </div>
                 <div className="col-md-6">
-                  <h3 className="fw-bold text-center">Description</h3>
-                  <div className="container d-flex justify-content-end fs-6 m-4">
-                    {home.description}
+                  <h3 className="text-center fw-bold mt-3">Floor Plan</h3>
+                  <div className="">
+                    <Floor homes={home} />
                   </div>
+                  <div className="d-flex justify-content-end"></div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="container mt-5 pt-5">
-            <div className="row py-4">
-              <div className="col-md-6">
-                <h2 className=" text-center fw-bold">Amenities</h2>
-                <Amenities homes={home} />
-              </div>
-              <div className="col-md-6">
-                <h3 className="text-center fw-bold mt-3">Floor Plan</h3>
-                <div className="">
-                  <Floor homes={home} />
-                </div>
-                <div className="d-flex justify-content-end"></div>
-              </div>
-            </div>
-          </div>
-          <div className="container mt-5 pt-5">
-            <div className="row py-4">
-              <div className="col-md-6">
-                <h2 className=" text-center fw-bold">{home.title}</h2>
-                <div className="mt-4">
-                  <Realtors homes={home} />
-                </div>
-                {isLoggedIn ? (
-                  <Bookings appointments={appointment} homes={home} />
-                ) : (
-                  <div className="alert alert-warning">
-                    You must be logged in to book an appointment.
+            <div className="container mt-5 pt-5">
+              <div className="row py-4">
+                <div className="col-md-6">
+                  <h2 className=" text-center fw-bold">{home.title}</h2>
+                  <div className="mt-4">
+                    <Realtors homes={home} />
                   </div>
-                )}
-              </div>
-              <div className="col-md-6">
-                <h3 className="text-center fw-bold mt-2">Map</h3>
-                <div className="mt-3">
-                  <Maps />
+                  {isLoggedIn ? (
+                    <Bookings appointments={appointment} homes={home} />
+                  ) : (
+                    <div className="alert alert-warning">
+                      You must be logged in to book an appointment.
+                    </div>
+                  )}
                 </div>
-                <div className="d-flex justify-content-end"></div>
+                <div className="col-md-6">
+                  <h3 className="text-center fw-bold mt-2">Map</h3>
+                  <div className="mt-3">
+                    <Maps />
+                  </div>
+                  <div className="d-flex justify-content-end"></div>
+                </div>
               </div>
             </div>
+            <Layout />
           </div>
-          <Layout />
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
-}
-
-// Function for fetching data on the server side using getServerSideProps
-{
-  /*
-export async function getServerSideProps({ params }) {
-  try {
-    // Make a GET request to fetch the home by id from your server
-    const response = await axios.get(
-      `http://localhost:3001/homes/${params.id}`
-    );
-    const home = response.data;
-
-    // Return the 'home' data as props
-    return {
-      props: {
-        home,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching home:', error);
-
-    // You can handle errors here, e.g., redirect to an error page
-    return {
-      redirect: {
-        destination: '/error', // Replace with your error page URL
-        permanent: false,
-      },
-    };
-  }
-}
-*/
 }

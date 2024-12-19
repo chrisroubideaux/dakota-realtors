@@ -1,10 +1,8 @@
 // Admins page
 'use client';
-// admin page
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-// import
 import Nav from '@/components/nav/Nav';
 import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';

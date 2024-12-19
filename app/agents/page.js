@@ -25,22 +25,24 @@ function Agents() {
   return (
     <>
       <div className="layout">
-        <Nav />
-        <Hero />
-        <Banners />
-        <div className="container text-center py-4 my-4 pt-5 mt-3">
-          <div className="row row-cols-1 row-cols-1">
-            {agents.slice(0, 4).map((agent, index) => (
-              <div
-                key={agent.id || `agent-${index}`}
-                className=" col-md-4 col-md-6 col-sm-12 mb-4"
-              >
-                <Realtors agents={agent} />
-              </div>
-            ))}
+        <div className="container-fluid">
+          <Nav />
+          <Hero />
+          <Banners />
+          <div className="container text-center py-4 my-4 pt-5 mt-3">
+            <div className="row row-cols-1 row-cols-1">
+              {agents.slice(0, 4).map((agent, index) => (
+                <div
+                  key={agent.id || `agent-${index}`}
+                  className=" col-md-4 col-md-6 col-sm-12 mb-4"
+                >
+                  <Realtors agents={agent} />
+                </div>
+              ))}
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   );
