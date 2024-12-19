@@ -2,10 +2,8 @@
 import Nav from '@/components/nav/Nav';
 import Mission from '@/components/misc/Mission';
 import Footer from '@/components/misc/Footer';
-//import dynamic from 'next/dynamic';
 
 function About() {
-  //const Typewriter = dynamic(() => import('typewriter-effect'), { ssr: false });
   return (
     <>
       <div className="layout h-100">
@@ -22,7 +20,6 @@ function About() {
           <h2 className="text-center fw-bold py-5 display-3">About</h2>
           <hr className="hr text-center" />
           <Mission />
-
           <Footer />
         </div>
       </div>

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import components
 import Nav from '@/components/nav/Nav';
 import Footer from '@/components/misc/Footer';
 

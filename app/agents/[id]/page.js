@@ -127,33 +127,3 @@ export default function AgentBio() {
     </>
   );
 }
-
-// Fetch data on the server side using getServerSideProps
-{
-  /*
-export async function getServerSideProps({ params }) {
-  try {
-    // Make a GET request to fetch agent data from server using `params.id`
-    const response = await axios.get(
-      `http://localhost:3001/agents${params.id}`
-    );
-    const agentData = response.data;
-
-    // Return data as props to the component
-    return {
-      props: {
-        agent: agentData,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching agent:', error);
-    return {
-      props: {
-        agent: {},
-      },
-    };
-  }
-}
-
-*/
-}

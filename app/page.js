@@ -1,10 +1,8 @@
 // cover page //
-
 'use client';
 import Link from 'next/link';
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
-
 const Typewriter = dynamic(() => import('typewriter-effect'), { ssr: false });
 
 export default function Home() {

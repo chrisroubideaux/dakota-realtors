@@ -49,32 +49,3 @@ function Agents() {
 }
 
 export default Agents;
-
-{
-  /*
-export async function getServerSideProps() {
-  try {
-    // Make a GET request to fetch agents data from server
-    const response = await axios.get(
-      'http://localhost:3001/agents'
-    );
-    const agentsData = response.data;
-
-    // Return data as props to the component
-    return {
-      props: {
-        agents: agentsData,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching agents:', error);
-    return {
-      props: {
-        agents: [],
-      },
-    };
-  }
-}
-
-*/
-}
