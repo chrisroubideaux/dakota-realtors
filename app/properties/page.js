@@ -63,8 +63,8 @@ const Properties = () => {
 
   return (
     <>
-      <Nav />
       <div className="layout h-100">
+        <Nav />
         <div className="properties mt-4">
           <div className="container text-center pt-5">
             <h1 className="pt-5">Featured Properties</h1>

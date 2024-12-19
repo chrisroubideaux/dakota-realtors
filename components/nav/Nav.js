@@ -9,7 +9,7 @@ import axios from 'axios';
 const Nav = ({ onSearch }) => {
   useEffect(() => {
     axios
-      .get('http://localhost:3001/apartments')
+      .get('https://dakota-realtors.onrender.com/apartments')
       .then((response) => {
         setApartmentsData(response.data);
       })
@@ -18,7 +18,7 @@ const Nav = ({ onSearch }) => {
       });
 
     axios
-      .get('http://localhost:3001/homes')
+      .get('https://dakota-realtors.onrender.com/homes')
       .then((response) => {
         setHomesData(response.data);
       })
@@ -27,7 +27,7 @@ const Nav = ({ onSearch }) => {
       });
 
     axios
-      .get('http://localhost:3001/commercials')
+      .get('https://dakota-realtors.onrender.com/commercials')
       .then((response) => {
         setCommercialsData(response.data);
       })
@@ -117,8 +117,8 @@ const Nav = ({ onSearch }) => {
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg fw-semiboldblur blur-rounded top-0 border-top z-index-3 shadow w-100  d-none d-lg-block">
+    <>
+      <nav className="navbar navbar-expand-lg fw-semiboldblur blur-rounded top-0 border-top z-index-3 shadow w-100  d-none d-lg-bloc">
         <div className="container-fluid ">
           <button
             className="navbar-toggler"
@@ -256,17 +256,14 @@ const Nav = ({ onSearch }) => {
                       </li>
                     ))}
                   </ul>
-                )}
-                  
+                )}     
               </div>
-            
-          
             </div>
             */}
           </div>
         </div>
       </nav>
-    </div>
+    </>
   );
 };
 

@@ -5,6 +5,9 @@ import '@/styles/form.css';
 import '@/styles/hero.css';
 import '@/styles/modal.css';
 import '@/styles/calendar.css';
+//import '@/styles/navbar.css';
+import '@/styles/sidebar.css';
+
 import BootstrapClient from '@/components/utils/BootstrapClient';
 
 export const metadata = {
