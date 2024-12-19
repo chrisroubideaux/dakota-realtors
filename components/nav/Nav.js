@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaAngleDown, FaSearch } from 'react-icons/fa';
+import { FaAngleDown, FaSearch, FaAlignJustify } from 'react-icons/fa';
 import axios from 'axios';
 
 const Nav = ({ onSearch }) => {
@@ -118,7 +118,7 @@ const Nav = ({ onSearch }) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg fw-semiboldblur blur-rounded top-0 border-top z-index-3 shadow w-100  d-none d-lg-bloc">
+      <nav className="navbar navbar-expand-lg blur-rounded  z-index-3 shadow w-100 d-lg-block">
         <div className="container-fluid ">
           <button
             className="navbar-toggler"
@@ -130,7 +130,8 @@ const Nav = ({ onSearch }) => {
             aria-label="Toggle navigation"
           >
             <span className="">
-              <i className="social-icons fas fa-align-right"></i>
+              <i className="social-icon fas fa-align-right"></i>
+              <FaAlignJustify className="social-icon " />
             </span>
           </button>
           {/*start of collapse button */}

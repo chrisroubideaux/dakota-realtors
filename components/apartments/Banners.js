@@ -4,8 +4,8 @@ import Iconbar from '@/components/misc/Iconbar';
 
 export default function Banners() {
   return (
-    <div>
-      <div className="container pt-5 mt-4">
+    <div className="banner">
+      <div className=" pt-5 mt-4">
         <h2 className="text-center pt-5 display-4">Featured Apartments</h2>
         <Iconbar />
         <p className="fw-normal text-center fs-5 pt-4 mt-2 p-5 m-2">
