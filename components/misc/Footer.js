@@ -1,5 +1,6 @@
 // Footer comonent
 //import Image from 'next/image';
+import Link from 'next/link';
 import { FaFacebook, FaInstagram, FaTiktok, FaAngleDown } from 'react-icons/fa';
 
 export default function Footer() {
@@ -243,7 +244,7 @@ export default function Footer() {
         <div className="row align-items-center">
           <div className="col-md-9">
             <div className="small mb-3 mb-md-0">
-              Copyright © 2024
+              Copyright © 2025
               <span className="me-1">
                 <a href="#" className="text-decoration-none">
                   Dakota Realtors
@@ -251,9 +252,9 @@ export default function Footer() {
               </span>
               | Built by
               <span className="">
-                <a href="#" className="me-2">
+                <Link href="https://project-shadow.vercel.app" className="me-2">
                   Digi Wraith
-                </a>
+                </Link>
               </span>
             </div>
           </div>

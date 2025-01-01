@@ -76,7 +76,7 @@ export default function Home() {
                           </li>
                         </ul>
                         <p className="text-center pt-2">
-                          © Copyright 2024 Dakota Realtors
+                          © Copyright 2025 Dakota Realtors
                         </p>
                       </div>
                     </div>

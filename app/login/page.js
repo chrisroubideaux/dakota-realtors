@@ -132,7 +132,7 @@ const Login = () => {
           <Link className="btn btn-lg w-75" href="/register">
             Register
           </Link>
-          <p className="mt-1 mb-3 text-muted">&copy; Dakota Realtors, 2024</p>
+          <p className="mt-1 mb-3 text-muted">&copy; Dakota Realtors, 2025</p>
         </form>
       </div>
     </div>
