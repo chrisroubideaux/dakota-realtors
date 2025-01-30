@@ -73,7 +73,7 @@ function Contact() {
           </div>
           <div className="w-100 align-self-end">
             <p className="nav d-block fs-xs text-center text-xl-start pb-2 mb-0">
-              &copy;2024, All rights reserved.
+              &copy;2025, All rights reserved.
               <a
                 className="nav-link d-inline-block p-0"
                 href="https://createx.studio/"
