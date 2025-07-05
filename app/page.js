@@ -26,7 +26,7 @@ export default function Home() {
               <div className="row">
                 <div className="col-lg-7 d-flex justify-content-center flex-column">
                   <div className="card card-body blur d-flex justify-content-center shadow-lg p-5 mt-5">
-                    <h1 className="text-gradient">Dakota Realtors</h1>
+                    <h1 className="text-gradient">Realty Dakota</h1>
                     <div className="lead pe-5 me-5 fw-normal">
                       <Typewriter
                         options={{
@@ -38,14 +38,11 @@ export default function Home() {
                     </div>
                     <hr />
                     <p className=" pe-5 me-5 ">
-                      Dakota Realtors is a powerful app built with Next.js,
-                      Redux, Express, MongoDB, and Python. Leveraging the power
-                      of AI, deep learning, and machine learning, Dakota
-                      Realtors tracks and analyzes national housing trends,
-                      streamlining the property search and connecting agents
-                      with sellers and buyers. The app allows users to create
-                      accounts, set appointments for viewing properties, and
-                      even list properties for sale.
+                      Realty Dakota is an AI-powered real estate app built with
+                      Next.js, Redux, Express, MongoDB, and Python. It uses
+                      machine learning to analyze market trends and makes it
+                      easy for users to buy, sell, rent, and schedule
+                      appointments with agents.
                     </p>
 
                     <div className="buttons">
@@ -76,7 +73,7 @@ export default function Home() {
                           </li>
                         </ul>
                         <p className="text-center pt-2">
-                          © Copyright 2025 Dakota Realtors
+                          © Copyright 2025 Realty Dakota
                         </p>
                       </div>
                     </div>

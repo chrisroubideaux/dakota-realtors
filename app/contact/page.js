@@ -38,7 +38,7 @@ function Contact() {
                   <h5 className=" fs-5">Mon-Thurs: 8am-5pm</h5>
                   <h5 className=" fs-5">Friday: 8am-3pm</h5>
                   <h5 className=" fs-5">Phone 000-000-0000</h5>
-                  <h5 className=" fs-5">Email: dakotarealty@gmail.com</h5>
+                  <h5 className=" fs-5">Email: realtydakota@gmail.com</h5>
                 </div>
                 <Link className="nav-link text-underlined" href="/">
                   back to menu
@@ -80,7 +80,9 @@ function Contact() {
                 target="_blank"
                 rel="noopener"
               >
-                Dakota Realtors
+                <span className="text-nowrap text-decoration-none">
+                  Realty Dakota
+                </span>
               </a>
             </p>
           </div>

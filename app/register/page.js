@@ -193,10 +193,10 @@ const Register = () => {
           {successMessage && <p className="text-success">{successMessage}</p>}
 
           <p className="pt-1 fw-bold">Already have an account?</p>
-          <Link className="btn btn lg w-75" href="/login">
+          <Link className="btn btn-md w-100" href="/login">
             Login
           </Link>
-          <p className="pt-1 text-muted">&copy; Dakota Realtors, 2025</p>
+          <p className="pt-1 text-muted">&copy; Realty Dakota, 2025</p>
         </form>
       </div>
     </div>

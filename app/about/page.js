@@ -8,8 +8,8 @@ function About() {
     <>
       <div className="layout h-100">
         <Nav />
-        <div className="about mt-3">
-          <div className="containter text-center py-5 mt-5">
+        <div className="about mt-1">
+          <div className="containter text-center py-5 ">
             <h1 className="display-3 py-3 mt-5">Our Mission</h1>
             <h4 className="fw-normal text-white ">
               Connecting you with the best realtors in the area

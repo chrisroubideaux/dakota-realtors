@@ -129,10 +129,10 @@ const Login = () => {
           </ul>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <p className="pt-1 fw-bold">{"Don't have an account?"}</p>
-          <Link className="btn btn-lg w-75" href="/register">
+          <Link className="btn btn-md w-100" href="/register">
             Register
           </Link>
-          <p className="mt-1 mb-3 text-muted">&copy; Dakota Realtors, 2025</p>
+          <p className="mt-1 mb-3 text-muted">&copy; Realty Dakota, 2025</p>
         </form>
       </div>
     </div>

@@ -22,7 +22,7 @@ export default function Footer() {
                 </a>
               </div>
               <p className="mb-5">
-                Dakota Realtors tracks and analyzes national housing trends,
+                Realty Dakota tracks and analyzes national housing trends,
                 streamlining the property search and connecting agents with
                 sellers and buyers.
               </p>
@@ -247,7 +247,7 @@ export default function Footer() {
               Copyright © 2025
               <span className="me-1">
                 <a href="#" className="text-decoration-none">
-                  Dakota Realtors
+                  Realty Dakota
                 </a>
               </span>
               | Built by
